@@ -23,10 +23,3 @@ editor_options:
 
 ### EMA Paper
 
-
-
-
-## References {.unnumbered}
-
-::: {#refs}
-:::
