@@ -260,7 +260,10 @@
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>path_models <span class="ot">&lt;-</span> <span class="fu">format_path</span>(<span class="st">"studydata/risk/models/ema"</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>path_data_shared <span class="ot">&lt;-</span> <span class="fu">format_path</span>(<span class="st">"studydata/risk/data_processed/shared"</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>path_data_ema <span class="ot">&lt;-</span> <span class="fu">format_path</span>(<span class="st">"studydata/risk/data_processed/ema"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>path_data_ema <span class="ot">&lt;-</span> <span class="fu">format_path</span>(<span class="st">"studydata/risk/data_processed/ema"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Table format</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">knitr.kable.NA =</span> <span class="st">''</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
 </section>
 <section id="make-metrics-df" class="level2">
@@ -301,7 +304,7 @@
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                            .metric <span class="sc">==</span> <span class="st">"npv"</span> <span class="sc">~</span> <span class="st">"negative predictive value"</span>)) <span class="sc">|&gt;</span> </span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a> <span class="fu">kbl</span>(<span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Metric"</span>, <span class="st">"Week"</span>, <span class="st">"Day"</span>, <span class="st">"Hour"</span>),</span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">digits =</span> <span class="dv">3</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">digits =</span> <span class="dv">2</span>,</span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">align =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="st">"l"</span>, <span class="st">"l"</span>, <span class="st">"l"</span>),</span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">linesep =</span> <span class="st">""</span>,</span>
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">caption =</span> <span class="st">"Performance Metrics for Full models by Prediction Window"</span>) <span class="sc">|&gt;</span>  </span>
@@ -322,39 +325,39 @@
 <tbody>
 <tr class="odd">
 <td style="text-align: left; width: 25em;">auROC</td>
-<td style="text-align: left;">0.891</td>
-<td style="text-align: left;">0.899</td>
-<td style="text-align: left;">0.929</td>
+<td style="text-align: left;">0.89</td>
+<td style="text-align: left;">0.90</td>
+<td style="text-align: left;">0.93</td>
 </tr>
 <tr class="even">
 <td style="text-align: left; width: 25em;">sensitivity</td>
-<td style="text-align: left;">0.823</td>
-<td style="text-align: left;">0.828</td>
-<td style="text-align: left;">0.864</td>
+<td style="text-align: left;">0.82</td>
+<td style="text-align: left;">0.83</td>
+<td style="text-align: left;">0.86</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left; width: 25em;">specificity</td>
-<td style="text-align: left;">0.819</td>
-<td style="text-align: left;">0.845</td>
-<td style="text-align: left;">0.881</td>
+<td style="text-align: left;">0.82</td>
+<td style="text-align: left;">0.85</td>
+<td style="text-align: left;">0.88</td>
 </tr>
 <tr class="even">
 <td style="text-align: left; width: 25em;">balanced accuracy</td>
-<td style="text-align: left;">0.828</td>
-<td style="text-align: left;">0.835</td>
-<td style="text-align: left;">0.854</td>
+<td style="text-align: left;">0.83</td>
+<td style="text-align: left;">0.83</td>
+<td style="text-align: left;">0.85</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left; width: 25em;">positive predictive value</td>
-<td style="text-align: left;">0.630</td>
-<td style="text-align: left;">0.300</td>
-<td style="text-align: left;">0.025</td>
+<td style="text-align: left;">0.63</td>
+<td style="text-align: left;">0.30</td>
+<td style="text-align: left;">0.03</td>
 </tr>
 <tr class="even">
 <td style="text-align: left; width: 25em;">negative predictive value</td>
-<td style="text-align: left;">0.944</td>
-<td style="text-align: left;">0.988</td>
-<td style="text-align: left;">0.999</td>
+<td style="text-align: left;">0.94</td>
+<td style="text-align: left;">0.99</td>
+<td style="text-align: left;">1.00</td>
 </tr>
 </tbody>
 </table>
@@ -366,22 +369,63 @@
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># kableExtra::footnote(general = c(footnote_table_metrics), threeparttable = TRUE)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
 <div class="cell-container"><div class="cell-decorator"><pre>In [5]:</pre></div><div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># metrics_subset &lt;- metrics |&gt; </span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(day = NA, hour = NA)</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># metrics_subset[1, 2] &lt;- NA</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># metrics_subset[7, ] &lt;- NA</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># metrics_subset |&gt;</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">#  kbl(format = "html", col.names = c("", "Week", "Day", "Hour"),</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">#       digits = 2,</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">#       align = c("r", "c", "c", "c"),</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">#      linesep = "") |&gt; </span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   row_spec(row = 0, align = "c") |&gt; </span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co">#   kable_styling(full_width = FALSE) |&gt; </span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co">#   kable_classic("striped") |&gt; </span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   column_spec(2, color  = "red", bold = TRUE)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>metrics <span class="sc">|&gt;</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Day =</span> <span class="st">""</span>, <span class="at">Hour =</span> <span class="st">""</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">.metric =</span> <span class="fu">case_when</span>(.metric <span class="sc">==</span> <span class="st">"roc_auc"</span> <span class="sc">~</span> <span class="st">"auROC"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                        .metric <span class="sc">==</span> <span class="st">"sens"</span> <span class="sc">~</span> <span class="st">"sensitivity"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                        .metric <span class="sc">==</span> <span class="st">"spec"</span> <span class="sc">~</span> <span class="st">"specificity"</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                        .metric <span class="sc">==</span> <span class="st">"bal_accuracy"</span> <span class="sc">~</span> <span class="st">"balanced accuracy"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"Week"</span>, <span class="st">"Day"</span>, <span class="st">"Hour"</span>),</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">digits =</span> <span class="dv">2</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">align =</span> <span class="fu">c</span>(<span class="st">"r"</span>, <span class="st">"c"</span>, <span class="st">"c"</span>, <span class="st">"c"</span>),</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">linesep =</span> <span class="st">""</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">row_spec</span>(<span class="at">row =</span> <span class="dv">0</span>, <span class="at">align =</span> <span class="st">"c"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">full_width =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>(<span class="st">"striped"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="dv">2</span>, <span class="at">color  =</span> <span class="st">"red"</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<table class="table lightable-classic lightable-striped table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Week</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Day</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Hour</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">auROC</td>
+<td style="text-align: center; font-weight: bold; color: red !important;">0.89</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">sensitivity</td>
+<td style="text-align: center; font-weight: bold; color: red !important;">0.82</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">specificity</td>
+<td style="text-align: center; font-weight: bold; color: red !important;">0.82</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">balanced accuracy</td>
+<td style="text-align: center; font-weight: bold; color: red !important;">0.83</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
 </div></div>
 </section>
      </main>
