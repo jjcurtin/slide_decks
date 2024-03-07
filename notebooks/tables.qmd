@@ -1,0 +1,31 @@
+---
+title: Tables
+author: John Curtin
+html-table-processing: none
+---
+
+Need to code out some examples of making tables using kableExtra and built in data
+
+```{r}
+library(tidyverse)
+library(kableExtra)
+```
+
+```{r}
+#| label: table-1
+#| tbl-cap: Table 1. A table.
+
+kbl(mtcars[1:10, 1:5]) |>
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "float_right") |>
+  kable_styling(fixed_thead = T) |>
+  add_header_above(c(" " = 1, "Group 1" = 2, "Group 2" = 2, "Group 3" = 1))
+
+```
+
+```{r}
+#| label: table-3
+#| tbl-cap: Table 3
+knitr::kable(mtcars[1:2, 1:2], table.attr = "class=\"striped\"",
+  format = "html")
+
+```
