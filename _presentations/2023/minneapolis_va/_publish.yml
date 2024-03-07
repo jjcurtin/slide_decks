@@ -1,0 +1,4 @@
+- source: minneapolis_va.qmd
+  quarto-pub:
+    - id: 87ea2df0-a95a-4d31-bf92-aa4249d62a9b
+      url: 'https://quartopub.com/sites/jjcurtin/2023_minneapolis_va'
