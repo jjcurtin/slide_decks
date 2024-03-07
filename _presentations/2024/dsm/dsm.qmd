@@ -8,7 +8,6 @@ title-slide-attributes:
   data-background-repeat: no
   data-background-position: left 10% bottom 10%
 format: 
-  
   revealjs:
     scrollable: true
     css: arc.css

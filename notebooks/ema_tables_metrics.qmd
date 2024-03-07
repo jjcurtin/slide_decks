@@ -1,0 +1,99 @@
+---
+title: "Performance Metrics Tables for EMA study"
+author: "John Curtin"
+---
+
+## Overview
+
+
+
+## Set up environment
+```{r}
+# handle conflicts
+options(conflicts.policy = "depends.ok")
+# devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/fun_ml.R?raw=true")
+# tidymodels_conflictRules()
+
+# library(kableExtra, exclude = "group_rows")
+# library(patchwork)
+# library(ggtext)
+# library(consort)
+# library(tidyposterior)
+library(tidyverse)
+# library(tidymodels)
+
+# Paths
+devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true")
+path_models <- format_path("studydata/risk/models/ema")
+path_data_shared <- format_path("studydata/risk/data_processed/shared")
+path_data_ema <- format_path("studydata/risk/data_processed/ema")
+```
+
+## Make metrics df
+```{r}
+auc <- tibble(metric = "auc", 
+              week = preds_week |> roc_auc(prob, truth = truth) |>  
+                pull(.estimate), 
+              day = preds_day |> roc_auc(prob, truth = truth) |>  
+                pull(.estimate),
+              hour = preds_hour |> roc_auc(prob, truth = truth) |>  
+                pull(.estimate))
+
+metrics_week <- preds_week |>   
+  conf_mat(truth, estimate) |> 
+  summary() |> 
+  mutate(.estimate = round(.estimate, 3)) |> 
+  rename(week = .estimate,
+         metric = .metric) |> 
+  select(-.estimator)
+
+metrics_day <- preds_day |>   
+  conf_mat(truth, estimate) |> 
+  summary() |> 
+  mutate(.estimate = round(.estimate, 3)) |> 
+  rename(day = .estimate,
+         metric = .metric) |> 
+  select(-.estimator)
+
+metrics_hour <- preds_hour |>   
+  conf_mat(truth, estimate) |> 
+  summary() |> 
+  mutate(.estimate = round(.estimate, 3)) |> 
+  rename(hour = .estimate,
+         metric = .metric) |> 
+  select(-.estimator)
+
+metrics_all <- metrics_week |> 
+  full_join(metrics_day, by = "metric") |> 
+  full_join(metrics_hour, by = "metric") |> 
+  filter(metric %in% c("sens", "spec", "ppv", "bal_accuracy")) |> 
+  bind_rows(auc) |> 
+  bind_rows(tibble(metric = "  ", week = NA, day = NA, hour = NA)) |> 
+  bind_rows(tibble(metric = "  ", week = NA, day = NA, hour = NA)) |> 
+  mutate(across(where(is.numeric), \(x) round(x, digits=2)))
+
+metrics_all <- metrics_all[c(5, 6, 1, 2, 4, 7, 3),]
+metrics_all[1,1] <- "AUC"
+metrics_all[3,1] <- "Sensitivity"
+metrics_all[4,1] <- "Specificity"
+metrics_all[5,1] <- "Balanced  Accuracy"
+metrics_all[7,1] <- "PPV"
+```
+```{r}
+
+
+metrics_subset <- metrics_all |> 
+  mutate(day = NA, hour = NA)
+metrics_subset[1, 2] <- NA
+metrics_subset[7, ] <- NA
+
+metrics_subset |>
+ kbl(format = "html", col.names = c("", "Week", "Day", "Hour"),
+      digits = 2,
+      align = c("r", "c", "c", "c"),
+     linesep = "") |> 
+  row_spec(row = 0, align = "c") |> 
+  kable_styling(full_width = FALSE) |> 
+  kable_classic("striped") |> 
+  column_spec(2, color  = "red", bold = TRUE)
+```
