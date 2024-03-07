@@ -30,4 +30,4 @@ editor_options:
 {{< embed notebooks/ema_figs_probability.qmd#fig-day-high_dec_thres >}}
 
 ### Tables
-{{< embed notebooks/ema_tables_metrics.qmd#table-paper >}}
+{{< embed notebooks/ema_tables_metrics.qmd#table-metrics-week_only >}}

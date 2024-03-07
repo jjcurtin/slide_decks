@@ -87,6 +87,7 @@ metrics |>
 ```
 
 ```{r}
+#| label: table-metrics-week_only
 metrics |> 
   slice(1:4) |> 
   mutate(Day = "", Hour = "") |> 
