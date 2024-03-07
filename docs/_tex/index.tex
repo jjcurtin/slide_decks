@@ -233,8 +233,13 @@ probability plots}}
 
 \phantomsection\label{table-paper}
 \begin{longtable}[]{@{}llll@{}}
-\caption{Performance Metrics for Full models by Prediction
-Window}\tabularnewline
+\caption{Areas under the receiver operating characteristic curves
+(auROCs) summarize the model's sensitivity and specificity over all
+possible decision thresholds. Sensitivity, specificity, balanced
+accuracy, positive predictive value, and negative predictive value are
+performance metrics calculated at a single decision threshold for each
+model determined with Youden's index. All metrics represent median
+values across 30 held-out test sets.}\tabularnewline
 \toprule\noalign{}
 Metric & Week & Day & Hour \\
 \midrule\noalign{}
