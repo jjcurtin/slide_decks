@@ -16,14 +16,18 @@ editor_options:
 
 ## Overview 
 
-### Generic
+## Generic
 
 
-### Burden Paper 
+## Burden Study 
 
-### EMA Paper
+## EMA Study 
 
+### Figures
 {{< embed notebooks/ema_figs_probability.qmd#fig-week-no_dec_thres >}}
 {{< embed notebooks/ema_figs_probability.qmd#fig-week >}}
 {{< embed notebooks/ema_figs_probability.qmd#fig-day >}}
 {{< embed notebooks/ema_figs_probability.qmd#fig-day-high_dec_thres >}}
+
+### Tables
+{{< embed notebooks/ema_tables_metrics.qmd#table-paper >}}

@@ -25,7 +25,7 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -44,6 +44,9 @@ ul.task-list li input[type="checkbox"] {
     document.body.classList.add('hypothesis-enabled');
   });
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <meta name="citation_title" content="Slide Decks for John Curtin&amp;amp;#039;s Scientific Presentations">
@@ -108,11 +111,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a>
-  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#generic" id="toc-generic" class="nav-link" data-scroll-target="#generic">Generic</a></li>
-  <li><a href="#burden-paper" id="toc-burden-paper" class="nav-link" data-scroll-target="#burden-paper">Burden Paper</a></li>
-  <li><a href="#ema-paper" id="toc-ema-paper" class="nav-link" data-scroll-target="#ema-paper">EMA Paper</a></li>
+  <li><a href="#burden-study" id="toc-burden-study" class="nav-link" data-scroll-target="#burden-study">Burden Study</a></li>
+  <li><a href="#ema-study" id="toc-ema-study" class="nav-link" data-scroll-target="#ema-study">EMA Study</a>
+  <ul class="collapse">
+  <li><a href="#figures" id="toc-figures" class="nav-link" data-scroll-target="#figures">Figures</a></li>
+  <li><a href="#tables" id="toc-tables" class="nav-link" data-scroll-target="#tables">Tables</a></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="notebooks/ema_tables_metrics-preview.html"><i class="bi bi-journal-code"></i>Performance Metrics Tables for EMA study</a></li><li><a href="notebooks/ema_figs_probability-preview.html"><i class="bi bi-journal-code"></i>Risk1 probability plots</a></li></ul></div></nav>
@@ -128,18 +133,21 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<section id="generic" class="level3">
-<h3 class="anchored" data-anchor-id="generic">Generic</h3>
 </section>
-<section id="burden-paper" class="level3">
-<h3 class="anchored" data-anchor-id="burden-paper">Burden Paper</h3>
+<section id="generic" class="level2">
+<h2 class="anchored" data-anchor-id="generic">Generic</h2>
 </section>
-<section id="ema-paper" class="level3">
-<h3 class="anchored" data-anchor-id="ema-paper">EMA Paper</h3>
+<section id="burden-study" class="level2">
+<h2 class="anchored" data-anchor-id="burden-study">Burden Study</h2>
+</section>
+<section id="ema-study" class="level2">
+<h2 class="anchored" data-anchor-id="ema-study">EMA Study</h2>
+<section id="figures" class="level3">
+<h3 class="anchored" data-anchor-id="figures">Figures</h3>
 <div class="quarto-embed-nb-cell">
 <div id="cell-fig-week-no_dec_thres" class="cell" data-fig-height="6" data-fig-width="6">
 <div class="cell-output cell-output-display">
-<div id="fig-week-no_dec_thres" class="quarto-figure quarto-figure-center quarto-float anchored" width="576" height="576">
+<div id="fig-week-no_dec_thres" class="quarto-figure quarto-figure-center quarto-float anchored" height="576" width="576">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-week-no_dec_thres-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a href="index_files/figure-html/notebooks-ema_figs_probability-fig-week-no_dec_thres-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1"><img src="index_files/figure-html/notebooks-ema_figs_probability-fig-week-no_dec_thres-output-1.png" id="fig-week-no_dec_thres" width="576" height="576" class="figure-img"></a>
@@ -155,7 +163,7 @@ Figure&nbsp;1
 <div class="quarto-embed-nb-cell">
 <div id="cell-fig-week" class="cell" data-fig-height="6" data-fig-width="6">
 <div class="cell-output cell-output-display">
-<div id="fig-week" class="quarto-figure quarto-figure-center quarto-float anchored" width="576" height="576">
+<div id="fig-week" class="quarto-figure quarto-figure-center quarto-float anchored" height="576" width="576">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-week-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a href="index_files/figure-html/notebooks-ema_figs_probability-fig-week-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2"><img src="index_files/figure-html/notebooks-ema_figs_probability-fig-week-output-2.png" id="fig-week" width="576" height="576" class="figure-img"></a>
@@ -171,7 +179,7 @@ Figure&nbsp;2
 <div class="quarto-embed-nb-cell">
 <div id="cell-fig-day" class="cell" data-fig-height="6" data-fig-width="6">
 <div class="cell-output cell-output-display">
-<div id="fig-day" class="quarto-figure quarto-figure-center quarto-float anchored" width="576" height="576">
+<div id="fig-day" class="quarto-figure quarto-figure-center quarto-float anchored" height="576" width="576">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-day-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a href="index_files/figure-html/notebooks-ema_figs_probability-fig-day-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" data-glightbox="description: .lightbox-desc-3"><img src="index_files/figure-html/notebooks-ema_figs_probability-fig-day-output-1.png" id="fig-day" width="576" height="576" class="figure-img"></a>
@@ -187,7 +195,7 @@ Figure&nbsp;3
 <div class="quarto-embed-nb-cell">
 <div id="cell-fig-day-high_dec_thres" class="cell" data-fig-height="6" data-fig-width="6">
 <div class="cell-output cell-output-display">
-<div id="fig-day-high_dec_thres" class="quarto-figure quarto-figure-center quarto-float anchored" width="576" height="576">
+<div id="fig-day-high_dec_thres" class="quarto-figure quarto-figure-center quarto-float anchored" height="576" width="576">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-day-high_dec_thres-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a href="index_files/figure-html/notebooks-ema_figs_probability-fig-day-high_dec_thres-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" data-glightbox="description: .lightbox-desc-4"><img src="index_files/figure-html/notebooks-ema_figs_probability-fig-day-high_dec_thres-output-1.png" id="fig-day-high_dec_thres" width="576" height="576" class="figure-img"></a>
@@ -200,6 +208,12 @@ Figure&nbsp;4
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-4" href="notebooks/ema_figs_probability-preview.html#cell-fig-day-high_dec_thres">Source: Risk1 probability plots</a></div>
+</section>
+<section id="tables" class="level3">
+<h3 class="anchored" data-anchor-id="tables">Tables</h3>
+<div class="quarto-embed-nb-cell">
+
+<a class="quarto-notebook-link" id="nblink-5" href="notebooks/ema_tables_metrics-preview.html#cell-table-paper">Source: Performance Metrics Tables for EMA study</a></div>
 <div class="hidden" aria-hidden="true">
 <span class="glightbox-desc lightbox-desc-1">Figure&nbsp;1: </span>
 <span class="glightbox-desc lightbox-desc-2">Figure&nbsp;2: </span>
@@ -599,7 +613,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","openEffect":"zoom","loop":false,"descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","descPosition":"bottom","loop":false});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;

@@ -47,6 +47,8 @@ metrics_hour <- read_csv(file.path(path_models,
 
 
 ```{r}
+#| label: table-paper
+
 metrics <- metrics_week |> 
   mutate(model = "Week") |> 
   bind_rows(metrics_day |> 
