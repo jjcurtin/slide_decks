@@ -69,6 +69,8 @@ One week window with no vertical line for decision threshold
 
 fig_week <- preds_week |> 
   plot_probs("week")
+
+fig_week
 ```
 
 One week window with vertical line for default decision threshold

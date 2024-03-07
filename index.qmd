@@ -1,5 +1,5 @@
 ---
-title: Respository for John Curtin's Scientific Presentations 
+title: "Slide Decks for John Curtin's Scientific Presentations"
 author:
   - name: John J. Curtin 
     orcid: 0000-0002-3286-938X
@@ -23,3 +23,7 @@ editor_options:
 
 ### EMA Paper
 
+{{< embed notebooks/ema_figs_probability.qmd#fig-week-no_dec_thres >}}
+{{< embed notebooks/ema_figs_probability.qmd#fig-week >}}
+{{< embed notebooks/ema_figs_probability.qmd#fig-day >}}
+{{< embed notebooks/ema_figs_probability.qmd#fig-day-high_dec_thres >}}
