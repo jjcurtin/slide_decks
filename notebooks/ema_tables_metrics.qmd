@@ -13,16 +13,9 @@ editor_options:
 ```{r}
 # handle conflicts
 options(conflicts.policy = "depends.ok")
-# devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/fun_ml.R?raw=true")
-# tidymodels_conflictRules()
 
 library(kableExtra, exclude = "group_rows")
-# library(patchwork)
-# library(ggtext)
-# library(consort)
-# library(tidyposterior)
 library(tidyverse)
-# library(tidymodels)
 
 # Paths
 devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true")
@@ -100,19 +93,19 @@ kbl(mtcars[1:10, 1:5]) |>
 
 ```{r}
 #| label: table-metrics-week_only
-metrics |> 
-  slice(1:4) |> 
-  mutate(Day = "", Hour = "") |> 
-  mutate(.metric = case_when(.metric == "roc_auc" ~ "auROC",
-                        .metric == "sens" ~ "sensitivity",
-                        .metric == "spec" ~ "specificity",
-                        .metric == "bal_accuracy" ~ "balanced accuracy")) |> 
-  kbl(col.names = c("", "Week", "Day", "Hour"),
-    digits = 2,
-    align = c("r", "c", "c", "c"),
-    linesep = "") |> 
-  row_spec(row = 0, align = "c") |> 
-  kable_styling(full_width = FALSE) |> 
-  kable_classic("striped") |> 
-  column_spec(2, color  = "red", bold = TRUE)
+# metrics |> 
+#   slice(1:4) |> 
+#   mutate(Day = "", Hour = "") |> 
+#   mutate(.metric = case_when(.metric == "roc_auc" ~ "auROC",
+#                         .metric == "sens" ~ "sensitivity",
+#                         .metric == "spec" ~ "specificity",
+#                         .metric == "bal_accuracy" ~ "balanced accuracy")) |> 
+#   kbl(col.names = c("", "Week", "Day", "Hour"),
+#     digits = 2,
+#     align = c("r", "c", "c", "c"),
+#     linesep = "") |> 
+#   row_spec(row = 0, align = "c") |> 
+#   kable_styling(full_width = FALSE) |> 
+#   kable_classic("striped") |> 
+#   column_spec(2, color  = "red", bold = TRUE)
 ```
