@@ -15,19 +15,9 @@ The data are from the EMA study based on RISK1 project
 ```{r}
 # handle conflicts
 options(conflicts.policy = "depends.ok")
-# devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/fun_ml.R?raw=true")
-# tidymodels_conflictRules()
 
-# library(kableExtra, exclude = "group_rows")
-# library(patchwork)
-# library(ggtext)
-# library(consort)
-# library(tidyposterior)
 library(tidyverse)
-# library(tidymodels)
-
 theme_set(theme_classic()) 
-
 
 # Paths
 devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true")
@@ -51,17 +41,17 @@ preds_hour<- readRDS(file.path(path_models,
 ## Function for faceted probability plot
 
 ```{r}
-
-# DO WE NEED model = below?
-
-plot_probs <- function(df_preds) {
+plot_probs <- function(df_preds, model) {
+  bar_color <- 
+    case_when(
+      tolower(model) == "week" ~ "orange",
+      tolower(model) == "day" ~ "green",
+      tolower(model) == "hour" ~ "blue",
+    )
   df_preds |> 
-    mutate(truth = if_else(truth == "no_lapse", "No lapse", "Lapse"),
-           estimate = if_else(estimate == "no_lapse", "No lapse", "Lapse"),
-           model = "week") |> 
-    ggplot(data = _, aes(x = prob)) + 
-     geom_histogram(bins = 15, fill = "orange", col = "black", alpha = .4) +
-     facet_wrap(~truth, nrow = 2, scales = "free_y") +
+    ggplot(data = _, aes(x = prob_beta)) + 
+     geom_histogram(bins = 15, fill = bar_color, col = "black", alpha = .4) +
+     facet_wrap(~label, nrow = 2, scales = "free_y") +
      xlab("Pr(Lapse)") +
     scale_y_continuous(labels = scales::comma)
 }
@@ -78,7 +68,7 @@ One week window with no vertical line for decision threshold
 #| fig-width: 6
 
 fig_week <- preds_week |> 
-  plot_probs()
+  plot_probs("week")
 ```
 
 One week window with vertical line for default decision threshold
@@ -98,10 +88,10 @@ One day window with vertical line for default decision threshold
 #| fig-width: 6
 
 fig_day <- preds_day |> 
- plot_probs()
+ plot_probs("day")
  
 fig_day +
-   geom_vline(xintercept = .5, color = "red", size = 2)
+   geom_vline(xintercept = .5, color = "red", linewidth = 2)
 ```
 
 One day window with vertical line for high (p = 0.9) decision threshold
@@ -111,5 +101,5 @@ One day window with vertical line for high (p = 0.9) decision threshold
 #| fig-width: 6
 
 fig_day +
-  geom_vline(xintercept = .9, color = "red", size = 2)
+  geom_vline(xintercept = .9, color = "red", linewidth = 2)
 ```
