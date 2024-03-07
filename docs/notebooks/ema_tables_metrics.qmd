@@ -66,24 +66,36 @@ metrics <- metrics[c(4,5,6, 1, 3, 2),]
 
 ```{r}
 #| label: table-paper
-#| tbl-cap: "Areas under the receiver operating characteristic curves (auROCs) summarize the model's sensitivity and specificity over all possible decision thresholds. Sensitivity, specificity, balanced accuracy, positive predictive value, and negative predictive value are performance metrics calculated at a single decision threshold for each model determined with Youden’s index. All metrics represent median values across 30 held-out test sets." 
 
-metrics |> 
- mutate(.metric = case_when(.metric == "roc_auc" ~ "auROC",
-                            .metric == "sens" ~ "sensitivity",
-                            .metric == "spec" ~ "specificity",
-                            .metric == "bal_accuracy" ~ "balanced accuracy",
-                            .metric == "ppv" ~ "positive predictive value",
-                            .metric == "npv" ~ "negative predictive value")) |> 
- kbl(col.names = c("Metric", "Week", "Day", "Hour"),
-     booktabs = TRUE,
-     digits = 2,
-     align = c("l", "l", "l", "l"),
-     linesep = "",
-     caption = "Performance Metrics for Full models by Prediction Window") |>  
-  kable_styling(position = "left", latex_options = c("HOLD_position")) |>  
-  column_spec(column = 1, width = "25em")  
-  # kableExtra::footnote(general = c(footnote_table_metrics), threeparttable = TRUE)
+# footnote_table_metrics <- "Areas under the receiver operating characteristic curves (auROCs) summarize the model's sensitivity and specificity over all possible decision thresholds. Sensitivity, specificity, balanced accuracy, positive predictive value, and negative predictive value are performance metrics calculated at a single decision threshold for each model determined with Youden’s index. All metrics represent median values across 30 held-out test sets." 
+# 
+# metrics |> 
+#  mutate(.metric = case_when(.metric == "roc_auc" ~ "auROC",
+#                             .metric == "sens" ~ "sensitivity",
+#                             .metric == "spec" ~ "specificity",
+#                             .metric == "bal_accuracy" ~ "balanced accuracy",
+#                             .metric == "ppv" ~ "positive predictive value",
+#                             .metric == "npv" ~ "negative predictive value")) |> 
+#  kbl(col.names = c("Metric", "Week", "Day", "Hour"),
+#      booktabs = TRUE,
+#      digits = 2,
+#      align = c("l", "l", "l", "l"),
+#      linesep = "",
+#      caption = "Performance Metrics for Full models by Prediction Window") |>  
+#   kable_styling(position = "left", latex_options = c("HOLD_position")) |>  
+#   column_spec(column = 1, width = "25em") |>   
+#   kableExtra::footnote(general = c(footnote_table_metrics), threeparttable = TRUE)
+```
+
+```{r}
+#| label: table-1
+#| tbl-cap: Table 1. A table.
+
+kbl(mtcars[1:10, 1:5]) |>
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "float_right") |>
+  kable_styling(fixed_thead = T) |>
+  add_header_above(c(" " = 1, "Group 1" = 2, "Group 2" = 2, "Group 3" = 1))
+
 ```
 
 ```{r}

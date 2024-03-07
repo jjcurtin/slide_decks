@@ -24,10 +24,13 @@ editor_options:
 ## EMA Study 
 
 ### Figures
+
 {{< embed notebooks/ema_figs_probability.qmd#fig-week-no_dec_thres >}}
 {{< embed notebooks/ema_figs_probability.qmd#fig-week >}}
 {{< embed notebooks/ema_figs_probability.qmd#fig-day >}}
 {{< embed notebooks/ema_figs_probability.qmd#fig-day-high_dec_thres >}}
 
 ### Tables
+
+{{< embed notebooks/ema_tables_metrics.qmd#table-1 >}}
 {{< embed notebooks/ema_tables_metrics.qmd#table-metrics-week_only >}}
