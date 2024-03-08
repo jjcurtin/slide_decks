@@ -116,6 +116,7 @@ plot_roc <- function(df){
 Week only
 ```{r}
 #| label: fig-roc-week
+#| fig-cap: ROC Curves by Model
 #| fig-height: 6
 #| fig-width: 6
 
@@ -130,6 +131,7 @@ roc_all |>
 Week & Day
 ```{r}
 #| label: fig-roc-week_day
+#| fig-cap: ROC Curves by Model
 #| fig-height: 6
 #| fig-width: 6
 
@@ -147,6 +149,7 @@ roc_all |>
 All three windows
 ```{r}
 #| label: fig-roc-all
+#| fig-cap: ROC Curves by Model
 #| fig-height: 6
 #| fig-width: 6
 

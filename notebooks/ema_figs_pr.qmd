@@ -59,6 +59,9 @@ pr_all <- pr_week |>
 
 ```{r}
 #| label: fig-prcurve
+#| fig-cap: PR Curves by Model
+#| fig-height: 6
+#| fig-width: 6
 
 pr_all |>
   ggplot(aes(x = recall, y = precision, color = model)) +
