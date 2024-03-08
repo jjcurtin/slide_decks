@@ -52,7 +52,7 @@ plot_probs <- function(df_preds, model) {
     ggplot(data = _, aes(x = prob_beta)) + 
      geom_histogram(bins = 15, fill = bar_color, col = "black", alpha = .4) +
      facet_wrap(~label, nrow = 2, scales = "free_y") +
-     xlab("Pr(Lapse)") +
+     xlab("P(Lapse | X)") +
     scale_y_continuous(labels = scales::comma)
 }
 ``` 
@@ -64,7 +64,7 @@ plot_probs <- function(df_preds, model) {
 One week window with no vertical line for decision threshold
 ```{r}
 #| label: fig-week-no_dec_thres
-#| fig-cap: Lapse Probability by Truth - Week
+#| fig-cap: P(Lapse | X) by Truth - Week
 #| fig-height: 6
 #| fig-width: 6
 
@@ -77,7 +77,7 @@ fig_week
 One week window with vertical line for default decision threshold
 ```{r}
 #| label: fig-week
-#| fig-cap: Lapse Probability by Truth - Week
+#| fig-cap: P(Lapse | X) by Truth - Day 
 #| fig-height: 6
 #| fig-width: 6
 
@@ -88,7 +88,7 @@ fig_week +
 One day window with vertical line for default decision threshold
 ```{r}
 #| label: fig-day
-#| fig-cap: Lapse Probability by Truth - Day
+#| fig-cap: P(Lapse | X) by Truth - Hour 
 #| fig-height: 6
 #| fig-width: 6
 

@@ -71,10 +71,10 @@ pr_all |>
        y = "Positive Predictive Value (Precision)") +
   scale_color_manual(values = c("orange","green","blue")) +
   geom_hline(yintercept = .70, color = "black", size = 1, linetype = "dotted") +
-  geom_segment(x = .72, y = -.05 , xend = .72, yend = .70,
+  geom_segment(x = .72, y = -.05 , xend = .67, yend = .75,
                color = "orange", size = 1, linetype = "dotted") +
-  geom_segment(x = .47, y = -.05 , xend = .47, yend = .70,
+  geom_segment(x = .47, y = -.05 , xend = .45, yend = .75,
                color = "green", size = 1, linetype = "dotted") +
-  geom_segment(x = .33, y = -.05 , xend = .33, yend = .70,
+  geom_segment(x = .33, y = -.05 , xend = .33, yend = .75,
                color = "blue", size = 1, linetype = "dotted")
 ```

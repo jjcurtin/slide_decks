@@ -59,6 +59,7 @@ shap_global_all <- shap_global_week |>
 
 ```{r}
 #| label: fig-global
+#| fig-cap: Global SHAPs by Model
 
 shap_global_all |>
   mutate(group = reorder(variable_grp, mean_value, sum)) |>
