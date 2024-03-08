@@ -10,6 +10,7 @@ title-slide-attributes:
 format: 
   revealjs:
     scrollable: true
+    chalkboard: true
     css: arc.css
 fig-cap-location: top
 editor_options: 
