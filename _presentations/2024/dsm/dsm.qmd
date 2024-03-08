@@ -318,9 +318,9 @@ For our purposes today I wont dive deep into the machine learning methods but le
 
 We used these features I just described to make predictions about the hour-by-hour probability of a future lapse.  We are developing separate models for three future lapse windows – lapses in the next hour, lapses in the next day, and lapses in the next week.  
 
-For example, if I was in recovery from an AUD, I could use these models to generate the probability that I would lapse after this symposium starting at 10am.  One model would generate the probability of a lapse between 10am and 11 am today, the second would predict the probability of a lapse between 10 am today and 10 am tomorrow and the third would provide the probability of a lapse anytime between 10am today and 10 am next Friday  
+For example, if I was in recovery from an AUD, I could use these models to generate the probability that I would lapse after this lecture starting at 1pm.  One model would generate the probability of a lapse between 1pm and 2pm today, the second would predict the probability of a lapse between 1pm today and 1pm tomorrow and the third would provide the probability of a lapse anytime between 1pm today and 1pm next Friday  
 
-And of course, all of the models would only use data collected prior to 10 am today so that they are “predicting”, in the full sense of the word, into the future and not just demonstrating an association.
+And of course, all of the models would only use data collected prior to 1pm today so that they are “predicting”, in the full sense of the word, into the future and not just demonstrating an association.
 
 :::
 
@@ -415,18 +415,22 @@ But for now, I will use .5 such that the model will predict “lapse” for all 
 
 ## Performance Metrics by Lapse Window Width
 
+<!--TEMP CREATE TABLE IN SLIDE DECK-->
 ```{r}
 library(tidyverse, quietly = TRUE)
-library(kableExtra, quietly = TRUE)
+library(kableExtra, exclude = "group_rows", quietly = TRUE)
 
-read_csv(here::here("notebooks/analysis_objects/ema_metrics.csv"),
+metrics <- read_csv(here::here("notebooks/analysis_objects/ema_metrics.csv"),
          col_types = cols()) |> 
-  slice(1:4) |>
-  mutate(Day = "", Hour = "") |>
-  mutate(.metric = case_when(.metric == "auROC" ~ "auROC",
+  mutate(.metric = case_when(.metric == "roc_auc" ~ "auROC",
                         .metric == "sens" ~ "sensitivity",
                         .metric == "spec" ~ "specificity",
-                        .metric == "bal_accuracy" ~ "balanced accuracy")) |>
+                        .metric == "bal_accuracy" ~ "balanced accuracy",
+                        .metric == "ppv" ~ "ppv"))
+
+metrics |> 
+  slice(1:4) |>
+  mutate(Day = "", Hour = "") |> 
   kbl(col.names = c("", "Week", "Day", "Hour"),
     digits = 2,
     align = c("r", "c", "c", "c"),
@@ -477,33 +481,9 @@ Area under the ROC curve (AUC)
 
 ::: {.column width="50%"}
 
-<!-- ADD AUC text-->
-<!--ROC Curves for Models-->
-```{r fig_roc_week}
-#| fig-height: 6
-#| fig-width: 6
+<!--ROC Curve for Week-->
+{{< embed ../../../notebooks/ema_figs_roc.qmd#fig-roc-week >}}
 
-# auc_week <- metrics_all[1,2] |> 
-#   as.character() |> 
-#   str_pad(width = 4, side = "right", pad = "0")
-# 
-# roc_all |> 
-#   mutate(model = factor(model, levels = c("1week", "1day", "1hour"), 
-#                         labels = c("week", "day", "hour"))) |> 
-#   filter(model == "week") |>
-#   ggplot(aes(x = 1 - specificity, y = sensitivity, color = model)) +
-#   geom_path(size = 1.25) +
-#   geom_abline(lty = 3) +
-#   coord_fixed(xlim = c(0, 1), ylim = c(0, 1)) +
-#   labs(x = "Specificity",
-#        y = "Sensitivity") +
-#   scale_x_continuous(breaks = seq(0,1,.25),
-#     labels = sprintf("%.2f", seq(1,0,-.25)))  +
-#   scale_color_manual(values = c("orange","green","blue")) +
-#   geom_text(x = .80, y = .20, 
-#             label = str_c("AUC = ", auc_week), 
-#             show.legend = FALSE, color = "orange")
-```
 :::
 
 ::::
@@ -564,35 +544,10 @@ But we were also eager to see how well we could do if we required a higher level
 
 
 ::: {.column width="50%"}
-<!--ROC Curves for Models-->
-```{r fig_roc_day}
-#| fig-height: 6
-#| fig-width: 6
 
-# auc_day <- metrics_all[1, 3] |> 
-#   as.character() |> 
-#   str_pad(width = 4, side = "right", pad = "0")
-# 
-# roc_all |> 
-#   mutate(model = factor(model, levels = c("1week", "1day", "1hour"), 
-#                         labels = c("week", "day", "hour"))) |> 
-#   filter(model == "week" | model == "day") |>
-#   ggplot(aes(x = 1 - specificity, y = sensitivity, color = model)) +
-#   geom_path(size = 1.25) +
-#   geom_abline(lty = 3) +
-#   coord_fixed(xlim = c(0, 1), ylim = c(0, 1)) +
-#   labs(x = "Specificity",
-#        y = "Sensitivity") +
-#   scale_x_continuous(breaks = seq(0,1,.25), 
-#                      labels = sprintf("%.2f", seq(1,0,-.25))) +
-#   scale_color_manual(values = c("orange","green","blue")) +
-#   geom_text(x = .80, y = .20, 
-#             label = str_c("AUC = ", auc_week), 
-#             show.legend = FALSE, color = "orange") +
-#   geom_text(x = .80, y = .15, 
-#             label = str_c("AUC = ", auc_day), 
-#             show.legend = FALSE, color = "green")
-```
+<!--ROC Curve for Week & Day-->
+{{< embed ../../../notebooks/ema_figs_roc.qmd#fig-roc-week_day >}}
+
 :::
 ::::
 
@@ -611,15 +566,11 @@ The day level model performed as well as, if not better, than the week level mod
 
 ## Performance Metrics by Lapse Window Width
 
+<!--TEMP CREATE TABLE IN SLIDE DECK-->
 ```{r}
-read_csv(here::here("notebooks/analysis_objects/ema_metrics.csv"),
-         col_types = cols()) |> 
+metrics |> 
   slice(1:4) |>
   mutate(Hour = "") |>
-  mutate(.metric = case_when(.metric == "auROC" ~ "auROC",
-                        .metric == "sens" ~ "sensitivity",
-                        .metric == "spec" ~ "specificity",
-                        .metric == "bal_accuracy" ~ "balanced accuracy")) |>
   kbl(col.names = c("", "Week", "Day", "Hour"),
     digits = 2,
     align = c("r", "c", "c", "c"),
@@ -684,37 +635,10 @@ Given our success with this day level model, we next developed a model with the 
 
 
 ::: {.column width="50%"}
-<!--ROC Curves for Models-->
-```{r fig_roc_hour}
-#| fig-height: 6
-#| fig-width: 6
 
-# auc_hour <- metrics_all[1, 4] |> 
-#   as.character() |> 
-#   str_pad(width = 4, side = "right", pad = "0")
-# 
-# roc_all |> 
-#   mutate(model = factor(model, levels = c("1week", "1day", "1hour"), 
-#                         labels = c("week", "day", "hour"))) |> 
-#   ggplot(aes(x = 1 - specificity, y = sensitivity, color = model)) +
-#   geom_path(size = 1.25) +
-#   geom_abline(lty = 3) +
-#   coord_fixed(xlim = c(0, 1), ylim = c(0, 1)) +
-#   labs(x = "Specificity",
-#        y = "Sensitivity") +
-#   scale_x_continuous(breaks = seq(0,1,.25),
-#     labels = sprintf("%.2f", seq(1,0,-.25)))  +
-#   scale_color_manual(values = c("orange","green","blue")) +
-#   geom_text(x = .80, y = .20, 
-#             label = str_c("AUC = ", auc_week), 
-#             show.legend = FALSE, color = "orange") +
-#   geom_text(x = .80, y = .15, 
-#             label = str_c("AUC = ", auc_day), 
-#             show.legend = FALSE, color = "green") +
-#   geom_text(x = .80, y = .10, 
-#             label = str_c("AUC = ", auc_hour), 
-#             show.legend = FALSE, color = "blue")
-```
+<!--ROC Curve for All-->
+{{< embed ../../../notebooks/ema_figs_roc.qmd#fig-roc-all >}}
+
 :::
 ::::
 
@@ -730,14 +654,10 @@ And it turns out that we can do somewhat better still with hour level prediction
 
 ## Performance Metrics by Lapse Window Width
 
+<!--TEMP CREATE TABLE IN SLIDE DECK-->
 ```{r}
-read_csv(here::here("notebooks/analysis_objects/ema_metrics.csv"),
-         col_types = cols()) |> 
+metrics |> 
   slice(1:4) |>
-  mutate(.metric = case_when(.metric == "auROC" ~ "auROC",
-                        .metric == "sens" ~ "sensitivity",
-                        .metric == "spec" ~ "specificity",
-                        .metric == "bal_accuracy" ~ "balanced accuracy")) |>
   kbl(col.names = c("", "Week", "Day", "Hour"),
     digits = 2,
     align = c("r", "c", "c", "c"),
@@ -766,32 +686,14 @@ And again, consistent with that AUC, the sensitivity, specificity, and balanced 
 :::
 
 ::: {.column width="50%"}
-```{r fig_shap_global}
-#| fig-height: 6
-#| fig-width: 6
 
-# shap_global_all <- shap_global_week |> 
-#   mutate(window = "week") |> 
-#   bind_rows(shap_global_day |> 
-#               mutate(window = "day")) |> 
-#   bind_rows(shap_global_hour |> 
-#               mutate(window = "hour")) |> 
-#   mutate(window = factor(window, levels = c("week", "day", "hour")))
-# 
-# shap_global_all |> 
-#   mutate(group = reorder(group, mean_value, sum)) |> 
-#   ggplot() +
-#   geom_bar(aes(x = group, y = mean_value, fill = window), stat = "identity") +
-#   ylab("Mean |SHAP| value (in Log-Odds)") +
-#   xlab("") +
-#   coord_flip() +
-#   scale_fill_manual(values = c("orange","green","blue"))
-```
+<!--Global SHAP Plot-->
+{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >}}
 
 :::
 
-
 ::::
+
 ::: {.notes}
 In the spirit of making this model more transparent and interpretable, lets briefly look under the hood at the feature importance
 
@@ -804,80 +706,26 @@ To make these values somewhat meaningful for you, let me remind you these Sh
 
 :::
 
-## Local Importance
+## Local Importance - Hour Model
 
-```{r fig_local_shaps}
-# # get order for items based on global sum importance
-# shap_levels <- shap_global_all |> 
-#   mutate(group = reorder(group, mean_value, sum)) |> 
-#   pull(group) |> 
-#   levels()
-# 
-# # downsample to 2% of observations for each plot (COULD INCREASE?)
-# ids_week <- shap_local_week |> 
-#   pull(ID) |> 
-#   unique()
-# ids_week <- ids_week |> sample(size = round(length(ids_week)/50))
-# ids_day <- shap_local_day |> 
-#   pull(ID) |> 
-#   unique()
-# ids_day <- ids_day |> sample(size = round(length(ids_day)/50))
-# ids_hour <- shap_local_hour |> 
-#   pull(ID) |> 
-#   unique()
-# ids_hour <- ids_hour |> sample(size = round(length(ids_hour)/50))
-# 
-# plot_shap_week <- shap_local_week |> 
-#   filter(ID %in% ids_week) |> 
-#   mutate(group = factor(group, levels = shap_levels)) |> 
-#   ggplot(mapping = aes(x = group, y = shap)) +
-#   ggforce::geom_sina(method = "counts", maxwidth = 0.7, alpha = 0.4, 
-#                      color = "orange") +
-#   geom_hline(yintercept = 0) +
-#   # geom_text(data = shap_global_all |> filter(window == "week"),
-#   #           aes(x = group, y = -1.75, label = round(mean_value, 2)),
-#   #           color = "orange") +
-#   scale_y_continuous(limits = c(-2, 4.5), breaks = seq(-2, 4)) +
-#   ylab("SHAP value (in Log-Odds)") +
-#   xlab("") +
-#   coord_flip() +
-#   ggtitle("Week")
-# 
-# plot_shap_day <- shap_local_day |> 
-#   filter(ID %in% ids_day) |> 
-#   mutate(group = factor(group, levels = shap_levels)) |> 
-#   ggplot(mapping = aes(x = group, y = shap)) +
-#   ggforce::geom_sina(method = "counts", maxwidth = 0.7, alpha = 0.4, 
-#                      color = "green") +
-#   geom_hline(yintercept = 0) +
-#   # geom_text(data = shap_global_all |> filter(window == "day"),
-#   #           aes(x = group, y = -2, label = round(mean_value, 2)),
-#   #           color = "green") +
-#   scale_y_continuous(limits = c(-2, 4.5), breaks = seq(-2, 4)) +
-#   ylab("SHAP value (in Log-Odds)") +
-#   xlab("") +
-#   coord_flip() +
-#   ggtitle("Day")
-# 
-# plot_shap_hour <- shap_local_hour |> 
-#   filter(ID %in% ids_hour) |> 
-#   mutate(group = factor(group, levels = shap_levels)) |> 
-#   ggplot(mapping = aes(x = group, y = shap)) +
-#   ggforce::geom_sina(method = "counts", maxwidth = 0.7, alpha = 0.4, 
-#                      color = "blue") +
-#   geom_hline(yintercept = 0) +
-#   # geom_text(data = shap_global_all |> filter(window == "hour"),
-#   #           aes(x = group, y = -1.75, label = round(mean_value, 2)),
-#   #           color = "black") +
-#   scale_y_continuous(limits = c(-2, 4.5), breaks = seq(-2, 4)) +
-#   ylab("SHAP value (in Log-Odds)") +
-#   xlab("") +
-#   coord_flip() +
-#   ggtitle("Hour")
-# 
-# plot_shap_day + plot_shap_hour
-```
+:::: {.columns}
 
+::: {.column width="33%"}
+<!-- Local SHAP - Week model-->
+{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_week >}}
+:::
+
+::: {.column width="33%"}
+<!-- Local SHAP - Day model-->
+{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day >}}
+:::
+
+::: {.column width="34%"}
+<!-- Local SHAP - Hour model-->
+{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_hour >}}
+:::
+
+:::: 
 
 ::: {.notes}
 
@@ -895,26 +743,15 @@ To make these values somewhat meaningful for you, let me remind you these Sh
 :::
 
 ::: {.column width="50%"}
-```{r fig_shap_global_2}
-#| fig-height: 6
-#| fig-width: 6
 
-# shap_global_all |> 
-#   mutate(group = reorder(group, mean_value, sum)) |> 
-#   ggplot() +
-#   geom_bar(aes(x = group, y = mean_value, fill = window), stat = "identity") +
-#   ylab("Mean |SHAP| value (in Log-Odds)") +
-#   xlab("") +
-#   coord_flip() +
-#   scale_fill_manual(values = c("orange","green","blue"))
-```
+<!--Global SHAP Plot-->
+{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >}}
 
 :::
 
-
 ::::
 ::: {.notes}
-Returning back to the global feature importance plot, we also see that demographics were not particularly important for prediction lapses for these models.   However, I'll return later to acknowledged that we had limited race/ethnicity diversity in the sample.  Nonetheless, we had reasonable variable on other participant characteristics like sex, SES, education, and addiction severity.  
+Returning back to the global feature importance plot, we also see that demographics were not particularly important for prediction lapses for these models.   However, I'll return later to acknowledged that we had limited race/ethnicity diversity in the sample.  Nonetheless, we had reasonable variability on other participant characteristics like sex, SES, education, and addiction severity.  
 
 And finally, we see that we can use lapse day and lapse hour to make predictions with the more temporally precise models.  Not surprisingly, people are more likely to lapse on weekends and during evening hours and the associated day and hour level models models can use that information to improve their lapse predictions.  These features likely contribute to the superior performance of the hour and to a lesser extent the day model relative to the week interval prediction model.
 
@@ -931,19 +768,23 @@ And finally, we see that we can use lapse day and lapse hour to make predictions
 
 ::: {.column width="50%"}
 
+<!--TEMP TABLE-->
 ```{r table_metrics_ppv_1}
-# # remove some data
-# metrics_subset <- metrics_all
-# metrics_subset[7, 2:4] <- NA
-# 
-# metrics_subset |>
-#  kbl(format = "html", col.names = c("", "Week", "Day", "Hour"),
-#       digits = 2,
-#       align = c("r", "c", "c", "c"),
-#      linesep = "") |> 
-#   row_spec(row = 0, align = "c") |> 
-#   kable_styling(full_width = FALSE) |> 
-#   kable_classic("striped")
+options(knitr.kable.NA = '')
+
+metrics_ppv1 <- metrics |> 
+  slice(1:5)  
+
+metrics_ppv1[5, 2:4] <- NA
+  
+metrics_ppv1 |>
+ kbl(format = "html", col.names = c("", "Week", "Day", "Hour"),
+      digits = 2,
+      align = c("r", "c", "c", "c"),
+     linesep = "") |>
+  row_spec(row = 0, align = "c") |>
+  kable_styling(full_width = FALSE) |>
+  kable_classic("striped")
 ```
 
 :::
@@ -969,56 +810,47 @@ PPV looks at the percentage of positive predictions from the model that are actu
 
 ::: {.column width="50%"}
 
-```{r table_lapse_2}
+<!--TEMP TABLE-->
+```{r}
 
-# lr <- tibble(row_name = "Lapse Rate", Week = "25.4%", Day = "7.7%", Hour = "0.4%")
-# 
-# lr |>
-#  kbl(format = "html", col.names = c("", "Week", "Day", "Hour"),
-#       digits = 2,
-#       align = c("r", "c", "c", "c"),
-#      linesep = "") |> 
-#   row_spec(row = 0, align = "c") |> 
-#   kable_styling(full_width = FALSE) |> 
-#   kable_classic("striped") |> 
-#   row_spec(1, color  = "red", bold = TRUE)
+lr <- tibble(row_name = "Lapse Rate", Week = "25.4%", Day = "7.7%", Hour = "0.4%")
+
+lr |>
+ kbl(format = "html", col.names = c("", "Week", "Day", "Hour"),
+      digits = 2,
+      align = c("r", "c", "c", "c"),
+     linesep = "") |>
+  row_spec(row = 0, align = "c") |>
+  kable_styling(full_width = FALSE) |>
+  kable_classic("striped") |>
+  row_spec(1, color  = "red", bold = TRUE)
 ```
 
 :::
 
 ::: {.column width="50%"}
 
-
-```{r table_metrics_ppv_2}
-# # remove some data
-# metrics_subset <- metrics_all
-# metrics_subset[7, 2:4] <- NA
-# 
-# metrics_subset |>
-#  kbl(format = "html", col.names = c("", "Week", "Day", "Hour"),
-#       digits = 2,
-#       align = c("r", "c", "c", "c"),
-#      linesep = "") |> 
-#   row_spec(row = 0, align = "c") |> 
-#   kable_styling(full_width = FALSE) |> 
-#   kable_classic("striped")
+<!--TEMP TABLE-->
+```{r}
+metrics_ppv1 |>
+ kbl(format = "html", col.names = c("", "Week", "Day", "Hour"),
+      digits = 2,
+      align = c("r", "c", "c", "c"),
+     linesep = "") |>
+  row_spec(row = 0, align = "c") |>
+  kable_styling(full_width = FALSE) |>
+  kable_classic("striped")
 ```
 
 :::
 
 ::::
 
-
-
-
 ::: {.notes}
 Now we haven’t talked about the frequency of lapses across the three lapse windows, but it should be intuitively clear that the percent of weeks that contain a lapse will be higher than the percent of days that contain a lapse, and that the percent of hours that contain a lapse will be lower still.  
 
 And this is what we see in our data.
-
-
 :::
-
 
 
 ## Positive Predictive Value (PPV)
@@ -1027,17 +859,15 @@ And this is what we see in our data.
 
 ::: {.column width="50%"}
 
-
-```{r table_lapse_3}
-
-# lr |>
-#  kbl(format = "html", col.names = c("", "Week", "Day", "Hour"),
-#       digits = 2,
-#       align = c("r", "c", "c", "c"),
-#      linesep = "") |> 
-#   row_spec(row = 0, align = "c") |> 
-#   kable_styling(full_width = FALSE) |> 
-#   kable_classic("striped")
+```{r}
+lr |>
+ kbl(format = "html", col.names = c("", "Week", "Day", "Hour"),
+      digits = 2,
+      align = c("r", "c", "c", "c"),
+     linesep = "") |>
+  row_spec(row = 0, align = "c") |>
+  kable_styling(full_width = FALSE) |>
+  kable_classic("striped")
 ```
 
 :::
@@ -1045,17 +875,16 @@ And this is what we see in our data.
 ::: {.column width="50%"}
 
 ```{r table_metrics_ppv_3}
-# # remove some data
-# 
-# metrics_all |>
-#  kbl(format = "html", col.names = c("", "Week", "Day", "Hour"),
-#       digits = 2,
-#       align = c("r", "c", "c", "c"),
-#      linesep = "") |> 
-#   row_spec(row = 0, align = "c") |> 
-#   kable_styling(full_width = FALSE) |> 
-#   kable_classic("striped") |> 
-#   row_spec(7, color  = "red", bold = TRUE)
+metrics |>
+  slice(1:5) |> 
+  kbl(col.names = c("", "Week", "Day", "Hour"),
+      digits = 2,
+      align = c("r", "c", "c", "c"),
+     linesep = "") |>
+  row_spec(row = 0, align = "c") |>
+  kable_styling(full_width = FALSE) |>
+  kable_classic("striped") |>
+  row_spec(5, color  = "red", bold = TRUE)
 ```
 
 :::
@@ -1120,7 +949,6 @@ And we may need to be careful about how we convey our predictions to patients.  
 #   kable_styling(full_width = FALSE) |> 
 #   column_spec(2, color  = c("black", "black", "black", "red"), bold = TRUE) 
 ```
-
 
 :::
 
@@ -1197,37 +1025,15 @@ And this is what we will need to do if we want to recommend more costly treatmen
 :::
   
 ::: {.column width="50%"}
+
 <!--Precision-Recall Curves by Models-->
+{{< embed ../../../notebooks/ema_figs_pr.qmd#fig-prcurve >}}
 
-```{r fig_ppv}
-#| fig-height: 6
-#| fig-width: 6
-
-# fig_pr <- pr_all |> 
-#   mutate(model = factor(model, levels = c("1week", "1day", "1hour"),
-#                         labels = c("week", "day", "hour"))) |>
-#   ggplot(aes(x = recall, y = precision, color = model)) +
-#   geom_path(size = 1.25) +
-#   coord_fixed(xlim = c(0, 1), ylim = c(0, 1)) +
-#   labs(x = "Sensitivity (Recall)",
-#        y = "Positive Predictive Value (Precision)") +
-#   scale_color_manual(values = c("orange","green","blue")) 
-# 
-# 
-# fig_pr +
-#   geom_hline(yintercept = .75, color = "black", size = 1, linetype = "dotted") +
-#   geom_segment(x = .67, y = -.05 , xend = .67, yend = .75, 
-#                color = "orange", size = 1, linetype = "dotted") +
-#   geom_segment(x = .43, y = -.05 , xend = .43, yend = .75, 
-#                color = "green", size = 1, linetype = "dotted") +
-#   geom_segment(x = .20, y = -.05 , xend = .20, yend = .75, 
-#                color = "blue", size = 1, linetype = "dotted")
-```
 :::
   
-  ::::
+::::
   
-  ::: {.notes}
+::: {.notes}
 But of course, as we increase the decision threshold for labeling a window as a lapse, we will trade off sensitivity.   We can see this trade off directly in the precision-recall curves on the right.  If we decide we need PPV of at least .75, you can see that we still have reasonable sensitivity for the one week window but we start to miss many lapses in the 1day window and more still in the 1hour window.
 
 I’ll return to this a bit more later when we discuss emerging plans for how best to implement these models within a digital therapeutic.
@@ -1417,8 +1223,6 @@ NEED TEXT FOR THIS BUT ITS IMPORTANT.   FOCUS ON lead = 0 for 1 hour and JIT –
 
 - More diversity in training data
 
-
-
 ::: {.notes}
 We are excited by the early performance of these machine learning models BUT I want to be clear that these are preliminary research studies.  And they included mostly white participants from our local community in Madison, WI.  
 
@@ -1430,7 +1234,7 @@ Machine learning models must be trained on diverse samples of patients or their 
 ## Active Project: Lapse in patients with Opioid Use Disorder 
 
 ::: {.medium}
-- Recruiting 400 - 500 patients in recovery from Opioid Use Disorder (~ 300 so far)
+- Recruiting 400 patients in recovery from Opioid Use Disorder (All enrolled, many completed )
 - National sample (size; diversity: demographics, location)
 - More variation in stage of recover (1 – 6 months at start)
 - 12 months of monitoring
@@ -1487,16 +1291,18 @@ We are also sensitive to the fact that these recommendations from the machine le
 
 :::
 
-## Optimization/Evaluation of an Algorithm Guided Smart DTx {.medium}
+## Optimization of an Algorithm Guided Smart DTx {.medium}
 
 - Lapse probabilities updated daily based on EMA and Geolocation features
-- Use lapse probability and locally important features to select  optimal DTx modules – guided by Rela
-- Provide recommendations designed to encourage engagement
-  - Algorithm transparency (risk level, change, features)
-  - Communication factors (empathy, feasibility)
-- MRT to optimize recommendation message components
-- RCT to evaluate Standard vs. Smart DTx on clinical outcomes
-
+- Use lapse probability and locally important features to select optimal DTx modules – guided by Relapse Prevention model
+- Provide recommendations with factorial manipulation of additional "transparency"
+  - risk level 
+  - risk change
+  - key important features
+- Outcomes
+  - Engagement with recommended module
+  - Heavy drinking days
+  
 ![nida_logo.png](https://github.com/jjcurtin/lectures/blob/main/images/niaaa_logo.png?raw=true){.absolute bottom="5%" right="2%" width="auto" height="auto"}\ 
 
 ::: {.notes}

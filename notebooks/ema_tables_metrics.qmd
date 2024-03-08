@@ -14,8 +14,8 @@ editor_options:
 # handle conflicts
 options(conflicts.policy = "depends.ok")
 
-library(kableExtra, exclude = "group_rows")
-library(tidyverse)
+library(kableExtra, exclude = "group_rows", quietly = TRUE)
+library(tidyverse, quietly = TRUE)
 
 # Paths
 devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true")
@@ -24,7 +24,7 @@ path_data_shared <- format_path("studydata/risk/data_processed/shared")
 path_data_ema <- format_path("studydata/risk/data_processed/ema")
 
 # Table format
-options(knitr.kable.NA = '')
+# options(knitr.kable.NA = '')
 ```
 
 ## Make metrics df
@@ -60,8 +60,6 @@ metrics |> write_csv(here::here("notebooks/analysis_objects", "ema_metrics.csv")
 ```
 
 ```{r}
-#| label: table-paper
-
 # footnote_table_metrics <- "Areas under the receiver operating characteristic curves (auROCs) summarize the model's sensitivity and specificity over all possible decision thresholds. Sensitivity, specificity, balanced accuracy, positive predictive value, and negative predictive value are performance metrics calculated at a single decision threshold for each model determined with Youden’s index. All metrics represent median values across 30 held-out test sets." 
 # 
 # metrics |> 
@@ -84,7 +82,6 @@ metrics |> write_csv(here::here("notebooks/analysis_objects", "ema_metrics.csv")
 
 
 ```{r}
-#| label: table-metrics-week_only
 metrics |>
   slice(1:4) |>
   mutate(Day = "", Hour = "") |>

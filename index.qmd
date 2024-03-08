@@ -2,13 +2,10 @@
 title: "Slide Decks for John Curtin's Scientific Presentations"
 author:
   - name: John J. Curtin 
-    orcid: 0000-0002-3286-938X
-    corresponding: true
     email: jjcurtin@wisc.edu
     affiliations:
       - Department of Psychology, University of Wisconsin-Madison 
 date: last-modified
-bibliography: references.bib
 number-sections: false 
 editor_options: 
   chunk_output_type: console
@@ -23,11 +20,15 @@ editor_options:
 
 ## EMA Study 
 
-### Figures
+### Probability Histograms 
 
 {{< embed notebooks/ema_figs_probability.qmd#fig-week-no_dec_thres >}}
 {{< embed notebooks/ema_figs_probability.qmd#fig-week >}}
 {{< embed notebooks/ema_figs_probability.qmd#fig-day >}}
 {{< embed notebooks/ema_figs_probability.qmd#fig-day-high_dec_thres >}}
 
-### Tables
+### ROCs 
+
+{{< embed notebooks/ema_figs_roc.qmd#fig-roc-week >}}
+{{< embed notebooks/ema_figs_roc.qmd#fig-roc-week_day >}}
+{{< embed notebooks/ema_figs_roc.qmd#fig-roc-all >}}
