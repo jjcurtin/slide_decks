@@ -91,8 +91,8 @@ plot_local <- function(shaps, grp_levels, ids, model){
     scale_y_continuous(limits = c(-2, 5), breaks = seq(-2, 5)) +
     ylab("SHAP value (in Log-Odds)") +
     xlab("") +
-    coord_flip() +
-    ggtitle(model)
+    coord_flip() 
+    # ggtitle(model)
 }
 ```
 
@@ -127,6 +127,7 @@ ids_hour <- ids_hour |> sample(size = round(length(ids_hour)/50))
 Week Plot
 ```{r}
 #| label: fig-local_week
+#| fig-cap: Local SHAPS - Week
 
 shap_local_week |>
   plot_local(grp_levels, ids_week, "Week")
@@ -135,6 +136,7 @@ shap_local_week |>
 Day plot
 ```{r}
 #| label: fig-local_day
+#| fig-cap: Local SHAPS - Day
 
 shap_local_day |>
   plot_local(grp_levels, ids_day, "Day")
@@ -143,6 +145,7 @@ shap_local_day |>
 Hour plot
 ```{r}
 #| label: fig-local_hour
+#| fig-cap: Local SHAPS - Hour
 
 shap_local_hour |>
   plot_local(grp_levels, ids_hour, "Hour")

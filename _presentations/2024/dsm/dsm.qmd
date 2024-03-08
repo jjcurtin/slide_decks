@@ -11,7 +11,7 @@ format:
   revealjs:
     scrollable: true
     chalkboard: true
-    css: arc.css
+    css: slides.css
 fig-cap-location: top
 editor_options: 
   chunk_output_type: console
@@ -418,6 +418,8 @@ But for now, I will use .5 such that the model will predict “lapse” for all 
 
 <!--TEMP CREATE TABLE IN SLIDE DECK-->
 ```{r}
+#| tbl-cap: Performance Metrics by Model 
+
 library(tidyverse, quietly = TRUE)
 library(kableExtra, exclude = "group_rows", quietly = TRUE)
 
@@ -569,6 +571,8 @@ The day level model performed as well as, if not better, than the week level mod
 
 <!--TEMP CREATE TABLE IN SLIDE DECK-->
 ```{r}
+#| tbl-cap: Performance Metrics by Model 
+
 metrics |> 
   slice(1:4) |>
   mutate(Hour = "") |>
@@ -657,6 +661,8 @@ And it turns out that we can do somewhat better still with hour level prediction
 
 <!--TEMP CREATE TABLE IN SLIDE DECK-->
 ```{r}
+#| tbl-cap: Performance Metrics by Model 
+
 metrics |> 
   slice(1:4) |>
   kbl(col.names = c("", "Week", "Day", "Hour"),
@@ -707,26 +713,17 @@ To make these values somewhat meaningful for you, let me remind you these Sh
 
 :::
 
-## Local Importance - Hour Model
+## Local Importance
 
-:::: {.columns}
-
-::: {.column width="33%"}
 <!-- Local SHAP - Week model-->
 {{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_week >}}
-:::
 
-::: {.column width="33%"}
 <!-- Local SHAP - Day model-->
 {{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day >}}
-:::
 
-::: {.column width="34%"}
 <!-- Local SHAP - Hour model-->
 {{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_hour >}}
-:::
 
-:::: 
 
 ::: {.notes}
 
@@ -771,6 +768,8 @@ And finally, we see that we can use lapse day and lapse hour to make predictions
 
 <!--TEMP TABLE-->
 ```{r table_metrics_ppv_1}
+#| tbl-cap: Performance Metrics by Model 
+
 options(knitr.kable.NA = '')
 
 metrics_ppv1 <- metrics |> 
@@ -813,6 +812,7 @@ PPV looks at the percentage of positive predictions from the model that are actu
 
 <!--TEMP TABLE-->
 ```{r}
+#| tbl-cap: Lapse Rates by Model 
 
 lr <- tibble(row_name = "Lapse Rate", Week = "25.4%", Day = "7.7%", Hour = "0.4%")
 
@@ -833,6 +833,8 @@ lr |>
 
 <!--TEMP TABLE-->
 ```{r}
+#| tbl-cap: Performance Metrics by Model 
+
 metrics_ppv1 |>
  kbl(format = "html", col.names = c("", "Week", "Day", "Hour"),
       digits = 2,
