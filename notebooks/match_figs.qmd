@@ -83,7 +83,7 @@ d_tx <- d |>
     summarize(outcome = mean(outcome), .groups = "drop")
 ```
 
-make df for outcomes by week collapsed across rct assigned tx (weighted)
+make df for outcomes by week collapsed across rct assigned tx (unweighted)
 ```{r}
 d_week <- d |> 
   select(subid, tx_rct, starts_with("outcome")) |> 
@@ -91,8 +91,10 @@ d_week <- d |>
                names_to = "week",
                names_pattern = "(?<=outcome_rct_)(.+)(?=_num)",
                values_to = "outcome") |> 
+  group_by(tx_rct, week) |> 
+  summarize(outcome = mean(outcome), .groups = "drop") |> 
   group_by(week) |> 
-    summarize(outcome = mean(outcome), .groups = "drop") |> 
+  summarize(outcome = mean(outcome), .groups = "drop") |> 
   mutate(tx = "rct") |> 
   relocate(tx)
 ```
@@ -152,17 +154,16 @@ d_rank |>
   plot_outcomes_rank()
 ```
 
-
 ### AIM 2 with RCT
-
-```{r}
-d_all <- 
-```
 
 ```{r}
 #| label: fig-wave-all-withrct
 #| fig-cap: "Abstince Rate over Time by Tx Rank"
 
-d_rank |>
+d_rank |> 
+  bind_rows(d_week) |> 
+  mutate(tx = fct(tx, levels = c("rct", "first", "second", "third")),
+         week = fct(week, levels = c("wk4", "wk12", "wk26"))) |> 
   plot_outcomes_withrct()
 ```
+
