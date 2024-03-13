@@ -1,0 +1,168 @@
+---
+title: Match Figs
+
+author: John Curtin
+editor_options: 
+  chunk_output_type: console
+---
+
+## Set up environment
+```{r}
+options(conflicts.policy = "depends.ok")
+library(tidyverse)
+theme_set(theme_classic()) 
+
+devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true")
+path_models <- format_path("studydata/match/models/pp_hybrid_wk4_outcome")
+```
+
+
+## AIM 2
+
+### Load and format data
+
+Load raw data
+```{r}
+version <- "v5"
+d <- read_csv(here::here(path_models, str_c("aim_2_", version, ".csv")),
+              show_col_types = FALSE) |> 
+  mutate(outcome_rct_wk4_num = if_else(outcome_rct_wk4 == "abstinent", 1, 0),
+         outcome_rct_wk12_num = if_else(outcome_rct_wk12 == "abstinent", 1, 0),
+         outcome_rct_wk26_num = if_else(outcome_rct_wk26 == "abstinent", 1, 0),
+         tx_worst = case_when(
+           prob_patch < prob_combo_nrt & prob_patch < prob_varenicline ~ "patch",
+           prob_combo_nrt < prob_patch & prob_combo_nrt < prob_varenicline ~ "combo_nrt",
+           prob_varenicline < prob_patch & prob_varenicline < prob_combo_nrt ~ "varenicline",
+           TRUE ~ NA_character_),
+         tx_second = case_when(
+           tx_worst == "patch" & tx_best == "varenicline" ~ "combo_nrt",
+           tx_worst == "patch" & tx_best == "combo_nrt" ~ "varenicline",
+           tx_worst == "varenicline" & tx_best == "patch" ~ "combo_nrt",
+           tx_worst == "varenicline" & tx_best == "combo_nrt" ~ "patch",
+           tx_worst == "combo_nrt" & tx_best == "varenicline" ~ "patch",
+           tx_worst == "combo_nrt" & tx_best == "patch" ~ "varenicline",
+           TRUE ~ NA_character_)) |> 
+  mutate(tx_rank = case_when(
+    tx_rct == tx_best ~ "first",
+    tx_rct == tx_second ~ "second",
+    tx_rct == tx_worst ~ "third",
+    TRUE ~ NA_character_)) |> 
+  select(subid, starts_with("tx_"), starts_with("prob_"),
+         outcome_rct_wk4_num, outcome_rct_wk12_num, outcome_rct_wk26_num) 
+```
+
+
+make df for outcomes by predicted tx rank
+```{r}
+d_rank <- d |> 
+  select(subid, tx_rank, 
+         outcome_rct_wk4_num, outcome_rct_wk12_num, outcome_rct_wk26_num) |> 
+  pivot_longer(
+    cols = c(outcome_rct_wk4_num, outcome_rct_wk12_num, outcome_rct_wk26_num),
+    names_to = "week",
+    names_pattern = "(?<=outcome_rct_)(.+)(?=_num)",
+    values_to = "outcome") |> 
+  mutate(tx_rank = factor(tx_rank, 
+                          levels = c("first", "second", "third")),
+         week = factor(week,
+                       levels = c("wk4", "wk12", "wk26")),
+         subid = factor(subid)) |> 
+  summarize(outcome = mean(outcome), .by = c(tx_rank, week)) |> 
+  rename (tx = tx_rank)
+```
+
+make df for outcomes by rct assigned tx (weighted)
+```{r}
+d_tx <- d |> 
+  select(subid, tx_rct, starts_with("outcome")) |> 
+  pivot_longer(cols = c(outcome_rct_wk4_num, outcome_rct_wk12_num, outcome_rct_wk26_num),
+               names_to = "week",
+               names_pattern = "(?<=outcome_rct_)(.+)(?=_num)",
+               values_to = "outcome") |> 
+  group_by(tx_rct, week) |> 
+    summarize(outcome = mean(outcome), .groups = "drop")
+```
+
+make df for outcomes by week collapsed across rct assigned tx (weighted)
+```{r}
+d_week <- d |> 
+  select(subid, tx_rct, starts_with("outcome")) |> 
+  pivot_longer(cols = c(outcome_rct_wk4_num, outcome_rct_wk12_num, outcome_rct_wk26_num),
+               names_to = "week",
+               names_pattern = "(?<=outcome_rct_)(.+)(?=_num)",
+               values_to = "outcome") |> 
+  group_by(week) |> 
+    summarize(outcome = mean(outcome), .groups = "drop") |> 
+  mutate(tx = "rct") |> 
+  relocate(tx)
+```
+
+### Plot functions
+```{r}
+plot_outcomes_rank <- function(d) {
+  
+  d |> 
+    ggplot(aes(x = week, y = outcome, fill = tx)) +
+      geom_col(position = "dodge") +
+      scale_fill_manual("Tx Received", 
+                      values = c("first" = "green", "second" = "blue", "third" = "red"))
+}
+```
+
+```{r}
+plot_outcomes_withrct <- function(d) {
+  
+  d |> 
+    ggplot(aes(x = week, y = outcome, fill = tx)) +
+      geom_col(position = "dodge") +
+      scale_fill_manual("Tx Received", 
+                      values = c("rct" = "gray", "first" = "green", 
+                                 "second" = "blue", "third" = "red"))
+}
+```
+
+
+### Aim 2 Figures without RCT outcome
+
+
+```{r}
+#| label: fig-wave-all 
+#| fig-cap: "Abstince Rate over Time by Tx Rank"
+
+d_rank |> 
+ plot_outcomes_rank()
+```
+
+
+```{r}
+#| label: fig-wave-1 
+#| fig-cap: "Abstince Rate over Time by Tx Rank"
+
+d_rank |>
+  mutate(outcome = if_else(week == "wk4", outcome, 0)) |> 
+  plot_outcomes_rank()
+```
+
+```{r}
+#| label: fig-wave-12
+#| fig-cap: "Abstince Rate over Time by Tx Rank"
+
+d_rank |>
+  mutate(outcome = if_else(week == "wk26", 0, outcome)) |> 
+  plot_outcomes_rank()
+```
+
+
+### AIM 2 with RCT
+
+```{r}
+d_all <- 
+```
+
+```{r}
+#| label: fig-wave-all-withrct
+#| fig-cap: "Abstince Rate over Time by Tx Rank"
+
+d_rank |>
+  plot_outcomes_withrct()
+```
