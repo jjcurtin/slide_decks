@@ -113,21 +113,22 @@ plot_outcomes <- function(d) {
 
 ### AIM 2
 
+
 A series of plots to unpack the result
 ```{r}
-#| label: fig-tx_week-1
+#| label: fig-tx_week_1
 #| fig-cap: "Abstince Rate over Time by Tx Received"
 #| fig-height: 6
 #| fig-width: 6
 
-d_rank |> 
-  bind_rows(d_week) |> 
-  mutate(outcome = if_else(tx == "rct" & week == "wk4", outcome, 0)) |> 
+d_rank |>
+  bind_rows(d_week) |>
+  mutate(outcome = if_else(tx == "rct" & week == "wk4", outcome, 0)) |>
   plot_outcomes()
 ```
 
 ```{r}
-#| label: fig-tx_week-2
+#| label: fig-tx_week_2
 #| fig-cap: "Abstince Rate over Time by Tx Received"
 #| fig-height: 6
 #| fig-width: 6
@@ -140,7 +141,7 @@ d_rank |>
 ```
 
 ```{r}
-#| label: fig-tx_week-3
+#| label: fig-tx_week_3
 #| fig-cap: "Abstince Rate over Time by Tx Received"
 #| fig-height: 6
 #| fig-width: 6
@@ -152,7 +153,7 @@ d_rank |>
 ```
 
 ```{r}
-#| label: fig-tx_week-4
+#| label: fig-tx_week_4
 #| fig-cap: "Abstince Rate over Time by Tx Received"
 #| fig-height: 6
 #| fig-width: 6
@@ -164,7 +165,7 @@ d_rank |>
 ```
 
 ```{r}
-#| label: fig-tx_week-5
+#| label: fig-tx_week_5
 #| fig-cap: "Abstince Rate over Time by Tx Received"
 #| fig-height: 6
 #| fig-width: 6

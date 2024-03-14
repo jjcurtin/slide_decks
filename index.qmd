@@ -21,11 +21,11 @@ editor_options:
 
 A series of figures that add bars to unpack Aim 2 primary results
 
-{{< embed notebooks/match_figs.qmd#fig-tx_week-1 >}}
-{{< embed notebooks/match_figs.qmd#fig-tx_week-2 >}}
-{{< embed notebooks/match_figs.qmd#fig-tx_week-3 >}}
-{{< embed notebooks/match_figs.qmd#fig-tx_week-4 >}}
-{{< embed notebooks/match_figs.qmd#fig-tx_week-5 >}}
+{{< embed notebooks/match_figs.qmd#fig-tx_week_1 >}}
+{{< embed notebooks/match_figs.qmd#fig-tx_week_2 >}}
+{{< embed notebooks/match_figs.qmd#fig-tx_week_3 >}}
+{{< embed notebooks/match_figs.qmd#fig-tx_week_4 >}}
+{{< embed notebooks/match_figs.qmd#fig-tx_week_5 >}}
 
 ## Burden Study 
 
