@@ -1,0 +1,15 @@
+{
+  "hash": "7db5f50ca95a423662ab2433ac53ddc6",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"EMA Paper Confusion Matrices\"\nauthor: \"John Curtin\"\neditor_options: \n  chunk_output_type: console\n---\n\n\n\n## Set up environment\n\n::: {.cell}\n\n```{.r .cell-code .hidden}\n# handle conflicts\noptions(conflicts.policy = \"depends.ok\")\n\nlibrary(tidyverse, quietly = TRUE)\n```\n\n::: {.cell-output .cell-output-stderr .hidden}\n\n```\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.2     ✔ readr     2.1.4\n✔ forcats   1.0.0     ✔ stringr   1.5.0\n✔ ggplot2   3.4.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.2     ✔ tidyr     1.3.0\n✔ purrr     1.0.1     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors\n```\n\n\n:::\n\n```{.r .cell-code .hidden}\ntheme_set(theme_classic()) \n\n# Paths\ndevtools::source_url(\"https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true\")\n```\n\n::: {.cell-output .cell-output-stderr .hidden}\n\n```\nℹ SHA-1 hash of file is \"a58e57da996d1b70bb9a5b58241325d6fd78890f\"\n```\n\n\n:::\n\n```{.r .cell-code .hidden}\npath_models <- format_path(\"studydata/risk/models/ema\")\npath_data_shared <- format_path(\"studydata/risk/data_processed/shared\")\npath_data_ema <- format_path(\"studydata/risk/data_processed/ema\")\n```\n:::\n\n\n## Open preds dfs\n\n\n::: {.cell}\n\n```{.r .cell-code .hidden}\npreds_week<- read_rds(file.path(path_models, \n                               \"outer_preds_1week_0_v5_nested_main.rds\"))\npreds_day<- read_rds(file.path(path_models, \n                              \"outer_preds_1day_0_v5_nested_main.rds\"))\npreds_hour<- read_rds(file.path(path_models, \n                               \"outer_preds_1hour_0_v5_nested_main.rds\")) \n```\n:::\n\n::: {.cell}\n\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -15,6 +15,17 @@ editor_options:
 
 ## Generic
 
+## MATCH
+
+### AIM 2
+
+A series of figures that add bars to unpack Aim 2 primary results
+
+{{< embed notebooks/match_figs.qmd#fig-tx_week-1 >}}
+{{< embed notebooks/match_figs.qmd#fig-tx_week-2 >}}
+{{< embed notebooks/match_figs.qmd#fig-tx_week-3 >}}
+{{< embed notebooks/match_figs.qmd#fig-tx_week-4 >}}
+{{< embed notebooks/match_figs.qmd#fig-tx_week-5 >}}
 
 ## Burden Study 
 

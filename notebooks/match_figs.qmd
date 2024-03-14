@@ -1,6 +1,5 @@
 ---
-title: Match Figs
-
+title: Match Figures
 author: John Curtin
 editor_options: 
   chunk_output_type: console
@@ -17,11 +16,9 @@ path_models <- format_path("studydata/match/models/pp_hybrid_wk4_outcome")
 ```
 
 
-## AIM 2
+## Load and format data
 
-### Load and format data
-
-Load raw data
+Load raw data for outcomes
 ```{r}
 version <- "v5"
 d <- read_csv(here::here(path_models, str_c("aim_2_", version, ".csv")),
@@ -43,16 +40,17 @@ d <- read_csv(here::here(path_models, str_c("aim_2_", version, ".csv")),
            tx_worst == "combo_nrt" & tx_best == "patch" ~ "varenicline",
            TRUE ~ NA_character_)) |> 
   mutate(tx_rank = case_when(
-    tx_rct == tx_best ~ "first",
-    tx_rct == tx_second ~ "second",
-    tx_rct == tx_worst ~ "third",
+    tx_rct == tx_best ~ "optimal",
+    tx_rct == tx_second ~ "intermediate",
+    tx_rct == tx_worst ~ "worst",
     TRUE ~ NA_character_)) |> 
   select(subid, starts_with("tx_"), starts_with("prob_"),
-         outcome_rct_wk4_num, outcome_rct_wk12_num, outcome_rct_wk26_num) 
+         outcome_rct_wk4_num, outcome_rct_wk12_num, outcome_rct_wk26_num) |> 
+  glimpse()
 ```
 
 
-make df for outcomes by predicted tx rank
+Make df for outcomes by predicted tx rank and wave
 ```{r}
 d_rank <- d |> 
   select(subid, tx_rank, 
@@ -62,16 +60,11 @@ d_rank <- d |>
     names_to = "week",
     names_pattern = "(?<=outcome_rct_)(.+)(?=_num)",
     values_to = "outcome") |> 
-  mutate(tx_rank = factor(tx_rank, 
-                          levels = c("first", "second", "third")),
-         week = factor(week,
-                       levels = c("wk4", "wk12", "wk26")),
-         subid = factor(subid)) |> 
   summarize(outcome = mean(outcome), .by = c(tx_rank, week)) |> 
   rename (tx = tx_rank)
 ```
 
-make df for outcomes by rct assigned tx (weighted)
+make df for outcomes by rct assigned tx and week
 ```{r}
 d_tx <- d |> 
   select(subid, tx_rct, starts_with("outcome")) |> 
@@ -87,7 +80,8 @@ make df for outcomes by week collapsed across rct assigned tx (unweighted)
 ```{r}
 d_week <- d |> 
   select(subid, tx_rct, starts_with("outcome")) |> 
-  pivot_longer(cols = c(outcome_rct_wk4_num, outcome_rct_wk12_num, outcome_rct_wk26_num),
+  pivot_longer(cols = c(outcome_rct_wk4_num, outcome_rct_wk12_num, 
+                        outcome_rct_wk26_num),
                names_to = "week",
                names_pattern = "(?<=outcome_rct_)(.+)(?=_num)",
                values_to = "outcome") |> 
@@ -99,71 +93,83 @@ d_week <- d |>
   relocate(tx)
 ```
 
-### Plot functions
+## Plot function
+
 ```{r}
-plot_outcomes_rank <- function(d) {
+plot_outcomes <- function(d) {
   
   d |> 
+    mutate(tx = fct(tx, levels = c("rct", "optimal", "intermediate", "worst")),
+           week = fct(week, levels = c("wk4", "wk12", "wk26"))) |> 
     ggplot(aes(x = week, y = outcome, fill = tx)) +
       geom_col(position = "dodge") +
       scale_fill_manual("Tx Received", 
-                      values = c("first" = "green", "second" = "blue", "third" = "red"))
+                      values = c("rct" = "gray", "optimal" = "green", 
+                                 "intermediate" = "blue", "worst" = "red")) +
+    ylab("Abstinence (point prevalance)") +
+    ylim(0, .47)
 }
 ```
 
+### AIM 2
+
+A series of plots to unpack the result
 ```{r}
-plot_outcomes_withrct <- function(d) {
-  
-  d |> 
-    ggplot(aes(x = week, y = outcome, fill = tx)) +
-      geom_col(position = "dodge") +
-      scale_fill_manual("Tx Received", 
-                      values = c("rct" = "gray", "first" = "green", 
-                                 "second" = "blue", "third" = "red"))
-}
-```
-
-
-### Aim 2 Figures without RCT outcome
-
-
-```{r}
-#| label: fig-wave-all 
-#| fig-cap: "Abstince Rate over Time by Tx Rank"
-
-d_rank |> 
- plot_outcomes_rank()
-```
-
-
-```{r}
-#| label: fig-wave-1 
-#| fig-cap: "Abstince Rate over Time by Tx Rank"
-
-d_rank |>
-  mutate(outcome = if_else(week == "wk4", outcome, 0)) |> 
-  plot_outcomes_rank()
-```
-
-```{r}
-#| label: fig-wave-12
-#| fig-cap: "Abstince Rate over Time by Tx Rank"
-
-d_rank |>
-  mutate(outcome = if_else(week == "wk26", 0, outcome)) |> 
-  plot_outcomes_rank()
-```
-
-### AIM 2 with RCT
-
-```{r}
-#| label: fig-wave-all-withrct
-#| fig-cap: "Abstince Rate over Time by Tx Rank"
+#| label: fig-tx_week-1
+#| fig-cap: "Abstince Rate over Time by Tx Received"
+#| fig-height: 6
+#| fig-width: 6
 
 d_rank |> 
   bind_rows(d_week) |> 
-  mutate(tx = fct(tx, levels = c("rct", "first", "second", "third")),
-         week = fct(week, levels = c("wk4", "wk12", "wk26"))) |> 
-  plot_outcomes_withrct()
+  mutate(outcome = if_else(tx == "rct" & week == "wk4", outcome, 0)) |> 
+  plot_outcomes()
 ```
 
+```{r}
+#| label: fig-tx_week-2
+#| fig-cap: "Abstince Rate over Time by Tx Received"
+#| fig-height: 6
+#| fig-width: 6
+
+d_rank |> 
+  bind_rows(d_week) |> 
+  mutate(outcome = if_else((tx == "rct" | tx == "optimal") &
+                            week == "wk4", outcome, 0)) |> 
+  plot_outcomes()
+```
+
+```{r}
+#| label: fig-tx_week-3
+#| fig-cap: "Abstince Rate over Time by Tx Received"
+#| fig-height: 6
+#| fig-width: 6
+
+d_rank |> 
+  bind_rows(d_week) |> 
+  mutate(outcome = if_else(week  == "wk4", outcome, 0)) |> 
+  plot_outcomes()
+```
+
+```{r}
+#| label: fig-tx_week-4
+#| fig-cap: "Abstince Rate over Time by Tx Received"
+#| fig-height: 6
+#| fig-width: 6
+
+d_rank |> 
+  bind_rows(d_week) |> 
+  mutate(outcome = if_else(week  != "wk26", outcome, 0)) |> 
+  plot_outcomes()
+```
+
+```{r}
+#| label: fig-tx_week-5
+#| fig-cap: "Abstince Rate over Time by Tx Received"
+#| fig-height: 6
+#| fig-width: 6
+
+d_rank |> 
+  bind_rows(d_week) |> 
+  plot_outcomes()
+```

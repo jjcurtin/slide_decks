@@ -1,5 +1,5 @@
 ---
-title: "Smart Digital Therapeutics for Alcohol Use Disorder: Algorithms for Prediction and Adaptive Intervention" 
+title: "Precision Mental Health for SUD: Contributions from High Dimensional Prediction Models" 
 author: "John J. Curtin, Ph.D."
 institute: "University of Wisconsin-Madison"
 title-slide-attributes:
@@ -16,6 +16,10 @@ fig-cap-location: top
 editor_options: 
   chunk_output_type: console
 ---
+
+## Theory and Mechanism in 
+
+
 ## Mental Healthcare Needs are High and Unmet  {.smaller}
 
 - In 2019, [52 million]{.red} Americans had an active mental illness
@@ -26,7 +30,6 @@ We have a mental health crisis in the U.S. and it is a crisis of **unmet** high 
 
 In 2019, **more than half of the 52 million Americans** with an active mental illness did not receive any treatment. **More than half**!
 :::
-
 
 
 ## Mental Healthcare Needs are High and Unmet  {.smaller}
