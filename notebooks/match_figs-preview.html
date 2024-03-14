@@ -369,7 +369,7 @@ $ outcome_rct_wk26_num &lt;dbl&gt; 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 
 <div id="fig-tx_week_1" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-tx_week_1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
-<a href="match_figs_files/figure-html/fig-tx_week_1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1"><img src="match_figs_files/figure-html/fig-tx_week_1-1.png" class="img-fluid figure-img" width="576"></a>
+<a href="match_figs_files/figure-html/fig-tx_week_1-1.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1"><img src="match_figs_files/figure-html/fig-tx_week_1-1.png" class="img-fluid figure-img" width="576"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tx_week_1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Abstince Rate over Time by Tx Received
@@ -389,7 +389,7 @@ Abstince Rate over Time by Tx Received
 <div id="fig-tx_week_2" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-tx_week_2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
-<a href="match_figs_files/figure-html/fig-tx_week_2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2"><img src="match_figs_files/figure-html/fig-tx_week_2-1.png" class="img-fluid figure-img" width="576"></a>
+<a href="match_figs_files/figure-html/fig-tx_week_2-1.png" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2"><img src="match_figs_files/figure-html/fig-tx_week_2-1.png" class="img-fluid figure-img" width="576"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tx_week_2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Abstince Rate over Time by Tx Received
@@ -402,13 +402,13 @@ Abstince Rate over Time by Tx Received
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>d_rank <span class="sc">|&gt;</span> </span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(d_week) <span class="sc">|&gt;</span> </span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">outcome =</span> <span class="fu">if_else</span>(week  <span class="sc">==</span> <span class="st">"wk4"</span>, outcome, <span class="dv">0</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">outcome =</span> <span class="fu">if_else</span>(tx <span class="sc">==</span> <span class="st">"rct"</span> <span class="sc">|</span> tx <span class="sc">==</span> <span class="st">"optimal"</span>, outcome, <span class="dv">0</span>)) <span class="sc">|&gt;</span> </span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_outcomes</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-tx_week_3" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-tx_week_3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
-<a href="match_figs_files/figure-html/fig-tx_week_3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" data-glightbox="description: .lightbox-desc-3"><img src="match_figs_files/figure-html/fig-tx_week_3-1.png" class="img-fluid figure-img" width="576"></a>
+<a href="match_figs_files/figure-html/fig-tx_week_3-1.png" class="lightbox" data-glightbox="description: .lightbox-desc-3" data-gallery="quarto-lightbox-gallery-3"><img src="match_figs_files/figure-html/fig-tx_week_3-1.png" class="img-fluid figure-img" width="576"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tx_week_3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Abstince Rate over Time by Tx Received
@@ -421,13 +421,14 @@ Abstince Rate over Time by Tx Received
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>d_rank <span class="sc">|&gt;</span> </span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(d_week) <span class="sc">|&gt;</span> </span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">outcome =</span> <span class="fu">if_else</span>(week  <span class="sc">!=</span> <span class="st">"wk26"</span>, outcome, <span class="dv">0</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_outcomes</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">outcome =</span> <span class="fu">if_else</span>(tx <span class="sc">==</span> <span class="st">"rct"</span> <span class="sc">|</span> tx <span class="sc">==</span> <span class="st">"optimal"</span> <span class="sc">|</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>                           week <span class="sc">==</span> <span class="st">"wk4"</span>, outcome, <span class="dv">0</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_outcomes</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-tx_week_4" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-tx_week_4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
-<a href="match_figs_files/figure-html/fig-tx_week_4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" data-glightbox="description: .lightbox-desc-4"><img src="match_figs_files/figure-html/fig-tx_week_4-1.png" class="img-fluid figure-img" width="576"></a>
+<a href="match_figs_files/figure-html/fig-tx_week_4-1.png" class="lightbox" data-glightbox="description: .lightbox-desc-4" data-gallery="quarto-lightbox-gallery-4"><img src="match_figs_files/figure-html/fig-tx_week_4-1.png" class="img-fluid figure-img" width="576"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tx_week_4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Abstince Rate over Time by Tx Received
@@ -445,7 +446,7 @@ Abstince Rate over Time by Tx Received
 <div id="fig-tx_week_5" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-tx_week_5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
-<a href="match_figs_files/figure-html/fig-tx_week_5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" data-glightbox="description: .lightbox-desc-5"><img src="match_figs_files/figure-html/fig-tx_week_5-1.png" class="img-fluid figure-img" width="576"></a>
+<a href="match_figs_files/figure-html/fig-tx_week_5-1.png" class="lightbox" data-glightbox="description: .lightbox-desc-5" data-gallery="quarto-lightbox-gallery-5"><img src="match_figs_files/figure-html/fig-tx_week_5-1.png" class="img-fluid figure-img" width="576"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tx_week_5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Abstince Rate over Time by Tx Received
@@ -850,7 +851,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>  </div> <!-- /content -->  <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":false,"openEffect":"zoom"});
+</script>  </div> <!-- /content -->  <script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","loop":false,"selector":".lightbox","openEffect":"zoom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;

@@ -148,7 +148,7 @@ d_rank |>
 
 d_rank |> 
   bind_rows(d_week) |> 
-  mutate(outcome = if_else(week  == "wk4", outcome, 0)) |> 
+  mutate(outcome = if_else(tx == "rct" | tx == "optimal", outcome, 0)) |> 
   plot_outcomes()
 ```
 
@@ -160,7 +160,8 @@ d_rank |>
 
 d_rank |> 
   bind_rows(d_week) |> 
-  mutate(outcome = if_else(week  != "wk26", outcome, 0)) |> 
+  mutate(outcome = if_else(tx == "rct" | tx == "optimal" |
+                           week == "wk4", outcome, 0)) |> 
   plot_outcomes()
 ```
 
