@@ -1,0 +1,4 @@
+- source: meet_faculty.qmd
+  quarto-pub:
+    - id: c0354d2b-1af1-4702-a0a1-2fb5f45e2664
+      url: 'https://jjcurtin.quarto.pub/precision-mental-health-for-sud-contributions-from-high-dimensional-prediction-models-e78c'

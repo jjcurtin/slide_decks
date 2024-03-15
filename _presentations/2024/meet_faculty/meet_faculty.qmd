@@ -17,169 +17,382 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Theory and Mechanism in 
+## Explanations vs. Prediction in Applied? Psychology
 
 
-## Mental Healthcare Needs are High and Unmet  {.smaller}
+Experimental Psychopathology promised:
 
-- In 2019, [52 million]{.red} Americans had an active mental illness
-  - More than half did not receive any [treatment]{.red}
+- Experiments will allow us to develop theories about mechanisms that cause, maintain, or correct psychopathology (proxy manipulations and measures)
+- Findings from experiments will generalize to real world psychopathology 
+- Solid theory about these mechanisms would lead to treatments
+- Biologically based approaches would allow us to "carve nature at its joints"
+
+
+## And....?
+
+- Tom Insel, former Director of NIMH (Wired Magazine, 2017)
+
+> “I spent 13 years at NIMH really pushing on the neuroscience and genetics of mental disorders, and when I look back on that I realize that while I think I succeeded at getting lots of really cool papers published by cool scientists at fairly large costs —I think $20 billion— I don’t think we moved the needle in reducing suicide, reducing hospitalizations, improving recovery for the tens of millions of people who have mental illness.” 
+
+
+## And What About Me....?
+
+John Curtin, 1998 - 2019 
+
+- Curtin J, Lang A, Patrick C, Stritzke W (1998). Alcohol and fear-potentiated startle: The role of competing cognitive demands in the stress-reducing effects of intoxication. **Journal of Abnormal Psychology**, 107, 547-557. 
+
+- Curtin JJ, Patrick CJ, Lang AR, Cacioppo JT, Birbaumer N. (2001). Alcohol affects emotion through cognition. **Psychological Science**, 12, 527-531.
+
+- Piper ME, Curtin JJ (2006). Tobacco withdrawal and negative affect: An analysis of initial emotional response intensity and voluntary emotion regulation. **Journal of Abnormal Psychology**, 115, 96-102. 
+
+- Curtin JJ, Lang AR (2007). Alcohol and emotion: Insights and directives from affective science. In J. Rottenberg & Johnson, S (Eds.), **Emotion and Psychopathology: Bridging Affective and Clinical Science**, (pp. 191-213), American Psychological Association.
+
+- Moberg CA, Curtin JJ (2009). Alcohol selectively reduces anxiety but not fear: Startle response during unpredictable vs. predictable threat. **Journal of Abnormal Psychology**, 118, 335-347.
+
+- Hogle JM, Kaye JT, Curtin JJ (2010). Nicotine withdrawal increases threat-induced anxiety but not fear: Neuroadaptation in human addiction. **Biological Psychiatry**, 68, 719-725.
+
+- Moberg CA, Weber S, Curtin JJ (2011). Alcohol dose effects on stress response to cued threat vary by threat intensity. **Psychopharmacology**, 218, 217-227. 
+
+- Hefner KR, Curtin JJ (2012). Alcohol stress response dampening: Selective reduction of anxiety in the face of uncertain threat. **Journal of Psychopharmacology**, 26, 232 – 245.
+
+- Hefner KR, Moberg CA, Hachiya LY, Curtin JJ (2013). Alcohol stress response dampening during imminent vs. distal, uncertain threat. **Journal of Abnormal Psychology**, 122, 756-769.
+
+- Bradford DE, Shapiro B, Curtin JJ (2013). How bad could it be? Alcohol dampens stress responses to uncertain intensity threat. **Psychological Science**, 24, 2541-2549. 
+
+- Bradford DE, Kaye JT, Curtin JJ (2014). Not just noise: Individual differences in general startle reactivity predict startle reactivity to uncertain and certain threat. **Psychophysiology**, 51, 407-411. 
+
+- Bradford DE, Starr MJ, Shackman AJ, Curtin JJ (2015). Empirically based comparisons of the reliability and validity of common quantification approaches for eyeblink startle potentiation in humans. **Psychophysiolology**, 52, 1669-1681. 
+
+- Bradford DE, Curtin JJ, Piper ME (2015). Anticipation of smoking sufficiently dampens stress reactivity in nicotine deprived smokers. **Journal of Abnormal Psychology**, 124, 128-36. 
+
+- Kaye JT, Bradford DE, & Curtin JJ (2016). Psychometric properties of startle and corrugator response in NPU, Affective Picture Viewing, and Resting State tasks. **Psychophysiology**, 53, 1241-1255. 
+
+- Bradford DE, Motschman CA Starr MJ, & Curtin JJ (2017). Alcohol’s effects on emotionally motivated attention, defensive reactivity, and subjective anxiety during uncertain threat. **Social Cognitive and Affective Neuroscience**, 12, 1823–1832. 
+
+- Kaye JT, Bradford DE, Magruder KP & Curtin JJ (2017). Probing for neuroadaptations to unpredictable stressors in addiction: translational methods and emerging evidence. **Journal of Studies on Alcohol and Drugs**, 78, 353-371.
+
+- Moberg CA, Bradford DE, Kaye JT, & Curtin JJ (2017). Increased startle potentiation to unpredictable stressors in alcohol dependence: Possible stress neuroadaptation in humans. **Journal of Abnormal Psychology**.
+
+- Hur J, Kaplan CM, Smith JF, Bradford DE, Fox AS, Curtin JJ, Shackman AJ (2018). Acute alcohol administration dampens central extended amygdala reactivity. **Scientific Reports**, 12, 16702. +
+
+- Hefner KR, Starr MJ, & Curtin JJ (2018). Heavy marijuana use but not deprivation is associated with increased stressor reactivity. **Journal of Abnormal Psychology**, 127, 348-358. 
+
+- Kaye JT, Fronk GE, Zgierska AE, Cruz MR, Rabago D, Curtin JJ (2019). Acute prazosin administration does not reduce stressor reactivity in healthy adults. **Psychopharmacology**, 236, 3371-3382. 
+
+## Pitfalls of Explanatory Research in Experimental Psychopathology {.smaller}
+
+- Laboratory manipulations and measures do not predict substantial variance in real world behaviors/outcomes
+
+- Our theories and mechanisms built on these laboratory approaches do no explain substantial variance in real world behaviors/outcomes
+
+- Focus on one to several mechanisms would not be expected to explain the emergence, maintenance or remediation of complex thoughts, feelings, and behaviors associated with psychopathology
+
+- These approaches are unlikely to produce interventions that yield meaningful clinical benefits
+
+
+## Similar Conclusions from Others
+
+Eisenberg, IW, Bisset, PG, Enkavi, AZ, Li, J, MacKinnon, DP, Marsch, LA, Poldrack, RA (2019).  Uncovering the structure of self-regulation through data-driven ontology discovery. Nature Communications, 10,  2319
+\
+\
+**Psychological sciences have identified a wealth of cognitive processes and behavioral phenomena, yet struggle to produce cumulative knowledge**. 
+
+**Progress is hamstrung** by siloed scientific traditions and **a focus on explanation over prediction**, two issues that are **particularly damaging for the study of multifaceted constructs like self-regulation**. 
+
+Here, we derive a psychological ontology from a study of individual differences across a broad range of behavioral tasks, self-report surveys, and self-reported real-world outcomes associated with self-regulation. **Though both tasks and surveys putatively measure self-regulation, they show little empirical relationship**. Within tasks and surveys, however, the ontology identifies reliable individual traits and reveals opportunities for theoretic synthesis. We then evaluate predictive power of the psychological measurements and find that **while surveys modestly and heterogeneously predict real-world outcomes, tasks largely do not**. We conclude that self-regulation lacks coherence as a construct, and that data-driven ontologies lay the groundwork for a cumulative psychological science.
+
+
+## Similar Conclusions from Others
+
+Yarkoni T., Westfall, J (2017). Choosing Prediction Over Explanation in Psychology: Lessons From Machine Learning.  Perspectives on Psychological Science.  12, 1100-1122.
+\
+\
+Psychology has historically been concerned, first and foremost, with **explaining the causal mechanisms that give rise to behavior**. 
+
+**Randomized, tightly controlled experiments are enshrined as the gold standard of psychological research**, and there are endless investigations of the various mediating and moderating variables that govern various behaviors. 
+
+We argue that psychology's near-total focus on explaining the causes of behavior has led much of the field to be populated by research programs that **provide intricate theories of psychological mechanism but that have little (or unknown) ability to predict future behaviors with any appreciable accuracy**. 
+
+We propose that principles and techniques from **the field of machine learning can help psychology become a more predictive science**. We review some of the fundamental concepts and tools of machine learning and point out examples where these concepts have been used to conduct interesting and important psychological research that focuses on predictive research questions. We suggest that an **increased focus on prediction, rather than explanation, can ultimately lead us to greater understanding of behavior.**
+
+## What Might Applied Predictive Science Offer?
+
+Not sure about *greater understanding of behavior*
+\
+\
+But...
+
+- if we can predict treatment efficacy, we can improve treatment outcomes by selecting optimal treatments to patients
+
+- if we can predict future symptoms or harmful behaviors, we can intervene "just-in-time" to prevent their occurence
+
+- better still if we can combine **just-in-time** with **optimal treatments**
+
+## Precision Medicine
+
+Barak Obama, Remarks by the President on Precision Medicine, January 2015
+
+>  "And that’s the promise of precision medicine... <br>
+-- delivering the right treatments, <br>
+-- at the right time, <br>
+-- every time <br>
+-- to the right person"
+
+
+**Precision Mental Health** may present the biggest opportunities for impact
+
+- Many treatments and supports available
+- Treatments are modestly effective
+- Symptoms and harmful behaviors are chronic and time-varying
+
+
+## Project Match
+
+We have three modestly effective (multi-faceted) treatments for AUD
+
+- Motivational Enhancement Therapy
+- Cognitive Behavioral Therapy
+- 12-Step Facilitation
+
+Goal: Match patients to optimal treatments based on individual differences based on ID X Treatment interactions
+\
+\
+Considered hundreds of IDs
+
+- Demographics
+- Personality traits
+- AUD history
+
+
+## Project Match
+
+RB Cutler, 2005 (BMC Public Health)
+
+> "Project MATCH was the largest and most expensive alcoholism treatment trial ever conducted. The results were disappointing. There were essentially no patient-treatment matches, and three very different treatments produced nearly identical outcomes. <br><br>
+An analysis of the problem suggested that too many Type I errors were being made in the alcoholism literature. Type I errors typically occur when an inappropriately large number of statistical tests are performed"
+
+- Predicting treatment effectiveness with single characteristics is insufficient
+- Analytic approaches of the 90s limited matching to simple Characteristic X Tx interactions and testing these interactions separately (typical explanatory approach)
+- We can do better now with high dimensional characterization and machine learning techniques
+
+
+## High Dimensional Tx Matching 
+
+- Conduct detailed, comprehensive baseline assessments of individual differences and recent experiences 
+- Use these characteristics and recent experiences to develop high dimensional models to predict meaningful treatment outcomes (real world)
+- Include first line (and other?) treatments received in these prediction models
+- Allow for interactions among baseline characteristics/experiences and treatments 
+- Models can then be used to predict expected outcome for patient for all available treatments
+- Select the optimal treatment for them
+
+## High Dimensional Tx Matching in the Hands of Gaylen Fronk
+
+- ~ 1100 smokers pooled across three first line medications for smoking cessation
+- Many, many individual differences collected at baseline (prior to treatment assignment)
+- Point prevalence abstinence measured at 
+  - 4 weeks
+  - 12 weeks (end of treatment)
+  - 24 weeks
+
+- Developed model to predict 4 week outcomes
+  - Elastic Net GLM (essentially LASSO)
+  - Hundreds of features
+  - Interactions with medication
+  
+- Use model to predict the probability of abstinence for each smoker for each medication
+- Use probability to rank their optimal, intermediate, and worst medication
+- Compare outcomes for smokers who received optimal vs. intermediate vs. worst medication (and RCT outcomes overall)
+
+  
+## Outcomes for Model-Based "Precise" Tx Recommendations
+
+:::: {.rows}
+
+::: {.row height="20%"}
+- Smoking abstinence ~ 33% for RCT assigned TX 
+- Likely similar if clinician selected because these are comparable front line TX?
+:::
+
+::: {.row height="80%"}
+{{< embed ../../../notebooks/match_figs.qmd#fig-tx_week_1 >}}
+:::
+
+::::
+
+## Outcomes for Model-Based "Precise" Tx Recommendations
+
+:::: {.rows}
+
+::: {.row height="20%"}
+- More than 10% increase in abstinence if received model-recommended "optimal" TX
+- Clinically meaningful increase given baseline efficacy of ~ 33%
+:::
+
+::: {.row height="80%"}
+{{< embed ../../../notebooks/match_figs.qmd#fig-tx_week_2 >}}
+:::
+
+::::
+
+## Outcomes for Model-Based "Precise" Tx Recommendations
+
+- Relative increase for model-recommended optimal TX sustained for six months
+- Magnitude of benefit decreases
+
+{{< embed ../../../notebooks/match_figs.qmd#fig-tx_week_3 >}}
+
+## Outcomes for Model-Based "Precise" Tx Recommendations
+
+- Model can distinguish between optimal, intermediate, and worst TX
+- Can allow some informed choice by patient
+
+{{< embed ../../../notebooks/match_figs.qmd#fig-tx_week_4 >}}
+
+## Outcomes for Model-Based "Precise" Tx Recommendations
+
+- Distinctions between ranked TX also diminish with time
+- Also expected because baseline characteristics are not static but not updated
+
+{{< embed ../../../notebooks/match_figs.qmd#fig-tx_week_5 >}}
+
+
+
+## Precision Mental Health
+
+Super excited but....
+\
+\
+Barak Obama, Remarks by the President on Precision Medicine, January 2015
+
+>  "And that’s the promise of precision medicine... <br>
+-- delivering the right treatments, <br>
+-- at the right time, <br>
+-- every time <br>
+-- to the right person"
+
+\
+\
+
+- Baseline characteristics don't predict well forever
+- Life happens
+- Events and experiences matter
+- Prediction models need updated inputs to continue to perform well
+
+## Enter Personal Sensing
+
+What is personal sensing
+
+- Measurement embedded in day-to-day life
+- Momentary (or very recent) experiences and events
+- Longitudinal
+- Minimally invasive
+
+
+Some options
+
+- Ecological Momentary Assessments
+- Sensors (physiology, sleep)
+- Contextualized Geolocation
+- Contextualized Communications (smartphone; social media)
+
+
+## {#gps_detection_1 data-menu-title="GPS detection, wide view" background-image="https://dionysus.psych.wisc.edu/present/meet_faculty/images/john_gps_wide.png" background-size="100%" background-position="bottom" background-repeat="none"}
+
 
 ::: {.notes}
-We have a mental health crisis in the U.S. and it is a crisis of **unmet** high need because our delivery of mental healthcare is deeply flawed. 
+Here is a wide view of my moment-by-moment location detected by a GPS app over a month when we were first experimenting with this sensing method.  The app recorded the paths that I traveled, with movement by car in green and running in blue.
 
-In 2019, **more than half of the 52 million Americans** with an active mental illness did not receive any treatment. **More than half**!
+The red dots indicate places that I stopped to visit for at least a few minutes.
+
+And although not displayed here, the app recorded the days and exact times that I was at each of these locations.
+
+From these data, you can immediately see that I am runner, with long runs leaving from downtown Madison and frequent trail runs on the weekends in the county and state parks to the west and northwest.
+:::
+
+## {#gps_detection_2 data-menu-title="GPS detection, zoomed" background-image="https://dionysus.psych.wisc.edu/present/meet_faculty/images/john_gps_zoom.png" background-size="100%" background-position="bottom" background-repeat="none"}
+
+
+::: {.notes}
+Zooming in to the Madison isthmus, these data show that I drove my children halfway around the lake each morning to their elementary school.  And from these data we might be able to detect those stressful mornings when getting my young kids dressed and fed didn't go as planned and we were late, sometimes **very late**, to school!
+
+The app recorded my daily running commute through downtown Madison to and from my office.  From this, we can observe my longs days at the office and also those days that I skipped out.
+
+Looking at the red dots indicating the places I visit, the app can detect the restaurants, bars, and coffee shops where I eat, drink and socialize.  We can use public map data to identify these places and make inferences about what I do there.
+:::
+
+## ...Imagine my smartphone communications...{.smaller}
+
+![smartphone_uber.png](https://github.com/jjcurtin/lectures/blob/main/images/smartphone_uber.png?raw=true){.absolute top="15%" left="33%" width="33%" height="auto"}\ 
+
+::: {.notes}
+In addition to geolocation, we also collected my smartphone communications logs and even the content of my text messages.
+
+And no such luck, I don't plan to show you my actual text messages!
+
+But imagine what we could learn about me from the patterns of my communications - Who I was calling, when I made those calls, and even the content of what I sent and received by text message.
+
+:::
+
+## Context is Critical
+
+
+::: {.notes}
+We believe we can improve the predictive strength of these geolocation and communication signals even further by identifying the specific people and places that make us happy or sad or stressed, those that we perceive support our mental health and recovery and those who undermine it.
+
+:::
+
+## Context is Critical
+![smartphone_context.png](https://github.com/jjcurtin/lectures/blob/main/images/smartphone_context.png?raw=true){.absolute top="15%" left="33%" width="33%" height="auto"}\ 
+
+::: {.notes}
+
+
+For example, consider the implications of this brief text message thread between a hypothetical patient and their drinking buddy for what you might predict for the probability that they might lapse back to drinking in the coming hours.   
+
+... And how would your prediction change if this wasn’t their drinking buddy but instead, their mom who was a big supporter of their recovery.
+
+This interpersonal context matters!!!
+
+:::
+
+## Context is Critical
+
+<!--intentional blank page-->
+
+
+::: {.notes}
+We can gather this contextual information quickly by asking a few key questions about the people and places we interact with frequently over the first couple of months that we record these signals.  And we can identify these frequent contacts and locations directly from these signals.
+
+In our current projects, we target people and places that we interact with at least twice a month or more for more detailed follow-up to gather context.    And it turns out that this really isn’t that burdensome.   Most of us are creatures of habit and if we set a threshold for 2x monthly interactions, we typically only have 10-30 people and places that meet this threshold.   And it’s the same people and places each month so we can build this context up when the person first starts to use the system and after that it only needs to be updated occasionally when we go somewhere new or make a new friend.
+
+:::
+
+## Contextualized Geolocation
+
+![context_gps.png](https://github.com/jjcurtin/lectures/blob/main/images/context_gps.png?raw=true){width="75%"}\ 
+
+::: {.notes}
+
+:::
+
+## Contextualized Communications
+
+![context_cell.png](https://github.com/jjcurtin/lectures/blob/main/images/context_cell.png?raw=true){width="75%"}\ 
+
+::: {.notes}
+
 :::
 
 
-## Mental Healthcare Needs are High and Unmet  {.smaller}
-
-- [In 2019, 52 million Americans had an active mental illness]{.gray}
-  - [More than half did not receive any treatment]{.gray}
-
-
-- [20 million]{.red} adults had an active substance use disorder
-  - 9 out of 10 did not receive any treatment
-
-
-::: {.notes}
-
-
-And for the 20 million adults suffering with a substance use disorder, it was worse still.
-
-**9 out of 10 without any treatment**
-:::
-
-
-
-## Mental Healthcare Needs are High and Unmet  {.smaller}
-
-- [In 2019, 52 million Americans had an active mental illness]{.gray}
-  - [More than half did not receive any treatment]{.gray}
-
-- [20 million adults had an active substance use disorder]{.gray}
-  - [9 out of 10 did not receive any treatment]{.gray}
-
-- Large treatment disparities exist by race, ethnicity, geography, and income
-
-
-
-::: {.notes}
-Our failure to treat is even more troubling for vulnerable groups.  Black and LatinX adults receive mental healthcare services at only half the rate of whites.  
-
-And similar mental healthcare disparities exist for people living in rural communities and for those with lower incomes.
-:::
-
-## Mental Healthcare Needs are High and Unmet  {.smaller}
-
-- Failure to treat is not surprising given many treatment barriers:
-  - Access
-  - Availability
-  - Affordability
-  - Acceptability
-
-
-::: {.notes}
-Our failure to treat is, unfortunately, not surprising.  There are many well known barriers to receiving traditional mental healthcare.
-
-These include problems with access that are particularly limiting for people living in rural communities
-
-Problems with availability
-
-Treatment costs are often prohibitive for those without health insurance 
-
-and stigma and related issues make traditional treatments for mental illness less acceptable to some patients.  
-:::
-
-## Digital Therapeutics (DTx)
-
-Digital therapeutics are smartphone "apps" that are designed to prevent, manage, or treat disease, including mental illness. 
-
-
-Can augment mental health services to address barriers
-
-- Accessible everywhere
-- Available 24/7
-- Highly scalable (affordable?)
-
-::: {.notes}
-Fortunately, digital therapeutics are now being developed and used by patients to address many of these treatment barriers.
-
-For those of you that are not yet familiar with this treatment modality, digital therapeutics are smartphone "apps" that are designed to prevent, manage, or treat disease, including substance use disorders and other mental illness. 
-
-These digital therapeutics can be combined with traditional treatments to reduce barriers because they are
-
-- Accessible everywhere
-
-- Available everyday, 24/7
-
-- and highlighly scalable, which may lower costs
-:::
-
-## Digital Therapeutics (DTx)
-
-Digital therapeutics are smartphone "apps" that are designed to prevent, manage, or treat disease, including mental illness. 
-
-
-Can augment mental health services to address barriers
-
-- [Accessible everywhere]{.gray} 
-- [Available 24/7]{.gray} 
-- [Highly scalable (affordable?)]{.gray}
-- Effective!
-
-::: {.notes}
-Of course, these benefits would be meaningless if digital therapeutics were not effective.
-
-But they are.  
-
-For example, patients with substance use disorders who use a digital therapeutic have almost double the odds of being abstinent from alcohol or other drugs
-
-These increases in abstinence from using digital therapeutics are observed not only when compared to patients on wait lists, who have yet to gain access to treatment but also when digital therapeutics are added on top of traditional treatments for substance use disorders.
-
-And these benefits are durable - they have been documented up to 12 months after the start of treatment.  
-:::
-## {#beta_app data-menu-title="Image of beta app" background-image="https://dionysus.psych.wisc.edu/present/meet_faculty/images/beta_app.png" background-size="100%" background-repeat="none"}
-
-
-::: {.notes}
-These apps are in use today with patients with SUD and at least two have recently received FDA approval.  However, I think they are still best considered beta versions relative to their full potential. 
-
-Their power comes from easy, 24/7 access to their many supports - the treatments, tools, and services built into these smartphone apps. But this is also their Achilles heel. As the patient using these apps, you now have to tackle difficult questions like:
-
-- When should I use them?
-
-- For how long?
-
-- Which of their many supports are best for me?
-
-- And which are best for me **right now**, at this moment in time?
-:::
-
----
-
-## Smart Digital Therapeutics
+## Lapse Prediction in Patients with AUD
 
 > “Could you predict not only [who]{.red} might be at greatest risk for relapse … <br>
  … but precisely [when]{.red} that relapse might occur … <br>
  … and how [best to intervene]{.red} to prevent it?"
 
-::: {.notes}
-My research team became interested in these issues when my colleague Dave Gustafson, the developer of a leading digital therapeutic for substance use disorders, approached us with a simple question. He asked...
-
-"Could you predict not only who might be at greatest risk for relapse
-but precisely when that relapse might occur and
-how best to intervene to prevent it"
-
-Dave had just completed a large study demonstrating the effectiveness of his app. However, he also noticed many of the people who relapsed hadn't used the app in the days leading up to that relapse.  And others who had relapsed hadn't used the specific supports in the app that he would have thought would be most effective for them.
-
-The next wave of digital therapeutics, lets call them smart digital therapeutics, must learn to know us well enough to recognize when we are at greatest risk for relapse and they must be smart enough to recommend the specific supports that would be most effective for us at that moment in time to prevent that relapse.
-
-And these apps will do this through the use of built-in artificial intelligence or machine learning algorithms that are powered by personal sensing.
-
-:::
 
 ## Lapse Prediction in Patients with AUD
+
 :::: {.columns}
 
 ::: {.column width="60%"}
@@ -190,12 +403,9 @@ And these apps will do this through the use of built-in artificial intelligence 
 - Collected active and passive personal sensing data streams
 :::
 
-
 ::: {.column width="40%"}
 ![risk1_pis.png](https://github.com/jjcurtin/lectures/blob/main/images/risk1_pis.png?raw=true)\    
 ![niaaa_logo.png](https://github.com/jjcurtin/lectures/blob/main/images/niaaa_logo.png?raw=true)\   
-
-
 :::
 
 
@@ -339,7 +549,7 @@ And of course, all of the models would only use data collected prior to 1pm toda
 - Model Tuning and Performance Evaluation
   - Area under ROC curve (AUC) as primary performance metric
   - Sensitivity, Specificity, Balanced accuracy, Positive predictive value
-  - Using [grouped]{.red} (by participant) [10-fold CV]{.red} 
+  - Using [grouped]{.red} (by participant) [nested k-fold CV]{.red} 
 
 ::: {.notes}
 We are evaluating machine learning model configurations that differ by common statistical algorithms. 
@@ -685,6 +895,108 @@ And again, consistent with that AUC, the sensitivity, specificity, and balanced 
 
 :::
 
+
+## (Selective) Next Steps
+
+- Geolocation - Claire FYP
+- Cellular communications - Coco FYP
+
+
+::: {.notes}
+One of the key next steps is to develop models that rely more on passive sensing rather than EMA to lower the patient burden of using these systems long term and to gain access to signals that may not be available by self-report.
+
+Let's take a look at two of the more revealing personal sensing methods that we are developing to provide you with some intuition about how we think this will work.
+
+:::
+
+
+## (Selective) Next Steps
+
+- [Geolocation - Claire FYP]{.gray}
+- [Cellular communications - Coco FYP]{.gray}
+
+- Build models with lead times > 0 hours
+
+
+
+
+
+::: {.notes}
+NEED TEXT FOR THIS BUT ITS IMPORTANT.   FOCUS ON lead = 0 for 1 hour and JIT – distraction, urge surfing but lead = 1 week for contact with therapist, sponsor, supportive friends and family, etc.
+
+:::
+
+
+## (Selective) Next Steps
+
+
+- [Geolocation - Claire FYP]{.gray}
+- [Cellular communications - Coco FYP]{.gray}
+
+- [Build models with lead times > 0 hours]{.gray}
+
+- More diversity in training data
+
+::: {.notes}
+We are excited by the early performance of these machine learning models BUT I want to be clear that these are preliminary research studies.  And they included mostly white participants from our local community in Madison, WI.  
+
+Models trained on these participants would be unlikely to work well with black and brown patients or patients from rural communities.  
+
+Machine learning models must be trained on diverse samples of patients or their use may exacerbate rather than reduce existing mental healthcare disparities. 
+:::
+
+## Active Project: Lapse in patients with Opioid Use Disorder 
+
+::: {.medium}
+- Recruiting 400 patients in recovery from Opioid Use Disorder (All enrolled, many completed )
+- National sample (size; diversity: demographics, location)
+- More variation in stage of recover (1 – 6 months at start)
+- 12 months of monitoring
+- Closer to real implementation methods
+:::
+:::: {.columns}
+
+::: {.column width="60%"}
+![risk2_pis.png](https://github.com/jjcurtin/lectures/blob/main/images/risk2_pis.png?raw=true)\ 
+:::
+::: {.column width="40%"}
+![nida_logo.png](https://github.com/jjcurtin/lectures/blob/main/images/nida_logo.png?raw=true)\ 
+:::
+::::
+::: {.notes}
+We are now collecting data for a NIDA funded project where we are specifically recruiting for racial, ethnic, and geographic diversity across the entire United States.
+
+
+We are also recruiting for people at different stages in their recovery and following them for a longer period of time – up to 12 months
+
+:::
+
+## (Selective) Next Steps
+
+
+- [Geolocation - Claire FYP]{.gray}
+- [Cellular communications - Coco FYP]{.gray}
+
+- [Build models with lead times > 0 hours]{.gray}
+
+- [More diversity in training data]{.gray}
+
+- Use models to improve DTx engagement and clinical outcomes
+  - SMART DTx – algorithm guided use
+  - How to craft patient feedback to encourage trust in the algorithm
+
+
+::: {.notes}
+Of course, accurately predicting future lapses is only useful if these predictions can be used to sustain engagement with treatments and improve clinical outcomes.  
+
+We have now started to consider how we can use these predictions to help patients optimize their use of a digital therapeutic.  
+
+These models may be able to suggest when more use of the DTx is needed because lapse risk is increasing or high but we are also hoping that we can use the models to recommend which tools and supports in the DTx are best for that patient at that moment in time given their lapse risk probability and important features contributing to the lapse prediction.
+
+We are also sensitive to the fact that these recommendations from the machine learning models will need to be provided to patients in a transparent manner that also encourages them to trust the algorithm and follow its recommendations.  
+
+:::
+
 ## Global Feature Importance by Model{.medium}
 
 :::: {.columns}
@@ -728,562 +1040,6 @@ To make these values somewhat meaningful for you, let me remind you these Sh
 {{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_week >}}
 
 ::: {.notes}
-
-:::
-
-## Global Variable Importance by Model{.medium}
-
-:::: {.columns}
-
-::: {.column width="50%"}
-
-- [All EMA items impact lapse probability (both globally and locally)]{.gray}
-- Demographics not particularly important (but limited race/ethnicity diversity)
-- Lapse day and Lapse hour are useful for day and hour level models as expected
-:::
-
-::: {.column width="50%"}
-
-<!--Global SHAP Plot-->
-{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >}}
-
-:::
-
-::::
-::: {.notes}
-Returning back to the global feature importance plot, we also see that demographics were not particularly important for prediction lapses for these models.   However, I'll return later to acknowledged that we had limited race/ethnicity diversity in the sample.  Nonetheless, we had reasonable variability on other participant characteristics like sex, SES, education, and addiction severity.  
-
-And finally, we see that we can use lapse day and lapse hour to make predictions with the more temporally precise models.  Not surprisingly, people are more likely to lapse on weekends and during evening hours and the associated day and hour level models models can use that information to improve their lapse predictions.  These features likely contribute to the superior performance of the hour and to a lesser extent the day model relative to the week interval prediction model.
-
-:::
-
-## Positive Predictive Value (PPV)
-
-
-:::: {.columns}
-
-::: {.column width="50%"}
-   
-:::
-
-::: {.column width="50%"}
-
-<!--TEMP TABLE-->
-```{r table_metrics_ppv_1}
-#| tbl-cap: Performance Metrics by Model 
-
-options(knitr.kable.NA = '')
-
-metrics_ppv1 <- metrics |> 
-  slice(1:5)  
-
-metrics_ppv1[5, 2:4] <- NA
-  
-metrics_ppv1 |>
- kbl(format = "html", col.names = c("", "Week", "Day", "Hour"),
-      digits = 2,
-      align = c("r", "c", "c", "c"),
-     linesep = "") |>
-  row_spec(row = 0, align = "c") |>
-  kable_styling(full_width = FALSE) |>
-  kable_classic("striped")
-```
-
-:::
-
-::::
-
-
-::: {.notes}
-Now, lets return one more time to the performance of these models because I would be remiss if I didn’t complicate the story a bit before we close.  
-
-Clearly, the sensitivity, specificity, and balanced accuracy of all three of these models is encouragingly high
-
-But what is often missed when we evaluate the performance of machine learning models is their positive predictive value or PPV. 
-
-PPV looks at the percentage of positive predictions from the model that are actually true lapses. And PPV is often lower when the positive event, in our case, lapses, is infrequent.
-
-:::
-
-
-## Positive Predictive Value (PPV)
-
-:::: {.columns}
-
-::: {.column width="50%"}
-
-<!--TEMP TABLE-->
-```{r}
-#| tbl-cap: Lapse Rates by Model 
-
-lr <- tibble(row_name = "Lapse Rate", Week = "25.4%", Day = "7.7%", Hour = "0.4%")
-
-lr |>
- kbl(format = "html", col.names = c("", "Week", "Day", "Hour"),
-      digits = 2,
-      align = c("r", "c", "c", "c"),
-     linesep = "") |>
-  row_spec(row = 0, align = "c") |>
-  kable_styling(full_width = FALSE) |>
-  kable_classic("striped") |>
-  row_spec(1, color  = "red", bold = TRUE)
-```
-
-:::
-
-::: {.column width="50%"}
-
-<!--TEMP TABLE-->
-```{r}
-#| tbl-cap: Performance Metrics by Model 
-
-metrics_ppv1 |>
- kbl(format = "html", col.names = c("", "Week", "Day", "Hour"),
-      digits = 2,
-      align = c("r", "c", "c", "c"),
-     linesep = "") |>
-  row_spec(row = 0, align = "c") |>
-  kable_styling(full_width = FALSE) |>
-  kable_classic("striped")
-```
-
-:::
-
-::::
-
-::: {.notes}
-Now we haven’t talked about the frequency of lapses across the three lapse windows, but it should be intuitively clear that the percent of weeks that contain a lapse will be higher than the percent of days that contain a lapse, and that the percent of hours that contain a lapse will be lower still.  
-
-And this is what we see in our data.
-:::
-
-
-## Positive Predictive Value (PPV)
-
-:::: {.columns}
-
-::: {.column width="50%"}
-
-```{r}
-lr |>
- kbl(format = "html", col.names = c("", "Week", "Day", "Hour"),
-      digits = 2,
-      align = c("r", "c", "c", "c"),
-     linesep = "") |>
-  row_spec(row = 0, align = "c") |>
-  kable_styling(full_width = FALSE) |>
-  kable_classic("striped")
-```
-
-:::
-
-::: {.column width="50%"}
-
-```{r table_metrics_ppv_3}
-metrics |>
-  slice(1:5) |> 
-  kbl(col.names = c("", "Week", "Day", "Hour"),
-      digits = 2,
-      align = c("r", "c", "c", "c"),
-     linesep = "") |>
-  row_spec(row = 0, align = "c") |>
-  kable_styling(full_width = FALSE) |>
-  kable_classic("striped") |>
-  row_spec(5, color  = "red", bold = TRUE)
-```
-
-:::
-
-::::
-
-::: {.notes}
-Because of this, we see relatively low PPV for our models – and particularly the day and the hour level models.
-
-These models catch most lapses (they have hi sensitivity), and they correctly label most no-lapse observations as well (hi specificity). But when you consider their positive predictions, a high percentage of these lapse predictions are false alarms.  
-
-This has two big implications.
-
-First, we need to consider the impact of false alarms when using these predictions.  It may **not** be problematic to encourage the patient to use their digital therapeutic in cases where the model makes a positive lapse prediction because the cost of a false alarm in that instance is low.  More DTx use is likely always good.
-
-But we may **not want to encourage** the use of more costly treatments if PPV is low.
-
-And we may need to be careful about how we convey our predictions to patients.   Perhaps it might be better to talk about level of risk rather than specifically predicting that a lapse will occur to avoid explicit false alarms that might decrease patient trust in the system.
-
-
-:::
-
-## Impact of Decision Thresholds:  1 day
-:::: {.columns}
-
-::: {.column width="50%"}
-
-<!--Lapse Probabilities for Day Model-->
-```{r fig_hist_probabilites_day}
-#| fig-height: 6
-#| fig-width: 6
-
-# fig_hist_day <- preds_day |> 
-#   mutate(truth = if_else(truth == "no_lapse", "No lapse", "Lapse"),
-#          estimate = if_else(estimate == "no_lapse", "No lapse", "Lapse"),
-#          model = "week") |> 
-#   ggplot(data = _, aes(x = prob)) + 
-#    geom_histogram(bins = 15, fill = "green", col = "black", alpha = .4) +
-#    facet_wrap(~truth, nrow = 2, scales = "free_y") +
-#    xlab("Pr(Lapse)") +
-#    scale_y_continuous(labels = scales::comma)
-# 
-# fig_hist_day +
-#   geom_vline(xintercept = .5, color = "red", size = 2)
-```
-
-:::
-
-::: {.column width="50%"}
-
-```{r}
-# thresholds <- tibble(metric = c("Sensitivity", "Specificity", "", "PPV"),
-#                      thresh_1 = c("0.81", "0.86", "", "0.32"), 
-#                      thresh_2 = c("", "", "", ""))
-# 
-# thresholds |>
-#  kbl(format = "html", col.names = c("", "Thres = 0.50", "Thres = 0.90"),
-#       digits = 2,
-#       align = c("r", "r", "r"),
-#      linesep = "") |> 
-#   row_spec(row = 0, align = "r") |> 
-#   kable_styling(full_width = FALSE) |> 
-#   column_spec(2, color  = c("black", "black", "black", "red"), bold = TRUE) 
-```
-
-:::
-
-::::
-
-::: {.notes}
-Second, if we need higher PPV, we may be able to get it by using a decision threshold that is higher than .5
-
-Here I am showing you the performance of the day level model when we use the default .5 threshold that you saw previously
-
-:::
-
-## Impact of Decision Thresholds:  1 day
-:::: {.columns}
-
-::: {.column width="50%"}
-<!--Lapse Probabilities for Day Model- .9 threshold-->
-```{r fig_hist_probabilites_day_threshold}
-#| fig-height: 6
-#| fig-width: 6
-
-# fig_hist_day +
-#   geom_vline(xintercept = .9, color = "red", size = 2)
-```
-:::
-
-::: {.column width="50%"}
-```{r}
-# thresholds <- tibble(metric = c("Sensitivity", "Specificity", "", "PPV"),
-#                      thresh_1 = c("0.81", "0.86", "", "0.32"), 
-#                      thresh_2 = c("0.40", "0.99", "", "0.83"))
-# 
-# thresholds |>
-#  kbl(format = "html", col.names = c("", "Thres = 0.50", "Thres = 0.90"),
-#       digits = 2,
-#       align = c("r", "r", "r"),
-#      linesep = "") |> 
-#   row_spec(row = 0, align = "r") |> 
-#   kable_styling(full_width = FALSE) |> 
-#   column_spec(3, color  = c("black", "black", "black", "red"), bold = TRUE)
-```
-
-:::
-
-::::
-
-::: {.notes}
-But if we move the threshold up to .9 before we call an observation a lapse, we can increase the PPV from .32 to .83.
-
-And this is what we will need to do if we want to recommend more costly treatments or other actions where false alarms may be problematic.
-:::
-
-## Precision - Recall Curves
-
-:::: {.columns}
-
-::: {.column width="50%"}
-
-```{r}
-# thresholds_2 <- tibble(metric = c("Threshold", "", "Sensitivity", "PPV"),
-#                        week = c("0.70", "", "0.67", "0.75"), 
-#                        day = c("0.88", "", "0.43", "0.75"),
-#                        hour = c("0.97", "", "0.20", "0.75"))
-# 
-# thresholds_2 |>
-#   kbl(format = "html", col.names = c("", "Week", "Day", "Hour"),
-#       digits = 2,
-#       align = c("r", "r", "r", "r"),
-#       linesep = "") |> 
-#   row_spec(row = 0, align = "r") |> 
-#   kable_styling(full_width = FALSE)
-```
-
-:::
-  
-::: {.column width="50%"}
-
-<!--Precision-Recall Curves by Models-->
-{{< embed ../../../notebooks/ema_figs_pr.qmd#fig-prcurve >}}
-
-:::
-  
-::::
-  
-::: {.notes}
-But of course, as we increase the decision threshold for labeling a window as a lapse, we will trade off sensitivity.   We can see this trade off directly in the precision-recall curves on the right.  If we decide we need PPV of at least .75, you can see that we still have reasonable sensitivity for the one week window but we start to miss many lapses in the 1day window and more still in the 1hour window.
-
-I’ll return to this a bit more later when we discuss emerging plans for how best to implement these models within a digital therapeutic.
-
-:::
-
-## Key Take Home Messages
-
-- Relatively high combined sensitivity and specificity
-
-- Comparable performance (AUC) from 1 week down to 1 hour windows
-
-- Will need to adjust decision thresholds to fit how we use the algorithm.
-  - Lower PPV OK for low burden or low cost recommendations
-  - Higher PPV needed to recommend “costly” interventions or actions
-
-
-::: {.notes}
-So to recap our main take-aways from this first project
-
-- We were generally encouraged by these preliminary models.
-
-- We’ve demonstrated that we can get relatively high combined sensitivity and specificity
-
-- We can do this for not only coarse one week windows but also temporally precise windows down to one hour
-
-- But we also recognize that depending on what we will use the predictions for, we may need to adjust decision thresholds to trade off sensitivity for greater positive predictive value.
-
-:::
-
-## (Selective) Next Steps
-
-- Geolocation, cellular communications, and other passively sensed signals
-
-
-::: {.notes}
-One of the key next steps is to develop models that rely more on passive sensing rather than EMA to lower the patient burden of using these systems long term and to gain access to signals that may not be available by self-report.
-
-Let's take a look at two of the more revealing personal sensing methods that we are developing to provide you with some intuition about how we think this will work.
-
-:::
-
-## {#gps_detection_1 data-menu-title="GPS detection, wide view" background-image="https://dionysus.psych.wisc.edu/present/meet_faculty/images/john_gps_wide.png" background-size="100%" background-position="bottom" background-repeat="none"}
-
-
-::: {.notes}
-Here is a wide view of my moment-by-moment location detected by a GPS app over a month when we were first experimenting with this sensing method.  The app recorded the paths that I traveled, with movement by car in green and running in blue.
-
-The red dots indicate places that I stopped to visit for at least a few minutes.
-
-And although not displayed here, the app recorded the days and exact times that I was at each of these locations.
-
-From these data, you can immediately see that I am runner, with long runs leaving from downtown Madison and frequent trail runs on the weekends in the county and state parks to the west and northwest.
-:::
-
-## {#gps_detection_2 data-menu-title="GPS detection, zoomed" background-image="https://dionysus.psych.wisc.edu/present/meet_faculty/images/john_gps_zoom.png" background-size="100%" background-position="bottom" background-repeat="none"}
-
-
-::: {.notes}
-Zooming in to the Madison isthmus, these data show that I drove my children halfway around the lake each morning to their elementary school.  And from these data we might be able to detect those stressful mornings when getting my young kids dressed and fed didn't go as planned and we were late, sometimes **very late**, to school!
-
-The app recorded my daily running commute through downtown Madison to and from my office.  From this, we can observe my longs days at the office and also those days that I skipped out.
-
-Looking at the red dots indicating the places I visit, the app can detect the restaurants, bars, and coffee shops where I eat, drink and socialize.  We can use public map data to identify these places and make inferences about what I do there.
-:::
-
-## ...Imagine my smartphone communications...{.smaller}
-
-![smartphone_uber.png](https://github.com/jjcurtin/lectures/blob/main/images/smartphone_uber.png?raw=true){.absolute top="15%" left="33%" width="33%" height="auto"}\ 
-
-::: {.notes}
-In addition to geolocation, we also collected my smartphone communications logs and even the content of my text messages.
-
-And no such luck, I don't plan to show you my actual text messages!
-
-But imagine what we could learn about me from the patterns of my communications - Who I was calling, when I made those calls, and even the content of what I sent and received by text message.
-
-:::
-
-## Context is Critical
-
-
-::: {.notes}
-We believe we can improve the predictive strength of these geolocation and communication signals even further by identifying the specific people and places that make us happy or sad or stressed, those that we perceive support our mental health and recovery and those who undermine it.
-
-:::
-
-## Context is Critical
-![smartphone_context.png](https://github.com/jjcurtin/lectures/blob/main/images/smartphone_context.png?raw=true){.absolute top="15%" left="33%" width="33%" height="auto"}\ 
-
-::: {.notes}
-
-
-For example, consider the implications of this brief text message thread between a hypothetical patient and their drinking buddy for what you might predict for the probability that they might lapse back to drinking in the coming hours.   
-
-... And how would your prediction change if this wasn’t their drinking buddy but instead, their mom who was a big supporter of their recovery.
-
-This interpersonal context matters!!!
-
-:::
-
-## Context is Critical
-
-<!--intentional blank page-->
-
-
-::: {.notes}
-We can gather this contextual information quickly by asking a few key questions about the people and places we interact with frequently over the first couple of months that we record these signals.  And we can identify these frequent contacts and locations directly from these signals.
-
-In our current projects, we target people and places that we interact with at least twice a month or more for more detailed follow-up to gather context.    And it turns out that this really isn’t that burdensome.   Most of us are creatures of habit and if we set a threshold for 2x monthly interactions, we typically only have 10-30 people and places that meet this threshold.   And it’s the same people and places each month so we can build this context up when the person first starts to use the system and after that it only needs to be updated occasionally when we go somewhere new or make a new friend.
-
-:::
-
-## Contextualized Geolocation
-
-![context_gps.png](https://github.com/jjcurtin/lectures/blob/main/images/context_gps.png?raw=true){width="75%"}\ 
-
-::: {.notes}
-
-:::
-
-## Contextualized Communications
-
-![context_cell.png](https://github.com/jjcurtin/lectures/blob/main/images/context_cell.png?raw=true){width="75%"}\ 
-
-::: {.notes}
-
-:::
-
-## Baseline Feature Engineering for GPS
-
-:::: {.columns}
-::: {.column width="50%"}
-
-- Focus on recent past experiences (6, 12, 24, 48, 72, 168 hours)
-
-- Raw scores and change scores (from baseline)
-
-- Time spent at important places (e.g, alcohol present, drank at location in past, risky, unpleasant)
-
-:::
-::: {.column width="50%"}
-![feature_gps.png](https://github.com/jjcurtin/lectures/blob/main/images/feature_gps.png?raw=true)\ 
-:::
-::::
-
-
-::: {.notes}
-To be clear, we have only just begun to train models using GPS.   We have started by focusing on recent locations…..
-DESCRIBE MORE
-
-
-There is clearly predictive signal in the geolocation signal but not enough to stand alone as the only features at this point.   We are seeing AUCs in the low .7s when we use only geolocation to predict future lapses.  
-
-However, when we add GPS to the EMA models that I described today, we appear to need fewer unique EMA items to get the same level of model performance.   So the addition of GPS may serve to lower patient burden while maintaining model performance.
-
-[PAUSE]
-
-The story is pretty much the same right now for cellular communications as well.   At this point we have only worked with the meta data – the contact numbers, call times, durations, etc – combined with context.   We haven’t yet done anything with the text message content.   And models built from the meta data perform about as well at these preliminary GPS models.
-
-But we are hoping to extract more signal from the both of these as we continue to work on feature engineering with it.
-
-:::
-
-## (Selective) Next Steps
-
-- [Geolocation, cellular communications, and other passively sensed signals]{.gray}
-
-- Build models with lead times > 0 hours
-
-
-
-
-
-::: {.notes}
-NEED TEXT FOR THIS BUT ITS IMPORTANT.   FOCUS ON lead = 0 for 1 hour and JIT – distraction, urge surfing but lead = 1 week for contact with therapist, sponsor, supportive friends and family, etc.
-
-:::
-
-
-## (Selective) Next Steps
-
-
-- [Geolocation, cellular communications, and other passively sensed signals]{.gray}
-
-- [Build models with lead times > 0 hours]{.gray}
-
-- More diversity in training data
-
-::: {.notes}
-We are excited by the early performance of these machine learning models BUT I want to be clear that these are preliminary research studies.  And they included mostly white participants from our local community in Madison, WI.  
-
-Models trained on these participants would be unlikely to work well with black and brown patients or patients from rural communities.  
-
-Machine learning models must be trained on diverse samples of patients or their use may exacerbate rather than reduce existing mental healthcare disparities. 
-:::
-
-## Active Project: Lapse in patients with Opioid Use Disorder 
-
-::: {.medium}
-- Recruiting 400 patients in recovery from Opioid Use Disorder (All enrolled, many completed )
-- National sample (size; diversity: demographics, location)
-- More variation in stage of recover (1 – 6 months at start)
-- 12 months of monitoring
-- Closer to real implementation methods
-:::
-:::: {.columns}
-
-::: {.column width="60%"}
-![risk2_pis.png](https://github.com/jjcurtin/lectures/blob/main/images/risk2_pis.png?raw=true)\ 
-:::
-::: {.column width="40%"}
-![nida_logo.png](https://github.com/jjcurtin/lectures/blob/main/images/nida_logo.png?raw=true)\ 
-:::
-::::
-::: {.notes}
-We are now collecting data for a NIDA funded project where we are specifically recruiting for racial, ethnic, and geographic diversity across the entire United States.
-
-
-We are also recruiting for people at different stages in their recovery and following them for a longer period of time – up to 12 months
-
-:::
-
-## (Selective) Next Steps
-
-
-- [Geolocation, cellular communications, and other passively sensed signals]{.gray}
-
-- [Build models with lead times > 0 hours]{.gray}
-
-- [More diversity in training data]{.gray}
-
-- Use models to improve DTx engagement and clinical outcomes
-  - SMART DTx – algorithm guided use
-  - How to craft patient feedback to encourage trust in the algorithm
-
-
-::: {.notes}
-Of course, accurately predicting future lapses is only useful if these predictions can be used to sustain engagement with treatments and improve clinical outcomes.  
-
-We have now started to consider how we can use these predictions to help patients optimize their use of a digital therapeutic.  
-
-These models may be able to suggest when more use of the DTx is needed because lapse risk is increasing or high but we are also hoping that we can use the models to recommend which tools and supports in the DTx are best for that patient at that moment in time given their lapse risk probability and important features contributing to the lapse prediction.
-
-We are also sensitive to the fact that these recommendations from the machine learning models will need to be provided to patients in a transparent manner that also encourages them to trust the algorithm and follow its recommendations.  
 
 :::
 
