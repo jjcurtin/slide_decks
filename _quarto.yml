@@ -9,4 +9,4 @@ format:
   html:
     toc: true
 #  docx: default
-#  pdf: default
+  pdf: default
