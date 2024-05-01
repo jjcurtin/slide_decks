@@ -20,6 +20,7 @@ devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/format_p
 path_models <- format_path("studydata/risk/models/ema")
 path_data_shared <- format_path("studydata/risk/data_processed/shared")
 path_data_ema <- format_path("studydata/risk/data_processed/ema")
+path_images <- format_path("images/ema")
 ```
 
 ## Get Local and Global SHAPs
@@ -141,13 +142,37 @@ Day plot
 
 shap_local_day |>
   plot_local(grp_levels, ids_day, "Day")
+
 ```
 
 Hour plot
 ```{r}
-#| label: fig-local_hour
-#| fig-cap: Local SHAPS - Hour
+feature_levels <- c("valence", "future stressful event", "lapse day", "past pleasant event",
+                    "future risky situation", "past risky situation", "arousal", 
+                    "past stressful event", "lapse hour",
+                    "craving", "future efficacy", "past use")
 
-shap_local_hour |>
-  plot_local(grp_levels, ids_hour, "Hour")
+fig_shap_local_hour <- 
+  shap_local_hour |>
+  filter(!str_detect(variable_grp, "age")) |> 
+  filter(!str_detect(variable_grp, "sex")) |> 
+  filter(!str_detect(variable_grp, "marital")) |> 
+  filter(!str_detect(variable_grp, "education")) |> 
+  filter(!str_detect(variable_grp, "race")) |> 
+  filter(!str_detect(variable_grp, "missing")) |>
+  separate_wider_delim(variable_grp, " (", names = c("feature", NA)) |> 
+  rename(variable_grp = feature) |>    
+  plot_local(feature_levels, ids_day, "Hour")
+```
+```{r}
+#| label: fig-local_day
+#| fig-cap: Local SHAPS - Day
+
+fig_shap_local_hour
+```
+
+```{r}
+jpeg(filename = here::here(path_images, "shap_local_day.jpg"))
+fig_shap_local_hour
+dev.off()
 ```
