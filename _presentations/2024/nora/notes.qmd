@@ -1,0 +1,87 @@
+We all know that we have a serious problem with treatment access and utilization for individuals with SUD.
+
+- Depending on the year and how you quanity it, only approximately 1 in 10 people with an active SUD receive any treatment for that SUD. 
+
+- And this failure to treat is even more troubling for vulnerable groups.  Black and LatinX adults receive mental healthcare services at only half the rate of whites.  And similar mental healthcare disparities exist for people living in rural communities and for those with lower incomes.
+
+- And these are just the numbers for initial treatment with medications and behavioral interventions.   Despite recognizing that SUDs are chronic and may require lifelong management, access and use of ongoing continuing care is even worse still.
+
+[PAUSE]
+
+-----
+
+Unfortunately, our failure to treat is not surprising.  There are many well known barriers to receiving traditional mental healthcare.
+
+- These include problems with access that affect everyone but are particularly limiting for people living in rural communities
+
+- There are problems with availability
+
+- Treatment costs are often prohibitive for those without health insurance 
+
+- and stigma and related issues make traditional treatments for mental illness less acceptable to some patients.  
+
+[PAUSE]
+
+-----
+
+We believe that digital therapeutics can play an important role in addressing barriers to treatment and contiuing care for relapse prevention because they are 
+
+- Accessible everywhere
+
+- Available everyday, 24/7
+
+- and highlighly scalable, which may lower costs
+
+[PAUSE]
+
+Of course, these benefits would be meaningless if digital therapeutics were not effective.
+
+- But they are.
+
+- For example, patients with substance use disorders who use a digital therapeutic have almost double the odds of being abstinent from alcohol or other drugs
+
+- These increases in abstinence from using digital therapeutics are observed not only when compared to patients on wait lists, who have yet to gain access to treatment but also when digital therapeutics are added on top of traditional treatments for substance use disorders.
+
+- And these benefits are durable - they have been documented up to 12 months after the start of treatment.  
+
+<!-- where to add ref to Dave and center at the forefront of this work over decades -->
+
+-----
+
+As we all know, these apps are in use today with patients with SUD, but they are still best considered beta versions relative to their full potential. 
+
+Their power comes from easy, 24/7 access to their many supports - the treatments, tools, and services built into these smartphone apps. But this is also their Achilles heel. As the patient using these apps, you now have to tackle difficult questions like:
+
+- When should I use them?
+
+- For how long?
+
+- Which of their many supports are best for me?
+
+- And which are best for me **right now**, at this moment in time?
+
+-----
+
+The next wave of digital therapeutics, lets call them smart digital therapeutics, must learn to know us well enough to recognize when we are at greatest risk for relapse and they must be smart enough to recommend the specific supports that would be most effective for us at that moment in time to prevent that relapse.
+
+And these apps will do this through the use of built-in machine learning algorithms that are powered by personal sensing.
+
+We've already made important strides in this direction from two parallel sensing and algothims focused grants from NIAAA and NIDA but we have just begun to scratch the surface of what we can achieve in this area with a systematic and coordinated approach.
+
+-----
+
+At this point, we are focusing on sensing with three separate but complementary sets of raw signals within A-CHESS.  These are
+
+- Ecological momentary assessments to track users subjective experiences over time
+- Geolocation
+- Cellular communications including meta data and text message content
+
+Relatively large samples of individuals with either AUD and OUD have found all three sensing methods to be acceptable.  
+ - We get high rates of compliance with EMA when used for up to 1 year
+ - All of our participants with AUD opted in, with very modest financial incentive, to share location and communications data with us
+ - With more than 400 participants with OUD enrolled in our NIDA protocol we have had approximately 5 decline to provide either location or communications data
+
+-----
+
+
+

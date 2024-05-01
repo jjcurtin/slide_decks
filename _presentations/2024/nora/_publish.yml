@@ -1,0 +1,4 @@
+- source: notes.qmd
+  quarto-pub:
+    - id: 33a68e0e-9f8b-4084-abd5-2e69cbc991a6
+      url: 'https://jjcurtin.quarto.pub/nida-pitch'
