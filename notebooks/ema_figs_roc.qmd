@@ -178,13 +178,13 @@ jpeg(filename = here::here(path_images, "roc_all.jpg"))
 roc_all |>
   plot_roc() +
   geom_text(x = .80, y = .20,
-            label = str_c("auROC = ", 0.90),
+            label = "auROC = 0.90",
             show.legend = FALSE, color = "orange") +
   geom_text(x = .80, y = .15,
-            label = str_c("auROC = ", 0.91),
+            label = "auROC = 0.91",
             show.legend = FALSE, color = "green") +
   geom_text(x = .80, y = .10,
-            label = str_c("auROC = ", 0.93),
+            label = "auROC = 0.93",
             show.legend = FALSE, color = "blue")
 
 dev.off()
