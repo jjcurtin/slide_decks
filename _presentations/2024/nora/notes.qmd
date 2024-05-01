@@ -66,7 +66,11 @@ The next wave of digital therapeutics, lets call them smart digital therapeutics
 
 And these apps will do this through the use of built-in machine learning algorithms that are powered by personal sensing.
 
-We've already made important strides in this direction from two parallel sensing and algothims focused grants from NIAAA and NIDA but we have just begun to scratch the surface of what we can achieve in this area with a systematic and coordinated approach.
+We've already made important strides in this direction from two parallel sensing and algothims focused grants
+
+- An NIAAA protocol where we followed 151 individuals from the broader madison area in early recovery from AUD for 3 months.  We've completed data collection and are building algorithms with these data now
+
+- And a NIDA protocol where we have enrolled slightly over 400 participants with OUD from across the US and followed them for one year
 
 -----
 
@@ -76,7 +80,8 @@ At this point, we are focusing on sensing with three separate but complementary 
 - Geolocation
 - Cellular communications including meta data and text message content
 
-Relatively large samples of individuals with either AUD and OUD have found all three sensing methods to be acceptable.  
+
+Participants in both projects have found all three sensing methods to be acceptable.  
  - We get high rates of compliance with EMA when used for up to 1 year
  - All of our participants with AUD opted in, with very modest financial incentive, to share location and communications data with us
  - With more than 400 participants with OUD enrolled in our NIDA protocol we have had approximately 5 decline to provide either location or communications data
