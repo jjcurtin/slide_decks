@@ -11,13 +11,14 @@ editor_options:
 options(conflicts.policy = "depends.ok")
 
 library(tidyverse, quietly = TRUE)
-theme_set(theme_classic()) 
+theme_set(theme_classic())
 
 # Paths
 devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true")
 path_models <- format_path("studydata/risk/models/ema")
 path_data_shared <- format_path("studydata/risk/data_processed/shared")
 path_data_ema <- format_path("studydata/risk/data_processed/ema")
+path_images <- format_path("images/ema")
 ```
 
 ## Open preds dfs
@@ -156,12 +157,35 @@ All three windows
 roc_all |>
   plot_roc() +
   geom_text(x = .80, y = .20,
-            label = str_c("AUC = ", auROC_week),
+            label = str_c("auROC = ", auROC_week),
             show.legend = FALSE, color = "orange") +
   geom_text(x = .80, y = .15,
-            label = str_c("AUC = ", auROC_day),
+            label = str_c("auROC = ", auROC_day),
             show.legend = FALSE, color = "green") +
   geom_text(x = .80, y = .10,
-            label = str_c("AUC = ", auROC_hour),
+            label = str_c("auROC = ", auROC_hour),
             show.legend = FALSE, color = "blue")
+```
+
+```{r}
+
+# save to images on server
+# updated auROC to use value from posterier distribution
+# label = str_c("auROC = ", auROC_day),
+
+jpeg(filename = here::here(path_images, "roc_all.jpg")) 
+
+roc_all |>
+  plot_roc() +
+  geom_text(x = .80, y = .20,
+            label = str_c("auROC = ", 0.90),
+            show.legend = FALSE, color = "orange") +
+  geom_text(x = .80, y = .15,
+            label = str_c("auROC = ", 0.91),
+            show.legend = FALSE, color = "green") +
+  geom_text(x = .80, y = .10,
+            label = str_c("auROC = ", 0.93),
+            show.legend = FALSE, color = "blue")
+
+dev.off()
 ```
