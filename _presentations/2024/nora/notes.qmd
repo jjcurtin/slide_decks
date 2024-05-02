@@ -1,5 +1,15 @@
-We all know that we have a serious problem with treatment access and utilization for individuals with SUD.
+Dave gave me 5 minutes
 
+- Bullet point the rationale for our focus on digital therapeutics 
+- Describe enough of what we have done date to give you a sense how we are approaching the problem and what may be possible
+- Highlight important next steps that are mostly shovel ready pending support given the preliminary work we've done
+
+-----
+
+- We all know that we have a serious problem with treatment access and utilization for individuals with SUD.
+
+- Few than 1/10 r.eceive SUD treatment in any given year
+ple 
 - Depending on the year and how you quanity it, only approximately 1 in 10 people with an active SUD receive any treatment for that SUD. 
 
 - And this failure to treat is even more troubling for vulnerable groups.  Black and LatinX adults receive mental healthcare services at only half the rate of whites.  And similar mental healthcare disparities exist for people living in rural communities and for those with lower incomes.
@@ -88,5 +98,46 @@ Participants in both projects have found all three sensing methods to be accepta
 
 -----
 
+We have begun to build risk prediction models using the AUD sample because lapses are
+
+- Clearly defined
+- Temporally precise onset
+- Precede but predict relapse and can serve as an early warning sign for relapse
+- Maladaptive responses (or AVEs) in response to lapses can increase relapse risk
+- Looking ahead to opioids and other substances, even single lapses can result in overdoses and deaths
+
+-----
+
+We are looking to develop high temporal resolution prediction models
+
+- In other words, we arent looking to simply identify individuals at high risk for lapses 
+- Instead we want to know when these lapses will occur.  
+- To this end, we are devloping models to predict the probability of a lapse within the next week, the next day and the even the next hour
+
+-----
+
+Train models using location and communication signals
+
+- Lower burden
+- Could improve performance furhter
+- New features for distinct risks not measured by EMA
+
+-----
+
+Optimize algorithmic feedback so that people trust and follow recommendations
+
+- probability
+- trends
+- features
+- recommendations
+
+-----
+
+Evaluate the clinical benefits of Smart DTx with embedded sensing and algorithms
 
 
+
+Issues of algorithmic fairness
+
+- More diverse training data (race/ethnicity but also geography)
+- Identification of biased features

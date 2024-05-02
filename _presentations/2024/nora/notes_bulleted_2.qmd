@@ -1,0 +1,150 @@
+We all know that we have a serious problem with access to treatment and continuing care for individuals with SUD
+
+We believe that digital therapeutics can play an important role in addressing barriers to care because they are 
+
+- Accessible everywhere
+- Available everyday, 24/7
+- and highlighly scalable, which may lower costs
+
+-----
+
+And today's digital therapeutics already provide meaningful clinical benefits
+
+- Use of a digital therapeutic almost doubles the odds of being abstinent from alcohol or other drugs
+- And these benefits are durable - they have been documented up to 12 months after the start of treatment.  
+
+-----
+
+[CLICK FORWARD]
+
+BUT, its also important to acknowledge that the digital therapeutics available today are still best considered beta versions relative to their full potential 
+
+Their power comes from easy, 24/7 access to their many supports - the treatments, tools, and services built into these apps. But this is also their Achilles heel. As the patient using these apps, you now have to tackle difficult questions like:
+
+- When should I use them?
+- For how long?
+- Which of their many supports are best for me?
+- And which are best for me **right now**, at this moment in time?
+
+-----
+
+These are essentially precision mental health questions about providing the right supports to the right people at the right time, every time
+
+And we believe digital therpeutics are optimially suited to provide such personalized care if we enhance them with embedded sensing capabilities and machine learning risk prediction models 
+
+-----
+
+We've already made important strides in sensing and risk prediction from a recently completed NIAAA protocol that focused on AUD and an ongoing NIDA protocol focused on OUD 
+
+And these projects can give you a good sense of our roadmap to improve digital therapeutics 
+
+-----
+
+So how are we approaching this precision mental health challenge?
+
+[PAUSE]
+
+To start, we have begun to develop risk prediction models that focus both on **predicting** and **explaining** future lapses
+
+Our focus is on predicting future lapses because lapses are 
+
+- Clearly defined
+- They have a temporally precise onset
+- They precede but often predict relapse and therefore can serve as an early warning sign
+- Clinically, we know that abstinence violation effects can increase relapse risk
+- And looking ahead to opioids and other substances, even single lapses can result in overdoses and deaths
+
+-----
+
+The inputs to these lapse prediction models come from feature engineering three separate but complementary sets of raw signals that can be sensed within A-CHESS, our digital therapeutic.  These are
+
+- Ecological momentary assessments
+- Geolocation
+- Cellular communications including meta data from calls and texts and text message content
+
+-----
+
+Each of these signals are easy to collect with standard technologies available on smartphones
+
+Participants in both projects have found all three sensing methods to be acceptable.  
+ - We get high rates of compliance with EMA when used for up to 1 year
+ - Among almost 600 participants across these two projects all but several have been willing to share their geolocation and cellular commuications data with us
+
+And we believe we can feature engineer strong and interpretable predictors for future lapses from each of these sources 
+
+-----
+
+And that is what we are doing now.  With the AUD sample, we have begun to develop future lapse prediction models with high temporal resolution 
+
+- In other words, we arent looking to simply identify individuals at high risk for lapses 
+- Instead we want to know precisely when these lapses will occur  
+
+-----
+
+[CLICK FORWARD]
+
+And we have already demonstrated that we can do this with features from EMA
+
+- We have developed models to predict future lapses in the next week, the next day, and even the next hour
+- These are true prediction models in the full sense of the word "predict"
+  - In other words, the features were all measured before the windows in which we observed the lapses so that we are predicting into the future
+  - And we evaluated these models on held-out new observations from new participants that were never seen during training
+
+And these models perform exceptionally well.  In the top right figure, you can see that all three auROCs are at or above .90, even when predicting lapses in precise one-hour windows
+
+-----
+
+This gives us the first two pieces we need for a precision mental health solution in A-CHESS - it tells us who needs support and when that support is needed.   
+
+But we can also apply emerging methods from the field of interpretable AI to these lapse prediction models to begin to understand why they are at risk for lapses and therefore what supports they may need to prevent that lapse
+
+-----
+
+[CLICK FORWARD]
+
+In the bottom right figure, I am showing you SHAP values from the hour model, which is a tool to allow us to know which features contibuted most strongly to individual lapse risk predictions for a specific individual at a specific time.  In other words, .  When someone  for specific person at a specific time. You can see that there is good variation for all the feature categories which mea
+
+
+Train models using location and communication signals
+
+- Lower burden
+- Could improve performance further
+- New features for distinct risks not measured by EMA
+
+-----
+
+Optimize algorithmic feedback so that people trust and follow these AI generated recommendations
+
+- probability
+- trends
+- features
+- recommendations
+
+-----
+
+Evaluate the clinical benefits of Smart DTx with embedded sensing and algorithms
+
+
+Issues of algorithmic fairness
+
+- More diverse training data (race/ethnicity but also geography)
+- Identification of biased features
+
+
+
+-----
+
+Further development of DTx interventions and supports
+
+- The commercial version of A-CHESS has recently expanded to include CBT4CBT modules based on Kathleen Carrols work
+- My collegagues and I are well-positioned as clinical psychologists with expetise in SUD treatment to do further module and support development
+- There are attractive synergies at UW between Dave's center and Richie Davidisons Center for Healthy Minds, which will allow us to capitalize on intervention development in the mindfulness space including MBSR and Mindfulness based relapse prevension
+- Quality intervention and support development is critial as we puruse our precision mental health goals because if we are going to personalize support we need to have robust content in place to recommend to patients depending on their specific risk factors and needs at any moment in time.
+
+-----
+
+In addition to the development of more traditional digital interventions and supports, we see big opportunities for the use of large language models in digital therapuetics in at least two ways
+
+- In the near term, if we want people to trust the support recommendations and other feedback from our risk models, there is evidence that AIs are more trusted when their are more anthrpomorthic and LLMs may help with this.
+- There are also opportunites to use LLMs to practice skills that might be trained by various support modules in the digital therapuetc.  For example, users could interactively practice drink refusal skills, or practice stressful interpersonal situations.  Again, LLMs may be well-positioned to make these practices richer or more naturalistic.
+
