@@ -29,10 +29,9 @@ So how are we approaching this precision mental health challenge?
 
 To start, we have begun to develop risk prediction models that focus both on **predicting** and **explaining** future lapses
 
-Our focus is on predicting future lapses because lapses are 
+Our focus is on future lapses because lapses are 
 
-- Clearly defined
-- They have a temporally precise onset
+- Clearly defined and have a temporally precise onset
 - They can serve as an early warning sign for relapse
 - And for some drugs, even single lapses can result in overdoses and deaths
 
@@ -53,7 +52,7 @@ Our goal is to use features from these signals to develop lapse prediction model
 
 -----
 
-[CLICK FORWARD]
+**[CLICK FORWARD]**
 
 And we have already demonstrated that we can do this for AUD lapses with features from EMA
 
@@ -71,7 +70,7 @@ This gives us the first two pieces we need for a precision mental health solutio
 
 -----
 
-[CLICK FORWARD]
+**[CLICK FORWARD]**
 
 In the bottom right figure, I am showing you local SHAP values from the next hour risk prediction model.  These SHAP values allow us to know which features contributed most strongly to each individual lapse risk prediction, in other words a prediction for a specific individual at a specific time.
 
@@ -102,9 +101,9 @@ As part of the evaluation process, issues of algorithmic bias and fairness immed
 
 -----
 
-[CLICK FORWARD]
+**[CLICK FORWARD]**
 
-- Continued quality intervention and support development is also critical because if we are going to personalize support we need to have robust content in place to recommend to patients depending on their specific risk factors and needs at any moment in time.
+Continued quality intervention and support development is also critical because if we are going to personalize support we need to have robust content in place to recommend to patients depending on their specific risk factors and needs at any moment in time.
 
 - My colleagues and I are well-positioned as clinical psychologists with expertise in SUD treatment to do further module and support development
 
@@ -112,7 +111,7 @@ As part of the evaluation process, issues of algorithmic bias and fairness immed
 
 -----
 
-There are also possibilities to begin to Marshall benefits from large language models within DTx
+There are also possibilities to begin to marshall benefits from large language models within DTx
 
 - In the near term, if we want people to trust the support recommendations and other feedback from our risk models, there is evidence that AIs are more trusted when they are more anthropomorphic and using LLMs for the support recommendations may be an easy first step to explore their value.
 
@@ -121,7 +120,7 @@ There are also possibilities to begin to Marshall benefits from large language m
 
 -----
 
-And to close, I want to make one more point. One of the exciting and attractive aspects about working in the DTx sphere is that what we learn is easy to port from app to app and platform to platform. 
+And to close, I want to make one more point. One of the exciting and attractive aspects about working in the DTx space is that what we learn is easy to port from app to app and platform to platform
 
 - Our sensing can be done on any smartphone. 
 - The algorithms and feedback are automated and portable. 
