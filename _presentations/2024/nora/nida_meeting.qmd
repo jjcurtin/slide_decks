@@ -1,4 +1,22 @@
-We all know that we have a serious problem with access to treatment and continuing care for individuals with SUD
+We all know that we have a serious problem with treatment access and utilization for individuals with SUD
+
+- Fewer than 1/10 people with an active SUD receive any treatment in any given year
+- Large health disparties make these numbers even worse for vulnerable gropus defined by race, ethnicity and geography 
+- These numbers are worth still for continuing care following initial treatment even though we know that SUDs often require lifelong management
+
+-----
+
+Unfortunately, our failure to treat is not surprising.  There are many well known barriers to receiving traditional mental healthcare.
+
+- These include problems with access that affect everyone but are particularly limiting for people living in rural communities
+
+- There are problems with availability
+
+- Treatment costs are often prohibitive for those without health insurance 
+
+- and stigma and related issues make traditional treatments for mental illness less acceptable to some patients.  
+
+-----
 
 We believe that digital therapeutics or DTx can play an important role in addressing barriers to care and today's digital therapeutics are already providing meaningful clinical benefits to research participants and patients
 
