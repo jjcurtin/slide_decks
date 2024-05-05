@@ -538,14 +538,7 @@ But we were also eager to see how well we could do if we required a higher level
 Area under the ROC curve (auROC)
 
 - [Next week = 0.90; [0.88 - 0.91]]{style="color: orange;"}
-
-
-day
-[0.888
--
-0.919], hour [0.916
--
-0.940]
+- [Next day  = 0.91; [0.89 - 0.92]]{style="color: green;"}
 
 ::: {.absolute left="0%" bottom="0%" width="300px" height="auto"}
 ::: {style="font-size: 75%;"}
@@ -578,37 +571,6 @@ The day level model performed as well as, if not better, than the week level mod
 [PAUSE]
 
 
-
-
-
-:::
-
-## Performance Metrics by Lapse Window Width
-
-
-<!--TEMP CREATE TABLE IN SLIDE DECK-->
-```{r}
-#| tbl-cap: Performance Metrics by Model 
-
-metrics |> 
-  slice(1:4) |>
-  mutate(Hour = "") |>
-  kbl(col.names = c("", "Week", "Day", "Hour"),
-    digits = 2,
-    align = c("r", "c", "c", "c"),
-    linesep = "") |>
-  row_spec(row = 0, align = "c") |>
-  kable_styling(full_width = FALSE) |>
-  kable_classic("striped") |>
-  column_spec(3, color  = "red", bold = TRUE)
-```
-
-::: {.notes}
-And consistent with this higher AUC, the day level model also had slightly better sensitivity and balanced accuracy, along with comparable specificity to the week level model
-
-[PAUSE]
-
-
 :::
 
 
@@ -633,13 +595,17 @@ Given our success with this day level model, we next developed a model with the 
 :::
 
 
-
-
 ## 1 Hour: ROC Curve
 
 :::: {.columns}
 
 ::: {.column width="50%"}
+
+Area under the ROC curve (auROC)
+
+- [Next week = 0.90; [0.88 - 0.91]]{style="color: orange;"}
+- [Next day  = 0.91; [0.89 - 0.92]]{style="color: green;"}
+- [Next hour = 0.93; [0.92 - 0.94]]{style="color: blue;"}
 
 ::: {.absolute left="0%" bottom="0%" width="300px" height="auto"}
 ::: {style="font-size: 75%;"}
@@ -673,32 +639,6 @@ And it turns out that we can do somewhat better still with hour level prediction
 
 :::
 
-
-## Performance Metrics by Lapse Window Width
-
-
-<!--TEMP CREATE TABLE IN SLIDE DECK-->
-```{r}
-#| tbl-cap: Performance Metrics by Model 
-
-metrics |> 
-  slice(1:4) |>
-  kbl(col.names = c("", "Week", "Day", "Hour"),
-    digits = 2,
-    align = c("r", "c", "c", "c"),
-    linesep = "") |>
-  row_spec(row = 0, align = "c") |>
-  kable_styling(full_width = FALSE) |>
-  kable_classic("striped") |>
-  column_spec(4, color  = "red", bold = TRUE)
-```
-
-::: {.notes}
-And again, consistent with that AUC, the sensitivity, specificity, and balanced accuracy were higher still for this model.
-
-[PAUSE]
-
-:::
 
 ## Global Feature Importance by Model{.medium}
 
