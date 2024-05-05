@@ -1,0 +1,203 @@
+---
+title: "Untitled"
+format: html
+---
+
+## Precision Medicine
+
+Barak Obama, Remarks by the President on Precision Medicine, January 2015
+
+>  "And that’s the promise of precision medicine... <br>
+-- delivering the right treatments, <br>
+-- at the right time, <br>
+-- every time <br>
+-- to the right person"
+
+
+**Precision Mental Health** may present the biggest opportunities for impact
+
+- Many treatments and supports available
+- Treatments are modestly effective
+- Symptoms and harmful behaviors are chronic and time-varying
+
+
+## Project Match
+
+We have three modestly effective (multi-faceted) treatments for AUD
+
+- Motivational Enhancement Therapy
+- Cognitive Behavioral Therapy
+- 12-Step Facilitation
+
+Goal: Match patients to optimal treatments based on individual differences based on ID X Treatment interactions
+\
+\
+Considered hundreds of IDs
+
+- Demographics
+- Personality traits
+- AUD history
+
+
+## Project Match
+
+RB Cutler, 2005 (BMC Public Health)
+
+> "Project MATCH was the largest and most expensive alcoholism treatment trial ever conducted. The results were disappointing. There were essentially no patient-treatment matches, and three very different treatments produced nearly identical outcomes. <br><br>
+An analysis of the problem suggested that too many Type I errors were being made in the alcoholism literature. Type I errors typically occur when an inappropriately large number of statistical tests are performed"
+
+- Predicting treatment effectiveness with single characteristics is insufficient
+- Analytic approaches of the 90s limited matching to simple Characteristic X Tx interactions and testing these interactions separately (typical explanatory approach)
+- We can do better now with high dimensional characterization and machine learning techniques
+
+
+## Precision Medicine
+
+Barak Obama, Remarks by the President on Precision Medicine, January 2015
+
+>  "And that’s the promise of precision medicine... <br>
+-- delivering the right treatments, <br>
+-- at the right time, <br>
+-- every time <br>
+-- to the right person"
+
+
+**Precision Mental Health** may present the biggest opportunities for impact
+
+- Many treatments and supports available
+- Treatments are modestly effective
+- Symptoms and harmful behaviors are chronic and time-varying
+
+
+## Project Match
+
+We have three modestly effective (multi-faceted) treatments for AUD
+
+- Motivational Enhancement Therapy
+- Cognitive Behavioral Therapy
+- 12-Step Facilitation
+
+Goal: Match patients to optimal treatments based on individual differences based on ID X Treatment interactions
+\
+\
+Considered hundreds of IDs
+
+- Demographics
+- Personality traits
+- AUD history
+
+
+## Project Match
+
+RB Cutler, 2005 (BMC Public Health)
+
+> "Project MATCH was the largest and most expensive alcoholism treatment trial ever conducted. The results were disappointing. There were essentially no patient-treatment matches, and three very different treatments produced nearly identical outcomes. <br><br>
+An analysis of the problem suggested that too many Type I errors were being made in the alcoholism literature. Type I errors typically occur when an inappropriately large number of statistical tests are performed"
+
+- Predicting treatment effectiveness with single characteristics is insufficient
+- Analytic approaches of the 90s limited matching to simple Characteristic X Tx interactions and testing these interactions separately (typical explanatory approach)
+- We can do better now with high dimensional characterization and machine learning techniques
+
+
+
+## High Dimensional Tx Matching 
+
+- Conduct detailed, comprehensive baseline assessments of individual differences and recent experiences 
+- Use these characteristics and recent experiences to develop high dimensional models to predict meaningful treatment outcomes (real world)
+- Include first line (and other?) treatments received in these prediction models
+- Allow for interactions among baseline characteristics/experiences and treatments 
+- Models can then be used to predict expected outcome for patient for all available treatments
+- Select the optimal treatment for them
+
+## High Dimensional Tx Matching in the Hands of Gaylen Fronk
+
+- ~ 1100 smokers pooled across three first line medications for smoking cessation
+- Many, many individual differences collected at baseline (prior to treatment assignment)
+- Point prevalence abstinence measured at 
+  - 4 weeks
+  - 12 weeks (end of treatment)
+  - 24 weeks
+
+- Developed model to predict 4 week outcomes
+  - Elastic Net GLM (essentially LASSO)
+  - Hundreds of features
+  - Interactions with medication
+  
+- Use model to predict the probability of abstinence for each smoker for each medication
+- Use probability to rank their optimal, intermediate, and worst medication
+- Compare outcomes for smokers who received optimal vs. intermediate vs. worst medication (and RCT outcomes overall)
+
+  
+## Outcomes for Model-Based "Precise" Tx Recommendations
+
+:::: {.rows}
+
+::: {.row height="20%"}
+- Smoking abstinence ~ 33% for RCT assigned TX 
+- Likely similar if clinician selected because these are comparable front line TX?
+:::
+
+::: {.row height="80%"}
+{{< embed ../../../notebooks/match_figs.qmd#fig-tx_week_1 >}}
+:::
+
+::::
+
+## Outcomes for Model-Based "Precise" Tx Recommendations
+
+:::: {.rows}
+
+::: {.row height="20%"}
+- More than 10% increase in abstinence if received model-recommended "optimal" TX
+- Clinically meaningful increase given baseline efficacy of ~ 33%
+:::
+
+::: {.row height="80%"}
+{{< embed ../../../notebooks/match_figs.qmd#fig-tx_week_2 >}}
+:::
+
+::::
+
+## Outcomes for Model-Based "Precise" Tx Recommendations
+
+- Relative increase for model-recommended optimal TX sustained for six months
+- Magnitude of benefit decreases
+
+{{< embed ../../../notebooks/match_figs.qmd#fig-tx_week_3 >}}
+
+## Outcomes for Model-Based "Precise" Tx Recommendations
+
+- Model can distinguish between optimal, intermediate, and worst TX
+- Can allow some informed choice by patient
+
+{{< embed ../../../notebooks/match_figs.qmd#fig-tx_week_4 >}}
+
+## Outcomes for Model-Based "Precise" Tx Recommendations
+
+- Distinctions between ranked TX also diminish with time
+- Also expected because baseline characteristics are not static but not updated
+
+{{< embed ../../../notebooks/match_figs.qmd#fig-tx_week_5 >}}
+
+
+
+## Precision Mental Health
+
+Super excited but....
+\
+\
+Barak Obama, Remarks by the President on Precision Medicine, January 2015
+
+>  "And that’s the promise of precision medicine... <br>
+-- delivering the right treatments, <br>
+-- at the right time, <br>
+-- every time <br>
+-- to the right person"
+
+\
+\
+
+- Baseline characteristics don't predict well forever
+- Life happens
+- Events and experiences matter
+- Prediction models need updated inputs to continue to perform well

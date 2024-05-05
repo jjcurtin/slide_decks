@@ -1,7 +1,8 @@
 ---
-title: "Smart Digital Therapeutics for Alcohol Use Disorder: Algorithms for Prediction and Adaptive Intervention" 
+title: "Precision Mental Health for Substance Use Disorders" 
 author: "John J. Curtin, Ph.D."
 institute: "University of Wisconsin-Madison"
+date: May 13, 2024
 
 title-slide-attributes:
   data-background-image: https://github.com/jjcurtin/lectures/blob/main/images/smartphone_know_you.png?raw=true
@@ -15,190 +16,10 @@ format:
     css: arc.css
   
 fig-cap-location: top
+
 ---
+
 ## Mental Healthcare Needs are High and Unmet  {.smaller}
-<!--First slide title here before load data to avoid blank page after title page-->
-
-```{r setup}
-#| include: false
-
-knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
-
-options(knitr.kable.NA = '')
-
-# source
-devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/fun_ml.R?raw=true")
-
-# handle conflicts
-options(conflicts.policy = "depends.ok")
-tidymodels_conflictRules()
-
-#devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/fun_eda.R?raw=true")
-library(kableExtra, exclude = "group_rows")
-# library(janitor)
-# library(corx)
-library(patchwork)
-library(ggtext)
-library(consort)
-library(tidyposterior)
-# library(cowplot, mask.ok = c("stamp", "align_plots"))
-library(tidyverse)
-library(tidymodels)
-
-theme_set(theme_classic()) 
-```
-
-
-```{r paths}
-switch (Sys.info()[['sysname']],
-        # PC paths
-        Windows = {
-          path_models <- "P:/studydata/risk/models/ema"
-          path_data_shared <- "P:/studydata/risk/data_processed/shared"
-          path_data_ema <- "P:/studydata/risk/data_processed/ema"},
-        # IOS paths
-        Darwin = {
-          path_models <- "/Volumes/private/studydata/risk/models/ema"
-          path_data_shared <- "/Volumes/private/studydata/risk/data_processed/shared"
-          path_data_ema <- "/Volumes/private/studydata/risk/data_processed/ema"}
-       )
-```
-
-```{r r-load_preds}
-# Predictions data
-preds_week<- readRDS(file.path(path_models, 
-                               "resample_preds_best_all_1week_0_v4_kfold.rds"))
-preds_day<- readRDS(file.path(path_models, 
-                              "resample_preds_best_all_1day_0_v4_kfold.rds"))
-preds_hour<- readRDS(file.path(path_models, 
-                               "resample_preds_best_all_1hour_0_v4_kfold.rds")) 
-
-# Table data
-disposition <- read_csv(file.path(path_data_ema, "disposition.csv"), col_types = "ccDDcccccccccc")
-screen <- read_csv(file.path(path_data_shared, "screen.csv"), col_types = vroom::cols()) %>% 
-  filter(subid %in% subset(disposition, analysis == "yes")$subid)
-
-# posterior probabilites
-pp <- readRDS(file.path(path_models, "posteriors_all_allwindows_0_v4_kfold.rds"))
-
-```
-
-```{r r-load_roc}
-# ROC curves
-roc_week <- preds_week |> 
-  roc_curve(prob, truth = truth) |> 
-  mutate(model = "1week")
-  
-
-roc_day <- preds_day |> 
-  roc_curve(prob, truth = truth) |> 
-  mutate(model = "1day")
-
-roc_hour <- preds_hour|> 
-  roc_curve(prob, truth = truth) |> 
-  mutate(model = "1hour")
-
-roc_all <- roc_week |> 
-  bind_rows(roc_day) |> 
-  bind_rows(roc_hour) |> 
-  mutate(thres_avg = round(.threshold, 3)) |> 
-  group_by(model, thres_avg) |> 
-  reframe(sensitivity = mean(sensitivity), specificity =  mean(specificity))
-
-# PR curves
-pr_week <- preds_week |> 
-  pr_curve(prob, truth = truth) |> 
-  mutate(model = "1week")
-
-pr_day <- preds_day |> 
-  pr_curve(prob, truth = truth) |> 
-  mutate(model = "1day")
-
-pr_hour <- preds_hour|> 
-  pr_curve(prob, truth = truth) |> 
-  mutate(model = "1hour")
-
-pr_all <- pr_week |> 
-  bind_rows(pr_day) |> 
-  bind_rows(pr_hour) |> 
-  mutate(thres_avg = round(.threshold, 3)) |> 
-  group_by(model, thres_avg) |> 
-  reframe(recall = mean(recall), precision =  mean(precision))
-```
-
-```{r shaps}
-# Grouped SHAPS
-shap_local_week <- readRDS(file.path(path_models, "imp_shap_grouped_all_1week_0_v4.rds")) 
-shap_local_day <- readRDS(file.path(path_models, "imp_shap_grouped_all_1day_0_v4.rds"))
-shap_local_hour <- readRDS(file.path(path_models, "imp_shap_grouped_all_1hour_0_v4.rds")) 
-  
-shap_global_week <- shap_local_week |> 
-  group_by(group) |> 
-  summarize(mean_value = mean(abs(shap)), .groups = "drop") |> 
-  arrange(mean_value)
-shap_global_day <- shap_local_day |> 
-  group_by(group) |> 
-  summarize(mean_value = mean(abs(shap)), .groups = "drop") |> 
-  arrange(mean_value)
-shap_global_hour <- shap_local_hour |> 
-  group_by(group) |> 
-  summarize(mean_value = mean(abs(shap)), .groups = "drop") |> 
-  arrange(mean_value)
-```
-
-```{r metrics}
-# metrics tables
-
-auc <- tibble(metric = "auc", 
-              week = preds_week |> roc_auc(prob, truth = truth) |>  
-                pull(.estimate), 
-              day = preds_day |> roc_auc(prob, truth = truth) |>  
-                pull(.estimate),
-              hour = preds_hour |> roc_auc(prob, truth = truth) |>  
-                pull(.estimate))
-
-metrics_week <- preds_week |>   
-  conf_mat(truth, estimate) |> 
-  summary() |> 
-  mutate(.estimate = round(.estimate, 3)) |> 
-  rename(week = .estimate,
-         metric = .metric) |> 
-  select(-.estimator)
-
-metrics_day <- preds_day |>   
-  conf_mat(truth, estimate) |> 
-  summary() |> 
-  mutate(.estimate = round(.estimate, 3)) |> 
-  rename(day = .estimate,
-         metric = .metric) |> 
-  select(-.estimator)
-
-metrics_hour <- preds_hour |>   
-  conf_mat(truth, estimate) |> 
-  summary() |> 
-  mutate(.estimate = round(.estimate, 3)) |> 
-  rename(hour = .estimate,
-         metric = .metric) |> 
-  select(-.estimator)
-
-metrics_all <- metrics_week |> 
-  full_join(metrics_day, by = "metric") |> 
-  full_join(metrics_hour, by = "metric") |> 
-  filter(metric %in% c("sens", "spec", "ppv", "bal_accuracy")) |> 
-  bind_rows(auc) |> 
-  bind_rows(tibble(metric = "  ", week = NA, day = NA, hour = NA)) |> 
-  bind_rows(tibble(metric = "  ", week = NA, day = NA, hour = NA)) |> 
-  mutate(across(where(is.numeric), \(x) round(x, digits=2)))
-
-metrics_all <- metrics_all[c(5, 6, 1, 2, 4, 7, 3),]
-metrics_all[1,1] <- "AUC"
-metrics_all[3,1] <- "Sensitivity"
-metrics_all[4,1] <- "Specificity"
-metrics_all[5,1] <- "Balanced  Accuracy"
-metrics_all[7,1] <- "PPV"
-```
-
-
 
 - In 2019, [52 million]{style="color: red;"} Americans had an active mental illness
   - More than half did not receive any [treatment]{style="color: red;"}
@@ -212,6 +33,8 @@ In 2019, **more than half of the 52 million Americans** with an active mental il
 :::
 
 
+
+-----------------------------------------------------------------------------
 
 ## Mental Healthcare Needs are High and Unmet  {.smaller}
 
@@ -232,6 +55,7 @@ And for the 20 million adults suffering with a substance use disorder, it was wo
 :::
 
 
+-----------------------------------------------------------------------------
 
 ## Mental Healthcare Needs are High and Unmet  {.smaller}
 
@@ -244,12 +68,13 @@ And for the 20 million adults suffering with a substance use disorder, it was wo
 - Large treatment disparities exist by race, ethnicity, geography, and income
 
 
-
 ::: {.notes}
 Our failure to treat is even more troubling for vulnerable groups.  Black and LatinX adults receive mental healthcare services at only half the rate of whites.  
 
 And similar mental healthcare disparities exist for people living in rural communities and for those with lower incomes.
 :::
+
+-----------------------------------------------------------------------------
 
 ## Mental Healthcare Needs are High and Unmet  {.smaller}
 
@@ -271,6 +96,8 @@ Treatment costs are often prohibitive for those without health insurance
 
 and stigma and related issues make traditional treatments for mental illness less acceptable to some patients.  
 :::
+
+-----------------------------------------------------------------------------
 
 ## Digital Therapeutics (DTx)
 
@@ -297,6 +124,8 @@ These digital therapeutics can be combined with traditional treatments to reduce
 - and highlighly scalable, which may lower costs
 :::
 
+-----------------------------------------------------------------------------
+
 ## Digital Therapeutics (DTx)
 
 Digital therapeutics are smartphone "apps" that are designed to prevent, manage, or treat disease, including mental illness. 
@@ -320,11 +149,12 @@ These increases in abstinence from using digital therapeutics are observed not o
 
 And these benefits are durable - they have been documented up to 12 months after the start of treatment.  
 :::
+
 ## {#beta_app data-menu-title="Image of beta app" background-image="https://dionysus.psych.wisc.edu/present/meet_faculty/images/beta_app.png" background-size="100%" background-repeat="none"}
 
 
 ::: {.notes}
-These apps are in use today with patients with SUD and at least two have recently received FDA approval.  However, I think they are still best considered beta versions relative to their full potential. 
+These apps are in use today with patients with SUD, but I think they are still best considered beta versions relative to their full potential. 
 
 Their power comes from easy, 24/7 access to their many supports - the treatments, tools, and services built into these smartphone apps. But this is also their Achilles heel. As the patient using these apps, you now have to tackle difficult questions like:
 
@@ -335,10 +165,24 @@ Their power comes from easy, 24/7 access to their many supports - the treatments
 - Which of their many supports are best for me?
 
 - And which are best for me **right now**, at this moment in time?
+
 :::
 
----
+-----------------------------------------------------------------------------
 
+## Precision Mental Health w/ Smart Digital Therapeutics
+
+**---UPDATE---**
+
+.....THESE ARE ESSENTIALLY PRECICION MENTAL HEALTH QUESTIONS---
+
+
+idea that DTx begin to address the every time piece
+
+Show how use of sensiing and machline learming algos can address the who, when and what
+And these apps will do this through the use of built-in artificial intelligence or machine learning algorithms that are powered by personal sensing.
+
+<!-- 
 ## Smart Digital Therapeutics
 
 > “Could you predict not only [who]{style="color: red;"} might be at greatest risk for relapse … <br>
@@ -359,16 +203,35 @@ The next wave of digital therapeutics, lets call them smart digital therapeutics
 And these apps will do this through the use of built-in artificial intelligence or machine learning algorithms that are powered by personal sensing.
 
 :::
+ -->
 
-## Lapse Prediction in Patients with AUD
+## Lapses are Key Targets for Intervention/Support 
+
+**---UPDATE---**
+
+NORA with AVE back in
+
+
+## Sensing Model Inputs
+
+**---UPDATE---**
+
+Focus on our big three
+
+Justify including churn for other measures
+
+
+## Lapse Prediction for AUD
+
+**---UPDATE---**
+
 :::: {.columns}
 
 ::: {.column width="60%"}
-- 151 patients with AUD
+- 151 individuals with moderate to severe AUD
 - Early in recovery (1-8 weeks)
 - Committed to abstinence throughout study
-- Followed for up to 3 months
-- Collected active and passive personal sensing data streams
+- Followed with sensing for up to 3 months
 :::
 
 
@@ -381,6 +244,9 @@ And these apps will do this through the use of built-in artificial intelligence 
 
 
 ::::
+
+NEED TO UPDATE THIS GOAL TO FOCUS ON BIG THREE BUT ALSO TEMPORALLY PRECISE
+
 [GOAL:]{style="color: red;"} Develop a temporally precise lapse monitoring (prediction) system for patients with AUD
 
 
@@ -397,7 +263,19 @@ Our first goal with this grant was to develop machine learning algorithms that c
 
 :::
 
-## Personal Sensing Data Streams
+-----------------------------------------------------------------------------
+
+## PARTICIPANT CHARACTERISTICS
+
+**-UPDATE---**
+
+Kendra slide?
+
+## Sensing
+
+**---UPDATE---**
+REMIND THREE
+ADD SLEEP SENSORS AND PHYSIOLOGY ON SUBSET - INFORMED OUR PERSPECTIVE ON CHURN AND TECHNOLOGY EDGE
 
 - [4X daily ecological momentary assessments (EMA)]{style="color: red;"}
 
@@ -429,8 +307,11 @@ We also have
 We are in the early stages of model building at this point and I will focus today on results from preliminary models using only EMA.  However, we are actively working with GPS and cellular communications as well and I’ll end with some brief discussion of those preliminary models, as well as early plans on how to implement these models clinically to help patients.
 :::
 
-## 4x Daily Ecological Momentary Assessments {.medium}
-
+-----------------------------------------------------------------------------
+## Ecological Momentary Assessments 
+ 
+**---UPDATE---**
+UPDATE FLOW WITH LAST SLIDE.  FOCUS ON EMA
 
 :::: {.columns}
 
@@ -464,8 +345,65 @@ All of the EMAs also asked them about their current craving, affective valence a
 On the first EMA each day, they also reported any future risky situations and stressful events that they expected in the next week and their confidence that they would remain abstinent. 
 :::
 
-## Feature Engineering
+## Sensing Feasibility/Acceptability
 
+**---UPDATE--** 
+
+slide or slides from Kenra maybe??
+
+Do fast and highlight these were important when we started this work but some audiences still have questions
+
+
+## Modeling: Predictions 
+
+- Predict hour-by-hour probability of [future lapse]{style="color: red;"}
+
+- Lapse window widths
+  - 1 hour
+  - 1 day
+  - 1 week
+
+::: {.notes}
+
+For our purposes today I wont dive deep into the machine learning methods but let me highlight a few high level details 
+
+We used these features I just described to make predictions about the hour-by-hour probability of a future lapse.  We are developing separate models for three future lapse windows – lapses in the next hour, lapses in the next day, and lapses in the next week.  
+
+For example, if I was in recovery from an AUD, I could use these models to generate the probability that I would lapse after this symposium starting at 10am.  One model would generate the probability of a lapse between 10am and 11 am today, the second would predict the probability of a lapse between 10 am today and 10 am tomorrow and the third would provide the probability of a lapse anytime between 10am today and 10 am next Friday  
+
+And of course, all of the models would only use data collected prior to 10 am today so that they are “predicting”, in the full sense of the word, into the future and not just demonstrating an association.
+
+:::
+
+## Modeling: Statistical Algorithms 
+
+**---UPDATE SLIDE NOTES--**
+
+- XGBoost - boosted decision trees
+- Also considered 
+  - ElasticNet GLM (e.g., LASSO, ridge regression)
+  - Random Forest
+  - KNN
+
+::: {.notes}
+We are evaluating machine learning model configurations that differ by common statistical algorithms
+:::
+
+## Modeling: Evaluating Performance
+
+**---UPDATE FOR FOCUS ON WHAT IS auROC--**
+**---UPDATE FOR FOCUS ON HELD OUT AND TRUE PREDICTION--**
+- Model Tuning and Performance Evaluation
+  - Area under ROC curve (AUC) as primary performance metric
+  - Using [grouped]{style="color: red;"} (by participant), nested [10-fold CV]{style="color: red;"} 
+
+We are evaluating these models primarily using the area under the ROC curve but we also consider and report a variety of other common metrics.
+
+And, of course, these performance metrics are calculated for new observations and new participants that the models have never seen and were not trained on by using grouped 10-fold cross-validation.
+
+:::
+
+## Modeling: Feature Engineering 
 
 - Features based on recent past experiences (12, 24, 48, 72, 168 hours)
 
@@ -487,49 +425,6 @@ We also calculated counts of past lapses and counts of past EMAs completed to in
 And we included these scores both in raw form and as change from baselines for the participant based on all their previous responses since the start of the study.
 :::
 
-## Machine Learning Methods
-
-
-- Predict hour-by-hour probability of [future lapse]{style="color: red;"}
-
-- Lapse window widths
-  - 1 hour
-  - 1 day
-  - 1 week
-
-::: {.notes}
-
-For our purposes today I wont dive deep into the machine learning methods but let me highlight a few high level details 
-
-We used these features I just described to make predictions about the hour-by-hour probability of a future lapse.  We are developing separate models for three future lapse windows – lapses in the next hour, lapses in the next day, and lapses in the next week.  
-
-For example, if I was in recovery from an AUD, I could use these models to generate the probability that I would lapse after this symposium starting at 10am.  One model would generate the probability of a lapse between 10am and 11 am today, the second would predict the probability of a lapse between 10 am today and 10 am tomorrow and the third would provide the probability of a lapse anytime between 10am today and 10 am next Friday  
-
-And of course, all of the models would only use data collected prior to 10 am today so that they are “predicting”, in the full sense of the word, into the future and not just demonstrating an association.
-
-:::
-
-## Machine Learning Methods {.medium}
-
-- Statistical Algorithms
-  - ElasticNet GLM (e.g., LASSO, ridge regression)
-  - Random Forest
-  - XGBoost
-  - KNN
-
-- Model Tuning and Performance Evaluation
-  - Area under ROC curve (AUC) as primary performance metric
-  - Sensitivity, Specificity, Balanced accuracy, Positive predictive value
-  - Using [grouped]{style="color: red;"} (by participant) [10-fold CV]{style="color: red;"} 
-
-::: {.notes}
-We are evaluating machine learning model configurations that differ by common statistical algorithms. 
-
-We are evaluating these models primarily using the area under the ROC curve but we also consider and report a variety of other common metrics.
-
-And, of course, these performance metrics are calculated for new observations and new participants that the models have never seen and were not trained on by using grouped 10-fold cross-validation.
-
-:::
 
 ## 1 Week: Probabilities for No Lapse and Lapse
 
@@ -537,7 +432,7 @@ And, of course, these performance metrics are calculated for new observations an
 
 ::: {.column width="60%"}
 
-- Model predicts [probability]{style="color: red;"} of lapse in next week for “[new]{style="color: red;"}” observations in test set
+- Model predicts [probability]{style="color: red;"} of lapse in next week for “[new]{style="color: red;"}” observations in test sets
 
 - Can panel predictions by [Ground Truth]{style="color: red;"} (i.e., true lapse vs. no lapse observations
 
@@ -546,24 +441,9 @@ And, of course, these performance metrics are calculated for new observations an
 
 
 ::: {.column width="40%"}
+
 <!--Lapse Probability by Ground Truth"-->
-```{r fig_hist_probabilites}
-#| fig-height: 6
-#| fig-width: 6
-
-fig_hist_week <- preds_week |> 
-  mutate(truth = if_else(truth == "no_lapse", "No lapse", "Lapse"),
-         estimate = if_else(estimate == "no_lapse", "No lapse", "Lapse"),
-         model = "week") |> 
-  ggplot(data = _, aes(x = prob)) + 
-   geom_histogram(bins = 15, fill = "orange", col = "black", alpha = .4) +
-   facet_wrap(~truth, nrow = 2, scales = "free_y") +
-   xlab("Pr(Lapse)") +
-  scale_y_continuous(labels = scales::comma)
-
-fig_hist_week
-```
-
+{{< embed ../../../notebooks/ema_figs_probability.qmd#fig-week-no_dec_thres >}}
 
 :::
 ::::
@@ -581,75 +461,6 @@ And this is exactly what we see for the one week lapse window model
 :::
 
 
-## 1 Week: Probabilities for No Lapse and Lapse
-
-:::: {.columns}
-
-::: {.column width="60%"}
-
-- [ Model predicts probability of lapse in next week for “new” observations in test set]{style="color: gray;"}
-
-- [Can panel predictions for GROUND TRUTH lapse and no lapse observations]{style="color: gray;"}
-
-- [Want high probabilities to be high for true lapses and low for true no lapses]{style="color: gray;"}
-
-- Need decision threshold for classification (.50 default)
-
-:::
-
-
-::: {.column width="40%"}
-<!--Lapse Probability by Ground Truth-->
-```{r fig_hist_proabilites_threshold}
-#| fig-height: 6
-#| fig-width: 6
-
-fig_hist_week +
-  geom_vline(xintercept = .5, color = "red", size = 2)
-```
-:::
-
-::::
-::: {.notes}
-Now to move from probabilities to actual categorical decisions – in other words, predicting a lapse or no lapse in some specific week, we need a decision threshold.   A probability of .50 is often used for this threshold, but as we will discuss later, there are times when we might want to choose other thresholds.   
-
-But for now, I will use .5 such that the model will predict “lapse” for all weeks with probabilities > .5 and it will predict “no-lapse” for all weeks with probabilities < .5
-
-
-:::
-
-## Performance Metrics by Lapse Window Width
-
-
-```{r table_metrics_week}
-
-
-# remove some data
-metrics_subset <- metrics_all |> 
-  mutate(day = NA, hour = NA)
-metrics_subset[1, 2] <- NA
-metrics_subset[7, ] <- NA
-
-metrics_subset |>
- kbl(format = "html", col.names = c("", "Week", "Day", "Hour"),
-      digits = 2,
-      align = c("r", "c", "c", "c"),
-     linesep = "") |> 
-  row_spec(row = 0, align = "c") |> 
-  kable_styling(full_width = FALSE) |> 
-  kable_classic("striped") |> 
-  column_spec(2, color  = "red", bold = TRUE)
-```
-
-::: {.notes}
-Using this decision threshold, we can now calculate the model’s sensitivity, specificity and balanced accuracy which is just the average of these two.
-
-This one week lapse prediction model correctly predicts “lapse” for 79 percent of the weeks that contain a lapse and it correctly predicts “no-lapse” for 85 percent of the weeks that do not include a lapse.   
-
-
-
-
-:::
 
 ## 1 Week: ROC Curve
 
@@ -657,13 +468,9 @@ This one week lapse prediction model correctly predicts “lapse” for 79 perce
 
 ::: {.column width="50%"}
 
-Area under the ROC curve (AUC)
+Area under the ROC curve (auROC)
 
- - Across all decision thresholds
-
- - ~.5 (random) – 1.0 (perfect)
-
-
+- [Next week = 0.90; [0.88 - 0.91]]{style="color: orange;"}
 
 ::: {.absolute left="0%" bottom="0%" width="300px" height="auto"}
 ::: {style="font-size: 75%;"}
@@ -681,33 +488,9 @@ Area under the ROC curve (AUC)
 
 ::: {.column width="50%"}
 
-<!-- ADD AUC text-->
-<!--ROC Curves for Models-->
-```{r fig_roc_week}
-#| fig-height: 6
-#| fig-width: 6
+<!--ROC Curve for Week-->
+{{< embed ../../../notebooks/ema_figs_roc.qmd#fig-roc-week >}}
 
-auc_week <- metrics_all[1,2] |> 
-  as.character() |> 
-  str_pad(width = 4, side = "right", pad = "0")
-
-roc_all |> 
-  mutate(model = factor(model, levels = c("1week", "1day", "1hour"), 
-                        labels = c("week", "day", "hour"))) |> 
-  filter(model == "week") |>
-  ggplot(aes(x = 1 - specificity, y = sensitivity, color = model)) +
-  geom_path(size = 1.25) +
-  geom_abline(lty = 3) +
-  coord_fixed(xlim = c(0, 1), ylim = c(0, 1)) +
-  labs(x = "Specificity",
-       y = "Sensitivity") +
-  scale_x_continuous(breaks = seq(0,1,.25),
-    labels = sprintf("%.2f", seq(1,0,-.25)))  +
-  scale_color_manual(values = c("orange","green","blue")) +
-  geom_text(x = .80, y = .20, 
-            label = str_c("AUC = ", auc_week), 
-            show.legend = FALSE, color = "orange")
-```
 :::
 
 ::::
@@ -752,6 +535,18 @@ But we were also eager to see how well we could do if we required a higher level
 
 ::: {.column width="50%"}
 
+Area under the ROC curve (auROC)
+
+- [Next week = 0.90; [0.88 - 0.91]]{style="color: orange;"}
+
+
+day
+[0.888
+-
+0.919], hour [0.916
+-
+0.940]
+
 ::: {.absolute left="0%" bottom="0%" width="300px" height="auto"}
 ::: {style="font-size: 75%;"}
 :::{.callout-tip icon=false}
@@ -768,35 +563,10 @@ But we were also eager to see how well we could do if we required a higher level
 
 
 ::: {.column width="50%"}
-<!--ROC Curves for Models-->
-```{r fig_roc_day}
-#| fig-height: 6
-#| fig-width: 6
 
-auc_day <- metrics_all[1, 3] |> 
-  as.character() |> 
-  str_pad(width = 4, side = "right", pad = "0")
+<!--ROC Curve for Week & Day-->
+{{< embed ../../../notebooks/ema_figs_roc.qmd#fig-roc-week_day >}}
 
-roc_all |> 
-  mutate(model = factor(model, levels = c("1week", "1day", "1hour"), 
-                        labels = c("week", "day", "hour"))) |> 
-  filter(model == "week" | model == "day") |>
-  ggplot(aes(x = 1 - specificity, y = sensitivity, color = model)) +
-  geom_path(size = 1.25) +
-  geom_abline(lty = 3) +
-  coord_fixed(xlim = c(0, 1), ylim = c(0, 1)) +
-  labs(x = "Specificity",
-       y = "Sensitivity") +
-  scale_x_continuous(breaks = seq(0,1,.25), 
-                     labels = sprintf("%.2f", seq(1,0,-.25))) +
-  scale_color_manual(values = c("orange","green","blue")) +
-  geom_text(x = .80, y = .20, 
-            label = str_c("AUC = ", auc_week), 
-            show.legend = FALSE, color = "orange") +
-  geom_text(x = .80, y = .15, 
-            label = str_c("AUC = ", auc_day), 
-            show.legend = FALSE, color = "green")
-```
 :::
 ::::
 
@@ -816,20 +586,20 @@ The day level model performed as well as, if not better, than the week level mod
 ## Performance Metrics by Lapse Window Width
 
 
-```{r table_metrics_day}
-# remove some data
-metrics_subset <- metrics_all |> 
-  mutate(hour = NA)
-metrics_subset[7,] <- NA
+<!--TEMP CREATE TABLE IN SLIDE DECK-->
+```{r}
+#| tbl-cap: Performance Metrics by Model 
 
-metrics_subset |>
- kbl(format = "html", col.names = c("", "Week", "Day", "Hour"),
-      digits = 2,
-      align = c("r", "c", "c", "c"),
-     linesep = "") |> 
-  row_spec(row = 0, align = "c") |> 
-  kable_styling(full_width = FALSE) |> 
-  kable_classic("striped") |> 
+metrics |> 
+  slice(1:4) |>
+  mutate(Hour = "") |>
+  kbl(col.names = c("", "Week", "Day", "Hour"),
+    digits = 2,
+    align = c("r", "c", "c", "c"),
+    linesep = "") |>
+  row_spec(row = 0, align = "c") |>
+  kable_styling(full_width = FALSE) |>
+  kable_classic("striped") |>
   column_spec(3, color  = "red", bold = TRUE)
 ```
 
@@ -887,37 +657,10 @@ Given our success with this day level model, we next developed a model with the 
 
 
 ::: {.column width="50%"}
-<!--ROC Curves for Models-->
-```{r fig_roc_hour}
-#| fig-height: 6
-#| fig-width: 6
 
-auc_hour <- metrics_all[1, 4] |> 
-  as.character() |> 
-  str_pad(width = 4, side = "right", pad = "0")
+<!--ROC Curve for All-->
+{{< embed ../../../notebooks/ema_figs_roc.qmd#fig-roc-all >}}
 
-roc_all |> 
-  mutate(model = factor(model, levels = c("1week", "1day", "1hour"), 
-                        labels = c("week", "day", "hour"))) |> 
-  ggplot(aes(x = 1 - specificity, y = sensitivity, color = model)) +
-  geom_path(size = 1.25) +
-  geom_abline(lty = 3) +
-  coord_fixed(xlim = c(0, 1), ylim = c(0, 1)) +
-  labs(x = "Specificity",
-       y = "Sensitivity") +
-  scale_x_continuous(breaks = seq(0,1,.25),
-    labels = sprintf("%.2f", seq(1,0,-.25)))  +
-  scale_color_manual(values = c("orange","green","blue")) +
-  geom_text(x = .80, y = .20, 
-            label = str_c("AUC = ", auc_week), 
-            show.legend = FALSE, color = "orange") +
-  geom_text(x = .80, y = .15, 
-            label = str_c("AUC = ", auc_day), 
-            show.legend = FALSE, color = "green") +
-  geom_text(x = .80, y = .10, 
-            label = str_c("AUC = ", auc_hour), 
-            show.legend = FALSE, color = "blue")
-```
 :::
 ::::
 
@@ -933,19 +676,20 @@ And it turns out that we can do somewhat better still with hour level prediction
 
 ## Performance Metrics by Lapse Window Width
 
-```{r table_metrics_hour}
-# remove some data
-metrics_subset <- metrics_all
-metrics_subset[7,] <- NA
 
-metrics_subset |>
- kbl(format = "html", col.names = c("", "Week", "Day", "Hour"),
-      digits = 2,
-      align = c("r", "c", "c", "c"),
-     linesep = "") |> 
-  row_spec(row = 0, align = "c") |> 
-  kable_styling(full_width = FALSE) |> 
-  kable_classic("striped") |> 
+<!--TEMP CREATE TABLE IN SLIDE DECK-->
+```{r}
+#| tbl-cap: Performance Metrics by Model 
+
+metrics |> 
+  slice(1:4) |>
+  kbl(col.names = c("", "Week", "Day", "Hour"),
+    digits = 2,
+    align = c("r", "c", "c", "c"),
+    linesep = "") |>
+  row_spec(row = 0, align = "c") |>
+  kable_styling(full_width = FALSE) |>
+  kable_classic("striped") |>
   column_spec(4, color  = "red", bold = TRUE)
 ```
 
@@ -967,27 +711,9 @@ And again, consistent with that AUC, the sensitivity, specificity, and balanced 
 :::
 
 ::: {.column width="50%"}
-```{r fig_shap_global}
-#| fig-height: 6
-#| fig-width: 6
 
-shap_global_all <- shap_global_week |> 
-  mutate(window = "week") |> 
-  bind_rows(shap_global_day |> 
-              mutate(window = "day")) |> 
-  bind_rows(shap_global_hour |> 
-              mutate(window = "hour")) |> 
-  mutate(window = factor(window, levels = c("week", "day", "hour")))
-
-shap_global_all |> 
-  mutate(group = reorder(group, mean_value, sum)) |> 
-  ggplot() +
-  geom_bar(aes(x = group, y = mean_value, fill = window), stat = "identity") +
-  ylab("Mean |SHAP| value (in Log-Odds)") +
-  xlab("") +
-  coord_flip() +
-  scale_fill_manual(values = c("orange","green","blue"))
-```
+<!--Global SHAP Plot-->
+{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >}}
 
 :::
 
@@ -1007,78 +733,14 @@ To make these values somewhat meaningful for you, let me remind you these Sh
 
 ## Local Importance
 
-```{r fig_local_shaps}
-# get order for items based on global sum importance
-shap_levels <- shap_global_all |> 
-  mutate(group = reorder(group, mean_value, sum)) |> 
-  pull(group) |> 
-  levels()
+<!-- Local SHAP - Hour model-->
+{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_hour >}}
 
-# downsample to 2% of observations for each plot (COULD INCREASE?)
-ids_week <- shap_local_week |> 
-  pull(ID) |> 
-  unique()
-ids_week <- ids_week |> sample(size = round(length(ids_week)/50))
-ids_day <- shap_local_day |> 
-  pull(ID) |> 
-  unique()
-ids_day <- ids_day |> sample(size = round(length(ids_day)/50))
-ids_hour <- shap_local_hour |> 
-  pull(ID) |> 
-  unique()
-ids_hour <- ids_hour |> sample(size = round(length(ids_hour)/50))
+<!-- Local SHAP - Day model-->
+{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day >}}
 
-plot_shap_week <- shap_local_week |> 
-  filter(ID %in% ids_week) |> 
-  mutate(group = factor(group, levels = shap_levels)) |> 
-  ggplot(mapping = aes(x = group, y = shap)) +
-  ggforce::geom_sina(method = "counts", maxwidth = 0.7, alpha = 0.4, 
-                     color = "orange") +
-  geom_hline(yintercept = 0) +
-  # geom_text(data = shap_global_all |> filter(window == "week"),
-  #           aes(x = group, y = -1.75, label = round(mean_value, 2)),
-  #           color = "orange") +
-  scale_y_continuous(limits = c(-2, 4.5), breaks = seq(-2, 4)) +
-  ylab("SHAP value (in Log-Odds)") +
-  xlab("") +
-  coord_flip() +
-  ggtitle("Week")
-
-plot_shap_day <- shap_local_day |> 
-  filter(ID %in% ids_day) |> 
-  mutate(group = factor(group, levels = shap_levels)) |> 
-  ggplot(mapping = aes(x = group, y = shap)) +
-  ggforce::geom_sina(method = "counts", maxwidth = 0.7, alpha = 0.4, 
-                     color = "green") +
-  geom_hline(yintercept = 0) +
-  # geom_text(data = shap_global_all |> filter(window == "day"),
-  #           aes(x = group, y = -2, label = round(mean_value, 2)),
-  #           color = "green") +
-  scale_y_continuous(limits = c(-2, 4.5), breaks = seq(-2, 4)) +
-  ylab("SHAP value (in Log-Odds)") +
-  xlab("") +
-  coord_flip() +
-  ggtitle("Day")
-
-plot_shap_hour <- shap_local_hour |> 
-  filter(ID %in% ids_hour) |> 
-  mutate(group = factor(group, levels = shap_levels)) |> 
-  ggplot(mapping = aes(x = group, y = shap)) +
-  ggforce::geom_sina(method = "counts", maxwidth = 0.7, alpha = 0.4, 
-                     color = "blue") +
-  geom_hline(yintercept = 0) +
-  # geom_text(data = shap_global_all |> filter(window == "hour"),
-  #           aes(x = group, y = -1.75, label = round(mean_value, 2)),
-  #           color = "black") +
-  scale_y_continuous(limits = c(-2, 4.5), breaks = seq(-2, 4)) +
-  ylab("SHAP value (in Log-Odds)") +
-  xlab("") +
-  coord_flip() +
-  ggtitle("Hour")
-
-plot_shap_day + plot_shap_hour
-```
-
+<!-- Local SHAP - Week model-->
+{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_week >}}
 
 ::: {.notes}
 
@@ -1096,19 +758,8 @@ plot_shap_day + plot_shap_hour
 :::
 
 ::: {.column width="50%"}
-```{r fig_shap_global_2}
-#| fig-height: 6
-#| fig-width: 6
 
-shap_global_all |> 
-  mutate(group = reorder(group, mean_value, sum)) |> 
-  ggplot() +
-  geom_bar(aes(x = group, y = mean_value, fill = window), stat = "identity") +
-  ylab("Mean |SHAP| value (in Log-Odds)") +
-  xlab("") +
-  coord_flip() +
-  scale_fill_manual(values = c("orange","green","blue"))
-```
+<!-- INSERT FIG  -->
 
 :::
 
@@ -1132,21 +783,6 @@ And finally, we see that we can use lapse day and lapse hour to make predictions
 
 ::: {.column width="50%"}
 
-```{r table_metrics_ppv_1}
-# remove some data
-metrics_subset <- metrics_all
-metrics_subset[7, 2:4] <- NA
-
-metrics_subset |>
- kbl(format = "html", col.names = c("", "Week", "Day", "Hour"),
-      digits = 2,
-      align = c("r", "c", "c", "c"),
-     linesep = "") |> 
-  row_spec(row = 0, align = "c") |> 
-  kable_styling(full_width = FALSE) |> 
-  kable_classic("striped")
-```
-
 :::
 
 ::::
@@ -1169,41 +805,12 @@ PPV looks at the percentage of positive predictions from the model that are actu
 :::: {.columns}
 
 ::: {.column width="50%"}
-
-```{r table_lapse_2}
-
-lr <- tibble(row_name = "Lapse Rate", Week = "25.4%", Day = "7.7%", Hour = "0.4%")
-
-lr |>
- kbl(format = "html", col.names = c("", "Week", "Day", "Hour"),
-      digits = 2,
-      align = c("r", "c", "c", "c"),
-     linesep = "") |> 
-  row_spec(row = 0, align = "c") |> 
-  kable_styling(full_width = FALSE) |> 
-  kable_classic("striped") |> 
-  row_spec(1, color  = "red", bold = TRUE)
-```
-
+<!-- table -->
 :::
 
 ::: {.column width="50%"}
 
-
-```{r table_metrics_ppv_2}
-# remove some data
-metrics_subset <- metrics_all
-metrics_subset[7, 2:4] <- NA
-
-metrics_subset |>
- kbl(format = "html", col.names = c("", "Week", "Day", "Hour"),
-      digits = 2,
-      align = c("r", "c", "c", "c"),
-     linesep = "") |> 
-  row_spec(row = 0, align = "c") |> 
-  kable_styling(full_width = FALSE) |> 
-  kable_classic("striped")
-```
+<!-- table -->
 
 :::
 
@@ -1228,37 +835,13 @@ And this is what we see in our data.
 
 ::: {.column width="50%"}
 
-
-```{r table_lapse_3}
-
-lr |>
- kbl(format = "html", col.names = c("", "Week", "Day", "Hour"),
-      digits = 2,
-      align = c("r", "c", "c", "c"),
-     linesep = "") |> 
-  row_spec(row = 0, align = "c") |> 
-  kable_styling(full_width = FALSE) |> 
-  kable_classic("striped")
-```
+<!-- table -->
 
 :::
 
 ::: {.column width="50%"}
 
-```{r table_metrics_ppv_3}
-# remove some data
-
-metrics_all |>
- kbl(format = "html", col.names = c("", "Week", "Day", "Hour"),
-      digits = 2,
-      align = c("r", "c", "c", "c"),
-     linesep = "") |> 
-  row_spec(row = 0, align = "c") |> 
-  kable_styling(full_width = FALSE) |> 
-  kable_classic("striped") |> 
-  row_spec(7, color  = "red", bold = TRUE)
-```
-
+<!-- table -->
 :::
 
 ::::
@@ -1284,44 +867,12 @@ And we may need to be careful about how we convey our predictions to patients.  
 
 ::: {.column width="50%"}
 
-<!--Lapse Probabilities for Day Model-->
-```{r fig_hist_probabilites_day}
-#| fig-height: 6
-#| fig-width: 6
-
-fig_hist_day <- preds_day |> 
-  mutate(truth = if_else(truth == "no_lapse", "No lapse", "Lapse"),
-         estimate = if_else(estimate == "no_lapse", "No lapse", "Lapse"),
-         model = "week") |> 
-  ggplot(data = _, aes(x = prob)) + 
-   geom_histogram(bins = 15, fill = "green", col = "black", alpha = .4) +
-   facet_wrap(~truth, nrow = 2, scales = "free_y") +
-   xlab("Pr(Lapse)") +
-   scale_y_continuous(labels = scales::comma)
-
-fig_hist_day +
-  geom_vline(xintercept = .5, color = "red", size = 2)
-```
-
+<!-- insert table or fig? -->
 :::
 
 ::: {.column width="50%"}
 
-```{r}
-thresholds <- tibble(metric = c("Sensitivity", "Specificity", "", "PPV"),
-                     thresh_1 = c("0.81", "0.86", "", "0.32"), 
-                     thresh_2 = c("", "", "", ""))
-
-thresholds |>
- kbl(format = "html", col.names = c("", "Thres = 0.50", "Thres = 0.90"),
-      digits = 2,
-      align = c("r", "r", "r"),
-     linesep = "") |> 
-  row_spec(row = 0, align = "r") |> 
-  kable_styling(full_width = FALSE) |> 
-  column_spec(2, color  = c("black", "black", "black", "red"), bold = TRUE) 
-```
-
+<!-- insert table or fig -->
 
 :::
 
@@ -1338,31 +889,14 @@ Here I am showing you the performance of the day level model when we use the def
 :::: {.columns}
 
 ::: {.column width="50%"}
-<!--Lapse Probabilities for Day Model- .9 threshold-->
-```{r fig_hist_probabilites_day_threshold}
-#| fig-height: 6
-#| fig-width: 6
 
-fig_hist_day +
-  geom_vline(xintercept = .9, color = "red", size = 2)
-```
+<!-- insert table or fig -->
 :::
 
-::: {.column width="50%"}
-```{r}
-thresholds <- tibble(metric = c("Sensitivity", "Specificity", "", "PPV"),
-                     thresh_1 = c("0.81", "0.86", "", "0.32"), 
-                     thresh_2 = c("0.40", "0.99", "", "0.83"))
 
-thresholds |>
- kbl(format = "html", col.names = c("", "Thres = 0.50", "Thres = 0.90"),
-      digits = 2,
-      align = c("r", "r", "r"),
-     linesep = "") |> 
-  row_spec(row = 0, align = "r") |> 
-  kable_styling(full_width = FALSE) |> 
-  column_spec(3, color  = c("black", "black", "black", "red"), bold = TRUE)
-```
+::: {.column width="50%"}
+
+<!-- insert table or fig -->
 
 :::
 
@@ -1380,50 +914,14 @@ And this is what we will need to do if we want to recommend more costly treatmen
 
 ::: {.column width="50%"}
 
-```{r}
-thresholds_2 <- tibble(metric = c("Threshold", "", "Sensitivity", "PPV"),
-                       week = c("0.70", "", "0.67", "0.75"), 
-                       day = c("0.88", "", "0.43", "0.75"),
-                       hour = c("0.97", "", "0.20", "0.75"))
-
-thresholds_2 |>
-  kbl(format = "html", col.names = c("", "Week", "Day", "Hour"),
-      digits = 2,
-      align = c("r", "r", "r", "r"),
-      linesep = "") |> 
-  row_spec(row = 0, align = "r") |> 
-  kable_styling(full_width = FALSE)
-```
+<!-- insert table or fig -->
 
 :::
   
 ::: {.column width="50%"}
-<!--Precision-Recall Curves by Models-->
 
-```{r fig_ppv}
-#| fig-height: 6
-#| fig-width: 6
+<!-- insert table or fig -->
 
-fig_pr <- pr_all |> 
-  mutate(model = factor(model, levels = c("1week", "1day", "1hour"),
-                        labels = c("week", "day", "hour"))) |>
-  ggplot(aes(x = recall, y = precision, color = model)) +
-  geom_path(size = 1.25) +
-  coord_fixed(xlim = c(0, 1), ylim = c(0, 1)) +
-  labs(x = "Sensitivity (Recall)",
-       y = "Positive Predictive Value (Precision)") +
-  scale_color_manual(values = c("orange","green","blue")) 
-
-
-fig_pr +
-  geom_hline(yintercept = .75, color = "black", size = 1, linetype = "dotted") +
-  geom_segment(x = .67, y = -.05 , xend = .67, yend = .75, 
-               color = "orange", size = 1, linetype = "dotted") +
-  geom_segment(x = .43, y = -.05 , xend = .43, yend = .75, 
-               color = "green", size = 1, linetype = "dotted") +
-  geom_segment(x = .20, y = -.05 , xend = .20, yend = .75, 
-               color = "blue", size = 1, linetype = "dotted")
-```
 :::
   
   ::::
@@ -1711,558 +1209,3 @@ We are also sensitive to the fact that these recommendations from the machine le
 ::: {.notes}
 
 :::
-
-## Demographics & Alcohol Use History
-<!-- JOHN looks like the latest version of the paper combined these tables - is that okay? --> 
-
-<!-- Demographics table-->
-```{r}
-footnote_table_dem_a <- "N = 151"
-footnote_table_dem_b <- "Two participants reported 100 or more quit attempts. We removed these outliers prior to calculating the mean (M), standard deviation (SD), and range."
-```
-
-```{r table_demo_auh}
-options(knitr.kable.NA = "")
-
-dem <- screen %>% 
-  summarise(mean = as.character(round(mean(dem_1, na.rm = TRUE), 1)),
-            SD = as.character(round(sd(dem_1, na.rm = TRUE), 1)),
-            min = as.character(min(dem_1, na.rm = TRUE)),
-            max = as.character(max(dem_1, na.rm = TRUE))) %>% 
-  mutate(var = "Age",
-         n = as.numeric(""),
-         perc = as.numeric("")) %>% 
-  select(var, n, perc, everything()) %>% 
-  full_join(screen %>% 
-  select(var = dem_2) %>% 
-  group_by(var) %>% 
-  summarise(n = n()) %>% 
-  mutate(perc = (n / sum(n)) * 100), by = c("var", "n", "perc")) %>% 
-  full_join(screen %>% 
-  select(var = dem_3) %>% 
-  mutate(var = fct_relevel(factor(var, 
-                         c("American Indian/Alaska Native", "Asian", "Black/African American",
-                           "White/Caucasian", "Other/Multiracial")))) %>%
-  group_by(var) %>% 
-  summarise(n = n()) %>% 
-  mutate(perc = (n / sum(n)) * 100), by = c("var", "n", "perc")) %>% 
-  full_join(screen %>% 
-  select(var = dem_4) %>% 
-  mutate(var = case_when(var == "No, I am not of Hispanic, Latino, or Spanish origin" ~ "No",
-                         TRUE ~ "Yes"),
-         var = fct_relevel(factor(var, c("Yes", "No")))) %>% 
-  group_by(var) %>% 
-  summarise(n = n()) %>% 
-  mutate(perc = (n / sum(n)) * 100), by = c("var", "n", "perc")) %>% 
-  full_join(screen %>% 
-  select(var = dem_5) %>% 
-  mutate(var = fct_relevel(factor(var, 
-                         c("Less than high school or GED degree", "High school or GED", 
-                           "Some college", "2-Year degree", "College degree", "Advanced degree")))) %>%
-  group_by(var) %>% 
-  summarise(n = n()) %>% 
-  mutate(perc = (n / sum(n)) * 100), by = c("var", "n", "perc")) %>% 
-  full_join(screen %>% 
-  select(var = dem_6, dem_6_1) %>% 
-  mutate(var = case_when(dem_6_1 == "Full-time" ~ "Employed full-time",
-                         dem_6_1 == "Part-time" ~ "Employed part-time",
-                         TRUE ~ var)) %>% 
-  mutate(var = fct_relevel(factor(var, 
-                         c("Employed full-time", "Employed part-time", "Full-time student",
-                           "Homemaker", "Disabled", "Retired", "Unemployed", 
-                           "Temporarily laid off, sick leave, or maternity leave",
-                           "Other, not otherwise specified")))) %>%
-  group_by(var) %>% 
-  summarise(n = n()) %>% 
-  mutate(perc = (n / sum(n)) * 100), by = c("var", "n", "perc")) %>% 
-  full_join(screen %>% 
-  summarise(mean = format(round(mean(dem_7, na.rm = TRUE), 0), big.mark = ","),
-            SD = format(round(sd(dem_7, na.rm = TRUE), 0), big.mark = ","),
-            min =format(round(min(dem_7, na.rm = TRUE), 0), big.mark = ","),
-            max = format(round(max(dem_7, na.rm = TRUE), 0), scientific = FALSE, big.mark = ",")) %>% 
-  mutate(var = "Personal Income",
-        n = as.numeric(""),
-        perc = as.numeric(""),
-        mean = str_c("$", as.character(mean)),
-        SD = str_c("$", as.character(SD)),
-        min = str_c("$", as.character(min)),
-        max = as.character(max)) %>% 
-  select(var, n, perc, everything()), by = c("var", "n", "perc", "mean", "SD", "min", "max")) %>% 
-  full_join(screen %>% 
-  select(var = dem_8) %>% 
-  mutate(var = case_when(var == "Never Married" ~ "Never married",
-                         TRUE ~ var)) %>% 
-  mutate(var = fct_relevel(factor(var, 
-                         c("Never married", "Married", "Divorced", "Separated",
-                           "Widowed")))) %>%
-  group_by(var) %>% 
-  summarise(n = n()) %>% 
-  mutate(perc = (n / sum(n)) * 100), by = c("var", "n", "perc"))
-
-auh <- screen %>% 
-  summarise(mean = mean(auh_1, na.rm = TRUE),
-            SD = sd(auh_1, na.rm = TRUE),
-            min = min(auh_1, na.rm = TRUE),
-            max = max(auh_1, na.rm = TRUE)) %>% 
-  mutate(var = "Age of first drink",
-        n = as.numeric(""),
-        perc = as.numeric("")) %>% 
-  select(var, n, perc, everything()) %>% 
-  full_join(screen %>% 
-  summarise(mean = mean(auh_2, na.rm = TRUE),
-            SD = sd(auh_2, na.rm = TRUE),
-            min = min(auh_2, na.rm = TRUE),
-            max = max(auh_2, na.rm = TRUE)) %>% 
-  mutate(var = "Age of regular drinking",
-        n = as.numeric(""),
-        perc = as.numeric("")) %>% 
-  select(var, n, perc, everything()), by = c("var", "n", "perc", "mean", "SD", 
-                                             "min", "max")) %>% 
-  full_join(screen %>% 
-  summarise(mean = mean(auh_3, na.rm = TRUE),
-            SD = sd(auh_3, na.rm = TRUE),
-            min = min(auh_3, na.rm = TRUE),
-            max = max(auh_3, na.rm = TRUE)) %>% 
-  mutate(var = "Age at which drinking became problematic",
-        n = as.numeric(""),
-        perc = as.numeric("")) %>% 
-  select(var, n, perc, everything()), by = c("var", "n", "perc", "mean", "SD",
-                                             "min", "max")) %>% 
-  full_join(screen %>% 
-  summarise(mean = mean(auh_4, na.rm = TRUE),
-            SD = sd(auh_4, na.rm = TRUE),
-            min = min(auh_4, na.rm = TRUE),
-            max = max(auh_4, na.rm = TRUE)) %>% 
-  mutate(var = "Age of first quit attempt",
-        n = as.numeric(""),
-        perc = as.numeric("")) %>% 
-  select(var, n, perc, everything()), by = c("var", "n", "perc", "mean", "SD",
-                                             "min", "max")) %>% 
-  full_join(screen %>% 
-  # filter out 2 people with 100 and 365 reported quit attempts - will make footnote in table
-  filter(auh_5 < 100) %>% 
-  summarise(mean = mean(auh_5, na.rm = TRUE),
-            SD = sd(auh_5, na.rm = TRUE),
-            min = min(auh_5, na.rm = TRUE),
-            max = max(auh_5, na.rm = TRUE)) %>% 
-  mutate(var = "Number of Quit Attempts*",
-        n = as.numeric(""),
-        perc = as.numeric("")) %>% 
-  select(var, n, perc, everything()), by = c("var", "n", "perc", "mean", "SD",
-                                             "min", "max")) %>% 
-  full_join(screen %>% 
-  select(var = auh_6_1) %>%
-  mutate(var = case_when(var == "Long-Term Residential Treatment (more than 6 months)" ~ "Long-term residential (6+ months)",
-                         TRUE ~ var)) %>% 
-  group_by(var) %>% 
-  drop_na() %>% 
-  summarise(n = n()) %>% 
-  mutate(perc = (n / 154) * 100), by = c("var", "n", "perc")) %>% 
-  full_join(screen %>% 
-  select(var = auh_6_2) %>%
-  mutate(var = case_when(var == "Short-Term Residential Treatment (less than 6 months)" ~ "Short-term residential (< 6 months)",
-                         TRUE ~ var)) %>% 
-  group_by(var) %>% 
-  drop_na() %>% 
-  summarise(n = n()) %>% 
-  mutate(perc = (n / 154) * 100), by = c("var", "n", "perc")) %>% 
-  full_join(screen %>% 
-  select(var = auh_6_3) %>%
-  mutate(var = case_when(var == "Outpatient Treatment" ~ "Outpatient",
-                         TRUE ~ var)) %>% 
-  group_by(var) %>% 
-  drop_na() %>% 
-  summarise(n = n()) %>% 
-  mutate(perc = (n / 154) * 100), by = c("var", "n", "perc")) %>% 
-  full_join(screen %>% 
-  select(var = auh_6_4) %>%
-  mutate(var = case_when(var == "Individual Counseling" ~ "Individual counseling",
-                         TRUE ~ var)) %>% 
-  group_by(var) %>% 
-  drop_na() %>% 
-  summarise(n = n()) %>% 
-  mutate(perc = (n / 154) * 100), by = c("var", "n", "perc")) %>% 
-  full_join(screen %>% 
-  select(var = auh_6_5) %>%
-  mutate(var = case_when(var == "Group Counseling" ~ "Group counseling",
-                         TRUE ~ var)) %>% 
-  group_by(var) %>% 
-  drop_na() %>% 
-  summarise(n = n()) %>% 
-  mutate(perc = (n / 154) * 100), by = c("var", "n", "perc")) %>% 
-  full_join(screen %>% 
-  select(var = auh_6_6) %>%
-  group_by(var) %>% 
-  drop_na() %>% 
-  summarise(n = n()) %>% 
-  mutate(perc = (n / 154) * 100), by = c("var", "n", "perc")) %>% 
-  full_join(screen %>% 
-  select(var = auh_6_7) %>%
-  group_by(var) %>% 
-  drop_na() %>% 
-  summarise(n = n()) %>% 
-  mutate(perc = (n / 154) * 100), by = c("var", "n", "perc")) %>% 
-  full_join(screen %>% 
-  select(var = auh_7) %>% 
-  mutate(var = fct_relevel(factor(var, c("Yes", "No")))) %>%
-  group_by(var) %>% 
-  summarise(n = n()) %>% 
-  mutate(perc = (n / sum(n)) * 100), by = c("var", "n", "perc")) %>% 
-  full_join(screen %>% 
-  mutate(across(dsm5_1:dsm5_11, ~ recode(., "No" = 0, "Yes" = 1))) %>% 
-  rowwise() %>% 
-  # calculate dsm5 score by adding up dsm5_1 through dsm5_11
-  mutate(dsm5_total = sum(c(dsm5_1, dsm5_2, dsm5_3, dsm5_4, dsm5_5, dsm5_6, dsm5_7, 
-                            dsm5_8, dsm5_9, dsm5_10, dsm5_11))) %>% 
-  ungroup() %>% 
-  summarise(mean = mean(dsm5_total),
-            SD = sd(dsm5_total),
-            min = min(dsm5_total, na.rm = TRUE),
-            max = max(dsm5_total, na.rm = TRUE)) %>% 
-  mutate(var = "Alcohol Use Disorder DSM-5 Symptom Count",
-        n = as.numeric(""),
-        perc = as.numeric("")) %>% 
-  select(var, n, perc, everything()), by = c("var", "n", "perc", "mean", "SD",
-                                             "min", "max")) %>% 
-  full_join(screen %>% 
-  select(var = assist_2_1) %>%
-  filter(var != "Never" & !is.na(var)) %>% 
-  mutate(var = "Tobacco products (cigarettes, chewing tobacco, cigars, etc.)") %>% 
-  group_by(var) %>% 
-  drop_na() %>% 
-  summarise(n = n()) %>% 
-  mutate(perc = (n / 154) * 100), by = c("var", "n", "perc")) %>% 
-  full_join(screen %>% 
-  select(var = assist_2_2) %>%
-  filter(var != "Never" & !is.na(var)) %>% 
-  mutate(var = "Cannabis (marijuana, pot, grass, hash, etc.)") %>% 
-  group_by(var) %>% 
-  drop_na() %>% 
-  summarise(n = n()) %>% 
-  mutate(perc = (n / 154) * 100), by = c("var", "n", "perc")) %>% 
-  full_join(screen %>% 
-  select(var = assist_2_3) %>%
-  filter(var != "Never" & !is.na(var)) %>% 
-  mutate(var = "Cocaine (coke, crack, etc.)") %>% 
-  group_by(var) %>% 
-  drop_na() %>% 
-  summarise(n = n()) %>% 
-  mutate(perc = (n / 154) * 100), by = c("var", "n", "perc")) %>% 
-  full_join(screen %>% 
-  select(var = assist_2_4) %>%
-  filter(var != "Never" & !is.na(var)) %>% 
-  mutate(var = "Amphetamine type stimulants (speed, diet pills, ecstasy, etc.)") %>% 
-  group_by(var) %>% 
-  drop_na() %>% 
-  summarise(n = n()) %>% 
-  mutate(perc = (n / 154) * 100), by = c("var", "n", "perc")) %>% 
-  full_join(screen %>% 
-  select(var = assist_2_5) %>%
-  filter(var != "Never" & !is.na(var)) %>% 
-  mutate(var = "Inhalants (nitrous, glue, petrol, paint thinner, etc.)") %>% 
-  group_by(var) %>% 
-  drop_na() %>% 
-  summarise(n = n()) %>% 
-  mutate(perc = (n / 154) * 100), by = c("var", "n", "perc")) %>% 
-  full_join(screen %>% 
-  select(var = assist_2_6) %>%
-  filter(var != "Never" & !is.na(var)) %>% 
-  mutate(var = "Sedatives or sleeping pills (Valium, Serepax, Rohypnol, etc.)") %>% 
-  group_by(var) %>% 
-  drop_na() %>% 
-  summarise(n = n()) %>% 
-  mutate(perc = (n / 154) * 100), by = c("var", "n", "perc")) %>% 
-  full_join(screen %>% 
-  select(var = assist_2_7) %>%
-  filter(var != "Never" & !is.na(var)) %>% 
-  mutate(var = "Hallucinogens (LSD, acid, mushrooms, PCP, Special K, etc.)") %>% 
-  group_by(var) %>% 
-  drop_na() %>% 
-  summarise(n = n()) %>% 
-  mutate(perc = (n / 154) * 100), by = c("var", "n", "perc")) %>% 
-  full_join(screen %>% 
-  select(var = assist_2_8) %>%
-  filter(var != "Never" & !is.na(var)) %>% 
-  mutate(var = "Opioids (heroin, morphine, methadone, codeine, etc.)") %>% 
-  group_by(var) %>% 
-  drop_na() %>% 
-  summarise(n = n()) %>% 
-  mutate(perc = (n / 154) * 100), by = c("var", "n", "perc")) 
-```
-
-
-```{r}
-# display and format table
-dem %>% 
-  bind_rows(auh %>% 
-              mutate(across(mean:max, ~round(.x, 1))) %>% 
-              mutate(across(mean:max, ~as.character(.x)))) %>% 
-  mutate(range = str_c(min, "-", max)) %>%
-  select(-c(min, max)) %>% 
-  kbl(longtable = TRUE,
-      booktabs = TRUE,
-      col.names = c("", "N", "%", "M", "SD", "Range"),
-      align = c("l", "c", "c", "c", "c", "c"),
-      digits = 1,
-      caption = "Demographics and Alcohol Use Information") %>%
-  kable_styling(font_size = 20, full_width = FALSE) %>% 
-  kable_classic("striped") |>
-  row_spec(row = 0, align = "c", italic = TRUE) %>% 
-  pack_rows("Sex", 2, 3, bold = FALSE) %>% 
-  pack_rows("Race", 4, 8, bold = FALSE) %>% 
-  pack_rows("Hispanic, Latino, or Spanish Origin", 9, 10, bold = FALSE) %>% 
-  pack_rows("Education", 11, 16, bold = FALSE) %>% 
-  pack_rows("Employment", 17, 25, bold = FALSE) %>% 
-  pack_rows("Marital Status", 27, 31, bold = FALSE) %>% 
-  pack_rows("Alcohol Use Disorder Milestones", 32, 35, bold = FALSE) %>% 
-  pack_rows("Lifetime History of Treatment (Can choose more than 1)", 37, 43, bold = FALSE) %>% 
-  pack_rows("Received Medication for Alcohol Use Disorder", 44, 45, bold = FALSE) %>% 
-  pack_rows("Current (Past 3 Month) Drug Use", 47, 54, bold = FALSE) %>% 
-  footnote(general=footnote_table_dem_a, symbol = c(footnote_table_dem_b), 
-           threeparttable = TRUE)
-```
-
-
-## Consort Diagram
-
-```{r load_consort_data}
-disposition <- read_csv(file.path(path_data_ema, "disposition.csv"), col_types = "ccDDcccccccccc")
-```
-
-
-```{r load_model_data}
-# AUCs for 10x10 folds data
-# auc_folds_week<- readRDS(file.path(path_models, "resample_metrics_best_all_1week_0_v4_kfold.rds"))
-# auc_folds_day<- readRDS(file.path(path_models, "resample_metrics_best_all_1day_0_v4_kfold.rds"))
-# auc_folds_hour<- readRDS(file.path(path_models, "resample_metrics_best_all_1hour_0_v4_kfold.rds")) 
-# 
-# # posterior probabilites
-# pp <- readRDS(file.path(path_models, "posteriors_all_allwindows_0_v4_kfold.rds"))
-# 
-
-# # Predictions data
-# preds_week<- readRDS(file.path(path_models, "resample_preds_best_all_1week_0_v4_kfold.rds"))
-# preds_day<- readRDS(file.path(path_models, "resample_preds_best_all_1day_0_v4_kfold.rds"))
-# preds_hour<- readRDS(file.path(path_models, "resample_preds_best_all_1hour_0_v4_kfold.rds")) 
-# 
-# # roc overall
-# roc_week_full <- preds_week %>% 
-#   roc_curve(prob, truth = truth)
-# 
-# roc_day_full <- preds_day %>% 
-#   roc_curve(prob, truth = truth)
-# 
-# roc_hour_full <- preds_hour%>% 
-#   roc_curve(prob, truth = truth)
-# 
-# # rocs per fold
-# roc_week <- preds_week %>%
-#   nest(.by = split_num, .key = "preds") %>% 
-#   mutate(roc = map(preds, \(preds) roc_curve(preds, prob, 
-#                                              truth = truth))) %>% 
-#   mutate(model = "week")
-# 
-# roc_day <- preds_day %>%
-#   nest(.by = split_num, .key = "preds") %>% 
-#   mutate(roc = map(preds, \(preds) roc_curve(preds, prob, 
-#                                              truth = truth))) %>% 
-#   mutate(model = "day")
-# 
-# roc_hour <- preds_hour %>%
-#   nest(.by = split_num, .key = "preds") %>% 
-#   mutate(roc = map(preds, \(preds) roc_curve(preds, prob, 
-#                                              truth = truth))) %>% 
-#   mutate(model = "week")
-# 
-# # pr overall
-# pr_week_full <- preds_week %>% 
-#   pr_curve(prob, truth = truth)
-# 
-# pr_day_full <- preds_day %>% 
-#   pr_curve(prob, truth = truth)
-# 
-# pr_hour_full <- preds_hour%>% 
-#   pr_curve(prob, truth = truth)
-# 
-# # prs per fold
-# pr_week <- preds_week %>% 
-#   pr_curve(prob, truth = truth) %>% 
-#   mutate(model = "1week")
-# 
-# pr_day <- preds_day %>% 
-#   pr_curve(prob, truth = truth) %>% 
-#   mutate(model = "1day")
-# 
-# pr_hour <- preds_hour%>% 
-#   pr_curve(prob, truth = truth) %>% 
-#   mutate(model = "1hour")
-# 
-# pr_all <- pr_week %>% 
-#   bind_rows(pr_day) %>% 
-#   bind_rows(pr_hour)
-# 
-# #raw SHAPs
-# shap_raw_week <- readRDS(file.path(path_models, "imp_shap_raw_all_1week_0_v4.rds")) %>% 
-#   group_by(variable) %>% 
-#   slice(1) %>%   
-#   ungroup() %>% 
-#   arrange(mean_value)
-# shap_raw_day <- readRDS(file.path(path_models, "imp_shap_raw_all_1day_0_v4.rds")) %>% 
-#   group_by(variable) %>% 
-#   slice(1) %>%   
-#   ungroup() %>% 
-#   arrange(mean_value)
-# shap_raw_hour <- readRDS(file.path(path_models, "imp_shap_raw_all_1hour_0_v4.rds")) %>% 
-#   group_by(variable) %>% 
-#   slice(1) %>%   
-#   ungroup() %>% 
-#   arrange(mean_value)
-# 
-# # Grouped SHAPS
-# shap_grouped_week <- readRDS(file.path(path_models, "imp_shap_grouped_all_1week_0_v4.rds")) 
-# shap_grouped_day <- readRDS(file.path(path_models, "imp_shap_grouped_all_1day_0_v4.rds"))
-# shap_grouped_hour <- readRDS(file.path(path_models, "imp_shap_grouped_all_1hour_0_v4.rds")) 
-# 
-# # lapse labels
-# labels_week <- read_csv(file.path(path_data_ema, "labels_1week.csv"), col_types = cols())
-# labels_day <- read_csv(file.path(path_data_ema, "labels_1day.csv"), col_types = cols())
-# labels_hour <- read_csv(file.path(path_data_ema, "labels_1hour.csv"), col_types = cols())
-```
-
-<!-- Consort Diagram-->
-
-```{r caption_consort}
-fig_caption_consort <- "Consort Diagram"
-```
-
-
-
-```{r fig_consort}
-#| fig.cap: !expr fig_caption_consort
-#| fig.height: 7
-consort_plot(data = disposition,
-             orders = c(eligible = "Eligible Sample",
-                        consented_reason = "Not Consented",
-                        consented = "Consented",
-                        enrolled_reason = "Not Enrolled",
-                        enrolled = "Enrolled",
-                        completed_followup_reason = "Discontinued",
-                        completed_followup = "Completed through Followup 1",
-                        analysis_reason = "Excluded",
-                        analysis = "Final Analysis"),
-             side_box = c("consented_reason", 
-                          "enrolled_reason", 
-                          "completed_followup_reason",
-                          "analysis_reason"),
-             cex = .9,
-             text_width = 45)
-```
-
-## ROC Posterior Probabilities
-
-<!-- AUC figure by model w/posterior probabilities-->  
-
-```{r fig_roc_pp}
-#| fig.height: 4.5  
-#| fig.width: 7  
-#| fig-align: "center"
-
-
-roc_plot <- roc_all %>% 
-  mutate(model = factor(model, levels = c("1week", "1day", "1hour"), 
-                        labels = c("Week", "Day", "Hour"))) %>% 
-  ggplot(aes(x = 1 - specificity, y = sensitivity, color = model)) +
-  geom_path(show.legend = FALSE) +
-  geom_abline(lty = 3) +
-  coord_fixed(xlim = c(0, 1), ylim = c(0, 1)) +
-  labs(x = "Specificity",
-       y = "Sensitivity") +
-  scale_x_continuous(breaks = seq(0,1,.25),
-    labels = sprintf("%.2f", seq(1,0,-.25))) 
-
-pp_tidy <- pp %>% 
-  tidy(seed = 123)
-
-ci <- pp_tidy %>% 
-  summary() %>% 
-  mutate(model = factor(model, levels = c("week", "day", "hour"),
-                        labels = c("Week", "Day", "Hour")),
-         y = 1000)
-
-pp_plot <- pp_tidy %>% 
-  mutate(model = factor(model, levels = c("week", "day", "hour"),
-                        labels = c("Week", "Day", "Hour"))) %>%
-  ggplot() + 
-  geom_histogram(aes(x = posterior, fill = model), color = "black", alpha = .4, 
-                 bins = 30) +
-  geom_segment(mapping = aes(y = y+100, yend = y-100, x = mean, xend = mean,
-                           color = model),
-               show.legend = FALSE,
-               data = ci) +
-  geom_segment(mapping = aes(y = y, yend = y, x = lower, xend = upper, color = model),
-              show.legend = FALSE,
-               data = ci) +
-  geom_text(data = ci, x = c(.93, .907, .92), y = 1000, 
-            label = str_c(round(ci$mean, 2), " [", round(ci$lower, 2), ", ", round(ci$upper, 2), "]")) +
-  facet_wrap(~model, ncol = 1) +
-  scale_y_continuous("Posterior Probability", breaks = c(0, 500, 1000)) +
-  xlab("Area Under ROC Curve") +
-  theme(strip.background = element_blank(),
-        strip.text.x = element_blank())
-
-roc_plot + pp_plot +
-  plot_layout (guides = "collect") &
-  theme(legend.position = "bottom")
-```
-
-## Model Comparison Posterior Probabilites
-
-
-
-```{r caption_pp_contrasts}
-fig_caption_pp_contrasts <- "Posterior Probabilities for Model Contrasts for AUC.   Region of Practical Equivalence (ROPE) indicated by dashed yellow lines"
-```
-
-```{r fig_posterior_d}
-#| fig-cap: !expr fig_caption_pp_contrasts
-#| fig.height:  7
-
-ci <- pp %>% 
-  contrast_models(list("hour","hour", "day"), 
-                list("week", "day", "week")) %>% 
-  summary(size = .01) %>% 
-  mutate(contrast = factor(contrast, 
-                           levels = c("hour vs week", "hour vs day", "day vs week"),
-                           labels = c("Hour vs. Week", "Hour vs. Day", "Day vs. Week")),
-         y = 700)
-
-pp %>% 
-  tidy(seed = 123) %>%   
-  group_by(model) %>% 
-  mutate(sample = row_number()) %>% 
-  ungroup() %>% 
-  pivot_wider(names_from = model, values_from = posterior) %>% 
-  mutate(hour_vs_week = hour - week,
-         hour_vs_day = hour - day,
-         day_vs_week = day - week) %>% 
-  pivot_longer(cols = hour_vs_week:day_vs_week,
-               names_to = "contrast",
-               values_to = "posterior") %>% 
-  mutate(contrast = factor(contrast, 
-                           levels = c("hour_vs_week", "hour_vs_day", "day_vs_week"),
-                           labels = c("Hour vs. Week", "Hour vs. Day", "Day vs. Week"))) %>% 
-  ggplot() +
-  geom_histogram(aes(x = posterior, fill = contrast), 
-                 color = "black", alpha = .4, bins = 30) +
-  geom_vline(xintercept = -.01, color = "yellow", linetype = "dashed", size = 1) +
-  geom_vline(xintercept = .01, color = "yellow", linetype = "dashed", size = 1) +
-  geom_segment(mapping = aes(y = y+100, yend = y-100, x = mean, xend = mean,
-                             color = contrast), data = ci, show.legend = FALSE) +
-  geom_segment(mapping = aes(y = y, yend = y, x = lower, xend = upper, 
-                             color = contrast), data = ci, show.legend = FALSE) +
-  geom_text(data = ci, x = c(.0255, .035, .015), y = 700, 
-            label = str_c(round(ci$mean, 2), " [", round(ci$lower, 2), ", ", round(ci$upper, 2), "]")) +
-  facet_wrap(~contrast, ncol = 1) +
-  xlab("Posterior")
-  
-```

@@ -165,8 +165,8 @@ fig_shap_local_hour <-
   plot_local(feature_levels, ids_day, "Hour")
 ```
 ```{r}
-#| label: fig-local_day
-#| fig-cap: Local SHAPS - Day
+#| label: fig-local_hour
+#| fig-cap: Local SHAPS - Hour 
 
 fig_shap_local_hour
 ```

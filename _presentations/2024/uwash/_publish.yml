@@ -2,3 +2,7 @@
   quarto-pub:
     - id: 83d64579-f3ff-4ce3-a84f-1d4fdf44a3bc
       url: 'https://jjcurtin.quarto.pub/fried'
+- source: uwash.qmd
+  quarto-pub:
+    - id: a65b4272-8486-4a68-aa24-caa23257b152
+      url: 'https://jjcurtin.quarto.pub/precision-mental-health-for-substance-use-disorders-7561'
