@@ -392,11 +392,11 @@ And of course, all of the models would only use data collected prior to 10 am to
 We are evaluating machine learning model configurations that differ by common statistical algorithms
 :::
 
-## Modeling: Performance Metric
+## Modeling: Area under ROC curve (auROC) 
 
 - Area under ROC curve (auROC)
   - Likelihood that model will assign higher probability to randomly selected lapse vs. no-lapse observation
-  - 0.50 for random classifier
+  - [0.50 for random classifier]{style="color: red;"}
   - 1.00 for perfect classifer
 
 {{< embed ../../../notebooks/ema_figs_roc.qmd#roc-random >}}
@@ -410,12 +410,11 @@ And, of course, these performance metrics are calculated for new observations an
 
 :::
 
-## Modeling: Performance Metric
+## Modeling: Area under ROC curve (auROC) 
 
-- Area under ROC curve (auROC) is primary performance metric
-  - Likelihood that model will assign a higher lapse probability to randomly selected lapse vs. no-lapse observation
-  - auROC = 0.50 for random classifier
-  - auROC = 1.00 for perfect classifer
+- Likelihood that model will assign a higher lapse probability to randomly selected lapse vs. no-lapse observation
+- auROC = 0.50 for random classifier
+- [auROC = 1.00 for perfect classifer]{style="color: red;"}
 
 
 {{< embed ../../../notebooks/ema_figs_roc.qmd#roc-perfect >}}
@@ -494,7 +493,7 @@ And this is exactly what we see for the one week lapse window model
 
 ::: {.column width="50%"}
 
-Area under the ROC curve (auROC)
+auROC
 
 - [Next week = 0.90; [0.88 - 0.91]]{style="color: orange;"}
 
@@ -561,7 +560,7 @@ But we were also eager to see how well we could do if we required a higher level
 
 ::: {.column width="50%"}
 
-Area under the ROC curve (auROC)
+auROC
 
 - [Next week = 0.90; [0.88 - 0.91]]{style="color: orange;"}
 - [Next day  = 0.91; [0.89 - 0.92]]{style="color: green;"}
@@ -602,32 +601,11 @@ The day level model performed as well as, if not better, than the week level mod
 
 ## 1 Hour: ROC Curve
 
-
-::: {.absolute left="0%" bottom="0%" width="300px" height="auto"}
-::: {style="font-size: 75%;"}
-:::{.callout-tip icon=false}
-## Coarse rules of thumb for AUC 
-.70 - .80 are considered fair  
-.80 - .90 are considered good  
-\> .90 are considered excellent  
-:::
-:::
-:::
-
-
-::: {.notes}
-Given our success with this day level model, we next developed a model with the highest level of temporal precision we could build given how we measured lapses, which was the hour level model.  
-
-:::
-
-
-## 1 Hour: ROC Curve
-
 :::: {.columns}
 
 ::: {.column width="50%"}
 
-Area under the ROC curve (auROC)
+auROC
 
 - [Next week = 0.90; [0.88 - 0.91]]{style="color: orange;"}
 - [Next day  = 0.91; [0.89 - 0.92]]{style="color: green;"}
@@ -666,8 +644,9 @@ And it turns out that we can do somewhat better still with hour level prediction
 :::
 
 
-## Global Feature Importance by Model{.medium}
+## Global Feature Importance by Model
 
+**--UPDATE FIGURE--**j
 :::: {.columns}
 
 ::: {.column width="50%"}
@@ -697,22 +676,7 @@ To make these values somewhat meaningful for you, let me remind you these Sh
 
 :::
 
-## Local Importance
-
-<!-- Local SHAP - Hour model-->
-{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_hour >}}
-
-<!-- Local SHAP - Day model-->
-{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day >}}
-
-<!-- Local SHAP - Week model-->
-{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_week >}}
-
-::: {.notes}
-
-:::
-
-## Global Variable Importance by Model{.medium}
+## Global Variable Importance by Model
 
 :::: {.columns}
 
@@ -738,192 +702,75 @@ And finally, we see that we can use lapse day and lapse hour to make predictions
 
 :::
 
-## Positive Predictive Value (PPV)
+
+## Algorithmic Fairness
+
+**--NEED FIG AND TEXT--**
 
 
-:::: {.columns}
+## Clinical Uses: Don't Predict Lapses
 
-::: {.column width="50%"}
-   
-:::
+Do NOT predict class labels  (Lapse vs. No-Lapse)
 
-::: {.column width="50%"}
+- Information loss
+- Iatriogenic effects
 
-:::
+## Clinical Uses: Don't Predict Lapses
 
-::::
+Do NOT predict class labels  (Lapse vs. No-Lapse)
 
+- [Information loss]{style="color: gray;"}
+- [Iatriogenic effects]{style="color: gray;"}
+- Low positive predictive values 
 
-::: {.notes}
-Now, lets return one more time to the performance of these models because I would be remiss if I didn’t complicate the story a bit before we close.  
+**--NEED FIG---**
 
-Clearly, the sensitivity, specificity, and balanced accuracy of all three of these models is encouragingly high
+## Clinical Uses: Do Use Probabilities
 
-But what is often missed when we evaluate the performance of machine learning models is their positive predictive value or PPV. 
+**-- auROCs, heatmap or jittered dots, calibration plots
 
-PPV looks at the percentage of positive predictions from the model that are actually true lapses. And PPV is often lower when the positive event, in our case, lapses, is infrequent.
+## Clinical Uses: Who and When
 
-:::
+**--UPDATE--**
 
+DAY and HOUR MODEL for JIT
 
-## Positive Predictive Value (PPV)
+Push week model into future
 
-:::: {.columns}
+FIGURE
 
-::: {.column width="50%"}
-<!-- table -->
-:::
+## Clinical Uses: Who and When
 
-::: {.column width="50%"}
+**--UPDATE--**
 
-<!-- table -->
+DAY and HOUR MODEL for JIT
 
-:::
+Push week model into future
 
-::::
-
-
+FIGURE
 
 
-::: {.notes}
-Now we haven’t talked about the frequency of lapses across the three lapse windows, but it should be intuitively clear that the percent of weeks that contain a lapse will be higher than the percent of days that contain a lapse, and that the percent of hours that contain a lapse will be lower still.  
+## Recommending Risk Relevant Intervensions/Supports 
 
-And this is what we see in our data.
+**--NEED FIG AND TEXt--**
 
+<!-- Local SHAP - Hour model-->
+{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_hour >}}
 
-:::
+<!-- Local SHAP - Day model-->
+{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day >}}
 
-
-
-## Positive Predictive Value (PPV)
-
-:::: {.columns}
-
-::: {.column width="50%"}
-
-<!-- table -->
-
-:::
-
-::: {.column width="50%"}
-
-<!-- table -->
-:::
-
-::::
+<!-- Local SHAP - Week model-->
+{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_week >}}
 
 ::: {.notes}
-Because of this, we see relatively low PPV for our models – and particularly the day and the hour level models.
-
-These models catch most lapses (they have hi sensitivity), and they correctly label most no-lapse observations as well (hi specificity). But when you consider their positive predictions, a high percentage of these lapse predictions are false alarms.  
-
-This has two big implications.
-
-First, we need to consider the impact of false alarms when using these predictions.  It may **not** be problematic to encourage the patient to use their digital therapeutic in cases where the model makes a positive lapse prediction because the cost of a false alarm in that instance is low.  More DTx use is likely always good.
-
-But we may **not want to encourage** the use of more costly treatments if PPV is low.
-
-And we may need to be careful about how we convey our predictions to patients.   Perhaps it might be better to talk about level of risk rather than specifically predicting that a lapse will occur to avoid explicit false alarms that might decrease patient trust in the system.
-
 
 :::
 
-## Impact of Decision Thresholds:  1 day
-:::: {.columns}
 
-::: {.column width="50%"}
+## Passive Sensing: More Risk Features 
 
-<!-- insert table or fig? -->
-:::
-
-::: {.column width="50%"}
-
-<!-- insert table or fig -->
-
-:::
-
-::::
-
-::: {.notes}
-Second, if we need higher PPV, we may be able to get it by using a decision threshold that is higher than .5
-
-Here I am showing you the performance of the day level model when we use the default .5 threshold that you saw previously
-
-:::
-
-## Impact of Decision Thresholds:  1 day
-:::: {.columns}
-
-::: {.column width="50%"}
-
-<!-- insert table or fig -->
-:::
-
-
-::: {.column width="50%"}
-
-<!-- insert table or fig -->
-
-:::
-
-::::
-
-::: {.notes}
-But if we move the threshold up to .9 before we call an observation a lapse, we can increase the PPV from .32 to .83.
-
-And this is what we will need to do if we want to recommend more costly treatments or other actions where false alarms may be problematic.
-:::
-
-## Precision - Recall Curves
-
-:::: {.columns}
-
-::: {.column width="50%"}
-
-<!-- insert table or fig -->
-
-:::
-  
-::: {.column width="50%"}
-
-<!-- insert table or fig -->
-
-:::
-  
-  ::::
-  
-  ::: {.notes}
-But of course, as we increase the decision threshold for labeling a window as a lapse, we will trade off sensitivity.   We can see this trade off directly in the precision-recall curves on the right.  If we decide we need PPV of at least .75, you can see that we still have reasonable sensitivity for the one week window but we start to miss many lapses in the 1day window and more still in the 1hour window.
-
-I’ll return to this a bit more later when we discuss emerging plans for how best to implement these models within a digital therapeutic.
-
-:::
-
-## Key Take Home Messages
-
-- Relatively high combined sensitivity and specificity
-
-- Comparable performance (AUC) from 1 week down to 1 hour windows
-
-- Will need to adjust decision thresholds to fit how we use the algorithm.
-  - Lower PPV OK for low burden or low cost recommendations
-  - Higher PPV needed to recommend “costly” interventions or actions
-
-
-::: {.notes}
-So to recap our main take-aways from this first project
-
-- We were generally encouraged by these preliminary models.
-
-- We’ve demonstrated that we can get relatively high combined sensitivity and specificity
-
-- We can do this for not only coarse one week windows but also temporally precise windows down to one hour
-
-- But we also recognize that depending on what we will use the predictions for, we may need to adjust decision thresholds to trade off sensitivity for greater positive predictive value.
-
-:::
-
-## (Selective) Next Steps
+**--UPDATE SLIDE AND TEXT--**
 
 - Geolocation, cellular communications, and other passively sensed signals
 
@@ -1057,20 +904,29 @@ But we are hoping to extract more signal from the both of these as we continue t
 
 :::
 
-## (Selective) Next Steps
-
-- [Geolocation, cellular communications, and other passively sensed signals]{style="color: gray;"}
-
-- Build models with lead times > 0 hours
 
 
 
 
 
-::: {.notes}
-NEED TEXT FOR THIS BUT ITS IMPORTANT.   FOCUS ON lead = 0 for 1 hour and JIT – distraction, urge surfing but lead = 1 week for contact with therapist, sponsor, supportive friends and family, etc.
 
-:::
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## (Selective) Next Steps
