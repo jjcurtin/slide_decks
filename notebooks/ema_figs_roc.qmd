@@ -80,7 +80,6 @@ roc_all <- roc_week |>
   reframe(sensitivity = mean(sensitivity), specificity =  mean(specificity)) |> 
   mutate(model = factor(model, levels = c("1week", "1day", "1hour"),
                         labels = c("week", "day", "hour")))
-
 auROC_week <- auROC$week |>
   as.character() |>
   str_pad(width = 4, side = "right", pad = "0")
@@ -97,17 +96,15 @@ auROC_hour <- auROC$hour |>
 ## ROC Plot Function
 
 ```{r}
-plot_roc <- function(df){
+plot_roc <- function(df, line_colors){
   df |> 
   ggplot(aes(x = 1 - specificity, y = sensitivity, color = model)) +
     geom_path(linewidth = 1.25) +
     geom_abline(lty = 3) +
     coord_fixed(xlim = c(0, 1), ylim = c(0, 1)) +
-    labs(x = "Specificity",
-        y = "Sensitivity") +
-  scale_x_continuous(breaks = seq(0,1,.25),
-    labels = sprintf("%.2f", seq(1,0,-.25)))  +
-  scale_color_manual(values = c("orange","green","blue"))
+    labs(x = "False Positive Rate",
+        y = "True Positive Rate") +
+  scale_color_manual(values = line_colors)
 }
 ```
 
@@ -116,55 +113,57 @@ plot_roc <- function(df){
 
 Week only
 ```{r}
-#| label: fig-roc-week
+#| label: roc-week
 #| fig-cap: ROC Curves by Model
 #| fig-height: 6
 #| fig-width: 6
 
+line_colors  <- c("orange", "green", "blue")
+
 roc_all |>
   filter(model == "week") |>
-  plot_roc() +
-  geom_text(x = .80, y = .20,
-            label = str_c("AUC = ", auROC_week),
-            show.legend = FALSE, color = "orange")
+  plot_roc(line_colors) # +
+#   geom_text(x = .80, y = .20,
+#            label = str_c("AUC = ", auROC_week),
+#            show.legend = FALSE, color = "orange")
 ```
 
 Week & Day
 ```{r}
-#| label: fig-roc-week_day
+#| label: roc-week_day
 #| fig-cap: ROC Curves by Model
 #| fig-height: 6
 #| fig-width: 6
 
 roc_all |>
   filter(model == "week" | model == "day") |>
-  plot_roc() +
-  geom_text(x = .80, y = .20,
-            label = str_c("AUC = ", auROC_week),
-            show.legend = FALSE, color = "orange") +
-  geom_text(x = .80, y = .15,
-            label = str_c("AUC = ", auROC_day),
-            show.legend = FALSE, color = "green")
+  plot_roc(line_colors) # +
+#   geom_text(x = .80, y = .20,
+#            label = str_c("AUC = ", auROC_week),
+#            show.legend = FALSE, color = "orange") +
+#   geom_text(x = .80, y = .15,
+#             label = str_c("AUC = ", auROC_day),
+#            show.legend = FALSE, color = "green")
 ```
 
 All three windows
 ```{r}
-#| label: fig-roc-all
+#| label: roc-all
 #| fig-cap: ROC Curves by Model
 #| fig-height: 6
 #| fig-width: 6
 
 roc_all |>
-  plot_roc() +
-  geom_text(x = .80, y = .20,
-            label = str_c("auROC = ", auROC_week),
-            show.legend = FALSE, color = "orange") +
-  geom_text(x = .80, y = .15,
-            label = str_c("auROC = ", auROC_day),
-            show.legend = FALSE, color = "green") +
-  geom_text(x = .80, y = .10,
-            label = str_c("auROC = ", auROC_hour),
-            show.legend = FALSE, color = "blue")
+  plot_roc(line_colors) #  +
+#   geom_text(x = .80, y = .20,
+#            label = str_c("auROC = ", auROC_week),
+#            show.legend = FALSE, color = "orange") +
+#  geom_text(x = .80, y = .15,
+#            label = str_c("auROC = ", auROC_day),
+#            show.legend = FALSE, color = "green") +
+#  geom_text(x = .80, y = .10,
+#            label = str_c("auROC = ", auROC_hour),
+#            show.legend = FALSE, color = "blue")
 ```
 
 ```{r}
@@ -176,7 +175,7 @@ roc_all |>
 jpeg(filename = here::here(path_images, "roc_all.jpg")) 
 
 roc_all |>
-  plot_roc() +
+  plot_roc(line_colors) +
   geom_text(x = .80, y = .20,
             label = "auROC = 0.90",
             show.legend = FALSE, color = "orange") +
@@ -188,4 +187,39 @@ roc_all |>
             show.legend = FALSE, color = "blue")
 
 dev.off()
+```
+
+
+
+## ROC demos
+
+
+Random classifier
+
+```{r}
+#| label: roc-random
+#| fig-cap: ROC Curves
+#| fig-height: 6
+#| fig-width: 6
+
+tibble(model = c("random", "random"),
+       specificity = c(1, 1),
+       sensitivity = c(0, 0)) |> 
+   mutate(model = factor(model, levels = c("random", "perfect"))) |> 
+   plot_roc(line_colors = c("gray", "red"))
+   
+```
+
+```{r}
+#| label: roc-perfect
+#| fig-cap: ROC Curves
+#| fig-height: 6
+#| fig-width: 6
+
+tibble(model = c("random", "random", "perfect", "perfect", "perfect"),
+       specificity = c(1, 1, 1, 1, 0),
+       sensitivity = c(0, 0, 0, 1, 1)) |> 
+   mutate(model = factor(model, levels = c("random", "perfect"))) |> 
+   plot_roc(line_colors = c("gray", "red"))
+   
 ```
