@@ -101,14 +101,12 @@ and stigma and related issues make traditional treatments for mental illness les
 
 ## Digital Therapeutics (DTx)
 
-Digital therapeutics are smartphone "apps" that are designed to prevent, manage, or treat disease, including mental illness. 
+- Smartphone "apps" that prevent, manage, or treat disease 
 
-
-Can augment mental health services to address barriers
-
-- Accessible everywhere
-- Available 24/7
-- Highly scalable (affordable?)
+- Can augment mental health services to address barriers
+  - Accessible everywhere
+  - Available 24/7
+  - Highly scalable (affordable?)
 
 ::: {.notes}
 Fortunately, digital therapeutics are now being developed and used by patients to address many of these treatment barriers.
@@ -128,15 +126,13 @@ These digital therapeutics can be combined with traditional treatments to reduce
 
 ## Digital Therapeutics (DTx)
 
-Digital therapeutics are smartphone "apps" that are designed to prevent, manage, or treat disease, including mental illness. 
+- Smartphone "apps" that prevent, manage, or treat disease 
 
-
-Can augment mental health services to address barriers
-
-- [Accessible everywhere]{style="color: gray;"} 
-- [Available 24/7]{style="color: gray;"} 
-- [Highly scalable (affordable?)]{style="color: gray;"} 
-- Effective!
+- Can augment mental health services to address barriers
+  - [Accessible everywhere]{style="color: gray;"} 
+  - [Available 24/7]{style="color: gray;"} 
+  - [Highly scalable (affordable?)]{style="color: gray;"} 
+  - Effective!
 
 ::: {.notes}
 Of course, these benefits would be meaningless if digital therapeutics were not effective.
@@ -375,27 +371,57 @@ And of course, all of the models would only use data collected prior to 10 am to
 
 :::
 
-## Modeling: Statistical Algorithms 
+## Modeling: Algorithms and Resampling
 
-**---UPDATE SLIDE NOTES--**
 
-- XGBoost - boosted decision trees
-- Also considered 
+- XGBoost - Boosted decision trees
   - ElasticNet GLM (e.g., LASSO, ridge regression)
   - Random Forest
   - KNN
 
+\
+\
+
+- Using grouped (by participant), nested, repeated k-fold CV 
+  - 30 test sets
+  - New participants and observations not used for training
+
 ::: {.notes}
+**---UPDATE SLIDE NOTES--**
+
 We are evaluating machine learning model configurations that differ by common statistical algorithms
 :::
 
-## Modeling: Evaluating Performance
+## Modeling: Performance Metric
 
-**---UPDATE FOR FOCUS ON WHAT IS auROC--**
-**---UPDATE FOR FOCUS ON HELD OUT AND TRUE PREDICTION--**
-- Model Tuning and Performance Evaluation
-  - Area under ROC curve (AUC) as primary performance metric
-  - Using [grouped]{style="color: red;"} (by participant), nested [10-fold CV]{style="color: red;"} 
+- Area under ROC curve (auROC)
+  - Likelihood that model will assign higher probability to randomly selected lapse vs. no-lapse observation
+  - 0.50 for random classifier
+  - 1.00 for perfect classifer
+
+{{< embed ../../../notebooks/ema_figs_roc.qmd#roc-random >}}
+
+::: {.notes}
+**---UPDATE SLIDE NOTES--**
+
+We are evaluating these models primarily using the area under the ROC curve but we also consider and report a variety of other common metrics.
+
+And, of course, these performance metrics are calculated for new observations and new participants that the models have never seen and were not trained on by using grouped 10-fold cross-validation.
+
+:::
+
+## Modeling: Performance Metric
+
+- Area under ROC curve (auROC) is primary performance metric
+  - Likelihood that model will assign a higher lapse probability to randomly selected lapse vs. no-lapse observation
+  - auROC = 0.50 for random classifier
+  - auROC = 1.00 for perfect classifer
+
+
+{{< embed ../../../notebooks/ema_figs_roc.qmd#roc-perfect >}}
+
+::: {.notes}
+**---UPDATE SLIDE NOTES--**
 
 We are evaluating these models primarily using the area under the ROC curve but we also consider and report a variety of other common metrics.
 
@@ -489,7 +515,7 @@ Area under the ROC curve (auROC)
 ::: {.column width="50%"}
 
 <!--ROC Curve for Week-->
-{{< embed ../../../notebooks/ema_figs_roc.qmd#fig-roc-week >}}
+{{< embed ../../../notebooks/ema_figs_roc.qmd#roc-week >}}
 
 :::
 
@@ -558,7 +584,7 @@ Area under the ROC curve (auROC)
 ::: {.column width="50%"}
 
 <!--ROC Curve for Week & Day-->
-{{< embed ../../../notebooks/ema_figs_roc.qmd#fig-roc-week_day >}}
+{{< embed ../../../notebooks/ema_figs_roc.qmd#roc-week_day >}}
 
 :::
 ::::
@@ -625,7 +651,7 @@ Area under the ROC curve (auROC)
 ::: {.column width="50%"}
 
 <!--ROC Curve for All-->
-{{< embed ../../../notebooks/ema_figs_roc.qmd#fig-roc-all >}}
+{{< embed ../../../notebooks/ema_figs_roc.qmd#roc-all >}}
 
 :::
 ::::
