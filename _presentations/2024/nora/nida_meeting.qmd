@@ -20,10 +20,6 @@ Unfortunately, our failure to treat is not surprising.  There are many well know
 
 We believe that digital therapeutics or DTx can play an important role in addressing barriers to care and today's digital therapeutics are already providing meaningful clinical benefits to research participants and patients
 
------
-
-**[--------------CLICK FORWARD-----------------]**
-
 BUT, its also important to acknowledge that the digital therapeutics available today are still best considered beta versions relative to their full potential 
 
 Their power comes from easy, 24/7 access to their many supports.  But this is also their Achilles heel. As the patient using these apps, you now have to tackle difficult questions like:
@@ -34,6 +30,8 @@ Their power comes from easy, 24/7 access to their many supports.  But this is al
 - And which are best for me **right now**, at this moment in time?
 
 -----
+
+**[--------------CLICK FORWARD-----------------]**
 
 These are essentially precision mental health questions about providing the right supports to the right people at the right time, every time
 
