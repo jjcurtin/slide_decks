@@ -20,7 +20,9 @@ library(tidyverse)
 theme_set(theme_classic()) 
 
 # Paths
-source("../../lab_support/format_path.R")
+devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true",
+                     sha1 = "a58e57da996d1b70bb9a5b58241325d6fd78890f")
+# source("../../lab_support/format_path.R")
 path_models <- format_path("studydata/risk/models/ema")
 path_data_shared <- format_path("studydata/risk/data_processed/shared")
 path_data_ema <- format_path("studydata/risk/data_processed/ema")
@@ -29,6 +31,8 @@ path_data_ema <- format_path("studydata/risk/data_processed/ema")
 ## Open preds dfs
 
 ```{r}
+#| label: Load predictions files
+
 preds_week <- read_rds(file.path(path_models, 
                                "outer_preds_1week_0_v5_nested_main.rds"))
 preds_day <- read_rds(file.path(path_models, 
@@ -113,16 +117,26 @@ fig_day +
 # Calibration plots
 
 ```{r}
-preds_hour |> 
-#  filter(outer_split_num == 1) |> 
-  select(label, .pred_Lapse = prob_beta) |> 
-  probably::cal_plot_breaks(truth = label, 
-                  estimate = .pred_Lapse)
-```
+#| label: calibration_plot_hour 
+#| out-height: 6in
+#| out-width: 6in
 
-```{r}
 preds_hour |> 
-  probably::cal_plot_windowed(truth = label, 
-                  estimate = .pred_Lapse,
-                  .by = method)
+  mutate(bins = cut(prob_beta, breaks = seq(0, 1, .125)),
+         lapse = if_else(label == "Lapse", 1, 0)) |> 
+  group_by(bins)  |> 
+  summarize(mean_lapse = mean(lapse),
+            .groups = "drop") |>
+  mutate(bins = as.numeric(bins),
+         midpoints = .125/2 + .125 * (bins - 1))  |> 
+  ggplot(data = _, aes(x = midpoints, y = mean_lapse)) +
+    geom_abline(slope = 1, intercept = 0, linetype = "dotted") +
+    geom_line() +
+    geom_point() +
+    xlab("Predicted Lapse Probability (bin mid-point)") +
+    ylab("Observed Lapse Probability") +
+    scale_x_continuous(breaks = seq(0, 1, .125),
+                        limits = c(0,1)) +
+    scale_y_continuous(breaks = seq(0, 1, .125),
+                        limits = c(0,1))
 ```
