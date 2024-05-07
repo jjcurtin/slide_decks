@@ -13,10 +13,8 @@ title-slide-attributes:
 format: 
   revealjs:
     scrollable: true
-    css: arc.css
-  
-fig-cap-location: top
-
+    chalkboard: true
+    css: slides.css
 ---
 
 ## Mental Healthcare Needs are High and Unmet  {.smaller}
@@ -394,10 +392,7 @@ We are evaluating machine learning model configurations that differ by common st
 
 ## Modeling: Area under ROC curve (auROC) 
 
-- Area under ROC curve (auROC)
-  - Likelihood that model will assign higher probability to randomly selected lapse vs. no-lapse observation
   - [0.50 for random classifier]{style="color: red;"}
-  - 1.00 for perfect classifer
 
 {{< embed ../../../notebooks/ema_figs_roc.qmd#roc-random >}}
 
@@ -412,8 +407,7 @@ And, of course, these performance metrics are calculated for new observations an
 
 ## Modeling: Area under ROC curve (auROC) 
 
-- Likelihood that model will assign a higher lapse probability to randomly selected lapse vs. no-lapse observation
-- auROC = 0.50 for random classifier
+- [auROC = 0.50 for random classifier]{style="color: gray;"}
 - [auROC = 1.00 for perfect classifer]{style="color: red;"}
 
 
@@ -428,6 +422,22 @@ And, of course, these performance metrics are calculated for new observations an
 
 :::
 
+## Modeling: Area under ROC curve (auROC) 
+
+- [auROC = 0.50 for random classifier]{style="color: gray;"}
+- [auROC = 1.00 for perfect classifer]{style="color: gray;"}
+- [Likelihood that model will assign a higher lapse probability to randomly selected lapse vs. no-lapse observation]{style="color: gray;"}
+
+{{< embed ../../../notebooks/ema_figs_roc.qmd#roc-perfect >}}
+
+::: {.notes}
+**---UPDATE SLIDE NOTES--**
+
+We are evaluating these models primarily using the area under the ROC curve but we also consider and report a variety of other common metrics.
+
+And, of course, these performance metrics are calculated for new observations and new participants that the models have never seen and were not trained on by using grouped 10-fold cross-validation.
+
+:::
 ## Modeling: Feature Engineering 
 
 - Features based on recent past experiences (12, 24, 48, 72, 168 hours)
