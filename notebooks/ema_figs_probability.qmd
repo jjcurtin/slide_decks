@@ -352,28 +352,123 @@ pr_all |>
 
 ## Confusion matrix
 
-### predict class
+### CM Plot functions
+
 ```{r}
-cm <- preds_day |> 
-  mutate(.pred_label = if_else(prob_beta > .5, "Lapse", "No lapse"))
+
+space_fun <- function(x, adjustment, rescale = FALSE) {
+  if (rescale) {
+    x <- x / sum(x)
+  }
+
+  adjustment <- sum(x) / adjustment
+
+  xmax <- cumsum(x) + seq(0, length(x) - 1) * adjustment
+  xmin <- cumsum(x) - x + seq(0, length(x) - 1) * adjustment
+
+  dplyr::tibble(xmin = xmin, xmax = xmax)
+}
+
+space_y_fun <- function(data, id, x_data) {
+  out <- space_fun(data[, id], 100, rescale = TRUE) * -1
+
+  names(out) <- c("ymin", "ymax")
+
+  out$xmin <- x_data[[id, 1]]
+  out$xmax <- x_data[[id, 2]]
+
+  out
+}
+
+cm_mosaic <- function(x) {
+  `%+%` <- ggplot2::`%+%`
+
+  cm_zero <- (as.numeric(x$table == 0) / 2) + x$table
+
+  x_data <- space_fun(colSums(cm_zero), 200)
+
+  full_data_list <- lapply(
+    seq_len(ncol(cm_zero)),
+    FUN = function(.x) space_y_fun(cm_zero, .x, x_data)
+  )
+
+  full_data <- dplyr::bind_rows(full_data_list)
+
+  y1_data <- full_data_list[[1]]
+
+  tick_labels <- colnames(cm_zero)
+  axis_labels <- get_axis_labels(x)
+
+  ggplot2::ggplot(full_data) %+%
+    ggplot2::geom_rect(
+      ggplot2::aes(
+        xmin = xmin,
+        xmax = xmax,
+        ymin = ymin,
+        ymax = ymax
+      ), 
+      fill = c("green", "red", "red", "green")
+    ) %+%
+    ggplot2::scale_x_continuous(
+      breaks = (x_data$xmin + x_data$xmax) / 2,
+      labels = tick_labels
+    ) %+%
+    ggplot2::scale_y_continuous(
+      breaks = (y1_data$ymin + y1_data$ymax) / 2,
+      labels = tick_labels
+    ) %+%
+    ggplot2::labs(
+      y = axis_labels$y,
+      x = axis_labels$x
+    ) %+%
+    ggplot2::theme(panel.background = ggplot2::element_blank())
+}
+
+# Note: Always assumes predictions are on the LHS of the table
+get_axis_labels <- function(x) {
+  table <- x$table
+
+  labels <- names(dimnames(table))
+
+  if (is.null(labels)) {
+    labels <- c("Prediction", "Truth")
+  }
+
+  list(
+    y = labels[[1]],
+    x = labels[[2]]
+  )
+}
+```
+
+
+### predict class for day model
+
+```{r}
+j_thres_roc <- roc_day |> 
+  mutate(j = sensitivity + specificity - 1) |> 
+  slice_max(j) |> 
+  print() |> 
+  pull(.threshold)
+
+(cm <- preds_day |> 
+   mutate(estimate = if_else(prob_beta > j_thres_roc, "Lapse", "No lapse"),
+          estimate = fct(estimate, levels = c("No lapse", "Lapse")),
+          label = fct_relevel(label, "No lapse")) |> 
+   yardstick::conf_mat(truth = label, estimate = estimate))
 ```
 
 
 ```{r}
-confusion_matrix <- table(cm$label, cm$.pred_label)
-confusion_matrix <- prop.table(confusion_matrix, margin = 1)
+#| label: cm_day
+#| out-height: 6in
+#| out-width: 6in
 
-# Calculate column widths based on frequencies
-column_widths <- prop.table(table(cm$label))
-
-# Plot confusion matrix
-heatmap(confusion_matrix, 
-  col = colorRampPalette(c("white", "blue"))(100),
-  main = "Confusion Matrix",
-  xlab = "Predicted Label",
-  ylab = "True Label",
-  cex.col = column_widths,
-  cex.row = 1,
-  cex.main = 1.5,
-  cex.lab = 1.2)
+cm_mosaic(cm) +
+  theme(axis.text.x = element_text(size = 16),
+        axis.text.y = element_text(size = 16),
+        axis.title.x = element_text(size = 24),
+        axis.title.y = element_text(size = 24))
 ```
+
+
