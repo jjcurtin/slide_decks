@@ -5,13 +5,13 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Overview
+## Overview and Setup
 
 This script makes faceted histograms that display the probabilities of lapse separately for true lapse and no lapse observations.  
 
 The data are from the EMA study based on RISK1 project
 
-## Set up environment
+### Set up environment
 ```{r}
 # handle conflicts
 options(conflicts.policy = "depends.ok")
@@ -28,7 +28,7 @@ path_data_shared <- format_path("studydata/risk/data_processed/shared")
 path_data_ema <- format_path("studydata/risk/data_processed/ema")
 ```
 
-## Open preds dfs
+### Open preds dfs
 
 ```{r}
 #| label: Load predictions files
@@ -42,9 +42,9 @@ preds_hour <- read_rds(file.path(path_models,
 ```
 
 
-# Faceted Plots
+## Faceted Plots
 
-Function for faceted probability plot
+### Faceted plof function
 
 ```{r}
 plot_probs <- function(df_preds, model) {
@@ -63,6 +63,8 @@ plot_probs <- function(df_preds, model) {
 }
 ``` 
   
+
+### Plots
 
 One week window with no vertical line for decision threshold
 ```{r}
@@ -114,7 +116,7 @@ fig_day +
 ```
 
 
-# Calibration plots
+## Calibration plots
 
 ```{r}
 #| label: calibration_plot_hour 
@@ -142,9 +144,9 @@ preds_hour |>
 ```
 
 
-# ROC plots
+## ROC plots
 
-ROC Plot Function
+### ROC Plot Function
 
 ```{r}
 plot_roc <- function(df, line_colors){
@@ -160,7 +162,7 @@ plot_roc <- function(df, line_colors){
 ```
 
 
-Generate ROC Curves
+### Generate ROC Curves
 ```{r}
 roc_week <- preds_week |> 
   yardstick::roc_curve(prob_beta, truth = label) |> 
@@ -184,6 +186,7 @@ roc_all <- roc_week |>
                         labels = c("week", "day", "hour")))
 ```
 
+### Plots
 
 Plot Week only
 ```{r}
@@ -264,7 +267,6 @@ Save image to server
 ```
 
 
-
 Plot demo of random classifier
 
 ```{r}
@@ -297,9 +299,9 @@ tibble(model = c("random", "random", "perfect", "perfect", "perfect"),
 ```
 
 
-# PR curves
+## PR curves
 
-Generate PR curves
+### Generate PR curves
 ```{r}
 pr_week <- preds_week |> 
   yardstick::pr_curve(prob_beta, truth = label) |> 
@@ -323,7 +325,7 @@ pr_all <- pr_week |>
                         labels = c("week", "day", "hour")))
 ```
 
-Plot PR Curves by Model
+### Plot PR Curves by Model
 
 ```{r}
 #| label: fig-prcurve
@@ -348,9 +350,9 @@ pr_all |>
 ```
 
 
-# Confusion matrix
+## Confusion matrix
 
-predict class
+### predict class
 ```{r}
 cm <- preds_day |> 
   mutate(.pred_label = if_else(prob_beta > .5, "Lapse", "No lapse"))
