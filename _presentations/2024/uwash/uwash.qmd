@@ -14,7 +14,7 @@ format:
   revealjs:
     scrollable: true
     chalkboard: true
-    css: arc.css
+    css: slides_wide.css
 ---
 
 ## Mental Healthcare Needs are High and Unmet  {.smaller}
@@ -547,7 +547,7 @@ auROC
 
 ::::: {.absolute left="0%" bottom="0%" width="300px" height="auto"}
 ::::: {style="font-size: 75%;"}
-:::::{.callout-tip icon=false}
+::::: {.callout-tip icon=false}
 ## Coarse rules of thumb for AUC 
 .70 - .80 are considered fair  
 .80 - .90 are considered good  
@@ -776,22 +776,63 @@ And finally, we see that we can use lapse day and lapse hour to make predictions
 
 ## Clinical Uses: DO NOT Predict Lapses
 
+::: {.columns}
+
+:::: {.column width="50%"}
 Do NOT predict class labels  (Lapse vs. No-Lapse)
 
 - Information loss
-- Iatriogenic effects
+::::
+
+
+:::: {.column width="50%"}
+<!-- Blank -->
+::::
+
+:::
 
 -----------------------------------------------------------------------------
 
 ## Clinical Uses: DO NOT Predict Lapses
 
+::: {.columns}
+
+:::: {.column width="50%"}
+Do NOT predict class labels  (Lapse vs. No-Lapse)
+
+- [Information loss]{style="color: gray;"}
+- Iatriogenic effects
+::::
+
+
+:::: {.column width="50%"}
+
+<!-- Blank -->
+::::
+
+:::
+
+-----------------------------------------------------------------------------
+
+## Clinical Uses: DO NOT Predict Lapses
+
+::: {.columns}
+
+:::: {.column width="50%"}
 Do NOT predict class labels  (Lapse vs. No-Lapse)
 
 - [Information loss]{style="color: gray;"}
 - [Iatriogenic effects]{style="color: gray;"}
-- Low positive predictive values 
+- Low positive predictive values
+  - Specificity = 0.85
+  - Sensitivity = 0.81
+  - Positive Predictive Value = 0.27 
+::::
 
-**--NEED FIG---**
+
+:::: {.column width="50%"}
+{{< embed ../../../notebooks/ema_figs_probability.qmd#cm_day >}}
+:::
 
 -----------------------------------------------------------------------------
 
