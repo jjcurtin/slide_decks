@@ -417,7 +417,7 @@ We are evaluating machine learning model configurations that differ by common st
 
 
 :::: {.column width="50%"}
-{{< embed ../../../notebooks/ema_figs_roc.qmd#roc-random >}}
+{{< embed ../../../notebooks/ema_figs_probability.qmd#roc-random >}}
 ::::
 
 :::
@@ -439,7 +439,7 @@ We are evaluating machine learning model configurations that differ by common st
 
 
 :::: {.column width="50%"}
-{{< embed ../../../notebooks/ema_figs_roc.qmd#roc-perfect >}}
+{{< embed ../../../notebooks/ema_figs_probability.qmd#roc-perfect >}}
 ::::
 
 :::
@@ -461,7 +461,7 @@ We are evaluating machine learning model configurations that differ by common st
 ::::
 
 :::: {.column width="50%"}
-{{< embed ../../../notebooks/ema_figs_roc.qmd#roc-perfect >}}
+{{< embed ../../../notebooks/ema_figs_probability.qmd#roc-perfect >}}
 ::::
 
 :::
@@ -561,7 +561,7 @@ auROC
 
 :::: {.column width="50%"}
 <!--ROC Curve for Week-->
-{{< embed ../../../notebooks/ema_figs_roc.qmd#roc-week >}}
+{{< embed ../../../notebooks/ema_figs_probability.qmd#roc-week >}}
 ::::
 
 :::
@@ -633,7 +633,7 @@ auROC
 :::: {.column width="50%"}
 
 <!--ROC Curve for Week & Day-->
-{{< embed ../../../notebooks/ema_figs_roc.qmd#roc-week_day >}}
+{{< embed ../../../notebooks/ema_figs_probability.qmd#roc-week_day >}}
 
 ::::
 :::
@@ -681,7 +681,7 @@ auROC
 :::: {.column width="50%"}
 
 <!--ROC Curve for All-->
-{{< embed ../../../notebooks/ema_figs_roc.qmd#roc-all >}}
+{{< embed ../../../notebooks/ema_figs_probability.qmd#roc-all >}}
 ::::
 
 :::
