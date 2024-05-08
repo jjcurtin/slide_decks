@@ -174,3 +174,23 @@ font-size: 0.85em !important;
   background-color: honeydew !important;
   border-radius: 4px;
 }
+
+.callout-title p strong{
+font-size: 75% !important;
+}
+
+.callout-content p {
+font-size: 75% !important;
+}
+
+.callout {
+position: absolute;
+left: 0%;
+bottom: 0%; 
+width: 300px;
+height: auto;
+}
+
+figcaption {
+display: none !important;
+}
