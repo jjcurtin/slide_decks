@@ -346,3 +346,32 @@ pr_all |>
   geom_segment(x = .33, y = -.05 , xend = .33, yend = .70,
                color = "blue", size = 1, linetype = "dotted")
 ```
+
+
+# Confusion matrix
+
+predict class
+```{r}
+cm <- preds_day |> 
+  mutate(.pred_label = if_else(prob_beta > .5, "Lapse", "No lapse"))
+```
+
+
+```{r}
+confusion_matrix <- table(cm$label, cm$.pred_label)
+confusion_matrix <- prop.table(confusion_matrix, margin = 1)
+
+# Calculate column widths based on frequencies
+column_widths <- prop.table(table(cm$label))
+
+# Plot confusion matrix
+heatmap(confusion_matrix, 
+  col = colorRampPalette(c("white", "blue"))(100),
+  main = "Confusion Matrix",
+  xlab = "Predicted Label",
+  ylab = "True Label",
+  cex.col = column_widths,
+  cex.row = 1,
+  cex.main = 1.5,
+  cex.lab = 1.2)
+```
