@@ -120,8 +120,9 @@ fig_day +
 
 ```{r}
 #| label: calibration_plot_hour 
-#| out-height: 6in
-#| out-width: 6in
+#| fig-cap: Observed vs. Predicted Lapse Probability 
+#| fig-height: 6
+#| fig-width: 6
 
 preds_hour |> 
   mutate(bins = cut(prob_beta, breaks = seq(0, 1, .125)),
@@ -191,10 +192,9 @@ roc_all <- roc_week |>
 Plot Week only
 ```{r}
 #| label: roc-week
-#| out-height: 6in
-#| out-width: 6in
-
-# fig-cap: ROC Curves by Model
+#| fig-cap: ROC Curves by Model
+#| fig-height: 6
+#| fig-width: 6
 
 line_colors  <- c("orange", "green", "blue")
 
@@ -209,10 +209,10 @@ roc_all |>
 Plot Week & Day
 ```{r}
 #| label: roc-week_day
-#| out-height: 6in
-#| out-width: 6in
+#| fig-cap: ROC Curves by Model
+#| fig-height: 6
+#| fig-width: 6
 
-# fig-cap: ROC Curves by Model
 roc_all |>
   filter(model == "week" | model == "day") |>
   plot_roc(line_colors) # +
@@ -227,8 +227,8 @@ roc_all |>
 Plot all three windows
 ```{r}
 #| label: roc-all
-#| out-height: 6in
-#| out-width: 6in
+#| fig-height: 6
+#| fig-width: 6
 
 # fig-cap: ROC Curves by Model
 roc_all |>
@@ -271,10 +271,10 @@ Plot demo of random classifier
 
 ```{r}
 #| label: roc-random
-#| out-height: 6in
-#| out-width: 6in
+#| fig-cap: ROC Curves
+#| fig-height: 6
+#| fig-width: 6
 
-# fig-cap: ROC Curves
 tibble(model = c("random", "random"),
        specificity = c(1, 1),
        sensitivity = c(0, 0)) |> 
@@ -287,10 +287,10 @@ Plot demo of random and perfect classifer
 
 ```{r}
 #| label: roc-perfect
-#| out-height: 6in
-#| out-width: 6in
+#| fig-cap: ROC Curves
+#| fig-height: 6
+#| fig-width: 6
 
-# fig-cap: ROC Curves
 tibble(model = c("random", "random", "perfect", "perfect", "perfect"),
        specificity = c(1, 1, 1, 1, 0),
        sensitivity = c(0, 0, 0, 1, 1)) |> 
@@ -461,8 +461,9 @@ j_thres_roc <- roc_day |>
 
 ```{r}
 #| label: cm_day
-#| out-height: 6in
-#| out-width: 6in
+#| fig-cap: Confusion Matrix Day Model
+#| fig-height: 6
+#| fig-width: 6
 
 cm_mosaic(cm) +
   theme(axis.text.x = element_text(size = 16),
