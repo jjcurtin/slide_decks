@@ -751,11 +751,7 @@ UPDATE
 
 ::: {.columns}
 :::: {.column width="50%"}
-- auROC
-
-  - [Next week = 0.90; [0.88 - 0.91]]{style="color: orange;"}
-  - [Next day  = 0.91; [0.89 - 0.92]]{style="color: green;"}
-  - [Next hour = 0.93; [0.92 - 0.94]]{style="color: blue;"}
+- auROCs range from 0.90 - 0.93
 ::::
 
 :::: {.column width="50%"}
@@ -773,13 +769,8 @@ INSERT NOTES
 
 ::: {.columns}
 :::: {.column width="50%"}
-- [auROC]{style="color: gray;"}
-
-  - [Next week = 0.90; [0.88 - 0.91]]{style="color: gray;"}
-  - [Next day  = 0.91; [0.89 - 0.92]]{style="color: gray;"}
-  - [Next hour = 0.93; [0.92 - 0.94]]{style="color: gray;"}
-
-- Probabilities are calibrated and ordinal
+- [auROCs range from 0.90 - 0.93]{style="color: gray;"}
+- Probabilities are well-calibrated and ordinal
 ::::
 
 :::: {.column width="50%"}
@@ -797,13 +788,9 @@ INSERT NOTES
 
 ::: {.columns}
 :::: {.column width="50%"}
-- [auROC]{style="color: gray;"}
-
-  - [Next week = 0.90; [0.88 - 0.91]]{style="color: gray;"}
-  - [Next day  = 0.91; [0.89 - 0.92]]{style="color: gray;"}
-  - [Next hour = 0.93; [0.92 - 0.94]]{style="color: gray;"}
-
-- Probabilities are calibrated and ordinal
+- [auROCs range from 0.90 - 0.93]{style="color: gray;"}
+- [Probabilities are calibrated and ordinal]{style="color: gray;"}
+- Provides fine gradations of relative risk for clinical decision-making
 ::::
 
 :::: {.column width="50%"}

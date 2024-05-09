@@ -140,9 +140,13 @@ preds_day |>
     xlab("Predicted Lapse Probability (bin mid-point)") +
     ylab("Observed Lapse Probability") +
     scale_x_continuous(breaks = seq(0, 1, bin_width),
-                        limits = c(0, 1)) +
+                       limits = c(0, 1)) +
     scale_y_continuous(breaks = seq(0, 1, bin_width),
-                        limits = c(0, 1))
+                       limits = c(0, 1)) +
+    theme(axis.text.x = element_text(size = 12),
+          axis.text.y = element_text(size = 12),
+          axis.title.x = element_text(size = 16),
+          axis.title.y = element_text(size = 16))
 ```
 
 
@@ -300,63 +304,11 @@ tibble(model = c("random", "random", "perfect", "perfect", "perfect"),
 ```
 
 
-## PR curves
-
-### Generate PR curves
-```{r}
-pr_week <- preds_week |> 
-  yardstick::pr_curve(prob_beta, truth = label) |> 
-  mutate(model = "1week")
-
-pr_day <- preds_day |> 
-  yardstick::pr_curve(prob_beta, truth = label) |> 
-  mutate(model = "1day")
-
-pr_hour <- preds_hour|> 
-  yardstick::pr_curve(prob_beta, truth = label) |> 
-  mutate(model = "1hour")
-
-pr_all <- pr_week |> 
-  bind_rows(pr_day) |> 
-  bind_rows(pr_hour) |> 
-  mutate(thres_avg = round(.threshold, 3)) |> 
-  group_by(model, thres_avg) |> 
-  reframe(recall = mean(recall), precision =  mean(precision)) |> 
-  mutate(model = factor(model, levels = c("1week", "1day", "1hour"),
-                        labels = c("week", "day", "hour")))
-```
-
-### Plot PR Curves by Model
-
-```{r}
-#| label: fig-prcurve
-#| fig-cap: PR Curves by Model
-#| fig-height: 6
-#| fig-width: 6
-
-pr_all |>
-  ggplot(aes(x = recall, y = precision, color = model)) +
-  geom_path(size = 1.25) +
-  coord_fixed(xlim = c(0, 1), ylim = c(0, 1)) +
-  labs(x = "Sensitivity (Recall)",
-       y = "Positive Predictive Value (Precision)") +
-  scale_color_manual(values = c("orange","green","blue")) +
-  geom_hline(yintercept = .70, color = "black", size = 1, linetype = "dotted") +
-  geom_segment(x = .72, y = -.05 , xend = .72, yend = .70,
-               color = "orange", size = 1, linetype = "dotted") +
-  geom_segment(x = .47, y = -.05 , xend = .47, yend = .70,
-               color = "green", size = 1, linetype = "dotted") +
-  geom_segment(x = .33, y = -.05 , xend = .33, yend = .70,
-               color = "blue", size = 1, linetype = "dotted")
-```
-
-
 ## Confusion matrix
 
 ### CM Plot functions
 
 ```{r}
-
 space_fun <- function(x, adjustment, rescale = FALSE) {
   if (rescale) {
     x <- x / sum(x)
@@ -390,8 +342,7 @@ cm_mosaic <- function(x) {
 
   full_data_list <- lapply(
     seq_len(ncol(cm_zero)),
-    FUN = function(.x) space_y_fun(cm_zero, .x, x_data)
-  )
+    FUN = function(.x) space_y_fun(cm_zero, .x, x_data))
 
   full_data <- dplyr::bind_rows(full_data_list)
 
@@ -467,10 +418,64 @@ j_thres_roc <- roc_day |>
 #| fig-width: 6
 
 cm_mosaic(cm) +
-  theme(axis.text.x = element_text(size = 16),
-        axis.text.y = element_text(size = 16),
-        axis.title.x = element_text(size = 24),
-        axis.title.y = element_text(size = 24))
+  theme(
+    axis.text.x = element_text(size = 16),
+    axis.text.y = element_text(size = 16),
+    axis.title.x = element_text(size = 24),
+    axis.title.y = element_text(size = 24)) +
+  geom_text(x = 350000, y = -.4, label = "612,086", color = "black", size = 6) +
+  geom_text(x = 350000, y = -.9, label = "147,130", color = "black", size = 6) +
+  geom_text(x = 820000, y = -.07, label = "9,244", color = "black", size = 6) +
+  geom_text(x = 820000, y = -.55, label = "54,077", color = "black", size = 6)
 ```
 
 
+## PR curves
+
+### Generate PR curves
+```{r}
+pr_week <- preds_week |> 
+  yardstick::pr_curve(prob_beta, truth = label) |> 
+  mutate(model = "1week")
+
+pr_day <- preds_day |> 
+  yardstick::pr_curve(prob_beta, truth = label) |> 
+  mutate(model = "1day")
+
+pr_hour <- preds_hour|> 
+  yardstick::pr_curve(prob_beta, truth = label) |> 
+  mutate(model = "1hour")
+
+pr_all <- pr_week |> 
+  bind_rows(pr_day) |> 
+  bind_rows(pr_hour) |> 
+  mutate(thres_avg = round(.threshold, 3)) |> 
+  group_by(model, thres_avg) |> 
+  reframe(recall = mean(recall), precision =  mean(precision)) |> 
+  mutate(model = factor(model, levels = c("1week", "1day", "1hour"),
+                        labels = c("week", "day", "hour")))
+```
+
+### Plot PR Curves by Model
+
+```{r}
+#| label: fig-prcurve
+#| fig-cap: PR Curves by Model
+#| fig-height: 6
+#| fig-width: 6
+
+pr_all |>
+  ggplot(aes(x = recall, y = precision, color = model)) +
+  geom_path(size = 1.25) +
+  coord_fixed(xlim = c(0, 1), ylim = c(0, 1)) +
+  labs(x = "Sensitivity (Recall)",
+       y = "Positive Predictive Value (Precision)") +
+  scale_color_manual(values = c("orange","green","blue")) +
+  geom_hline(yintercept = .70, color = "black", size = 1, linetype = "dotted") +
+  geom_segment(x = .72, y = -.05 , xend = .72, yend = .70,
+               color = "orange", size = 1, linetype = "dotted") +
+  geom_segment(x = .47, y = -.05 , xend = .47, yend = .70,
+               color = "green", size = 1, linetype = "dotted") +
+  geom_segment(x = .33, y = -.05 , xend = .33, yend = .70,
+               color = "blue", size = 1, linetype = "dotted")
+```
