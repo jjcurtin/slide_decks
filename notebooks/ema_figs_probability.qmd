@@ -119,29 +119,30 @@ fig_day +
 ## Calibration plots
 
 ```{r}
-#| label: calibration_plot_hour 
+#| label: fig-calibration_plot_day 
 #| fig-cap: Observed vs. Predicted Lapse Probability 
 #| fig-height: 6
 #| fig-width: 6
 
-preds_hour |> 
-  mutate(bins = cut(prob_beta, breaks = seq(0, 1, .125)),
+bin_width = 0.10
+preds_day |> 
+  mutate(bins = cut(prob_beta, breaks = seq(0, 1, bin_width)),
          lapse = if_else(label == "Lapse", 1, 0)) |> 
   group_by(bins)  |> 
   summarize(mean_lapse = mean(lapse),
             .groups = "drop") |>
   mutate(bins = as.numeric(bins),
-         midpoints = .125/2 + .125 * (bins - 1))  |> 
+         midpoints = bin_width/2 + bin_width * (bins - 1))  |> 
   ggplot(data = _, aes(x = midpoints, y = mean_lapse)) +
     geom_abline(slope = 1, intercept = 0, linetype = "dotted") +
     geom_line() +
     geom_point() +
     xlab("Predicted Lapse Probability (bin mid-point)") +
     ylab("Observed Lapse Probability") +
-    scale_x_continuous(breaks = seq(0, 1, .125),
-                        limits = c(0,1)) +
-    scale_y_continuous(breaks = seq(0, 1, .125),
-                        limits = c(0,1))
+    scale_x_continuous(breaks = seq(0, 1, bin_width),
+                        limits = c(0, 1)) +
+    scale_y_continuous(breaks = seq(0, 1, bin_width),
+                        limits = c(0, 1))
 ```
 
 
@@ -460,7 +461,7 @@ j_thres_roc <- roc_day |>
 
 
 ```{r}
-#| label: cm_day
+#| label: fig-cm_day
 #| fig-cap: Confusion Matrix Day Model
 #| fig-height: 6
 #| fig-width: 6

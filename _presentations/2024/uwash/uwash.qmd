@@ -14,7 +14,7 @@ format:
   revealjs:
     scrollable: true
     chalkboard: true
-    css: slides_wide.css
+    css: uwash.css
     logo: qr-code.png
 include-after: |
   <script type="text/javascript">
@@ -844,7 +844,7 @@ INSERT NOTES
 ::::
 
 :::: {.column width="50%"}
-{{< embed ../../../notebooks/ema_figs_probability.qmd#calibration_plot_hour >}}
+{{< embed ../../../notebooks/ema_figs_probability.qmd#fig-calibration_plot_day >}}
 ::::
 
 :::
@@ -870,7 +870,7 @@ INSERT NOTES
 ::::
 
 :::: {.column width="50%"}
-{{< embed ../../../notebooks/ema_figs_probability.qmd#calibration_plot_hour >}}
+{{< embed ../../../notebooks/ema_figs_probability.qmd#fig-calibration_plot_day >}}
 ::::
 
 :::
