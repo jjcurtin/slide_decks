@@ -202,9 +202,6 @@ And these apps will do this through the use of built-in artificial intelligence 
 
 **---UPDATE---**
 
-NORA with AVE back in
-
-
 
 - Clearly defined
 - They have a temporally precise onset
@@ -212,6 +209,10 @@ NORA with AVE back in
 - Clinically, we know that abstinence violation effects can increase relapse risk
 - And looking ahead to opioids and other substances, even single lapses can result in overdoses and deaths
 
+::: {.notes}
+UPDATE
+
+:::
 
 -----------------------------------------------------------------------------
 
