@@ -184,54 +184,50 @@ Their power comes from easy, 24/7 access to their many supports - the treatments
 :::
 
 -----------------------------------------------------------------------------
-
 ## Precision Mental Health w/ Smart DTx
 
 **---UPDATE---**
 
-.....THESE ARE ESSENTIALLY PRECICION MENTAL HEALTH QUESTIONS---
+- Precision mental health requires us to provide the right treatments and supports to the right people at the right time, every time
 
+- Current DTx can already help with "every time"
 
-idea that DTx begin to address the every time piece
+- Smart DTx can address "who", "when" & "why"
 
-Show how use of sensiing and machline learming algos can address the who, when and what
-And these apps will do this through the use of built-in artificial intelligence or machine learning algorithms that are powered by personal sensing.
-
-<!-- 
-## Smart Digital Therapeutics
+  - Sensing
+  - AI/Machine learning
 
 > “Could you predict not only [who]{style="color: red;"} might be at greatest risk for relapse … <br>
  … but precisely [when]{style="color: red;"} that relapse might occur … <br>
  … and how [best to intervene]{style="color: red;"} to prevent it?"
 
+
 ::: {.notes}
-My research team became interested in these issues when my colleague Dave Gustafson, the developer of a leading digital therapeutic for substance use disorders, approached us with a simple question. He asked...
+UPDATE
 
-"Could you predict not only who might be at greatest risk for relapse
-but precisely when that relapse might occur and
-how best to intervene to prevent it"
+These are essentially precision mental health questions about providing the right interventions and supports to the right people at the right time, every time
 
-Dave had just completed a large study demonstrating the effectiveness of his app. However, he also noticed many of the people who relapsed hadn't used the app in the days leading up to that relapse.  And others who had relapsed hadn't used the specific supports in the app that he would have thought would be most effective for them.
 
-The next wave of digital therapeutics, lets call them smart digital therapeutics, must learn to know us well enough to recognize when we are at greatest risk for relapse and they must be smart enough to recommend the specific supports that would be most effective for us at that moment in time to prevent that relapse.
+This next wave of digital therapeutics, lets call them smart digital therapeutics, must learn to know us well enough to recognize when we are at greatest risk for relapse and they must be smart enough to recommend the specific supports that would be most effective for us at that moment in time to prevent that relapse.
 
+And we believe digital therapeutics can provide this personalized care if we enhance them with embedded sensing capabilities and machine learning risk prediction models
 And these apps will do this through the use of built-in artificial intelligence or machine learning algorithms that are powered by personal sensing.
-
 :::
- -->
 
 -----------------------------------------------------------------------------
 
 ## Model Output: Lapses 
 
-**---UPDATE---**
+Lapses
 
+- are clearly defined,
+- have a temporally precise onset, and
+- can serve as an early warning sign for relapse (precede and predict)
 
-- Clearly defined
-- They have a temporally precise onset
-- They precede but often predict relapse and therefore can serve as an early warning sign
-- Clinically, we know that abstinence violation effects can increase relapse risk
-- And looking ahead to opioids and other substances, even single lapses can result in overdoses and deaths
+\
+
+- "Abstinence violation effects" can increase relapse risk
+- Even a single lapse can result in overdose and/or death for some drugs
 
 ::: {.notes}
 UPDATE
@@ -440,12 +436,12 @@ We are evaluating machine learning model configurations that differ by common st
 ::: {.columns}
 
 :::: {.column width="50%"}
-- [0.50 for random classifier]{style="color: red;"}
+- 0.50 for random classifier
 ::::
 
 
 :::: {.column width="50%"}
-{{< embed ../../../notebooks/ema_figs_probability.qmd#roc-random >}}
+{{< embed ../../../notebooks/ema_figs_probability.qmd#fig-roc_random >}}
 ::::
 
 :::
@@ -462,12 +458,12 @@ We are evaluating machine learning model configurations that differ by common st
 
 :::: {.column width="50%"}
 - [0.50 for random classifier]{style="color: gray;"}
-- [1.00 for perfect classifer]{style="color: red;"}
+- 1.00 for perfect classifer
 ::::
 
 
 :::: {.column width="50%"}
-{{< embed ../../../notebooks/ema_figs_probability.qmd#roc-perfect >}}
+{{< embed ../../../notebooks/ema_figs_probability.qmd#fig-roc_perfect >}}
 ::::
 
 :::
@@ -485,11 +481,11 @@ We are evaluating machine learning model configurations that differ by common st
 :::: {.column width="50%"}
 - [0.50 for random classifier]{style="color: gray;"}
 - [1.00 for perfect classifer]{style="color: gray;"}
-- [Likelihood that model will assign a higher lapse probability to randomly selected lapse vs. no-lapse observation]{style="color: red;"}
+- Likelihood that model will assign a higher lapse probability to randomly selected lapse vs. no-lapse observation
 ::::
 
 :::: {.column width="50%"}
-{{< embed ../../../notebooks/ema_figs_probability.qmd#roc-perfect >}}
+{{< embed ../../../notebooks/ema_figs_probability.qmd#fig-roc_perfect >}}
 ::::
 
 :::
@@ -573,15 +569,11 @@ auROC
 
 - [Next week = 0.90; [0.88 - 0.91]]{style="color: orange;"}
 
-::::: {.absolute left="0%" bottom="0%" width="300px" height="auto"}
-::::: {style="font-size: 75%;"}
 :::::{.callout-tip icon=false}
 ## Coarse rules of thumb for AUC 
 .70 - .80 are considered fair  
 .80 - .90 are considered good  
 \> .90 are considered excellent  
-:::::
-:::::
 :::::
 
 ::::
@@ -589,7 +581,7 @@ auROC
 
 :::: {.column width="50%"}
 <!--ROC Curve for Week-->
-{{< embed ../../../notebooks/ema_figs_probability.qmd#roc-week >}}
+{{< embed ../../../notebooks/ema_figs_probability.qmd#fig-roc_week >}}
 ::::
 
 :::
@@ -608,15 +600,11 @@ And the AUC for our 1 week model is .90, which is generally considered excellent
 ## 1 Day: ROC Curve
 
 
-::::: {.absolute left="0%" bottom="0%" width="300px" height="auto"}
-::::: {style="font-size: 75%;"}
 :::::{.callout-tip icon=false}
 ## Coarse rules of thumb for AUC 
 .70 - .80 are considered fair  
 .80 - .90 are considered good  
 \> .90 are considered excellent  
-:::::
-:::::
 :::::
 
 
@@ -643,15 +631,11 @@ auROC
 - [Next week = 0.90; [0.88 - 0.91]]{style="color: orange;"}
 - [Next day  = 0.91; [0.89 - 0.92]]{style="color: green;"}
 
-::::: {.absolute left="0%" bottom="0%" width="300px" height="auto"}
-::::: {style="font-size: 75%;"}
 :::::{.callout-tip icon=false}
 ## Coarse rules of thumb for AUC 
 .70 - .80 are considered fair  
 .80 - .90 are considered good  
 \> .90 are considered excellent  
-:::::
-:::::
 :::::
 
 
@@ -661,7 +645,7 @@ auROC
 :::: {.column width="50%"}
 
 <!--ROC Curve for Week & Day-->
-{{< embed ../../../notebooks/ema_figs_probability.qmd#roc-week_day >}}
+{{< embed ../../../notebooks/ema_figs_probability.qmd#fig-roc_week_day >}}
 
 ::::
 :::
@@ -691,15 +675,11 @@ auROC
 - [Next day  = 0.91; [0.89 - 0.92]]{style="color: green;"}
 - [Next hour = 0.93; [0.92 - 0.94]]{style="color: blue;"}
 
-::::: {.absolute left="0%" bottom="0%" width="300px" height="auto"}
-::::: {style="font-size: 75%;"}
 :::::{.callout-tip icon=false}
 ## Coarse rules of thumb for AUC 
 .70 - .80 are considered fair  
 .80 - .90 are considered good  
 \> .90 are considered excellent  
-:::::
-:::::
 :::::
 
 
@@ -709,7 +689,7 @@ auROC
 :::: {.column width="50%"}
 
 <!--ROC Curve for All-->
-{{< embed ../../../notebooks/ema_figs_probability.qmd#roc-all >}}
+{{< embed ../../../notebooks/ema_figs_probability.qmd#fig-roc_all >}}
 ::::
 
 :::
