@@ -49,8 +49,6 @@ We have a mental health crisis in the U.S. and it is a crisis of **unmet** high 
 In 2019, **more than half of the 52 million Americans** with an active mental illness did not receive any treatment. **More than half**!
 :::
 
-
-
 -----------------------------------------------------------------------------
 
 ## Mental Healthcare Needs are High and Unmet  {.smaller}
@@ -64,13 +62,10 @@ In 2019, **more than half of the 52 million Americans** with an active mental il
 
 
 ::: {.notes}
-
-
 And for the 20 million adults suffering with a substance use disorder, it was worse still.
 
 **9 out of 10 without any treatment**
 :::
-
 
 -----------------------------------------------------------------------------
 
@@ -180,10 +175,10 @@ Their power comes from easy, 24/7 access to their many supports - the treatments
 - Which of their many supports are best for me?
 
 - And which are best for me **right now**, at this moment in time?
-
 :::
 
 -----------------------------------------------------------------------------
+
 ## Precision Mental Health w/ Smart DTx
 
 **---UPDATE---**
@@ -231,7 +226,6 @@ Lapses
 
 ::: {.notes}
 UPDATE
-
 :::
 
 -----------------------------------------------------------------------------
@@ -245,6 +239,10 @@ Focus on our big three
 Justify including churn for other measures
 
 
+::: {.notes}
+UPDATE
+:::
+
 -----------------------------------------------------------------------------
 
 ## Lapse Prediction for AUD
@@ -252,7 +250,6 @@ Justify including churn for other measures
 **---UPDATE---**
 
 ::: {.columns}
-
 :::: {.column width="60%"}
 - 151 individuals with moderate to severe AUD
 - Early in recovery (1-8 weeks)
@@ -260,23 +257,15 @@ Justify including churn for other measures
 - Followed with sensing for up to 3 months
 ::::
 
-
 :::: {.column width="40%"}
 ![risk1_pis.png](https://github.com/jjcurtin/lectures/blob/main/images/risk1_pis.png?raw=true)\    
 ![niaaa_logo.png](https://github.com/jjcurtin/lectures/blob/main/images/niaaa_logo.png?raw=true)\    
-
-
 ::::
-
-
 :::
 
 NEED TO UPDATE THIS GOAL TO FOCUS ON BIG THREE BUT ALSO TEMPORALLY PRECISE
 
 [GOAL:]{style="color: red;"} Develop a temporally precise lapse monitoring (prediction) system for patients with AUD
-
-
-
 
 ::: {.notes}
 So let me transition now to describing how we are taking the first baby steps toward developing smart digital therapeutics for SUD
@@ -286,7 +275,6 @@ We have recently completed a NIAAA funded project where we collected data from 1
 These participants were committed to abstinence at the start of the study and we followed them for up to 3 months, collecting a variety of active and passive personal sensing data streams.
 
 Our first goal with this grant was to develop machine learning algorithms that can generate temporally precise predictions about when future lapses back to alcohol use will occur for patients with AUD.
-
 :::
 
 -----------------------------------------------------------------------------
@@ -296,6 +284,12 @@ Our first goal with this grant was to develop machine learning algorithms that c
 **-UPDATE---**
 
 Kendra slide?
+
+::: {.notes}
+UPDATE
+:::
+
+-----------------------------------------------------------------------------
 
 ## Sensing
 
@@ -341,13 +335,11 @@ We are in the early stages of model building at this point and I will focus toda
 UPDATE FLOW WITH LAST SLIDE.  FOCUS ON EMA
 
 ::: {.columns}
-
 :::: {.column width="60%"}
 ![risk1_ema_questions.png](https://github.com/jjcurtin/lectures/blob/main/images/risk1_ema_questions.png?raw=true){.absolute width="60%" top="15%" height="auto"}\    
 ::::
 
 :::: {.column width="30%"}
-
 - Current
   - Craving
   - Affect
@@ -360,7 +352,6 @@ UPDATE FLOW WITH LAST SLIDE.  FOCUS ON EMA
   - Stressful events
   - Confidence
 ::::
-
 :::
 
 ::: {.notes}
@@ -384,6 +375,10 @@ slide or slides from Kenra maybe??
 Do fast and highlight these were important when we started this work but some audiences still have questions
 
 
+::: {.notes}
+UPDATE
+:::
+
 -----------------------------------------------------------------------------
 
 ## Modeling: Predictions 
@@ -396,7 +391,6 @@ Do fast and highlight these were important when we started this work but some au
   - 1 week
 
 ::: {.notes}
-
 For our purposes today I wont dive deep into the machine learning methods but let me highlight a few high level details 
 
 We used these features I just described to make predictions about the hour-by-hour probability of a future lapse.  We are developing separate models for three future lapse windows – lapses in the next hour, lapses in the next day, and lapses in the next week.  
@@ -404,13 +398,11 @@ We used these features I just described to make predictions about the hour-by-ho
 For example, if I was in recovery from an AUD, I could use these models to generate the probability that I would lapse after this symposium starting at 10am.  One model would generate the probability of a lapse between 10am and 11 am today, the second would predict the probability of a lapse between 10 am today and 10 am tomorrow and the third would provide the probability of a lapse anytime between 10am today and 10 am next Friday  
 
 And of course, all of the models would only use data collected prior to 10 am today so that they are “predicting”, in the full sense of the word, into the future and not just demonstrating an association.
-
 :::
 
 -----------------------------------------------------------------------------
 
 ## Modeling: Algorithms and Resampling
-
 
 - XGBoost - Boosted decision trees
   - ElasticNet GLM (e.g., LASSO, ridge regression)
@@ -434,16 +426,13 @@ We are evaluating machine learning model configurations that differ by common st
 ## Modeling: Area under ROC curve (auROC) 
 
 ::: {.columns}
-
 :::: {.column width="50%"}
 - 0.50 for random classifier
 ::::
 
-
 :::: {.column width="50%"}
 {{< embed ../../../notebooks/ema_figs_probability.qmd#fig-roc_random >}}
 ::::
-
 :::
 
 ::: {.notes}
@@ -455,17 +444,14 @@ We are evaluating machine learning model configurations that differ by common st
 ## Modeling: Area under ROC curve (auROC) 
 
 ::: {.columns}
-
 :::: {.column width="50%"}
 - [0.50 for random classifier]{style="color: gray;"}
 - 1.00 for perfect classifer
 ::::
 
-
 :::: {.column width="50%"}
 {{< embed ../../../notebooks/ema_figs_probability.qmd#fig-roc_perfect >}}
 ::::
-
 :::
 
 ::: {.notes}
@@ -477,7 +463,6 @@ We are evaluating machine learning model configurations that differ by common st
 ## Modeling: Area under ROC curve (auROC) 
 
 ::: {.columns}
-
 :::: {.column width="50%"}
 - [0.50 for random classifier]{style="color: gray;"}
 - [1.00 for perfect classifer]{style="color: gray;"}
@@ -487,7 +472,6 @@ We are evaluating machine learning model configurations that differ by common st
 :::: {.column width="50%"}
 {{< embed ../../../notebooks/ema_figs_probability.qmd#fig-roc_perfect >}}
 ::::
-
 :::
 
 ::: {.notes}
@@ -518,15 +502,12 @@ We also calculated counts of past lapses and counts of past EMAs completed to in
 And we included these scores both in raw form and as change from baselines for the participant based on all their previous responses since the start of the study.
 :::
 
-
 -----------------------------------------------------------------------------
 
 ## 1 Week: Probabilities for No Lapse and Lapse
 
 ::: {.columns}
-
 :::: {.column width="60%"}
-
 - Model predicts [probability]{style="color: red;"} of lapse in next week for “[new]{style="color: red;"}” observations in test sets
 
 - Can panel predictions by [Ground Truth]{style="color: red;"} (i.e., true lapse vs. no lapse observations
@@ -534,12 +515,9 @@ And we included these scores both in raw form and as change from baselines for t
 - Want high probabilities to be high for true lapses and low for true no lapses
 ::::
 
-
 :::: {.column width="40%"}
-
 <!--Lapse Probability by Ground Truth"-->
 {{< embed ../../../notebooks/ema_figs_probability.qmd#fig-week-no_dec_thres >}}
-
 ::::
 :::
 
@@ -555,14 +533,11 @@ Ideally, you want the predicted probabilities to be very high for weeks when the
 And this is exactly what we see for the one week lapse window model
 :::
 
-
 -----------------------------------------------------------------------------
-
 
 ## 1 Week: ROC Curve
 
 ::: {.columns}
-
 :::: {.column width="50%"}
 
 auROC
@@ -570,20 +545,17 @@ auROC
 - [Next week = 0.90; [0.88 - 0.91]]{style="color: orange;"}
 
 :::::{.callout-tip icon=false}
-## Coarse rules of thumb for AUC 
+## Coarse rules of thumb for auROC 
 .70 - .80 are considered fair  
 .80 - .90 are considered good  
 \> .90 are considered excellent  
 :::::
-
 ::::
-
 
 :::: {.column width="50%"}
 <!--ROC Curve for Week-->
 {{< embed ../../../notebooks/ema_figs_probability.qmd#fig-roc_week >}}
 ::::
-
 :::
 
 ::: {.notes}
@@ -592,29 +564,27 @@ But as I said, depending on the application, we may not want to always use a .5 
 The area under this curve can range from approximately .5 for a random classifier to 1.0 for a classifier that performs perfectly.  
 
 And the AUC for our 1 week model is .90, which is generally considered excellent performance.  
-
 :::
 
 -----------------------------------------------------------------------------
 
 ## 1 Day: ROC Curve
 
+auROC
+
+- [Next week = 0.90; [0.88 - 0.91]]{style="color: orange;"}
 
 :::::{.callout-tip icon=false}
-## Coarse rules of thumb for AUC 
+## Coarse rules of thumb for auROC 
 .70 - .80 are considered fair  
 .80 - .90 are considered good  
 \> .90 are considered excellent  
 :::::
 
-
 ::: {.notes}
 So we were very encouraged by the performance of this model because it exceeded the performance of the only other published week level lapse prediction model that we were aware of.   
 
 But we were also eager to see how well we could do if we required a higher level of temporal precision by developing a day level model.
-
-
-
 :::
 
 -----------------------------------------------------------------------------
@@ -623,30 +593,23 @@ But we were also eager to see how well we could do if we required a higher level
 ## 1 Day: ROC Curve
 
 ::: {.columns}
-
 :::: {.column width="50%"}
-
 auROC
 
 - [Next week = 0.90; [0.88 - 0.91]]{style="color: orange;"}
 - [Next day  = 0.91; [0.89 - 0.92]]{style="color: green;"}
 
 :::::{.callout-tip icon=false}
-## Coarse rules of thumb for AUC 
+## Coarse rules of thumb for auROC 
 .70 - .80 are considered fair  
 .80 - .90 are considered good  
 \> .90 are considered excellent  
 :::::
-
-
 ::::
 
-
 :::: {.column width="50%"}
-
 <!--ROC Curve for Week & Day-->
 {{< embed ../../../notebooks/ema_figs_probability.qmd#fig-roc_week_day >}}
-
 ::::
 :::
 
@@ -656,19 +619,14 @@ And here is the ROC curve and the AUC for the day level model in green, superimp
 The day level model performed as well as, if not better, than the week level model with an AUC of .91
 
 [PAUSE]
-
-
 :::
 
 -----------------------------------------------------------------------------
 
-
 ## 1 Hour: ROC Curve
 
 ::: {.columns}
-
 :::: {.column width="50%"}
-
 auROC
 
 - [Next week = 0.90; [0.88 - 0.91]]{style="color: orange;"}
@@ -676,59 +634,43 @@ auROC
 - [Next hour = 0.93; [0.92 - 0.94]]{style="color: blue;"}
 
 :::::{.callout-tip icon=false}
-## Coarse rules of thumb for AUC 
+## Coarse rules of thumb for auROC 
 .70 - .80 are considered fair  
 .80 - .90 are considered good  
 \> .90 are considered excellent  
 :::::
-
-
 ::::
 
-
 :::: {.column width="50%"}
-
 <!--ROC Curve for All-->
 {{< embed ../../../notebooks/ema_figs_probability.qmd#fig-roc_all >}}
 ::::
-
 :::
 
 ::: {.notes}
-
-And it turns out that we can do somewhat better still with hour level predictions.  Here the blur curve represents the ROC curve for the hour level model, which had the best AUC yet, .93
+And it turns out that we can do somewhat better still with hour level predictions.  Here the blue curve represents the ROC curve for the hour level model, which had the best AUC yet, .93
 
 [PAUSE]
-
-
 :::
 
 -----------------------------------------------------------------------------
-
 
 ## Global Feature Importance
 
 **--UPDATE FIGURE--**
 
 ::: {.columns}
-
 :::: {.column width="50%"}
-
 - All EMA items impact lapse probability (both globally and locally)
-
 ::::
 
 :::: {.column width="50%"}
-
 <!--Global SHAP Plot-->
-
 <!-- 
 TEMP DISABLED FOR QUICK PUBLISH
 embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >}}
 -->
-
 ::::
-
 :::
 
 ::: {.notes}
@@ -740,7 +682,6 @@ First, all of EMA items affect predictions about lapse probability globally acro
 
 To make these values somewhat meaningful for you, let me remind you these Sh
 [logodds of .4 = 1.5 odds;  logodds of .7 = double the odds]
-
 :::
 
 -----------------------------------------------------------------------------
@@ -748,37 +689,32 @@ To make these values somewhat meaningful for you, let me remind you these Sh
 ## Global Feature Importance
 
 ::: {.columns}
-
 :::: {.column width="50%"}
-
 - [All EMA items impact lapse probability (both globally and locally)]{style="color: grey;"}
 - Demographics not particularly important (but limited race/ethnicity diversity)
 - Lapse day and Lapse hour are useful for day and hour level models as expected
 ::::
 
 :::: {.column width="50%"}
-
 <!-- INSERT FIG  -->
-
 ::::
-
-
 :::
 
 ::: {.notes}
 Returning back to the global feature importance plot, we also see that demographics were not particularly important for prediction lapses for these models.   However, I'll return later to acknowledged that we had limited race/ethnicity diversity in the sample.  Nonetheless, we had reasonable variable on other participant characteristics like sex, SES, education, and addiction severity.  
 
 And finally, we see that we can use lapse day and lapse hour to make predictions with the more temporally precise models.  Not surprisingly, people are more likely to lapse on weekends and during evening hours and the associated day and hour level models models can use that information to improve their lapse predictions.  These features likely contribute to the superior performance of the hour and to a lesser extent the day model relative to the week interval prediction model.
-
 :::
 
 -----------------------------------------------------------------------------
-
 
 ## Algorithmic Fairness
 
 **--NEED FIG AND TEXT--**
 
+::: {.notes}
+UPDATE
+:::
 
 -----------------------------------------------------------------------------
 
@@ -788,6 +724,10 @@ Do NOT predict class labels  (Lapse vs. No-Lapse)
 
 - Information loss
 - Iatriogenic effects
+
+::: {.notes}
+UPDATE
+:::
 
 -----------------------------------------------------------------------------
 
@@ -801,12 +741,15 @@ Do NOT predict class labels  (Lapse vs. No-Lapse)
 
 **--NEED FIG---**
 
+::: {.notes}
+UPDATE
+:::
+
 -----------------------------------------------------------------------------
 
 ## Clinical Uses: DO Use Lapse Probabilities
 
 ::: {.columns}
-
 :::: {.column width="50%"}
 - auROC
 
@@ -818,7 +761,6 @@ Do NOT predict class labels  (Lapse vs. No-Lapse)
 :::: {.column width="50%"}
 <!-- blank  -->
 ::::
-
 :::
 
 ::: {.notes}
@@ -829,10 +771,7 @@ INSERT NOTES
 
 ## Clinical Uses: DO Use Lapse Probabilities
 
-
-
 ::: {.columns}
-
 :::: {.column width="50%"}
 - [auROC]{style="color: gray;"}
 
@@ -846,7 +785,6 @@ INSERT NOTES
 :::: {.column width="50%"}
 {{< embed ../../../notebooks/ema_figs_probability.qmd#fig-calibration_plot_day >}}
 ::::
-
 :::
 
 ::: {.notes}
@@ -858,7 +796,6 @@ INSERT NOTES
 ## Clinical Uses: DO Use Lapse Probabilities
 
 ::: {.columns}
-
 :::: {.column width="50%"}
 - [auROC]{style="color: gray;"}
 
@@ -872,7 +809,6 @@ INSERT NOTES
 :::: {.column width="50%"}
 {{< embed ../../../notebooks/ema_figs_probability.qmd#fig-calibration_plot_day >}}
 ::::
-
 :::
 
 ::: {.notes}
@@ -891,6 +827,10 @@ Push week model into future
 
 FIGURE
 
+::: {.notes}
+INSERT NOTES
+:::
+
 -----------------------------------------------------------------------------
 
 ## Clinical Uses: Who and When?
@@ -903,6 +843,9 @@ Push week model into future
 
 FIGURE
 
+::: {.notes}
+INSERT NOTES
+:::
 
 -----------------------------------------------------------------------------
 
@@ -921,9 +864,8 @@ embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_week >}}
 
 
 ::: {.notes}
-
+UPDATE
 :::
-
 
 -----------------------------------------------------------------------------
 
@@ -938,7 +880,6 @@ embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_week >}}
 One of the key next steps is to develop models that rely more on passive sensing rather than EMA to lower the patient burden of using these systems long term and to gain access to signals that may not be available by self-report.
 
 Let's take a look at two of the more revealing personal sensing methods that we are developing to provide you with some intuition about how we think this will work.
-
 :::
 
 -----------------------------------------------------------------------------
@@ -981,17 +922,16 @@ In addition to geolocation, we also collected my smartphone communications logs 
 And no such luck, I don't plan to show you my actual text messages!
 
 But imagine what we could learn about me from the patterns of my communications - Who I was calling, when I made those calls, and even the content of what I sent and received by text message.
-
 :::
 
 -----------------------------------------------------------------------------
 
 ## Context is Critical
 
+<!--intentional blank page-->
 
 ::: {.notes}
 We believe we can improve the predictive strength of these geolocation and communication signals even further by identifying the specific people and places that make us happy or sad or stressed, those that we perceive support our mental health and recovery and those who undermine it.
-
 :::
 
 -----------------------------------------------------------------------------
@@ -1000,14 +940,11 @@ We believe we can improve the predictive strength of these geolocation and commu
 ![smartphone_context.png](https://github.com/jjcurtin/lectures/blob/main/images/smartphone_context.png?raw=true){.absolute top="15%" left="33%" width="33%" height="auto"}\ 
 
 ::: {.notes}
-
-
 For example, consider the implications of this brief text message thread between a hypothetical patient and their drinking buddy for what you might predict for the probability that they might lapse back to drinking in the coming hours.   
 
 ... And how would your prediction change if this wasn’t their drinking buddy but instead, their mom who was a big supporter of their recovery.
 
 This interpersonal context matters!!!
-
 :::
 
 -----------------------------------------------------------------------------
@@ -1021,7 +958,6 @@ This interpersonal context matters!!!
 We can gather this contextual information quickly by asking a few key questions about the people and places we interact with frequently over the first couple of months that we record these signals.  And we can identify these frequent contacts and locations directly from these signals.
 
 In our current projects, we target people and places that we interact with at least twice a month or more for more detailed follow-up to gather context.    And it turns out that this really isn’t that burdensome.   Most of us are creatures of habit and if we set a threshold for 2x monthly interactions, we typically only have 10-30 people and places that meet this threshold.   And it’s the same people and places each month so we can build this context up when the person first starts to use the system and after that it only needs to be updated occasionally when we go somewhere new or make a new friend.
-
 :::
 
 -----------------------------------------------------------------------------
@@ -1031,7 +967,7 @@ In our current projects, we target people and places that we interact with at le
 ![context_gps.png](https://github.com/jjcurtin/lectures/blob/main/images/context_gps.png?raw=true){width="75%"}\ 
 
 ::: {.notes}
-
+UPDATE
 :::
 
 -----------------------------------------------------------------------------
@@ -1041,7 +977,7 @@ In our current projects, we target people and places that we interact with at le
 ![context_cell.png](https://github.com/jjcurtin/lectures/blob/main/images/context_cell.png?raw=true){width="75%"}\ 
 
 ::: {.notes}
-
+UPDATE
 :::
 
 -----------------------------------------------------------------------------
@@ -1050,20 +986,17 @@ In our current projects, we target people and places that we interact with at le
 
 ::: {.columns}
 :::: {.column width="50%"}
-
 - Focus on recent past experiences (6, 12, 24, 48, 72, 168 hours)
 
 - Raw scores and change scores (from baseline)
 
 - Time spent at important places (e.g, alcohol present, drank at location in past, risky, unpleasant)
-
 ::::
 
 :::: {.column width="50%"}
 ![feature_gps.png](https://github.com/jjcurtin/lectures/blob/main/images/feature_gps.png?raw=true)\ 
 ::::
 :::
-
 
 ::: {.notes}
 To be clear, we have only just begun to train models using GPS.   We have started by focusing on recent locations…..
@@ -1079,10 +1012,7 @@ However, when we add GPS to the EMA models that I described today, we appear to 
 The story is pretty much the same right now for cellular communications as well.   At this point we have only worked with the meta data – the contact numbers, call times, durations, etc – combined with context.   We haven’t yet done anything with the text message content.   And models built from the meta data perform about as well at these preliminary GPS models.
 
 But we are hoping to extract more signal from the both of these as we continue to work on feature engineering with it.
-
 :::
-
-
 
 -----------------------------------------------------------------------------
 
@@ -1130,7 +1060,6 @@ Models trained on these participants would be unlikely to work well with black a
 
 Machine learning models must be trained on diverse samples of patients or their use may exacerbate rather than reduce existing mental healthcare disparities. 
 :::
-
 
 -----------------------------------------------------------------------------
 
