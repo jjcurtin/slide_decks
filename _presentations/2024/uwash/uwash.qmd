@@ -168,38 +168,33 @@ Their power comes from easy, 24/7 access to their many supports - the treatments
 
 ## Precision Mental Health w/ Smart DTx
 
-**---UPDATE---**
+- Precision mental health requires us to provide the right treatments and supports to the right people at the right time, every time
 
-.....THESE ARE ESSENTIALLY PRECICION MENTAL HEALTH QUESTIONS---
+- Current DTx can already help with "every time"
 
+- Smart DTx can address "who", "when" & "why"
 
-idea that DTx begin to address the every time piece
-
-Show how use of sensiing and machline learming algos can address the who, when and what
-And these apps will do this through the use of built-in artificial intelligence or machine learning algorithms that are powered by personal sensing.
-
-<!-- 
-## Smart Digital Therapeutics
+  - Sensing
+  - AI/Machine learning
 
 > “Could you predict not only [who]{style="color: red;"} might be at greatest risk for relapse … <br>
  … but precisely [when]{style="color: red;"} that relapse might occur … <br>
  … and how [best to intervene]{style="color: red;"} to prevent it?"
+**---UPDATE---**
 
+
+ 
 ::: {.notes}
-My research team became interested in these issues when my colleague Dave Gustafson, the developer of a leading digital therapeutic for substance use disorders, approached us with a simple question. He asked...
+UPDATE
 
-"Could you predict not only who might be at greatest risk for relapse
-but precisely when that relapse might occur and
-how best to intervene to prevent it"
+These are essentially precision mental health questions about providing the right interventions and supports to the right people at the right time, every time
 
-Dave had just completed a large study demonstrating the effectiveness of his app. However, he also noticed many of the people who relapsed hadn't used the app in the days leading up to that relapse.  And others who had relapsed hadn't used the specific supports in the app that he would have thought would be most effective for them.
 
-The next wave of digital therapeutics, lets call them smart digital therapeutics, must learn to know us well enough to recognize when we are at greatest risk for relapse and they must be smart enough to recommend the specific supports that would be most effective for us at that moment in time to prevent that relapse.
+This next wave of digital therapeutics, lets call them smart digital therapeutics, must learn to know us well enough to recognize when we are at greatest risk for relapse and they must be smart enough to recommend the specific supports that would be most effective for us at that moment in time to prevent that relapse.
 
+And we believe digital therapeutics can provide this personalized care if we enhance them with embedded sensing capabilities and machine learning risk prediction models 
 And these apps will do this through the use of built-in artificial intelligence or machine learning algorithms that are powered by personal sensing.
-
 :::
- -->
 
 -----------------------------------------------------------------------------
 
@@ -208,6 +203,14 @@ And these apps will do this through the use of built-in artificial intelligence 
 **---UPDATE---**
 
 NORA with AVE back in
+
+
+
+- Clearly defined
+- They have a temporally precise onset
+- They precede but often predict relapse and therefore can serve as an early warning sign
+- Clinically, we know that abstinence violation effects can increase relapse risk
+- And looking ahead to opioids and other substances, even single lapses can result in overdoses and deaths
 
 
 -----------------------------------------------------------------------------
