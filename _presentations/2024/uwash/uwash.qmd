@@ -704,8 +704,6 @@ And finally, we see that we can use lapse day and lapse hour to make predictions
 
 -----------------------------------------------------------------------------
 
------------------------------------------------------------------------------
-
 ## Clinical Uses: DO NOT Predict Lapses
 
 ::: {.columns}
