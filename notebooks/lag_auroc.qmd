@@ -1,0 +1,119 @@
+---
+title: auROCs for Lagged models 
+author: John Curtin 
+editor_options: 
+  chunk_output_type: console
+---
+
+
+NOTE THESE ARE TEMP FIGS BASD ON  INNER LOOP PERFORMANCE.  NEED TO UPDATE TO OUTER LOOP AND ALSO TO FILES THAT START WITH POSTERIOR.
+
+## Set up
+```{r}
+# handle conflicts
+options(conflicts.policy = "depends.ok")
+
+library(tidyverse)
+library(tidyposterior)
+theme_set(theme_classic()) 
+
+# Paths
+devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true",
+                     sha1 = "a58e57da996d1b70bb9a5b58241325d6fd78890f")
+# source("../../lab_support/format_path.R")
+path_lag <- format_path(str_c("studydata/risk/models/lag"))
+```
+
+## Get/Process data
+
+This commented out code chunk makes a tmp file of 300 inner folds for each of 5 models and saves on server.   This will change once we have outer loop performance.
+```{r}
+#inner_lag <- read_csv(file.path(path_lag, 
+#                                 "inner_metrics_1week_0_v2_nested_main.csv"),
+#                       col_types = cols()) |> 
+#  mutate(lag = 0) |> 
+#  bind_rows(read_csv(file.path(path_lag, 
+#                                 "inner_metrics_1week_24_v2_nested_main.csv"),
+#                       col_types = cols()) |> 
+#  mutate(lag = 24)) |> 
+#  bind_rows(read_csv(file.path(path_lag, 
+#                                 "inner_metrics_1week_72_v2_nested_main.csv"),
+#                       col_types = cols()) |> 
+#  mutate(lag = 72)) |> 
+#  bind_rows(read_csv(file.path(path_lag, 
+#                                   "inner_metrics_1week_168_v2_nested_main.csv"),
+#                         col_types = cols()) |> 
+#  mutate(lag = 168)) |> 
+#  bind_rows(read_csv(file.path(path_lag, 
+#                                   "inner_metrics_1week_336_v2_nested_main.csv"),
+#                         col_types = cols()) |> 
+#  mutate(lag = 336)) |> 
+#  glimpse()
+#
+#inner_best <- inner_lag |> 
+#  group_by(algorithm, feature_set, hp1, hp2, hp3, resample, lag)  |>  
+#    summarize(across(c(accuracy, bal_accuracy, roc_auc, sens, spec, ppv, npv),
+#                     median),
+#              n_jobs = n(), .groups = "drop") |> 
+#  group_by(lag) |> 
+#  arrange(desc(roc_auc)) |> 
+#  slice(1) |> 
+#  rename(med_roc_auc = roc_auc) |> 
+#  select(lag, algorithm, hp1, hp2, hp3, resample, med_roc_auc, n_jobs)
+#
+#inner_lag <- inner_lag |> 
+#  full_join(inner_best, by = c("lag", "algorithm", "hp1", "hp2", "hp3", "resample")) |> 
+#  filter(!is.na(med_roc_auc))
+
+
+inner_lag <- read_csv(here::here(path_lag, "tmp_300folds.csv"))
+```
+
+NOTE: THIS IS ALSO NOT QUITE RIGHT. NEED TO BE MODELED ON FOLDS AND REPEATS
+```{r}
+#set.seed(101)
+#pp <- inner_lag |> 
+#  select(outer_split_num, inner_split_num, lag, roc_auc) |> 
+#  pivot_wider(names_from = lag, values_from = roc_auc) |> 
+#  rename(id = outer_split_num,
+#         id2 = inner_split_num) |> 
+#  perf_mod(formula = statistic ~ model + (1 | id2/id),
+#         transform = tidyposterior::logit_trans,  # for skewed & bounded AUC
+#         adapt_delta = .99,
+#         family = gaussian, 
+#)  
+
+#pp_tidy <- pp |> 
+#  tidy(seed = 123) 
+
+#q = c(.025, .5, .975)
+#ci <- pp_tidy |> 
+#  group_by(model) |> 
+#  summarize(pp_median = quantile(posterior, probs = q[2]),
+#            pp_lower = quantile(posterior, probs = q[1]), 
+#            pp_upper = quantile(posterior, probs = q[3])) |> 
+#   mutate(model = factor(model, levels = c(0, 24, 72, 168, 336),
+#                        labels = c("0 lag", "24 lag", "72 lag", "168 lag", "336 lag"))) |> 
+#   arrange(model)
+
+ci <- read_csv(here::here(path_lag, "tmp_ci.csv"))
+```
+
+```{r}
+#| label: fig-lag-posteriors
+
+pp_tidy |> 
+  mutate(model = factor(model, levels = c(0, 24, 72, 168, 336),
+                        labels = c("0 lag", "24 lag", "72 lag", "168 lag", "336 lag"))) |>
+  ggplot() + 
+  geom_histogram(aes(x = posterior), color = "#4A235A", fill = "#D7BDE2",
+                 bins = 50) +
+  geom_segment(mapping = aes(y = y+100, yend = y-100, x = pp_median, xend = pp_median),
+               data = ci) +
+  geom_segment(mapping = aes(y = y, yend = y, x = pp_lower, xend = pp_upper),
+                data = ci) +
+  facet_wrap(~model, ncol = 1) +
+  scale_y_continuous("Posterior Probability", breaks = c(0, 500, 1000)) +
+  xlab("Area Under ROC Curve") +
+  theme(legend.position = "none")
+```

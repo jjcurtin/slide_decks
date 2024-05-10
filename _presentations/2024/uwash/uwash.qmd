@@ -293,7 +293,7 @@ We are in the early stages of model building at this point and I will focus toda
 
 -----------------------------------------------------------------------------
 
-## PARTICIPANT CHARACTERISTICS
+## Participant Characteristics
 
 {{< embed ../../../notebooks/ema_demographics.qmd#fig-demographics >}}
 
@@ -305,9 +305,6 @@ UPDATE
 
 ## Ecological Momentary Assessments 
  
-**---UPDATE---**
-UPDATE FLOW WITH LAST SLIDE.  FOCUS ON EMA
-
 ::: {.columns}
 :::: {.column width="60%"}
 ![risk1_ema_questions.png](https://github.com/jjcurtin/lectures/blob/main/images/risk1_ema_questions.png?raw=true){.absolute width="60%" top="15%" height="auto"}\    
@@ -329,6 +326,9 @@ UPDATE FLOW WITH LAST SLIDE.  FOCUS ON EMA
 :::
 
 ::: {.notes}
+UPDATE
+
+
 So let me tell you a bit more about the 4x daily EMA we collected.  
 
 On each EMA, participants reported the date and time of any lapses back to alcohol use that they hadn’t previously reported. 
@@ -513,7 +513,6 @@ And this is exactly what we see for the one week lapse window model
 
 ::: {.columns}
 :::: {.column width="50%"}
-
 auROC
 
 - [Next week = 0.90; [0.88 - 0.91]]{style="color: orange;"}
@@ -544,6 +543,8 @@ And the AUC for our 1 week model is .90, which is generally considered excellent
 
 ## 1 Day: ROC Curve
 
+::: {.columns}
+:::: {.column width="50%"}
 auROC
 
 - [Next week = 0.90; [0.88 - 0.91]]{style="color: orange;"}
@@ -554,6 +555,12 @@ auROC
 .80 - .90 are considered good  
 \> .90 are considered excellent  
 :::::
+::::
+
+:::: {.column width="50%"}
+<!--Blank-->
+::::
+:::
 
 ::: {.notes}
 So we were very encouraged by the performance of this model because it exceeded the performance of the only other published week level lapse prediction model that we were aware of.   
@@ -629,6 +636,14 @@ And it turns out that we can do somewhat better still with hour level prediction
 
 -----------------------------------------------------------------------------
 
+## Algorithmic Fairness
+
+**--NEED FIG AND TEXT--**
+
+::: {.notes}
+UPDATE
+:::
+
 ## Global Feature Importance
 
 **--UPDATE FIGURE--**
@@ -648,6 +663,9 @@ embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >}}
 :::
 
 ::: {.notes}
+UPDATE
+
+
 In the spirit of making this model more transparent and interpretable, lets briefly look under the hood at the feature importance
 
 The plot on the right shows feature names and their associated importance indexed by mean absolute SHAP values over all observations.  From this we see a few important characteristics of the model.   
@@ -665,39 +683,43 @@ To make these values somewhat meaningful for you, let me remind you these Sh
 ::: {.columns}
 :::: {.column width="50%"}
 - [All EMA items impact lapse probability (both globally and locally)]{style="color: grey;"}
-- Demographics not particularly important (but limited race/ethnicity diversity)
+- Demographics not particularly important (but limited race/ethnic diversity)
 - Lapse day and Lapse hour are useful for day and hour level models as expected
 ::::
 
 :::: {.column width="50%"}
-<!-- INSERT FIG  -->
+<!--Global SHAP Plot-->
+<!-- 
+TEMP DISABLED FOR QUICK PUBLISH
+embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >}}
+-->
 ::::
 :::
 
 ::: {.notes}
-Returning back to the global feature importance plot, we also see that demographics were not particularly important for prediction lapses for these models.   However, I'll return later to acknowledged that we had limited race/ethnicity diversity in the sample.  Nonetheless, we had reasonable variable on other participant characteristics like sex, SES, education, and addiction severity.  
+We also see that demographics were not particularly important for prediction lapses for these models.   However, I'll return later to acknowledged that we had limited race/ethnicity diversity in the sample.  Nonetheless, we had reasonable variable on other participant characteristics like sex, SES, education, and addiction severity.  
 
 And finally, we see that we can use lapse day and lapse hour to make predictions with the more temporally precise models.  Not surprisingly, people are more likely to lapse on weekends and during evening hours and the associated day and hour level models models can use that information to improve their lapse predictions.  These features likely contribute to the superior performance of the hour and to a lesser extent the day model relative to the week interval prediction model.
 :::
 
 -----------------------------------------------------------------------------
 
-## Algorithmic Fairness
-
-**--NEED FIG AND TEXT--**
-
-::: {.notes}
-UPDATE
-:::
-
 -----------------------------------------------------------------------------
 
 ## Clinical Uses: DO NOT Predict Lapses
 
-Do NOT predict class labels  (Lapse vs. No-Lapse)
+::: {.columns}
+:::: {.column width="50%"}
+DO NOT predict class labels  (Lapse vs. No-Lapse)
 
 - Information loss
 - Iatriogenic effects
+::::
+
+:::: {.column width="50%"}
+<!--Blank-->
+::::
+:::
 
 ::: {.notes}
 UPDATE
@@ -707,13 +729,19 @@ UPDATE
 
 ## Clinical Uses: DO NOT Predict Lapses
 
-Do NOT predict class labels  (Lapse vs. No-Lapse)
+::: {.columns}
+:::: {.column width="50%"}
+DO NOT predict class labels  (Lapse vs. No-Lapse)
 
 - [Information loss]{style="color: gray;"}
 - [Iatriogenic effects]{style="color: gray;"}
 - Low positive predictive values 
+::::
 
-**--NEED FIG---**
+:::: {.column width="50%"}
+embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >}}
+::::
+:::
 
 ::: {.notes}
 UPDATE
@@ -725,6 +753,8 @@ UPDATE
 
 ::: {.columns}
 :::: {.column width="50%"}
+DO use lapse probability
+
 - auROCs range from 0.90 - 0.93
 ::::
 
@@ -743,27 +773,10 @@ INSERT NOTES
 
 ::: {.columns}
 :::: {.column width="50%"}
+DO use lapse probability
+
 - [auROCs range from 0.90 - 0.93]{style="color: gray;"}
-- Probabilities are well-calibrated and ordinal
-::::
-
-:::: {.column width="50%"}
-{{< embed ../../../notebooks/ema_figs_probability.qmd#fig-calibration_plot_day >}}
-::::
-:::
-
-::: {.notes}
-INSERT NOTES
-:::
-
------------------------------------------------------------------------------
-
-## Clinical Uses: DO Use Lapse Probabilities
-
-::: {.columns}
-:::: {.column width="50%"}
-- [auROCs range from 0.90 - 0.93]{style="color: gray;"}
-- [Probabilities are calibrated and ordinal]{style="color: gray;"}
+- Probabilities are calibrated and ordinal
 - Provides fine gradations of relative risk for clinical decision-making
 ::::
 
@@ -780,29 +793,34 @@ INSERT NOTES
 
 ## Clinical Uses: Who and When?
 
-**--UPDATE--**
+::: {.columns}
+:::: {.column width="50%"}
+- Day and Hour models can be used for "just-in-time" interventions
+- Week model may be too coarse for JIT
+::::
 
-DAY and HOUR MODEL for JIT
-
-Push week model into future
-
-FIGURE
+:::: {.column width="50%"}
+<!-- blank  -->
+::::
+:::
 
 ::: {.notes}
 INSERT NOTES
 :::
 
------------------------------------------------------------------------------
-
-## Clinical Uses: Who and When?
-
 **--UPDATE--**
 
-DAY and HOUR MODEL for JIT
+::: {.columns}
+:::: {.column width="50%"}
+- [Day and Hour prediction windows can be used for "just-in-time" interventions]{style="color: gray;"}
+- [Week window may be too coarse for JIT]{style="color: gray;"}
+- Push week window further into the future support outside of DTx 
+::::
 
-Push week model into future
-
-FIGURE
+:::: {.column width="50%"}
+INSERT LAG FIGURE
+::::
+:::
 
 ::: {.notes}
 INSERT NOTES
