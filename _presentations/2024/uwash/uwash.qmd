@@ -1,5 +1,5 @@
 ---
-title: "Precision Mental Health for SUD:<br> Contributions from Sensing and Algorithms" 
+title: "Precision Mental Health for SUD: Contributions from Sensing and Algorithms" 
 author: "John J. Curtin, Ph.D."
 institute: "University of Wisconsin-Madison"
 date: May 13, 2024
@@ -33,7 +33,7 @@ include-after: |
         document.querySelector("div.has-logo > img.slide-logo").style.display = "none";
       }
     });
-  </script>    
+  </script>      
 ---
 
 ## Mental Healthcare Needs are High and Unmet  {.smaller}
