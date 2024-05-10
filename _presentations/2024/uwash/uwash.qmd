@@ -1,5 +1,5 @@
 ---
-title: "Precision Mental Health for Substance Use Disorders" 
+title: "Precision Mental Health for SUD:<br> Contributions from Sensing and Algorithms" 
 author: "John J. Curtin, Ph.D."
 institute: "University of Wisconsin-Madison"
 date: May 13, 2024
@@ -181,9 +181,7 @@ Their power comes from easy, 24/7 access to their many supports - the treatments
 
 ## Precision Mental Health w/ Smart DTx
 
-**---UPDATE---**
-
-- Precision mental health requires us to provide the right treatments and supports to the right people at the right time, every time
+- Precision mental health requires us to provide the [right treatments]{style="color: red;"} and supports to the [right people]{style="color: red;"} at the [right time]{style="color: red;"}, [every time]{style="color: red;"}
 
 - Current DTx can already help with "every time"
 
@@ -191,11 +189,6 @@ Their power comes from easy, 24/7 access to their many supports - the treatments
 
   - Sensing
   - AI/Machine learning
-
-> “Could you predict not only [who]{style="color: red;"} might be at greatest risk for relapse … <br>
- … but precisely [when]{style="color: red;"} that relapse might occur … <br>
- … and how [best to intervene]{style="color: red;"} to prevent it?"
-
 
 ::: {.notes}
 UPDATE
@@ -232,12 +225,31 @@ UPDATE
 
 ## Model Inputs: Sensing
 
-**---UPDATE---**
+Sensing requires:
 
-Focus on our big three
+- in vivo measurement
+- longitudinal
+- high temporal granularity 
 
-Justify including churn for other measures
+\
 
+Should be:
+
+- Consistent across platforms/devices
+- Stable/Low churn
+- Feasible/acceptable for long term use
+
+::: {.notes}
+UPDATE
+:::
+
+-----------------------------------------------------------------------------
+
+## Model Inputs: Sensing
+
+- Ecological Momentary Assessments (EMA)
+- Contextualized Geolocation
+- Contexualized smartphone communications
 
 ::: {.notes}
 UPDATE
@@ -247,14 +259,16 @@ UPDATE
 
 ## Lapse Prediction for AUD
 
-**---UPDATE---**
-
 ::: {.columns}
 :::: {.column width="60%"}
 - 151 individuals with moderate to severe AUD
 - Early in recovery (1-8 weeks)
 - Committed to abstinence throughout study
 - Followed with sensing for up to 3 months
+  - [Ecological Momentary Assessments]{style="color: red;"}
+  - Contextualized Geolocation
+  - Contexualized smartphone communications
+  - (also sensed physiology, sleep, coarse self-report)
 ::::
 
 :::: {.column width="40%"}
@@ -263,11 +277,9 @@ UPDATE
 ::::
 :::
 
-NEED TO UPDATE THIS GOAL TO FOCUS ON BIG THREE BUT ALSO TEMPORALLY PRECISE
-
-[GOAL:]{style="color: red;"} Develop a temporally precise lapse monitoring (prediction) system for patients with AUD
-
 ::: {.notes}
+UPDATE NOTES
+
 So let me transition now to describing how we are taking the first baby steps toward developing smart digital therapeutics for SUD
 
 We have recently completed a NIAAA funded project where we collected data from 151 participants who were in early recovery from a moderate to severe alcohol use disorder.  
@@ -275,56 +287,18 @@ We have recently completed a NIAAA funded project where we collected data from 1
 These participants were committed to abstinence at the start of the study and we followed them for up to 3 months, collecting a variety of active and passive personal sensing data streams.
 
 Our first goal with this grant was to develop machine learning algorithms that can generate temporally precise predictions about when future lapses back to alcohol use will occur for patients with AUD.
+
+We are in the early stages of model building at this point and I will focus today on results from preliminary models using only EMA.  However, we are actively working with GPS and cellular communications as well and I’ll end with some brief discussion of those preliminary models, as well as early plans on how to implement these models clinically to help patients.
 :::
 
 -----------------------------------------------------------------------------
 
 ## PARTICIPANT CHARACTERISTICS
 
-**-UPDATE---**
-
-Kendra slide?
+{{< embed ../../../notebooks/ema_demographics.qmd#fig-demographics >}}
 
 ::: {.notes}
 UPDATE
-:::
-
------------------------------------------------------------------------------
-
-## Sensing
-
-**---UPDATE---**
-REMIND THREE
-ADD SLEEP SENSORS AND PHYSIOLOGY ON SUBSET - INFORMED OUR PERSPECTIVE ON CHURN AND TECHNOLOGY EDGE
-
-- [4X daily ecological momentary assessments (EMA)]{style="color: red;"}
-
-- Monthly self-report
-
-- Geolocation (GPS)
-
-- Cellular communications (voice and text messages)
-  - Meta data
-  - Text message content
-
-- Sleep sensor (Wake/sleep times; sleep efficiency; wakings; restlessness)
-
-::: {.notes}
-As I mentioned, in this project, we collected a variety of active and passive personal sensing data streams.   
-
-Participants completed brief (7-10 item) ecological momentary assessments or EMAs, 4 times per day
-
-We also have 
-
-- more temporally coarse, monthly self reports, 
-
-- Moment by moment geolocation,
-
-- Meta data from their cellular communications and the actual content of their text messages, 
-
-- and we had sleep sensors in their beds.
-
-We are in the early stages of model building at this point and I will focus today on results from preliminary models using only EMA.  However, we are actively working with GPS and cellular communications as well and I’ll end with some brief discussion of those preliminary models, as well as early plans on how to implement these models clinically to help patients.
 :::
 
 -----------------------------------------------------------------------------
@@ -386,14 +360,14 @@ UPDATE
 - Predict hour-by-hour probability of [future lapse]{style="color: red;"}
 
 - Lapse window widths
-  - 1 hour
+  - 1 week 
   - 1 day
-  - 1 week
+  - 1 hour 
 
 ::: {.notes}
 For our purposes today I wont dive deep into the machine learning methods but let me highlight a few high level details 
 
-We used these features I just described to make predictions about the hour-by-hour probability of a future lapse.  We are developing separate models for three future lapse windows – lapses in the next hour, lapses in the next day, and lapses in the next week.  
+We used these features I just described to make predictions about the hour-by-hour probability of a future lapse.  We are developing separate models for three future lapse windows – lapses in the next week, lapses in the next day, and lapses in the next hour.  
 
 For example, if I was in recovery from an AUD, I could use these models to generate the probability that I would lapse after this symposium starting at 10am.  One model would generate the probability of a lapse between 10am and 11 am today, the second would predict the probability of a lapse between 10 am today and 10 am tomorrow and the third would provide the probability of a lapse anytime between 10am today and 10 am next Friday  
 
