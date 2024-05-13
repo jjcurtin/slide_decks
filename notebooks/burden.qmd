@@ -1,0 +1,282 @@
+---
+title: Burden Paper Plots
+author: Kendra & John
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+options(conflicts.policy = "depends.ok")
+library(tidyverse)
+theme_set(theme_classic())
+
+devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true")
+path_shared <- format_path("studydata/risk/data_processed/shared")
+path_ema <- format_path("studydata/risk/data_processed/ema")
+path_burden <- format_path("studydata/risk/data_processed/burden")
+```
+
+### Compliance
+
+```{r}
+visit_dates <- read_csv(here::here(path_shared, "visit_dates.csv"), 
+                        col_types = cols())
+
+ema_m <- read_csv(here::here(path_shared, "ema_morning.csv"), 
+                  col_types = cols()) |> 
+  mutate(start_date = with_tz(start_date, tzone = "America/Chicago"),
+         subid = as.numeric(subid))
+
+ema_l <- read_csv(here::here(path_shared, "ema_later.csv"), 
+                  col_types = cols()) |> 
+  mutate(start_date = with_tz(start_date, tzone = "America/Chicago"),
+         subid = as.numeric(subid))
+```
+
+```{r}
+disposition <- read_csv(here::here(path_ema, "disposition.csv"), 
+                        col_types = cols())
+
+get_study_days <- function(the_subid, dates) {
+  start_study <- dates |> filter(subid == the_subid) |> pull(start_study)
+  end_study <- dates |> filter(subid == the_subid) |> pull(end_study)
+  study_days <- tibble(subid = the_subid, study_day = seq(start_study, end_study - days(1), by = "day")) 
+  return(study_days)
+}
+
+sample <- disposition |> 
+  filter(analysis == "yes")
+
+subids <- sample$subid
+dates <- sample |> 
+  select(subid, start_study, end_study)
+
+study_dates <- subids |> 
+  map_dfr(~get_study_days(.x, dates))
+```
+
+
+
+
+
+
+```{r}
+ema <- ema_m |> 
+  select(subid, start_date) |> 
+  full_join(ema_l |> select(subid, start_date), 
+            by = c("subid", "start_date")) |> 
+  mutate(start_date = date(start_date)) |> 
+  filter(subid %in% subids)
+
+# count EMAs per day
+ema_count_4x <- ema |>  
+  count(subid, start_date) |>
+  mutate(n = if_else(n > 4, 4, as.numeric(n)))
+
+# left join with study dates
+ema_study_dates <- study_dates |>
+  left_join(ema_count_4x, by = c("subid", "study_day" = "start_date")) |> 
+  mutate(n = if_else(is.na(n), 0, n)) |> 
+  mutate(n_prompts = 4)
+
+# slice into 7 day bins
+ema_study_weeks <- ema_study_dates |> 
+  group_by(subid) |> 
+  slice(1:7) |> 
+  mutate(week = 1) |> 
+  bind_rows(ema_study_dates |> 
+    group_by(subid) |> 
+    slice(8:14) |> 
+    mutate(week = 2)) |> 
+  bind_rows(ema_study_dates |> 
+    group_by(subid) |> 
+    slice(15:21) |> 
+    mutate(week = 3)) |> 
+  bind_rows(ema_study_dates |> 
+    group_by(subid) |> 
+    slice(22:28) |> 
+    mutate(week = 4)) |> 
+  bind_rows(ema_study_dates |> 
+    group_by(subid) |> 
+    slice(29:35) |> 
+    mutate(week = 5)) |> 
+  bind_rows(ema_study_dates |> 
+    group_by(subid) |> 
+    slice(36:42) |> 
+    mutate(week = 6)) |> 
+  bind_rows(ema_study_dates |> 
+    group_by(subid) |> 
+    slice(43:49) |> 
+    mutate(week = 7)) |> 
+  bind_rows(ema_study_dates |> 
+    group_by(subid) |> 
+    slice(50:56) |> 
+    mutate(week = 8)) |> 
+  bind_rows(ema_study_dates |> 
+    group_by(subid) |> 
+    slice(57:63) |> 
+    mutate(week = 9)) |> 
+  bind_rows(ema_study_dates |> 
+    group_by(subid) |> 
+    slice(64:70) |> 
+    mutate(week = 10)) |> 
+  bind_rows(ema_study_dates |> 
+    group_by(subid) |> 
+    slice(71:77) |> 
+    mutate(week = 11)) |> 
+  bind_rows(ema_study_dates |> 
+    group_by(subid) |> 
+    slice(78:84) |> 
+    mutate(week = 12)) |> 
+  ungroup()
+
+ema_week_compliance_4x <- ema_study_weeks |> 
+  group_by(subid, week) |> 
+  summarize(sum_n = sum(n), sum_prompts = sum(n_prompts), .groups = "rowwise") |> 
+  mutate(compliance = sum_n/sum_prompts) |> 
+  ungroup()
+
+ema_week_compliance_1x <- ema_study_weeks |>
+  mutate(n = if_else(n > 1, 1, n),
+         n_prompts = 1) |> 
+  group_by(subid, week) |> 
+  summarize(sum_n = sum(n), sum_prompts = sum(n_prompts), .groups = "rowwise") |> 
+  mutate(compliance = sum_n/sum_prompts) |> 
+  ungroup()
+
+week_compliance_all <- ema_week_compliance_4x |> 
+              mutate(compliance = compliance*100) |> 
+              group_by(week) |> 
+              summarize(mean_compliance = mean(compliance),
+                        n = n(),
+                        sd = sd(compliance)) |> 
+              mutate(se = sd/sqrt(n),
+                     signal = "4x Daily") |> 
+  bind_rows(ema_week_compliance_1x |> 
+              mutate(compliance = compliance*100) |> 
+              group_by(week) |> 
+              summarize(mean_compliance = mean(compliance),
+                        n = n(),
+                        sd = sd(compliance)) |> 
+              mutate(se = sd/sqrt(n),
+                     signal = "1x Daily")) 
+```
+
+
+```{r}
+#| label: fig-ema_comliance 
+#| fig-cap: EMA Compliance by Week 
+#| fig-height: 6
+#| fig-width: 6
+
+week_compliance_all |> 
+  group_by(week, signal) |> 
+  ggplot(aes(x = week, y = mean_compliance, group = signal, 
+         color = signal, fill = signal)) +
+  geom_line() +
+  geom_ribbon(aes(ymin = mean_compliance - se, ymax = mean_compliance + se), 
+              alpha = .4) +
+  theme_classic() +
+  scale_color_manual(values = c("#4A235A", "#0B5345")) +
+  scale_fill_manual(values = c("#D7BDE2", "#A2D9CE")) +
+  scale_x_continuous(name = "Week", 
+                     breaks = seq(1, 12, 1)) +
+  scale_y_continuous(name = "Completion percentage", 
+                     breaks = seq(0, 100, 10), 
+                     limits = c(0, 100)) +
+  geom_hline(aes(yintercept = mean_compliance, color = signal), week_compliance_all |> 
+               group_by(signal) |> 
+               summarize(mean_compliance = mean(mean_compliance)),
+             linetype = "dashed", linewidth = .3) +
+  theme(legend.title = element_blank(),
+        legend.position = "bottom") +
+  scale_x_continuous(breaks = seq(1, 12),
+                       limits = c(1, 12)) +
+  scale_y_continuous(breaks = seq(0, 100, 10), limits = c(0, 100)) +
+  theme(axis.text.x = element_text(size = 12),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_text(size = 16),
+        axis.title.y = element_text(size = 16))
+
+```
+
+### Acceptability Figures
+
+Format self-report data
+
+```{r}
+sr <- read_csv(here::here(path_burden, "acceptability.csv"), 
+                 col_types = cols()) |> 
+  select(-response_id) |> 
+  select(-contains("carrying")) |> 
+  select(-contains("text")) |> 
+  select(-contains("audio")) |> 
+  select(-contains("wristband")) |> 
+  select(-c(starts_with("sleep_")))  |> 
+  group_by(subid) |> 
+  arrange(desc(date)) |> 
+  slice(1) |> 
+  ungroup()  |> 
+  glimpse()
+```
+
+
+Plotting function
+
+THIS USES A PIVOT HACK.  NEED TO UPDATE TO SELECT RELEVANT VAR INSTEAD
+```{r}
+make_barplot <- function(d, labels, title){
+  d |>
+    pivot_longer(everything(), names_to = "measure") |>
+    mutate(value = factor(value,
+      levels = c(-2:2),
+      labels = c("Strongly agree", "Agree", "Undecided", "Disagree", "Strongly disagree")
+    )) |>
+    ggplot(aes(x = value)) +
+      geom_bar() +
+      geom_vline(aes(xintercept = "Undecided"), linetype = "dashed", linewidth = .4, color = "black") +
+    xlab("Rating") +
+    ggtitle(title) +
+    theme(
+      title = element_text(size = 20, color = "red"),
+      axis.text.x = element_text(size = 12, color = "black"),
+      axis.text.y = element_text(size = 12, color = "black"),
+      axis.title.x = element_text(size = 16, color = "black"),
+      axis.title.y = element_text(size = 16, color = "black"))
+}
+```
+
+
+#### EMA
+
+```{r}
+plot_interfere  <- sr |> 
+  select(daily_survey_interfere) |>
+  make_barplot(labels = c("Strongly agree", "Agree", "Undecided", 
+                              "Disagree", "Strongly disagree"),
+                   title = "Interfere")
+```
+```{r}
+plot_dislike  <- sr |> 
+  select(daily_survey_dislike) |>
+  make_barplot(labels = c("Strongly agree", "Agree", "Undecided", 
+                              "Disagree", "Strongly disagree"),
+                   title = "Dislike")
+```
+
+```{r}
+plot_willing <- sr |> 
+  select(daily_survey_4_1year) |>
+  make_barplot(labels = c("Strongly disagree", "Disagree", "Undecided", 
+                              "Agree", "Strongly agree"),
+                   title = "Willing for 1 year")
+```
+
+```{r}
+#| label: fig-ema_sr 
+#| fig-cap: EMA Acceptability 
+#| fig-height: 8
+#| fig-width: 6
+cowplot::plot_grid(plot_interfere, plot_dislike, plot_willing, 
+                   nrow = 3)
+```
