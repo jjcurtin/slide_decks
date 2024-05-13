@@ -96,24 +96,43 @@ NOTE: THIS IS ALSO NOT QUITE RIGHT. NEED TO BE MODELED ON FOLDS AND REPEATS
 #                        labels = c("0 lag", "24 lag", "72 lag", "168 lag", "336 lag"))) |> 
 #   arrange(model)
 
-ci <- read_csv(here::here(path_lag, "tmp_ci.csv"))
+ci <- read_csv(here::here(path_lag, "tmp_ci.csv")) |> 
+  mutate(model = case_match(model,
+                            "0 lag" ~ "No lag",
+                            "24 lag" ~ "1 day lag",
+                            "72 lag" ~ "3 day lag",
+                            "168 lag" ~ "1 week lag",
+                            "336 lag" ~ "2 week lag")) |> 
+  mutate(model = fct(model, 
+                     levels = c("2 week lag", "1 week lag", "3 day lag", 
+                                "1 day lag", "No lag"))) |> 
+  glimpse() 
 ```
 
-```{r}
-#| label: fig-lag-posteriors
 
-pp_tidy |> 
-  mutate(model = factor(model, levels = c(0, 24, 72, 168, 336),
-                        labels = c("0 lag", "24 lag", "72 lag", "168 lag", "336 lag"))) |>
-  ggplot() + 
-  geom_histogram(aes(x = posterior), color = "#4A235A", fill = "#D7BDE2",
-                 bins = 50) +
-  geom_segment(mapping = aes(y = y+100, yend = y-100, x = pp_median, xend = pp_median),
-               data = ci) +
-  geom_segment(mapping = aes(y = y, yend = y, x = pp_lower, xend = pp_upper),
-                data = ci) +
-  facet_wrap(~model, ncol = 1) +
-  scale_y_continuous("Posterior Probability", breaks = c(0, 500, 1000)) +
-  xlab("Area Under ROC Curve") +
-  theme(legend.position = "none")
+```{r}
+#| label: fig-lag_auroc 
+#| fig-cap: auROCs by Prediction Window Lag
+#| fig-height: 6
+#| fig-width: 6
+
+ci |>
+  ggplot(aes(x = model)) +
+  geom_point(aes(y = pp_median), size = 3) +
+  geom_errorbar(aes(ymin = pp_lower, ymax = pp_upper),
+    width = .2,
+    position = position_dodge(.9)
+  ) +
+  coord_flip() +
+  ylab("auROC") +
+  xlab("Prediction Window Lag") +
+  theme(legend.position = "none") +
+  scale_y_continuous(
+    breaks = seq(0.8, 1, 0.05),
+    limits = c(0.8, 1)
+  ) +
+  theme(axis.text.x = element_text(size = 12),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_text(size = 16),
+        axis.title.y = element_text(size = 16))
 ```
