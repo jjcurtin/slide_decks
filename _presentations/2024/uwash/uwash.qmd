@@ -976,11 +976,12 @@ UPDATE
 
 -----------------------------------------------------------------------------
 
-## Passive Sensing: More Risk Features 
+## (Selective) Next Steps: Passive Sensing 
 
-**--UPDATE SLIDE AND TEXT--**
+Use geolocation and cellular communications
 
-- Geolocation, cellular communications, and other passively sensed signals
+- Lower sensing burden
+- More (distinct) risk features for intervention recommendations
 
 ::: {.notes}
 One of the key next steps is to develop models that rely more on passive sensing rather than EMA to lower the patient burden of using these systems long term and to gain access to signals that may not be available by self-report.
@@ -1106,11 +1107,11 @@ But we are hoping to extract more signal from the both of these as we continue t
 ## (Selective) Next Steps
 
 
-- [Geolocation, cellular communications, and other passively sensed signals]{style="color: gray;"}
-
-- [Build models with lead times > 0 hours]{style="color: gray;"}
-
-- More diversity in training data
+- [Use geolocation and cellular communications]{style="color: gray;"}
+- Improve algorithmic fairness
+  - Improve assessment of fairness
+  - Explore computational solutions
+  - More diversity in training data
 
 
 
@@ -1159,16 +1160,9 @@ We are also recruiting for people at different stages in their recovery and foll
 
 ## (Selective) Next Steps
 
-
-- [Geolocation, cellular communications, and other passively sensed signals]{style="color: gray;"}
-
-- [Build models with lead times > 0 hours]{style="color: gray;"}
-
-- [More diversity in training data]{style="color: gray;"}
-
-- Use models to improve DTx engagement and clinical outcomes
-  - SMART DTx – algorithm guided use
-  - How to craft patient feedback to encourage trust in the algorithm
+- [Use geolocation and cellular communications]{style="color: gray;"}
+- [Improve algorithmic fairness]{style="color: gray;"}
+- Optimize algorithmic feedback to increase trust
 
 
 ::: {.notes}
@@ -1179,9 +1173,62 @@ We have now started to consider how we can use these predictions to help patient
 These models may be able to suggest when more use of the DTx is needed because lapse risk is increasing or high but we are also hoping that we can use the models to recommend which tools and supports in the DTx are best for that patient at that moment in time given their lapse risk probability and important features contributing to the lapse prediction.
 
 We are also sensitive to the fact that these recommendations from the machine learning models will need to be provided to patients in a transparent manner that also encourages them to trust the algorithm and follow its recommendations.  
+:::
+
+
+-----------------------------------------------------------------------------
+
+## Optimize Algorithmic Feedback in Smart DTx
+
+- Daily updates from Day model based on EMA and and geolocation features
+  - Lapse probability for that day
+  - Recent trends in lapse probabilitity 
+  - Locally important features for that day
+
+- Manipulate algorithmic transparency in daily message
+
+- Measure trust, risk-relevant engagement, and clinical outcomes
+
+![niaaa_logo.png](https://github.com/jjcurtin/lectures/blob/main/images/niaaa_logo.png?raw=true){.absolute bottom="5%" right="2%" width="auto" height="auto"}\ 
+
+::: {.notes}
 
 :::
 
+
+
+-----------------------------------------------------------------------------
+
+## (Selective) Next Steps
+
+- [Use geolocation and cellular communications]{style="color: gray;"}
+- [Improve algorithmic fairness]{style="color: gray;"}
+- [Optimize algorithmic feedback to increase trust]{style="color: gray;"}
+- Consider other precision mental health applications
+
+
+::: {.notes}
+:::
+
+-----------------------------------------------------------------------------
+
+## Precision Mental Health without Sensing
+
+
+
+-----------------------------------------------------------------------------
+
+## CRediTs
+
+![credits.png](https://github.com/jjcurtin/lectures/blob/main/images/credits_risk1.png?raw=true){.absolute bottom="0%" left="5%" width="92%" height="auto"}\ 
+
+::: {.notes}
+
+:::
+
+-----------------------------------------------------------------------------
+
+## Extra Slides
 
 -----------------------------------------------------------------------------
 
@@ -1196,35 +1243,3 @@ We are also sensitive to the fact that these recommendations from the machine le
 
 
 -----------------------------------------------------------------------------
-
-## Optimization/Evaluation of an Algorithm Guided Smart DTx {.medium}
-
-- Lapse probabilities updated daily based on EMA and Geolocation features
-- Use lapse probability and locally important features to select  optimal DTx modules – guided by Rela
-- Provide recommendations designed to encourage engagement
-  - Algorithm transparency (risk level, change, features)
-  - Communication factors (empathy, feasibility)
-- MRT to optimize recommendation message components
-- RCT to evaluate Standard vs. Smart DTx on clinical outcomes
-
-![nida_logo.png](https://github.com/jjcurtin/lectures/blob/main/images/niaaa_logo.png?raw=true){.absolute bottom="5%" right="2%" width="auto" height="auto"}\ 
-
-::: {.notes}
-
-:::
-
-
------------------------------------------------------------------------------
-
-## Precision Mental Health without Sensing
-
-
-
------------------------------------------------------------------------------
-## CRediTs
-
-![credits.png](https://github.com/jjcurtin/lectures/blob/main/images/credits_risk1.png?raw=true){.absolute bottom="0%" left="5%" width="92%" height="auto"}\ 
-
-::: {.notes}
-
-:::
