@@ -425,8 +425,8 @@ cm_mosaic(cm) +
     axis.title.y = element_text(size = 24)) +
   geom_text(x = 350000, y = -.4, label = "612,086", color = "black", size = 6) +
   geom_text(x = 350000, y = -.9, label = "147,130", color = "black", size = 6) +
-  geom_text(x = 820000, y = -.07, label = "9,244", color = "black", size = 6) +
-  geom_text(x = 820000, y = -.55, label = "54,077", color = "black", size = 6)
+  geom_text(x = 818000, y = -.07, label = "9,244", color = "black", size = 6) +
+  geom_text(x = 818000, y = -.55, label = "54,077", color = "black", size = 6)
 ```
 
 

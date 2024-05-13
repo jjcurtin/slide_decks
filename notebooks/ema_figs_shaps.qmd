@@ -10,8 +10,7 @@ editor_options:
 ```{r}
 # handle conflicts
 options(conflicts.policy = "depends.ok")
-
-library(tidyverse, quietly = TRUE)
+library(tidyverse)
 theme_set(theme_classic()) 
 
 # Paths
@@ -61,6 +60,8 @@ shap_global_all <- shap_global_week |>
 ```{r}
 #| label: fig-global
 #| fig-cap: Global SHAPs by Model
+#| fig-height: 6
+#| fig-width: 6
 
 shap_global_all |>
   mutate(group = reorder(variable_grp, mean_value, sum)) |>
@@ -126,53 +127,67 @@ ids_hour <- shap_local_hour |>
 ids_hour <- ids_hour |> sample(size = round(length(ids_hour)/50))
 ```
 
-Week Plot
+### Week Plot
 ```{r}
 #| label: fig-local_week
 #| fig-cap: Local SHAPS - Week
+#| fig-height: 6
+#| fig-width: 6
 
 shap_local_week |>
   plot_local(grp_levels, ids_week, "Week")
 ```
 
-Day plot
+### Day plot
+
+All features
 ```{r}
 #| label: fig-local_day
 #| fig-cap: Local SHAPS - Day
+#| fig-height: 6
+#| fig-width: 6
 
 shap_local_day |>
   plot_local(grp_levels, ids_day, "Day")
 
 ```
 
-Hour plot
+Day plot with only EMA
 ```{r}
-feature_levels <- c("valence", "future stressful event", "lapse day", "past pleasant event",
+feature_levels <- c("valence", "future stressful event", "past pleasant event",
                     "future risky situation", "past risky situation", "arousal", 
-                    "past stressful event", "lapse hour",
+                    "past stressful event", 
                     "craving", "future efficacy", "past use")
+```
 
-fig_shap_local_hour <- 
-  shap_local_hour |>
+```{r}
+#| label: fig-local_day_emaonly
+#| fig-cap: Local SHAPS - Day
+#| fig-height: 6
+#| fig-width: 6
+
+shap_local_day |>
   filter(!str_detect(variable_grp, "age")) |> 
   filter(!str_detect(variable_grp, "sex")) |> 
   filter(!str_detect(variable_grp, "marital")) |> 
   filter(!str_detect(variable_grp, "education")) |> 
   filter(!str_detect(variable_grp, "race")) |> 
   filter(!str_detect(variable_grp, "missing")) |>
+  filter(!str_detect(variable_grp, "day")) |>
+  filter(!str_detect(variable_grp, "hour")) |>
   separate_wider_delim(variable_grp, " (", names = c("feature", NA)) |> 
   rename(variable_grp = feature) |>    
-  plot_local(feature_levels, ids_day, "Hour")
+  plot_local(feature_levels, ids_day, "Day")
 ```
+
+
+### Hour plot
 ```{r}
 #| label: fig-local_hour
 #| fig-cap: Local SHAPS - Hour 
+#| fig-height: 6
+#| fig-width: 6
 
-fig_shap_local_hour
-```
-
-```{r}
-jpeg(filename = here::here(path_images, "shap_local_day.jpg"))
-fig_shap_local_hour
-dev.off()
+shap_local_hour |>
+  plot_local(feature_levels, ids_hour, "Hour")
 ```

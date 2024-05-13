@@ -118,7 +118,7 @@ ci <- read_csv(here::here(path_lag, "tmp_ci.csv")) |>
 
 ci |>
   ggplot(aes(x = model)) +
-  geom_point(aes(y = pp_median), size = 3) +
+  geom_point(aes(y = pp_median), size = 2) +
   geom_errorbar(aes(ymin = pp_lower, ymax = pp_upper),
     width = .2,
     position = position_dodge(.9)

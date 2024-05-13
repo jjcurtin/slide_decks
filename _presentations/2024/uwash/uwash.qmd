@@ -36,7 +36,7 @@ include-after: |
   </script>      
 ---
 
-## Mental Healthcare Needs are High and Unmet  {.smaller}
+## Mental Healthcare Needs are High and Unmet 
 
 - In 2019, [52 million]{style="color: red;"} Americans had an active mental illness
   - More than half did not receive any treatment
@@ -50,7 +50,7 @@ In 2019, **more than half of the 52 million Americans** with an active mental il
 
 -----------------------------------------------------------------------------
 
-## Mental Healthcare Needs are High and Unmet  {.smaller}
+## Mental Healthcare Needs are High and Unmet
 
 - [In 2019, 52 million Americans had an active mental illness]{style="color: grey;"}
   - [More than half did not receive any treatment]{style="color: grey;"}
@@ -68,7 +68,7 @@ And for the 20 million adults suffering with a substance use disorder, it was wo
 
 -----------------------------------------------------------------------------
 
-## Mental Healthcare Needs are High and Unmet  {.smaller}
+## Mental Healthcare Needs are High and Unmet
 
 - [In 2019, 52 million Americans had an active mental illness]{style="color: grey;"}
   - [More than half did not receive any treatment]{style="color: grey;"}
@@ -87,7 +87,7 @@ And similar mental healthcare disparities exist for people living in rural commu
 
 -----------------------------------------------------------------------------
 
-## Mental Healthcare Needs are High and Unmet  {.smaller}
+## Mental Healthcare Needs are High and Unmet
 
 - Failure to treat is not surprising given many treatment barriers:
   - Access
@@ -387,7 +387,7 @@ On the first EMA each day, they also reported any future risky situations and st
 
 -----------------------------------------------------------------------------
 
-## Sensing Feasibility/Acceptability: GPS 
+## Sensing Feasibility/Acceptability: Geolocation 
 
 ::: {.columns}
 :::: {.column width="50%"}
@@ -439,7 +439,7 @@ On the first EMA each day, they also reported any future risky situations and st
 
 -----------------------------------------------------------------------------
 
-## Sensing Feasibility/Acceptability: Text Content 
+## Sensing Feasibility/Acceptability: Text Message Content 
 
 ::: {.columns}
 :::: {.column width="50%"}
@@ -617,6 +617,7 @@ And this is exactly what we see for the one week lapse window model
 Model auROCs
 
 - Next week = [0.90]{style="color: orange;"}; [0.88 - 0.91]
+
 :::::{.callout-tip icon=false}
 ## Coarse rules of thumb for auROC 
 .70 - .80 are considered fair  
@@ -679,6 +680,7 @@ Model auROCs
 
 - Next week = [0.90]{style="color: orange;"}; [0.88 - 0.91]
 - Next day  = [0.91]{style="color: green;"}; [0.89 - 0.92]
+
 :::::{.callout-tip icon=false}
 ## Coarse rules of thumb for auROC 
 .70 - .80 are considered fair  
@@ -711,7 +713,7 @@ Model auROCs
 
 - Next week = [0.90]{style="color: orange;"}; [0.88 - 0.91]
 - Next day  = [0.91]{style="color: green;"}; [0.89 - 0.92]
-- Next hour = [0.93]{style="color: green;"}; [0.92 - 0.94]
+- Next hour = [0.93]{style="color: blue;"}; [0.92 - 0.94]
 
 :::::{.callout-tip icon=false}
 ## Coarse rules of thumb for auROC 
@@ -737,7 +739,22 @@ And it turns out that we can do somewhat better still with hour level prediction
 
 ## Algorithmic Fairness
 
-**--NEED FIG AND TEXT--**
+::: {.columns}
+:::: {.column width="35%"}
+- Substantially poorer performance if not white/non-hispanic
+- Meaningfully poorer performance for other less priviledged groups
+- Not just due to under-representation in training data
+
+\
+
+- Move beyond binary comparisons
+- Methods to remediate?
+::::
+
+:::: {.column width="65%"}
+{{< embed ../../../notebooks/fairema.qmd#fig-fair >}}
+::::
+:::
 
 ::: {.notes}
 UPDATE
@@ -753,12 +770,7 @@ UPDATE
 ::::
 
 :::: {.column width="50%"}
-**--UPDATE FIGURE--**
-<!--Global SHAP Plot-->
-<!-- 
-TEMP DISABLED FOR QUICK PUBLISH
-embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >}}
--->
+{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >}}
 ::::
 :::
 
@@ -786,12 +798,7 @@ To make these values somewhat meaningful for you, let me remind you these Sh
 ::::
 
 :::: {.column width="50%"}
-**--UPDATE FIGURE--**
-<!--Global SHAP Plot-->
-<!-- 
-TEMP DISABLED FOR QUICK PUBLISH
-embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >}}
--->
+{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >}}
 ::::
 :::
 
@@ -808,17 +815,12 @@ And finally, we see that we can use lapse day and lapse hour to make predictions
 ::: {.columns}
 :::: {.column width="50%"}
 - [All EMA items impact lapse probability (both globally and locally)]{style="color: grey;"}
-- Lapse day and Lapse hour are useful for day and hour level models as expected
+- [Lapse day and Lapse hour are useful for day and hour level models as expected]{style="color: grey;"}
 - Demographics not particularly important (but limited race/ethnic diversity)
 ::::
 
 :::: {.column width="50%"}
-**--UPDATE FIGURE--**
-<!--Global SHAP Plot-->
-<!-- 
-TEMP DISABLED FOR QUICK PUBLISH
-embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >}}
--->
+{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >}}
 ::::
 :::
 
@@ -836,8 +838,8 @@ And finally, we see that we can use lapse day and lapse hour to make predictions
 :::: {.column width="50%"}
 DO NOT predict class labels  (Lapse vs. No-Lapse)
 
+- Iatriogenic effects?
 - Information loss
-- Iatriogenic effects
 ::::
 
 :::: {.column width="50%"}
@@ -854,16 +856,19 @@ UPDATE
 ## Clinical Uses: DO NOT Predict Lapses
 
 ::: {.columns}
-:::: {.column width="50%"}
+:::: {.column width="45%"}
 DO NOT predict class labels  (Lapse vs. No-Lapse)
 
-- [Information loss]{style="color: gray;"}
 - [Iatriogenic effects]{style="color: gray;"}
+- [Information loss?]{style="color: gray;"}
 - Low positive predictive values 
+  - Lapses on only ~7% of days
+  - Spec and Sens > 0.80
+  - PPV ~ 0.27
 ::::
 
-:::: {.column width="50%"}
-embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >}}
+:::: {.column width="55%"}
+{{< embed ../../../notebooks/ema_figs_probability.qmd#fig-cm_day >}}
 ::::
 :::
 
@@ -920,7 +925,6 @@ INSERT NOTES
 ::: {.columns}
 :::: {.column width="50%"}
 - Day and Hour models can be used for "just-in-time" interventions
-- Week model may be too coarse for JIT
 ::::
 
 :::: {.column width="50%"}
@@ -939,7 +943,7 @@ INSERT NOTES
 ::: {.columns}
 :::: {.column width="50%"}
 - [Day and Hour prediction windows can be used for "just-in-time" interventions]{style="color: gray;"}
-- [Week window may be too coarse for JIT]{style="color: gray;"}
+- Week window may be too coarse for JIT
 - Push week window further into the future to support outside of DTx 
 ::::
 
@@ -956,17 +960,15 @@ INSERT NOTES
 
 ## Clinical Uses: Which Interventions/Supports?
 
-**--NEED FIG AND TEXt--**
+::: {.columns}
+:::: {.column width="50%"}
 
-<!-- 
-TEMP DISABLE FOR QUICK PUBLISH
-embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_hour >}}
+::::
 
-embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day >}}
-
-embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_week >}}
--->
-
+:::: {.column width="50%"}
+{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day_emaonly >}}
+::::
+:::
 
 ::: {.notes}
 UPDATE
@@ -979,7 +981,6 @@ UPDATE
 **--UPDATE SLIDE AND TEXT--**
 
 - Geolocation, cellular communications, and other passively sensed signals
-
 
 ::: {.notes}
 One of the key next steps is to develop models that rely more on passive sensing rather than EMA to lower the patient burden of using these systems long term and to gain access to signals that may not be available by self-report.
@@ -1083,27 +1084,6 @@ UPDATE
 
 ::: {.notes}
 UPDATE
-:::
-
------------------------------------------------------------------------------
-
-## Baseline Feature Engineering for GPS
-
-::: {.columns}
-:::: {.column width="50%"}
-- Focus on recent past experiences (6, 12, 24, 48, 72, 168 hours)
-
-- Raw scores and change scores (from baseline)
-
-- Time spent at important places (e.g, alcohol present, drank at location in past, risky, unpleasant)
-::::
-
-:::: {.column width="50%"}
-![feature_gps.png](https://github.com/jjcurtin/lectures/blob/main/images/feature_gps.png?raw=true)\ 
-::::
-:::
-
-::: {.notes}
 To be clear, we have only just begun to train models using GPS.   We have started by focusing on recent locations…..
 DESCRIBE MORE
 
@@ -1112,36 +1092,12 @@ There is clearly predictive signal in the geolocation signal but not enough to s
 
 However, when we add GPS to the EMA models that I described today, we appear to need fewer unique EMA items to get the same level of model performance.   So the addition of GPS may serve to lower patient burden while maintaining model performance.
 
-[PAUSE]
-
 The story is pretty much the same right now for cellular communications as well.   At this point we have only worked with the meta data – the contact numbers, call times, durations, etc – combined with context.   We haven’t yet done anything with the text message content.   And models built from the meta data perform about as well at these preliminary GPS models.
 
 But we are hoping to extract more signal from the both of these as we continue to work on feature engineering with it.
 :::
 
 -----------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1260,6 +1216,11 @@ We are also sensitive to the fact that these recommendations from the machine le
 
 -----------------------------------------------------------------------------
 
+## Precision Mental Health without Sensing
+
+
+
+-----------------------------------------------------------------------------
 ## CRediTs
 
 ![credits.png](https://github.com/jjcurtin/lectures/blob/main/images/credits_risk1.png?raw=true){.absolute bottom="0%" left="5%" width="92%" height="auto"}\ 
