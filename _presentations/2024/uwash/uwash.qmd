@@ -39,8 +39,7 @@ include-after: |
 ## Mental Healthcare Needs are High and Unmet  {.smaller}
 
 - In 2019, [52 million]{style="color: red;"} Americans had an active mental illness
-  - More than half did not receive any [treatment]{style="color: red;"}
-
+  - More than half did not receive any treatment
 
 
 ::: {.notes}
@@ -77,7 +76,7 @@ And for the 20 million adults suffering with a substance use disorder, it was wo
 - [20 million adults had an active substance use disorder]{style="color: grey;"}
   - [9 out of 10 did not receive any treatment]{style="color: grey;"}
 
-- Large treatment disparities exist by race, ethnicity, geography, and income
+- [Large treatment disparities]{style="color: red;"} exist by race, ethnicity, geography, and income
 
 
 ::: {.notes}
@@ -344,8 +343,10 @@ On the first EMA each day, they also reported any future risky situations and st
 
 ::: {.columns}
 :::: {.column width="50%"}
-- Compliance > 80% for 4x daily
-- Compliance ~ 95% for 1x daily
+- High levels of compliance over 3 months
+  - ~ 80% for 4x daily
+  - ~ 95% for 1x daily
+- Also high compliance for 1 year on NIDA OUD project
 ::::
 
 :::: {.column width="50%"}
@@ -364,10 +365,15 @@ On the first EMA each day, they also reported any future risky situations and st
 
 ::: {.columns}
 :::: {.column width="50%"}
+- Collected self-report measures of acceptability
+  - The [...]{style="color: gray;"} [interfered]{style="color: red;"} with my daily activities
+  - I [disliked]{style="color: red;"} the [...]{style="color: gray;"}
+  - I would be [willing to use]{style="color: red;"} the [...]{style="color: gray;"} [for 1 year]{style="color: red;"} to help with my recovery
 
-ADD TEXT
-list three questions
-EMA compliance high over time at 4x daily and higher at 1x daily
+\
+
+- Perceptions were neutral or better for most
+- Better when provides clinical benefits to users?
 ::::
 
 :::: {.column width="50%"}
@@ -381,17 +387,23 @@ EMA compliance high over time at 4x daily and higher at 1x daily
 
 -----------------------------------------------------------------------------
 
-## Sensing Feasibility/Acceptability: Passive Signals
+## Sensing Feasibility/Acceptability: GPS 
 
 ::: {.columns}
 :::: {.column width="50%"}
 
-OPT IN at HIGH RATES FOR GPS AND COMMUNICATIONS
+- 100% opted-in to provide [geolocation]{style="color: red;"}
+- Very modest ($10/month) financial incentive
+
+\
+
+- Perceptions about sharing geolocation were neutral or better for most
+- Better when provides clinical benefits to users?
 
 ::::
 
 :::: {.column width="50%"}
-OPT IN PLOTS for TWO passive
+{{< embed ../../../notebooks/burden.qmd#fig-gps_sr >}}
 ::::
 :::
 
@@ -401,16 +413,23 @@ OPT IN PLOTS for TWO passive
 
 -----------------------------------------------------------------------------
 
-## Sensing Feasibility/Acceptability: Passive Signals
+## Sensing Feasibility/Acceptability: Communication Logs 
 
 ::: {.columns}
 :::: {.column width="50%"}
 
-Describe self report findings
+- 150/151 opted-in to provide [communication logs and text message content]{style="color: red;"} 
+- Very modest ($10/month) financial incentive
+
+\
+
+- Perceptions about sharing logs were neutral or better for most
+- Better when provides clinical benefits to users?
+
 ::::
 
 :::: {.column width="50%"}
-self report plots
+{{< embed ../../../notebooks/burden.qmd#fig-logs_sr >}}
 ::::
 :::
 
@@ -420,6 +439,23 @@ self report plots
 
 -----------------------------------------------------------------------------
 
+## Sensing Feasibility/Acceptability: Text Content 
+
+::: {.columns}
+:::: {.column width="50%"}
+- Essentially same story for sharing text message content
+::::
+
+:::: {.column width="50%"}
+{{< embed ../../../notebooks/burden.qmd#fig-sms_sr >}}
+::::
+:::
+
+::: {.notes}
+**---UPDATE SLIDE NOTES--**
+:::
+
+-----------------------------------------------------------------------------
 ## Modeling: Predictions 
 
 - Predict hour-by-hour probability of [future lapse]{style="color: red;"}
@@ -578,10 +614,9 @@ And this is exactly what we see for the one week lapse window model
 
 ::: {.columns}
 :::: {.column width="50%"}
-auROC
+Model auROCs
 
-- [Next week = 0.90; [0.88 - 0.91]]{style="color: orange;"}
-
+- Next week = [0.90]{style="color: orange;"}; [0.88 - 0.91]
 :::::{.callout-tip icon=false}
 ## Coarse rules of thumb for auROC 
 .70 - .80 are considered fair  
@@ -610,9 +645,9 @@ And the AUC for our 1 week model is .90, which is generally considered excellent
 
 ::: {.columns}
 :::: {.column width="50%"}
-auROC
+Model auROCs
 
-- [Next week = 0.90; [0.88 - 0.91]]{style="color: orange;"}
+- Next week = [0.90]{style="color: orange;"}; [0.88 - 0.91]
 
 :::::{.callout-tip icon=false}
 ## Coarse rules of thumb for auROC 
@@ -640,11 +675,10 @@ But we were also eager to see how well we could do if we required a higher level
 
 ::: {.columns}
 :::: {.column width="50%"}
-auROC
+Model auROCs
 
-- [Next week = 0.90; [0.88 - 0.91]]{style="color: orange;"}
-- [Next day  = 0.91; [0.89 - 0.92]]{style="color: green;"}
-
+- Next week = [0.90]{style="color: orange;"}; [0.88 - 0.91]
+- Next day  = [0.91]{style="color: green;"}; [0.89 - 0.92]
 :::::{.callout-tip icon=false}
 ## Coarse rules of thumb for auROC 
 .70 - .80 are considered fair  
@@ -673,11 +707,11 @@ The day level model performed as well as, if not better, than the week level mod
 
 ::: {.columns}
 :::: {.column width="50%"}
-auROC
+Model auROCs
 
-- [Next week = 0.90; [0.88 - 0.91]]{style="color: orange;"}
-- [Next day  = 0.91; [0.89 - 0.92]]{style="color: green;"}
-- [Next hour = 0.93; [0.92 - 0.94]]{style="color: blue;"}
+- Next week = [0.90]{style="color: orange;"}; [0.88 - 0.91]
+- Next day  = [0.91]{style="color: green;"}; [0.89 - 0.92]
+- Next hour = [0.93]{style="color: green;"}; [0.92 - 0.94]
 
 :::::{.callout-tip icon=false}
 ## Coarse rules of thumb for auROC 

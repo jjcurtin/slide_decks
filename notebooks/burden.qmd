@@ -56,10 +56,6 @@ study_dates <- subids |>
 ```
 
 
-
-
-
-
 ```{r}
 ema <- ema_m |> 
   select(subid, start_date) |> 
@@ -164,7 +160,7 @@ week_compliance_all <- ema_week_compliance_4x |>
 
 
 ```{r}
-#| label: fig-ema_comliance 
+#| label: fig-ema_compliance 
 #| fig-cap: EMA Compliance by Week 
 #| fig-height: 6
 #| fig-width: 6
@@ -225,20 +221,18 @@ Plotting function
 
 THIS USES A PIVOT HACK.  NEED TO UPDATE TO SELECT RELEVANT VAR INSTEAD
 ```{r}
-make_barplot <- function(d, labels, title){
+make_barplot <- function(d, the_labels, title){
   d |>
     pivot_longer(everything(), names_to = "measure") |>
-    mutate(value = factor(value,
-      levels = c(-2:2),
-      labels = c("Strongly agree", "Agree", "Undecided", "Disagree", "Strongly disagree")
-    )) |>
+    mutate(value = factor(value, levels = c(-2:2), labels = the_labels)) |>
     ggplot(aes(x = value)) +
       geom_bar() +
-      geom_vline(aes(xintercept = "Undecided"), linetype = "dashed", linewidth = .4, color = "black") +
+      geom_vline(aes(xintercept = "Undecided"), linetype = "dashed", linewidth = .4, 
+                 color = "black") +
     xlab("Rating") +
     ggtitle(title) +
     theme(
-      title = element_text(size = 20, color = "red"),
+      title = element_text(size = 16, color = "red"),
       axis.text.x = element_text(size = 12, color = "black"),
       axis.text.y = element_text(size = 12, color = "black"),
       axis.title.x = element_text(size = 16, color = "black"),
@@ -250,24 +244,24 @@ make_barplot <- function(d, labels, title){
 #### EMA
 
 ```{r}
-plot_interfere  <- sr |> 
+ema_interfere  <- sr |> 
   select(daily_survey_interfere) |>
-  make_barplot(labels = c("Strongly agree", "Agree", "Undecided", 
+  make_barplot(the_labels = c("Strongly agree", "Agree", "Undecided", 
                               "Disagree", "Strongly disagree"),
                    title = "Interfere")
 ```
 ```{r}
-plot_dislike  <- sr |> 
+ema_dislike  <- sr |> 
   select(daily_survey_dislike) |>
-  make_barplot(labels = c("Strongly agree", "Agree", "Undecided", 
+  make_barplot(the_labels = c("Strongly agree", "Agree", "Undecided", 
                               "Disagree", "Strongly disagree"),
                    title = "Dislike")
 ```
 
 ```{r}
-plot_willing <- sr |> 
+ema_willing <- sr |> 
   select(daily_survey_4_1year) |>
-  make_barplot(labels = c("Strongly disagree", "Disagree", "Undecided", 
+  make_barplot(the_labels = c("Strongly disagree", "Disagree", "Undecided", 
                               "Agree", "Strongly agree"),
                    title = "Willing for 1 year")
 ```
@@ -275,8 +269,91 @@ plot_willing <- sr |>
 ```{r}
 #| label: fig-ema_sr 
 #| fig-cap: EMA Acceptability 
-#| fig-height: 8
+#| fig-height: 6.5 
 #| fig-width: 6
-cowplot::plot_grid(plot_interfere, plot_dislike, plot_willing, 
+cowplot::plot_grid(ema_interfere, ema_dislike, ema_willing, 
                    nrow = 3)
+```
+
+#### GPS
+
+```{r}
+gps_dislike  <- sr |> 
+  select(location_dislike) |>
+  make_barplot(the_labels = c("Strongly agree", "Agree", "Undecided", 
+                              "Disagree", "Strongly disagree"),
+                   title = "Dislike")
+```
+
+```{r}
+gps_willing <- sr |> 
+  select(location_1year) |>
+  make_barplot(the_labels = c("Strongly disagree", "Disagree", "Undecided", 
+                              "Agree", "Strongly agree"),
+                   title = "Willing for 1 year")
+```
+
+```{r}
+#| label: fig-gps_sr 
+#| fig-cap: GPS Acceptability 
+#| fig-height: 6 
+#| fig-width: 6
+cowplot::plot_grid(gps_dislike, gps_willing, 
+                   nrow = 2)
+```
+
+#### Meta 
+
+```{r}
+logs_dislike  <- sr |> 
+  select(all_logs_dislike) |>
+  make_barplot(the_labels = c("Strongly agree", "Agree", "Undecided", 
+                              "Disagree", "Strongly disagree"),
+                   title = "Dislike")
+```
+
+```{r}
+logs_willing <- sr |> 
+  select(all_logs_1year) |>
+  make_barplot(the_labels = c("Strongly disagree", "Disagree", "Undecided", 
+                              "Agree", "Strongly agree"),
+                   title = "Willing for 1 year")
+```
+
+```{r}
+#| label: fig-logs_sr 
+#| fig-cap: Smartphone Logs Acceptability 
+#| fig-height: 6 
+#| fig-width: 6
+cowplot::plot_grid(logs_dislike, logs_willing, 
+                   nrow = 2)
+```
+
+
+
+#### SMS Content 
+
+```{r}
+sms_dislike  <- sr |> 
+  select(sms_content_dislike) |>
+  make_barplot(the_labels = c("Strongly agree", "Agree", "Undecided", 
+                              "Disagree", "Strongly disagree"),
+                   title = "Dislike")
+```
+
+```{r}
+sms_willing <- sr |> 
+  select(sms_content_1year) |>
+  make_barplot(the_labels = c("Strongly disagree", "Disagree", "Undecided", 
+                              "Agree", "Strongly agree"),
+                   title = "Willing for 1 year")
+```
+
+```{r}
+#| label: fig-sms_sr 
+#| fig-cap: Smartphone Logs Acceptability 
+#| fig-height: 6 
+#| fig-width: 6
+cowplot::plot_grid(sms_dislike, sms_willing, 
+                   nrow = 2)
 ```
