@@ -340,17 +340,82 @@ On the first EMA each day, they also reported any future risky situations and st
 
 -----------------------------------------------------------------------------
 
-## Sensing Feasibility/Acceptability
+## Sensing Feasibility/Acceptability: EMA
 
-**---UPDATE--** 
+::: {.columns}
+:::: {.column width="50%"}
+- Compliance > 80% for 4x daily
+- Compliance ~ 95% for 1x daily
+::::
 
-slide or slides from Kenra maybe??
-
-Do fast and highlight these were important when we started this work but some audiences still have questions
-
+:::: {.column width="50%"}
+{{< embed ../../../notebooks/burden.qmd#fig-ema_compliance >}}
+::::
+:::
 
 ::: {.notes}
-UPDATE
+**---UPDATE SLIDE NOTES--**
+:::
+
+-----------------------------------------------------------------------------
+
+## Sensing Feasibility/Acceptability: EMA
+
+
+::: {.columns}
+:::: {.column width="50%"}
+
+ADD TEXT
+list three questions
+EMA compliance high over time at 4x daily and higher at 1x daily
+::::
+
+:::: {.column width="50%"}
+{{< embed ../../../notebooks/burden.qmd#fig-ema_sr >}}
+::::
+:::
+
+::: {.notes}
+**---UPDATE SLIDE NOTES--**
+:::
+
+-----------------------------------------------------------------------------
+
+## Sensing Feasibility/Acceptability: Passive Signals
+
+::: {.columns}
+:::: {.column width="50%"}
+
+OPT IN at HIGH RATES FOR GPS AND COMMUNICATIONS
+
+::::
+
+:::: {.column width="50%"}
+OPT IN PLOTS for TWO passive
+::::
+:::
+
+::: {.notes}
+**---UPDATE SLIDE NOTES--**
+:::
+
+-----------------------------------------------------------------------------
+
+## Sensing Feasibility/Acceptability: Passive Signals
+
+::: {.columns}
+:::: {.column width="50%"}
+
+Describe self report findings
+::::
+
+:::: {.column width="50%"}
+self report plots
+::::
+:::
+
+::: {.notes}
+**---UPDATE SLIDE NOTES--**
 :::
 
 -----------------------------------------------------------------------------
@@ -644,9 +709,9 @@ And it turns out that we can do somewhat better still with hour level prediction
 UPDATE
 :::
 
-## Global Feature Importance
+-----------------------------------------------------------------------------
 
-**--UPDATE FIGURE--**
+## Global Feature Importance
 
 ::: {.columns}
 :::: {.column width="50%"}
@@ -654,6 +719,7 @@ UPDATE
 ::::
 
 :::: {.column width="50%"}
+**--UPDATE FIGURE--**
 <!--Global SHAP Plot-->
 <!-- 
 TEMP DISABLED FOR QUICK PUBLISH
@@ -664,7 +730,6 @@ embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >}}
 
 ::: {.notes}
 UPDATE
-
 
 In the spirit of making this model more transparent and interpretable, lets briefly look under the hood at the feature importance
 
@@ -683,11 +748,38 @@ To make these values somewhat meaningful for you, let me remind you these Sh
 ::: {.columns}
 :::: {.column width="50%"}
 - [All EMA items impact lapse probability (both globally and locally)]{style="color: grey;"}
-- Demographics not particularly important (but limited race/ethnic diversity)
 - Lapse day and Lapse hour are useful for day and hour level models as expected
 ::::
 
 :::: {.column width="50%"}
+**--UPDATE FIGURE--**
+<!--Global SHAP Plot-->
+<!-- 
+TEMP DISABLED FOR QUICK PUBLISH
+embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >}}
+-->
+::::
+:::
+
+::: {.notes}
+We also see that demographics were not particularly important for prediction lapses for these models.   However, I'll return later to acknowledged that we had limited race/ethnicity diversity in the sample.  Nonetheless, we had reasonable variable on other participant characteristics like sex, SES, education, and addiction severity.  
+
+And finally, we see that we can use lapse day and lapse hour to make predictions with the more temporally precise models.  Not surprisingly, people are more likely to lapse on weekends and during evening hours and the associated day and hour level models models can use that information to improve their lapse predictions.  These features likely contribute to the superior performance of the hour and to a lesser extent the day model relative to the week interval prediction model.
+:::
+
+-----------------------------------------------------------------------------
+
+## Global Feature Importance
+
+::: {.columns}
+:::: {.column width="50%"}
+- [All EMA items impact lapse probability (both globally and locally)]{style="color: grey;"}
+- Lapse day and Lapse hour are useful for day and hour level models as expected
+- Demographics not particularly important (but limited race/ethnic diversity)
+::::
+
+:::: {.column width="50%"}
+**--UPDATE FIGURE--**
 <!--Global SHAP Plot-->
 <!-- 
 TEMP DISABLED FOR QUICK PUBLISH
@@ -806,17 +898,19 @@ INSERT NOTES
 INSERT NOTES
 :::
 
-**--UPDATE--**
+-----------------------------------------------------------------------------
+
+## Clinical Uses: Who and When?
 
 ::: {.columns}
 :::: {.column width="50%"}
 - [Day and Hour prediction windows can be used for "just-in-time" interventions]{style="color: gray;"}
 - [Week window may be too coarse for JIT]{style="color: gray;"}
-- Push week window further into the future support outside of DTx 
+- Push week window further into the future to support outside of DTx 
 ::::
 
 :::: {.column width="50%"}
-INSERT LAG FIGURE
+{{< embed ../../../notebooks/lag_auroc.qmd#fig-lag_auroc >}}
 ::::
 :::
 
