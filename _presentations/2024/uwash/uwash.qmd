@@ -163,7 +163,7 @@ And these benefits are durable - they have been documented up to 12 months after
 
 
 ::: {.notes}
-These apps are in use today with patients with SUD, but I think they are still best considered beta versions relative to their full potential. 
+As you likely know, these apps are in use today with patients with SUD, but I think they are still best considered beta versions relative to their full potential. 
 
 Their power comes from easy, 24/7 access to their many supports - the treatments, tools, and services built into these smartphone apps. But this is also their Achilles heel. As the patient using these apps, you now have to tackle difficult questions like:
 
@@ -194,11 +194,9 @@ UPDATE
 
 These are essentially precision mental health questions about providing the right interventions and supports to the right people at the right time, every time
 
-
 This next wave of digital therapeutics, lets call them smart digital therapeutics, must learn to know us well enough to recognize when we are at greatest risk for relapse and they must be smart enough to recommend the specific supports that would be most effective for us at that moment in time to prevent that relapse.
 
-And we believe digital therapeutics can provide this personalized care if we enhance them with embedded sensing capabilities and machine learning risk prediction models
-And these apps will do this through the use of built-in artificial intelligence or machine learning algorithms that are powered by personal sensing.
+And we believe digital therapeutics can provide this personalized care if we enhance them with sensing capabilities and built-in artificial intelligence or machine learning risk prediction algorithms.
 :::
 
 -----------------------------------------------------------------------------
@@ -217,7 +215,22 @@ Lapses
 - Even a single lapse can result in overdose and/or death for some drugs
 
 ::: {.notes}
-UPDATE
+[PAUSE]
+
+So - how are we approaching this precision mental health challenge?
+
+To start, we have begun to develop risk prediction models that focus both on **predicting** and **explaining** future lapses
+
+Our focus is on future lapses rather than other clinically meaningful outcomes like substance use related problems or relapse for several reasons.
+
+To start, lapses are
+
+- Clearly defined and have a temporally precise onset
+- They can serve as an early warning sign for relapse because they both precede and predict it
+
+- Lapses are also important targets for intervention because we know that maladaptive thoughts and feelings following a lapse - often called abstinence violation effects - can start a downward spiral that leads to relapse by itself   
+
+- And sadly, for some drugs, even a single lapse can result in overdose and death
 :::
 
 -----------------------------------------------------------------------------
@@ -251,7 +264,16 @@ UPDATE
 - Contexualized smartphone communications
 
 ::: {.notes}
-UPDATE
+The inputs to these lapse prediction models come from feature engineering three separate but complementary sets of raw signals that can be sensed easily on any smartphone. These are
+
+Ecological momentary assessments
+Geolocation
+Cellular communications meta data and text message content
+
+Our goal is to use features from these powerful signals to develop lapse prediction models with exceptionally high temporal resolution
+
+In other words, we aren’t looking to simply identify individuals at high risk for lapses
+Instead we want to know precisely when these lapses will occur so that we can intervene to prevent them
 :::
 
 -----------------------------------------------------------------------------
@@ -361,7 +383,6 @@ On the first EMA each day, they also reported any future risky situations and st
 -----------------------------------------------------------------------------
 
 ## Sensing Feasibility/Acceptability: EMA
-
 
 ::: {.columns}
 :::: {.column width="50%"}
@@ -962,7 +983,26 @@ INSERT NOTES
 
 ::: {.columns}
 :::: {.column width="50%"}
+- Tools from interpretable AI can help explain [why]{style="color: orange;"} a future lapse is expected
+::::
 
+:::: {.column width="50%"}
+<!--blank-->
+::::
+:::
+
+::: {.notes}
+
+:::
+
+-----------------------------------------------------------------------------
+
+## Clinical Uses: Which Interventions/Supports?
+
+::: {.columns}
+:::: {.column width="50%"}
+- [Tools from interpretable AI can help explain why a future lapse is expected]{style="color: gray;"}
+- Local SHAP values highlight important risk features for a [specific individual at a specific moment in time]{style="color: orange;"}
 ::::
 
 :::: {.column width="50%"}
@@ -972,11 +1012,59 @@ INSERT NOTES
 
 ::: {.notes}
 UPDATE
+
+In the bottom right figure, I am showing you local SHAP values from the next hour risk prediction model. These SHAP values allow us to know which features contributed most strongly to each individual lapse risk prediction, in other words a prediction for a specific individual at a specific time.
 :::
 
 -----------------------------------------------------------------------------
 
+## Clinical Uses: Which Interventions/Supports?
+
+::: {.columns}
+:::: {.column width="50%"}
+- [Tools from interpretable AI can help explain why a future lapse is expected]{style="color: gray;"}
+- [Local SHAP values highlight important risk features for a specific individual at a specific moment in time{style="color: gray;"}
+- If we know why, we can begin to [recommend interventions and supports]{style="color: orange;"} to address these risks
+::::
+
+:::: {.column width="50%"}
+{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day_emaonly >}}
+::::
+:::
+
+::: {.notes}
+- For example, today one DTx user may show a high lapse probability and the model may have assigned that probability because they have been craving a lot recently. For that person, we could recommend urge surfing techniques and provide them support doing it within the DTx. 
+
+- A second person might have similarly high lapse probability but instead because they have lapsed a few times in recent weeks. They could be encouraged to complete activities designed to increase their motivation for abstinence. 
+
+- A third person might have a low probability of lapsing because they have reported many recent positive activities. No intervention might be needed for this person but they could receive feedback about how their commitment to their well-being was paying off for their recovery.
+:::
+
+-----------------------------------------------------------------------------
+
+## Clinical Uses: Which Interventions/Supports?
+
+::: {.columns}
+:::: {.column width="50%"}
+- [Tools from interpretable AI can help explain why a future lapse is expected]{style="color: gray;"}
+- [Local SHAP values highlight important risk features for a specific individual at a specific moment in time{style="color: gray;"}
+- If we know why, we can begin to [recommend interventions and supports]{style="color: orange;"} to address these risks
+::::
+
+:::: {.column width="50%"}
+{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day_emaonly >}}
+::::
+:::
+
+::: {.notes}
+As a starting point, the mapping between between important local risk features and specific interventions or supports could be created using clinical domain expertise. In other words, what would a clinician tell their patient to do in those circumstances. We can simply hard code these clinically derived mappings between risk features and support recommendations in the Smart DTx
+
+However, with enough training data, reinforcement learning can also be applied to this problem to allow the model to learn the best intervention to recommend given a set of risk features to reduce subsequent lapse probability.
+:::
+
+-----------------------------------------------------------------------------
 ## (Selective) Next Steps: Passive Sensing 
+
 
 Use geolocation and cellular communications
 
@@ -984,9 +1072,15 @@ Use geolocation and cellular communications
 - More (distinct) risk features for intervention recommendations
 
 ::: {.notes}
+As the sensing and recommendation system continues to mature, we will want a richer, broader set of lapse risk features so that we can distinguish better between different situations that require different supports. We can do this by engineering features from our location and communication signals, which tap into different experiences than what we measure by EMA.
+
 One of the key next steps is to develop models that rely more on passive sensing rather than EMA to lower the patient burden of using these systems long term and to gain access to signals that may not be available by self-report.
 
 Let's take a look at two of the more revealing personal sensing methods that we are developing to provide you with some intuition about how we think this will work.
+
+
+
+
 :::
 
 -----------------------------------------------------------------------------
@@ -1100,20 +1194,13 @@ But we are hoping to extract more signal from the both of these as we continue t
 
 -----------------------------------------------------------------------------
 
-
-
-
-
 ## (Selective) Next Steps
-
 
 - [Use geolocation and cellular communications]{style="color: gray;"}
 - Improve algorithmic fairness
   - Improve assessment of fairness
   - Explore computational solutions
   - More diversity in training data
-
-
 
 ::: {.notes}
 We are excited by the early performance of these machine learning models BUT I want to be clear that these are preliminary research studies.  And they included mostly white participants from our local community in Madison, WI.  
@@ -1128,7 +1215,7 @@ Machine learning models must be trained on diverse samples of patients or their 
 ## Active Project: Lapse in patients with Opioid Use Disorder 
 
 ::: {.medium}
-- Recruiting 400 - 500 patients in recovery from Opioid Use Disorder (~ 300 so far)
+- Recruiting ~ 400 patients in recovery from Opioid Use Disorder 
 - National sample (size; diversity: demographics, location)
 - More variation in stage of recover (1 – 6 months at start)
 - 12 months of monitoring
@@ -1152,9 +1239,7 @@ We are now collecting data for a NIDA funded project where we are specifically r
 
 
 We are also recruiting for people at different stages in their recovery and following them for a longer period of time – up to 12 months
-
 :::
-
 
 -----------------------------------------------------------------------------
 
@@ -1168,7 +1253,7 @@ We are also recruiting for people at different stages in their recovery and foll
 ::: {.notes}
 Of course, accurately predicting future lapses is only useful if these predictions can be used to sustain engagement with treatments and improve clinical outcomes.  
 
-We have now started to consider how we can use these predictions to help patients optimize their use of a digital therapeutic.  
+We have now started to consider how we can use these predictions to help patients personalize their use of a digital therapeutic.  
 
 These models may be able to suggest when more use of the DTx is needed because lapse risk is increasing or high but we are also hoping that we can use the models to recommend which tools and supports in the DTx are best for that patient at that moment in time given their lapse risk probability and important features contributing to the lapse prediction.
 
@@ -1195,8 +1280,6 @@ We are also sensitive to the fact that these recommendations from the machine le
 
 :::
 
-
-
 -----------------------------------------------------------------------------
 
 ## (Selective) Next Steps
@@ -1216,6 +1299,60 @@ We are also sensitive to the fact that these recommendations from the machine le
 
 ::: {.columns}
 :::: {.column width="50%"}
+- Large dataset from an RCT of first line medications for smoking cessation
+  - Varenicline (e.g., Chantix)
+  - NRT patch
+  - Combo NRT (patch and lozenge)
+  
+- Measured point prevalence abstinence
+  - 4 weeks
+  - 12 weeks (end of treatment)
+  - 26 weeks (long term follow-up) 
+::::
+
+:::: {.column width="50%"}
+<!-- BLANK -->
+::::
+:::
+
+::: {.notes}
+UPDATE
+:::
+
+-----------------------------------------------------------------------------
+
+## Precision Mental Health without Sensing
+
+::: {.columns}
+:::: {.column width="50%"}
+- Sample was very well-characterized at baseline  
+  - Smoking history
+  - Personality and other individual differences
+  - Environment and social network
+
+\
+
+- Trained a model to predict abstinence
+  - Many, many features
+  - Included Medication X Feature interactions
+  - Predict smoker abstinence probability for each medication 
+::::
+
+:::: {.column width="50%"}
+<!-- BLANK -->
+::::
+:::
+
+::: {.notes}
+UPDATE
+:::
+
+-----------------------------------------------------------------------------
+
+## Precision Mental Health without Sensing
+
+::: {.columns}
+:::: {.column width="50%"}
 
 ::::
 
@@ -1227,7 +1364,6 @@ We are also sensitive to the fact that these recommendations from the machine le
 ::: {.notes}
 UPDATE
 :::
-
 
 -----------------------------------------------------------------------------
 
@@ -1251,25 +1387,3 @@ UPDATE
 ## CRediTs
 
 ![credits.png](https://github.com/jjcurtin/lectures/blob/main/images/credits_risk1.png?raw=true){.absolute bottom="0%" left="5%" width="92%" height="auto"}\ 
-
-::: {.notes}
-
-:::
-
------------------------------------------------------------------------------
-
-## Extra Slides
-
------------------------------------------------------------------------------
-
-## Relapse Prevention Model
-
-![relapse_prevention_flowchart.png](https://github.com/jjcurtin/lectures/blob/main/images/relapse_prevention_flowchart.png?raw=true){.absolute bottom="0%" left="10%" width="73%" height="auto"}\ 
-
-
-::: {.notes}
-
-:::
-
-
------------------------------------------------------------------------------
