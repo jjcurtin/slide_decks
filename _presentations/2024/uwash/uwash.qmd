@@ -4,18 +4,19 @@ author: "John J. Curtin, Ph.D."
 institute: "University of Wisconsin-Madison"
 date: May 13, 2024
 
+format: 
+  revealjs:
+    scrollable: true
+    css: uwash.css
+    logo: qr-code.png
+    slide-number: false
+
 title-slide-attributes:
   data-background-image: https://github.com/jjcurtin/lectures/blob/main/images/smartphone_know_you.png?raw=true
   data-background-size: 35%
   data-background-repeat: no
   data-background-position: left 10% bottom 10%
 
-format: 
-  revealjs:
-    scrollable: true
-    chalkboard: true
-    css: uwash.css
-    logo: qr-code.png
 include-after: |
   <script type="text/javascript">
     Reveal.on('ready', event => {
@@ -45,7 +46,9 @@ include-after: |
 ::: {.notes}
 We have a mental health crisis in the U.S. and it is a crisis of **unmet** high need because our delivery of mental healthcare is deeply flawed. 
 
-In 2019, **more than half of the 52 million Americans** with an active mental illness did not receive any treatment. **More than half**!
+In 2019, **more than half of the 52 million Americans** with an active mental illness did not receive any treatment. 
+
+**More than half**!
 :::
 
 -----------------------------------------------------------------------------
@@ -99,7 +102,7 @@ And similar mental healthcare disparities exist for people living in rural commu
 ::: {.notes}
 Our failure to treat is, unfortunately, not surprising.  There are many well known barriers to receiving traditional mental healthcare.
 
-These include problems with access that are particularly limiting for people living in rural communities
+These include problems with access that that affect everyone but are particularly limiting for people living in rural communities
 
 Problems with availability
 
@@ -152,9 +155,29 @@ But they are.
 
 For example, patients with substance use disorders who use a digital therapeutic have almost double the odds of being abstinent from alcohol or other drugs
 
-These increases in abstinence from using digital therapeutics are observed not only when compared to patients on wait lists, who have yet to gain access to treatment but also when digital therapeutics are added on top of traditional treatments for substance use disorders.
+These increases in abstinence from using digital therapeutics are observed not only when compared to patients on wait lists, who have yet to gain access to treatment, but also when digital therapeutics are added on top of traditional treatments for substance use disorders.
 
 And these benefits are durable - they have been documented up to 12 months after the start of treatment.  
+:::
+
+-----------------------------------------------------------------------------
+
+## Digital Therapeutics (DTx)
+
+- Smartphone "apps" that prevent, manage, or treat disease 
+
+- Can augment mental health services to address barriers
+  - [Accessible everywhere]{style="color: gray;"} 
+  - [Available 24/7]{style="color: gray;"} 
+  - [Highly scalable (affordable?)]{style="color: gray;"} 
+  - Effective!
+
+::: {.notes}
+[PAUSE]
+
+But let me pause for a moment.  I want to be very clear on one point before we move forward.  I do not believe or hope that digital therapeutics will replace human therapists. 
+  
+Therapists will always be needed for what they do uniquely well.  We simply need more than they can provide alone.  Digital therapeutics can provide that "more."
 :::
 
 -----------------------------------------------------------------------------
@@ -163,9 +186,13 @@ And these benefits are durable - they have been documented up to 12 months after
 
 
 ::: {.notes}
-As you likely know, these apps are in use today with patients with SUD, but I think they are still best considered beta versions relative to their full potential. 
+[PAUSE]
 
-Their power comes from easy, 24/7 access to their many supports - the treatments, tools, and services built into these smartphone apps. But this is also their Achilles heel. As the patient using these apps, you now have to tackle difficult questions like:
+So as you likely know, digital therapeutics are in use today with patients with SUD, but I think these apps are still best considered beta versions relative to their full potential. 
+
+Their power comes from easy, 24/7 access to their many supports - the treatments, tools, and services built into these smartphone apps. 
+
+But this is also their Achilles heel. As the patient using these apps, you now have to tackle difficult questions like:
 
 - When should I use them?
 
@@ -182,7 +209,7 @@ Their power comes from easy, 24/7 access to their many supports - the treatments
 
 - Precision mental health requires us to provide the [right treatments]{style="color: orange;"} and supports to the [right people]{style="color: orange;"} at the [right time]{style="color: orange;"}, [every time]{style="color: orange;"}
 
-- Current DTx can already help with "every time"
+- Current DTx can already help with "every time" given reduced barriers to care
 
 - Smart DTx can address "who", "when" & "why"
 
@@ -190,13 +217,13 @@ Their power comes from easy, 24/7 access to their many supports - the treatments
   - AI/Machine learning
 
 ::: {.notes}
-UPDATE
+These are essentially precision mental health questions about providing the **right interventions and supports** to the **right people** at the **right time**, **every time**
 
-These are essentially precision mental health questions about providing the right interventions and supports to the right people at the right time, every time
+Current digital therapeutics can already address the **every time** need given their 24/7 availability and reduced barriers to use
 
-This next wave of digital therapeutics, lets call them smart digital therapeutics, must learn to know us well enough to recognize when we are at greatest risk for relapse and they must be smart enough to recommend the specific supports that would be most effective for us at that moment in time to prevent that relapse.
+But to fully embrace this precision mental health goal, the next wave of digital therapeutics, lets call them **smart digital therapeutics**, must learn to know us well enough to recognize when we are at greatest risk for relapse and they must be smart enough to recommend the specific supports both inside and outside the app that would be most effective for us at that moment in time to prevent that relapse.
 
-And we believe digital therapeutics can provide this personalized care if we enhance them with sensing capabilities and built-in artificial intelligence or machine learning risk prediction algorithms.
+And we believe digital therapeutics can provide this **personalized care** if we enhance them with sensing capabilities and built-in artificial intelligence or machine learning risk prediction algorithms.
 :::
 
 -----------------------------------------------------------------------------
@@ -217,7 +244,7 @@ Lapses
 ::: {.notes}
 [PAUSE]
 
-So - how are we approaching this precision mental health challenge?
+OK - so how are we approaching this precision mental health challenge?
 
 To start, we have begun to develop risk prediction models that focus both on **predicting** and **explaining** future lapses
 
@@ -228,51 +255,82 @@ To start, lapses are
 - Clearly defined and have a temporally precise onset
 - They can serve as an early warning sign for relapse because they both precede and predict it
 
-- Lapses are also important targets for intervention because we know that maladaptive thoughts and feelings following a lapse - often called abstinence violation effects - can start a downward spiral that leads to relapse by itself   
+- Lapses are also important targets for intervention because we know that maladaptive thoughts and feelings following a lapse - often called abstinence violation effects - can start a downward spiral that leads to relapse by itself if not addressed   
 
 - And sadly, for some drugs, even a single lapse can result in overdose and death
+
+
+So for these reasons, we are developing risk models that predict the probability of a future lapse
 :::
 
 -----------------------------------------------------------------------------
 
-## Model Inputs: Sensing
+## Model Inputs: Personal Sensing
 
 Sensing requires:
 
-- in vivo measurement
-- longitudinal
-- high temporal granularity 
-
-\
-
-Should be:
-
-- Consistent across platforms/devices
-- Stable/Low churn
+- In Vivo measurement
+- Longitudinal
+- High temporal granularity 
 - Feasible/acceptable for long term use
 
 ::: {.notes}
-UPDATE
+The next logical set of questions surround the model inputs.   
+
+What will we use as inputs or risk features in these models to predict lapses?
+
+And how will we measure the raw signals associated with these risk features?
+
+We believe that personal sensing will play a big role here.  And when I talk about sensing, I am talking about a measurement strategy that allows for in vivo measurement within the context of an individual's day-to-day life.   
+
+It must be longitudinal but also with high temporal granularity so that we have the temporal precision to intervene during days and even potentially moments of heightend risk
+
+And it must be acceptable to people for long term use because we know that SUDs are chronic, relapsing disorders that require lifetime management and continuing care.
 :::
 
 -----------------------------------------------------------------------------
 
-## Model Inputs: Sensing
+## Model Inputs: Personal Sensing
+
+Sensing requires:
+
+- [In Vivo measurement]{style="color: gray;"}
+- [Longitudinal]{style="color: gray;"}
+- [High temporal granularity]{style="color: gray;"}
+- [Feasible/acceptable for long term use]{style="color: gray;"}
+
+\
+
+- Consistent across platforms/devices
+- Stable/Low churn
+
+::: {.notes}
+There are also some practical requirements.  
+
+If we are going to make the sensing and and prediction system widely available, then the measurement must be feasible, consistent, and stable across common equipment that most people own.  
+
+From our perspective, this limits us to smartphones with the major operating systems
+:::
+
+-----------------------------------------------------------------------------
+
+## Model Inputs: Personal Sensing
 
 - Ecological Momentary Assessments (EMA)
 - Contextualized Geolocation
 - Contexualized smartphone communications
 
 ::: {.notes}
-The inputs to these lapse prediction models come from feature engineering three separate but complementary sets of raw signals that can be sensed easily on any smartphone. These are
+Given these sensing requirements, we are focusing the majority of our effort at this point on feature engineering with three separate but complementary sets of raw signals that can be sensed easily on any smartphone. These are
 
-Ecological momentary assessments
-Geolocation
-Cellular communications meta data and text message content
+- Ecological momentary assessments
+- Geolocation
+- Cellular communications meta data and text message content
 
 Our goal is to use features from these powerful signals to develop lapse prediction models with exceptionally high temporal resolution
 
 In other words, we aren’t looking to simply identify individuals at high risk for lapses
+
 Instead we want to know precisely when these lapses will occur so that we can intervene to prevent them
 :::
 
@@ -299,17 +357,51 @@ Instead we want to know precisely when these lapses will occur so that we can in
 :::
 
 ::: {.notes}
-UPDATE NOTES
-
 So let me transition now to describing how we are taking the first baby steps toward developing smart digital therapeutics for SUD
 
 We have recently completed a NIAAA funded project where we collected data from 151 participants who were in early recovery from a moderate to severe alcohol use disorder.  
 
-These participants were committed to abstinence at the start of the study and we followed them for up to 3 months, collecting a variety of active and passive personal sensing data streams.
+These participants were committed to abstinence at the start of the study and we followed them for up to 3 months, collecting a variety of personal sensing data streams including the three I just metioned.
 
-Our first goal with this grant was to develop machine learning algorithms that can generate temporally precise predictions about when future lapses back to alcohol use will occur for patients with AUD.
+Our broad goal was to develop a sensing and prediction system that could be embedded in any digital therapeutic to both predict future lapses and to understand the risk factors contributing to those predicted lapses so that we can provide appropriate support in advance
 
-We are in the early stages of model building at this point and I will focus today on results from preliminary models using only EMA.  However, we are actively working with GPS and cellular communications as well and I’ll end with some brief discussion of those preliminary models, as well as early plans on how to implement these models clinically to help patients.
+And critically, this system must perform well enough to be useful when applied to individuals.  
+
+In other words, we are not looking to find coarse group-level predictors of lapses but instead to make predictions for specfic individuals at specific moments in time that are actionable
+:::
+
+-----------------------------------------------------------------------------
+
+## Lapse Prediction for AUD
+
+::: {.columns}
+:::: {.column width="60%"}
+- 151 individuals with moderate to severe AUD
+- Early in recovery (1-8 weeks)
+- Committed to abstinence throughout study
+- Followed with sensing for up to 3 months
+  - [Ecological Momentary Assessments]{style="color: orange;"}
+  - Contextualized Geolocation
+  - Contexualized smartphone communications
+  - (also sensed physiology, sleep, coarse self-report)
+::::
+
+:::: {.column width="40%"}
+![risk1_pis.png](https://github.com/jjcurtin/lectures/blob/main/images/risk1_pis.png?raw=true)\    
+![niaaa_logo.png](https://github.com/jjcurtin/lectures/blob/main/images/niaaa_logo.png?raw=true)\    
+::::
+:::
+
+::: {.notes}
+[PAUSE]
+
+We are in the early stages of model building at this point and I will focus today primarily on results from preliminary models using only EMA.  
+
+However, we are actively working with GPS and cellular communications as well and I will give you a clear sense of how we are developing models with those signals too.  
+
+I'll also give you more detail about how we think we can implement these models for clinical benefits.  
+
+And if there is time, I'll end by contrasting this work with other precision mental health models we are developing to use outside of digital therapeutics
 :::
 
 -----------------------------------------------------------------------------
@@ -319,7 +411,34 @@ We are in the early stages of model building at this point and I will focus toda
 {{< embed ../../../notebooks/ema_demographics.qmd#fig-demographics >}}
 
 ::: {.notes}
-UPDATE
+Let me start highlighting the characteristics of the sample we are using to develop and evaluate the AUD lapse models.
+
+We had reasonble diversity across many participant charactersitics including age, sex at birth, martital status, education, and income
+
+However, given the methods we used for recruiting, we have very little racial and ethinic diversity in the sample.  The sample is predominately white and non-hispanic
+
+I'll return to this later both when we evaluate issues of algorithmic fairness and when I talk about another, larger NIDA funded project where we are correcting this issue of racial and ethnic representation in our models.  
+:::
+
+-----------------------------------------------------------------------------
+
+## Participant Characteristics
+
+::: {.columns}
+:::: {.column width="50%"}
+- All participants met criteria for moderate to severe AUD
+- Reported abstinence goals
+::::
+
+:::: {.column width="50%"}
+{{< embed ../../../notebooks/ema_demographics.qmd#fig-aud_symptoms  >}}
+::::
+:::
+
+::: {.notes}
+I also want to highlight that this is a sample with clinically meaningful problems with their AUD use, consistent with their pursuit of abstinence goals
+
+On the right, I am showing you a histogram of the DSM-5 AUD symptom counts to confirm that everyone reported 4 or more symptoms of alcohol use disorder consistent with a moderate to severe presentation
 :::
 
 -----------------------------------------------------------------------------
@@ -347,16 +466,13 @@ UPDATE
 :::
 
 ::: {.notes}
-UPDATE
+So let me tell you a bit more about the 4x daily EMA we collected for three months during their study participation  
 
+On each EMA, participants reported the date and time of any lapses back to alcohol use that they hadn’t previously reported. These lapse reports are used for the lapse outcomes that we train our models to predict.  And these laspes were also confirmed by study staff during lab visits using a follow-back procedure.
 
-So let me tell you a bit more about the 4x daily EMA we collected.  
+All of the EMAs also asked participants about their current craving, affective valence and arousal, recent risky situations, and recent stressful and pleasant events since their last EMA.
 
-On each EMA, participants reported the date and time of any lapses back to alcohol use that they hadn’t previously reported. 
-
-All of the EMAs also asked them about their current craving, affective valence and arousal, recent risky situations, and recent stressful and pleasant events since their last EMA.
-
-On the first EMA each day, they also reported any future risky situations and stressful events that they expected in the next week and their confidence that they would remain abstinent. 
+And on the first EMA each day, they also reported any future risky situations and stressful events that they expected in the next week and their confidence that they would remain abstinent. 
 :::
 
 -----------------------------------------------------------------------------
@@ -377,7 +493,17 @@ On the first EMA each day, they also reported any future risky situations and st
 :::
 
 ::: {.notes}
-**---UPDATE SLIDE NOTES--**
+So when I introduced sensing earlier, I indicated that it must be feasible and acceptable to users over reasonably long periods of time so lets take a look at that for our three sensed signals.
+
+Our participants completed approximately 80% of the 4x Daily EMAs over the three months period with only a modest drop in compliance over time.
+
+Importantly, the completion rates for at least 1 EMA per day were even higher - at 95% 
+
+And although I won't show these results today, we are now building models using only 1 EMA per day that can match the performance of the models I will show you with 4 EMA per day
+
+And I also want to note that the NIDA funded project I mentioned earlier is collecting 1 EMA per day for a year from individuals with high rates of compliance.
+
+So the bottom line is that it may be possible to sense EMA for the long periods we need for SUD with adequate compliance
 :::
 
 -----------------------------------------------------------------------------
@@ -403,7 +529,17 @@ On the first EMA each day, they also reported any future risky situations and st
 :::
 
 ::: {.notes}
-**---UPDATE SLIDE NOTES--**
+They also reported their subjective perceptions of the sensing methods.  Specifically, for each sensing method, we asked them to report
+
+- if it interfered with their daily activities
+- if they disliked providing it to us
+- and if they would be willing to provide it for a year if it helped their recovery
+
+In the figures to the right, I show histograms for these three questions with the scale oriented so that responses indicating higher acceptability are displayed to the right.
+
+As you can see, most participants found EMA to be at least neutral or better
+
+And I should note, in the context of this study, there were no clinical benefits provided to participants for engaging with our sensing system.  Its at least reasonable to expect that these sensing methods may be viewed more favorabily still by participants when used to help them with their recovery.
 :::
 
 -----------------------------------------------------------------------------
@@ -415,6 +551,33 @@ On the first EMA each day, they also reported any future risky situations and st
 
 - 100% opted-in to provide [geolocation]{style="color: orange;"}
 - Very modest ($10/month) financial incentive
+::::
+
+:::: {.column width="50%"}
+<!-- BLANK-->
+::::
+:::
+
+::: {.notes}
+[PAUSE]
+
+Now let me turn to the more passive, but perhaps also more sensitive sensing methods we use.  Candidly, when we started this project, we weren't certain participants would provide these data to us, but it turns out they will.
+
+To start, participants were not required to provide us with geolocation to participate in the study.  Instead, we provided a very modest monetary incentive, $10/month in the context of about $800 of total study payments.
+
+Nonetheless, 100% of the participants opted-in to provide us with their location data.
+:::
+
+-----------------------------------------------------------------------------
+
+## Sensing Feasibility/Acceptability: Geolocation 
+
+::: {.columns}
+:::: {.column width="50%"}
+
+- [100% opted-in to provide geolocation]{style="color: gray"}
+- [Very modest ($10/month) financial incentive]{style="color: gray"}
+
 
 \
 
@@ -429,24 +592,45 @@ On the first EMA each day, they also reported any future risky situations and st
 :::
 
 ::: {.notes}
-**---UPDATE SLIDE NOTES--**
+We also asked them if they disliked providing these data and if they were would be willing to provide it for a year.  We didnt ask the interference question because these data are passively collected with little to no burden on the user.
+
+And as you can see, similar to EMA, most participants' evaluations of the acceptability of sensing geolocation was neutral or better.
 :::
 
 -----------------------------------------------------------------------------
 
-## Sensing Feasibility/Acceptability: Communication Logs 
+## Sensing Feasibility/Acceptability: Communication Logs and Text Content
 
 ::: {.columns}
 :::: {.column width="50%"}
 
 - 150/151 opted-in to provide [communication logs and text message content]{style="color: orange;"} 
 - Very modest ($10/month) financial incentive
+::::
+
+:::: {.column width="50%"}
+::::
+:::
+
+::: {.notes}
+We did the same evaluations for our sensing of participants' communications.  We collected both the meta data or logs from their phones that contained the dates, times, and numbers of all incoming and outgoing calls and messages and we also collected the actual content of their text messages.  
+
+And similar to geolocation, almost everyone was willing to provide these data to us with only a modest financial incentive
+:::
+
+-----------------------------------------------------------------------------
+
+## Sensing Feasibility/Acceptability: Communication Logs
+
+::: {.columns}
+:::: {.column width="50%"}
+
+- [150/151 opted-in to provide communication logs and text message content]{style="color: gray;"} 
+- [Very modest ($10/month) financial incentive]{style="color: gray;"} 
 
 \
 
 - Perceptions about sharing logs were neutral or better for most
-- Better when provides clinical benefits to users?
-
 ::::
 
 :::: {.column width="50%"}
@@ -455,7 +639,11 @@ On the first EMA each day, they also reported any future risky situations and st
 :::
 
 ::: {.notes}
-**---UPDATE SLIDE NOTES--**
+We again asked the same "dislike" and "willingness to use for a year" questions, separately for the communication logs and text message content.
+
+To the right, I am showing you their perceptions about sharing the logs were mostly neutral or better 
+
+[PAUSE]
 :::
 
 -----------------------------------------------------------------------------
@@ -464,7 +652,13 @@ On the first EMA each day, they also reported any future risky situations and st
 
 ::: {.columns}
 :::: {.column width="50%"}
-- Essentially same story for sharing text message content
+- [150/151 opted-in to provide communication logs and text message content]{style="color: gray;"} 
+- [Very modest ($10/month) financial incentive]{style="color: gray;"} 
+
+\
+
+- [Perceptions about sharing logs were neutral or better for most]{style="color: gray;"} 
+- And essentially same story for sharing text message content
 ::::
 
 :::: {.column width="50%"}
@@ -473,10 +667,15 @@ On the first EMA each day, they also reported any future risky situations and st
 :::
 
 ::: {.notes}
-**---UPDATE SLIDE NOTES--**
+And the story is essentially the same about sharing the content of their text messages with us, with maybe a few more participants expressing some dislike.
+
+Again, to be candid, we were pretty excited about these data because we believe they speak directly to the feasibility of using all three of this potentially powerful sensed signals for lapse prediction.
+
+And I should also say that we've collected these same three sensed signals in our NIDA project in over 400 individuals with opioid use disorder and the short story there is that they too will give us these data, even though many of them are engaging in the use of a drug that has potential legal ramifications for them.
 :::
 
 -----------------------------------------------------------------------------
+
 ## Modeling: Predictions 
 
 - Predict hour-by-hour probability of [future lapse]{style="color: orange;"}
@@ -487,13 +686,15 @@ On the first EMA each day, they also reported any future risky situations and st
   - 1 hour 
 
 ::: {.notes}
+OK, now that we've talked about sensing, I want to transition to training models to use features from these raw signals to predict lapses.
+
 For our purposes today I wont dive deep into the machine learning methods but let me highlight a few high level details 
 
-We used these features I just described to make predictions about the hour-by-hour probability of a future lapse.  We are developing separate models for three future lapse windows – lapses in the next week, lapses in the next day, and lapses in the next hour.  
+We used features from these sensed signals that I just described to make predictions about the hour-by-hour probability of a future lapse.  We are developing separate models for three future lapse windows – lapses in the next week, lapses in the next day, and lapses in the next hour.  
 
-For example, if I was in recovery from an AUD, I could use these models to generate the probability that I would lapse after this symposium starting at 10am.  One model would generate the probability of a lapse between 10am and 11 am today, the second would predict the probability of a lapse between 10 am today and 10 am tomorrow and the third would provide the probability of a lapse anytime between 10am today and 10 am next Friday  
+For example, if I was in recovery from an AUD, I could use these models to generate the probability that I would lapse after this symposium starting at 1 pm.  One model would generate the probability I would lapse at some point between 1 pm today and 1 pm next tuesday, the second would predict the probability of a lapse between 1 pm today and 1 pm tomorrow and the third and most temporally precise model would provide the probability of a lapse in the next hour, between 1pm today and 2 pm today.  
 
-And of course, all of the models would only use data collected prior to 10 am today so that they are “predicting”, in the full sense of the word, into the future and not just demonstrating an association.
+And of course, all of the models would only use data collected prior to 1 pm today so that they are “predicting”, in the full sense of the word, into the future and not just demonstrating an association.
 :::
 
 -----------------------------------------------------------------------------
@@ -501,6 +702,7 @@ And of course, all of the models would only use data collected prior to 10 am to
 ## Modeling: Algorithms and Resampling
 
 - XGBoost - Boosted decision trees
+- Also considered:
   - ElasticNet GLM (e.g., LASSO, ridge regression)
   - Random Forest
   - KNN
@@ -508,13 +710,41 @@ And of course, all of the models would only use data collected prior to 10 am to
 \
 
 - Using grouped (by participant), nested, repeated k-fold CV 
-  - 30 test sets
+  - 30 "held-out" test sets
   - New participants and observations not used for training
 
 ::: {.notes}
-**---UPDATE SLIDE NOTES--**
+We are evaluating machine learning model configurations that differ by common statistical algorithms that I can talk more about later if there is interest.
 
-We are evaluating machine learning model configurations that differ by common statistical algorithms
+And we are rigorously evaluating the performance of these models using grouped, nested, repeated k-fold cross validation.  
+
+For our purposes, what this means is that we evalute model performance in 30 separate held out test sets and each of these sets contain new observatations from new participants that were not used to train the models.  
+
+And again, this is consistent with what we mean by prediction.  We don't care how our models perform with the participants we used to train them. We want to know how well the models will work when we implement them with new people in the future.
+:::
+
+-----------------------------------------------------------------------------
+
+## Modeling: Feature Engineering 
+
+- Features based on recent past experiences (12, 24, 48, 72, 168 hours)
+
+- Min, max, and median response (all items)
+
+- History (count) of past lapses (item 1) and completed EMAs (compliance)
+
+- Raw scores and change scores (from baseline/all past responses)
+
+::: {.notes}
+We used the raw responses to the EMAs to engineer about 300 features to use in our models to predict future lapses
+
+We formed features by aggregating EMA items over various past time periods ranging from 12 - 168 hours in the past relative to the window we want to predict into.
+
+We calculated mins, maxes and medians for the EMA items in these time periods
+
+We also calculated counts of past lapses and counts of past EMAs completed to index engagment with our monitoring system.
+
+And we included these scores both in raw form and as change from baselines for the participant based on all their previous responses since the start of the study.
 :::
 
 -----------------------------------------------------------------------------
@@ -532,7 +762,13 @@ We are evaluating machine learning model configurations that differ by common st
 :::
 
 ::: {.notes}
-**---UPDATE SLIDE NOTES--**
+We will be evaluting our models with a performance metric called the Area under the Receiver Operating Characteristic curve or auROC for short.
+
+The ROC curve plots a models true positive rate by its false positive rate.
+
+The dotted line on the right shows the curve for a classifier with random features that are unrelated to the outcome.  For any increase in the true positive rate, there is a comparable increase in the false positive rate.
+
+And the auROC for this random classifier would be .50
 :::
 
 -----------------------------------------------------------------------------
@@ -551,7 +787,9 @@ We are evaluating machine learning model configurations that differ by common st
 :::
 
 ::: {.notes}
-**---UPDATE SLIDE NOTES--**
+And the red line displays the curve for a perfectly performing classifer.  It pushes up into the top left corner of the plot where the true positve rate is 1.0 and the false positive rate is 0.   
+
+This perfect classifer would have an auROC of 1.0
 :::
 
 -----------------------------------------------------------------------------
@@ -571,31 +809,13 @@ We are evaluating machine learning model configurations that differ by common st
 :::
 
 ::: {.notes}
-**---UPDATE SLIDE NOTES--**
-:::
+So the range of auROCs is approximately .5 - 1.0 
 
------------------------------------------------------------------------------
+but the auROC also has an intutiive intepretation that I want you to understand.  
 
-## Modeling: Feature Engineering 
+Its value represents the probability that any randomly selected positive observation, in our case, a lapse, will be assigned a higher probability score than a randomly selected negative observation where no lapse occurs.
 
-- Features based on recent past experiences (12, 24, 48, 72, 168 hours)
-
-- Min, max, and median response (all items)
-
-- History (count) of past lapses (item 1) and completed EMAs (compliance)
-
-- Raw scores and change scores (from baseline/all past responses)
-
-::: {.notes}
-We used these raw EMAs to engineer about 300 features to use in machine learning models to predict future lapses
-
-We formed features by aggregating EMA items over various past time periods ranging from 12 -168 hours in the past
-
-We calculated mins, maxes and medians for the EMA items in these time periods
-
-We also calculated counts of past lapses and counts of past EMAs completed to index engagment with our monitoring system.
-
-And we included these scores both in raw form and as change from baselines for the participant based on all their previous responses since the start of the study.
+So for example, if a model has an auROC of 0.90, it means that there is a 90 percent chance that any specific lapse will be scored higher than a specific no-lapse event 
 :::
 
 -----------------------------------------------------------------------------
@@ -618,7 +838,9 @@ And we included these scores both in raw form and as change from baselines for t
 :::
 
 ::: {.notes}
-Ok, lets start with the model that provides the coarsest level of temporal specificity – 1 week, and let me take a moment to make the predictions that this machine learning model provides more concrete for you
+OK, lets begin to explore how well we can do.
+
+lets start with the model that provides the coarsest level of temporal specificity – 1 week, and let me take a moment to make the predictions that this machine learning model provides more concrete for you
 
 On the right, you are looking at histograms of the lapse probability predictions that the model makes for all the weeks for all the patients in the held out folds.   
 
@@ -654,9 +876,9 @@ Model auROCs
 :::
 
 ::: {.notes}
-But as I said, depending on the application, we may not want to always use a .5 decision threshold.  And this is where the ROC curve and the area under this curve come into play as a performance metric.   The ROC curve is a plot of the model’s sensitivity by its specificity across all possible decision thresholds.
+But we can get more precise in our evaluation of this model with the ROC curve and auROC.
 
-The area under this curve can range from approximately .5 for a random classifier to 1.0 for a classifier that performs perfectly.  
+Remember that the area under this curve can range from approximately .5 for a random classifier to 1.0 for a classifier that performs perfectly.  
 
 And the AUC for our 1 week model is .90, which is generally considered excellent performance.  
 :::
@@ -717,9 +939,9 @@ Model auROCs
 :::
 
 ::: {.notes}
-And here is the ROC curve and the AUC for the day level model in green, superimposed on the week level model in orange
+And here is the ROC curve and the auROC for the day level model in green, superimposed on the week level model in orange
 
-The day level model performed as well as, if not better, than the week level model with an AUC of .91
+The day level model performed as well as, if not better, than the week level model with an auROC of .91
 
 [PAUSE]
 :::
@@ -751,9 +973,35 @@ Model auROCs
 :::
 
 ::: {.notes}
-And it turns out that we can do somewhat better still with hour level predictions.  Here the blue curve represents the ROC curve for the hour level model, which had the best AUC yet, .93
+And it turns out that we can do somewhat better still with hour level predictions.  Here the blue curve represents the ROC curve for the hour level model, which had the best auROC yet, .93
 
 [PAUSE]
+
+And to be clear, we believe all three of these models to have clinically implementable levels of performance such that we can make meaningful decisions about the probability of a future lapse for individual participants at specfic moments or windows in time.
+
+Thats the good news.
+:::
+
+-----------------------------------------------------------------------------
+
+## Algorithmic Fairness
+
+::: {.columns}
+:::: {.column width="35%"}
+::::
+
+:::: {.column width="65%"}
+::::
+:::
+
+::: {.notes}
+[PAUSE]
+
+But, not surprisingly given what I told you earlier about the characterisics of our training data, there is important bad news to share as well.
+
+When we evaluate model performance, it is critical that we looks at performance in protected groups.  And too often, these analyses are not done or reported.  
+
+Its only very recently that we have begin to take this seriously and we must.  If we hope to use our smart DTx to address existing dispartities in SUD then our models must perform well with all groups, regardless of their privilege or the use of these models may exacerbate rather than reduce existing mental healthcare disparities.
 :::
 
 -----------------------------------------------------------------------------
@@ -765,11 +1013,6 @@ And it turns out that we can do somewhat better still with hour level prediction
 - Substantially poorer performance if not white/non-hispanic
 - Meaningfully poorer performance for other less priviledged groups
 - Not just due to under-representation in training data
-
-\
-
-- Move beyond binary comparisons
-- Methods to remediate?
 ::::
 
 :::: {.column width="65%"}
@@ -778,7 +1021,19 @@ And it turns out that we can do somewhat better still with hour level prediction
 :::
 
 ::: {.notes}
-UPDATE
+[PAUSE]
+
+And our models have some serious but unfortunately not unexpected problems.
+
+On the right, these are preliminary analyses looking at performance across a variety of binary groups defined by priviledge with respect to SUD treatment access and/or outcomes.  
+
+From these analyses, it is clear that our models perform substantially worse when predicing lapse for anyone who isnt white and non-hispanic.  And this was expected given the lack of racial and ethinic diversity in the sample.
+
+However, there are also some, though smaller, performance issues for other less privleged groups, even when we had reasonable divesity regarding those characteristics in the sample.  And this highlights other sources of potential bias. 
+
+For example, when selecting which EMA questions to ask participants, we based this on domain expetise from decades of research on the risk factors for lapses.  However, that research was done with predominately white, predominately male participants who often had other priviledges that allowed for them to participate in research.  Given this, it may not be suprising that when we use this literature to select EMA items to measure, we may fail to include items that might tap lapse risk for people who are not white men.
+
+I'll come back to this later when talking about our NIDA project and next steps and I hope we can discuss this too during the question period.
 :::
 
 -----------------------------------------------------------------------------
@@ -787,25 +1042,20 @@ UPDATE
 
 ::: {.columns}
 :::: {.column width="50%"}
-- All EMA items impact lapse probability (both globally and locally)
+- All EMA items impact lapse probability
 ::::
 
 :::: {.column width="50%"}
-embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >}}
+{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >}}
 ::::
 :::
 
 ::: {.notes}
-UPDATE
+In the spirit of making this model more transparent and interpretable, lets also briefly look under the hood at global feature importance
 
-In the spirit of making this model more transparent and interpretable, lets briefly look under the hood at the feature importance
+The plot on the right shows feature names and their associated importance indexed by mean absolute SHAP values. The width of the bars shows the relative global importance of each feature for each model, globally across all participants and observations.  From this we see a few important characteristics of the model.   
 
-The plot on the right shows feature names and their associated importance indexed by mean absolute SHAP values over all observations.  From this we see a few important characteristics of the model.   
-
-First, all of EMA items affect predictions about lapse probability globally across observations  As you might expect, history of past lapses has a big influence on the probability of a future lapse.  But self reported abstinence efficacy, craving, history of stress events and other features from the EMA all make meaningful contributions to lapse probability across observations.  
-
-To make these values somewhat meaningful for you, let me remind you these Sh
-[logodds of .4 = 1.5 odds;  logodds of .7 = double the odds]
+First, all of EMA items affect predictions about lapse probability across observations  As you might expect, history of past lapses has a big influence on the probability of a future lapse.  But self reported abstinence efficacy, craving, history of stress events and other features from the EMA all make meaningful contributions to lapse probability across observations.  
 :::
 
 -----------------------------------------------------------------------------
@@ -814,19 +1064,19 @@ To make these values somewhat meaningful for you, let me remind you these Sh
 
 ::: {.columns}
 :::: {.column width="50%"}
-- [All EMA items impact lapse probability (both globally and locally)]{style="color: grey;"}
+- [All EMA items impact lapse probability]{style="color: grey;"}
 - Lapse day and Lapse hour are useful for day and hour level models as expected
 ::::
 
 :::: {.column width="50%"}
-embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >}}
+{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >}}
 ::::
 :::
 
 ::: {.notes}
-We also see that demographics were not particularly important for prediction lapses for these models.   However, I'll return later to acknowledged that we had limited race/ethnicity diversity in the sample.  Nonetheless, we had reasonable variable on other participant characteristics like sex, SES, education, and addiction severity.  
+We also see that we can use lapse day and lapse hour to make predictions with the more temporally precise models.  Not surprisingly, people are more likely to lapse on weekends and during evening hours and the associated day and hour level models models can use that information to improve their lapse predictions.  
 
-And finally, we see that we can use lapse day and lapse hour to make predictions with the more temporally precise models.  Not surprisingly, people are more likely to lapse on weekends and during evening hours and the associated day and hour level models models can use that information to improve their lapse predictions.  These features likely contribute to the superior performance of the hour and to a lesser extent the day model relative to the week interval prediction model.
+These features likely contribute to the superior performance of the hour and to a lesser extent the day model relative to the week interval prediction model.
 :::
 
 -----------------------------------------------------------------------------
@@ -835,22 +1085,70 @@ And finally, we see that we can use lapse day and lapse hour to make predictions
 
 ::: {.columns}
 :::: {.column width="50%"}
-- [All EMA items impact lapse probability (both globally and locally)]{style="color: grey;"}
+- [All EMA items impact lapse probability]{style="color: grey;"}
 - [Lapse day and Lapse hour are useful for day and hour level models as expected]{style="color: grey;"}
 - Demographics not particularly important (but limited race/ethnic diversity)
 ::::
 
 :::: {.column width="50%"}
-embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >}}
+{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >}}
 ::::
 :::
 
 ::: {.notes}
-We also see that demographics were not particularly important for prediction lapses for these models.   However, I'll return later to acknowledged that we had limited race/ethnicity diversity in the sample.  Nonetheless, we had reasonable variable on other participant characteristics like sex, SES, education, and addiction severity.  
-
-And finally, we see that we can use lapse day and lapse hour to make predictions with the more temporally precise models.  Not surprisingly, people are more likely to lapse on weekends and during evening hours and the associated day and hour level models models can use that information to improve their lapse predictions.  These features likely contribute to the superior performance of the hour and to a lesser extent the day model relative to the week interval prediction model.
+And finally, we see that demographics were not particularly important for predicting lapses for these models. In other words, the frequency of observed lapses did not differ meaningfully by these demographic characteristics.  Though again, lets not forget the lack of racial and ethnic diversity in the sample.    
 :::
 
+-----------------------------------------------------------------------------
+
+## What next?
+
+- Very strong overall performance
+- Temporally precise models for immediate future lapse risk
+- EMA risk features are intepretable and sensible
+
+\
+
+- Critical to address issues of algorithmic fairness 
+
+\
+
+- And how can we use these models for clinical benefit?
+
+::: {.notes}
+So lets pause here for a quick re-cap of where we are so far
+
+- We have models that predict exceptionally well when evaluted in the full sample
+
+- These models have a high degree of temporal specificity, even down to hour level resolution
+
+- The risk features from EMA map sensibly onto known lapse risks and we have interventions and supports designed to address many of these risks
+
+- BUT, and this is a very big BUT, we have some critically important work to do with respect to algoritmic fairness before we can implement these models without doing harm.
+
+Assuming we can do this in our subsequent projects, the next logical question is how can use these models.
+:::
+
+-----------------------------------------------------------------------------
+
+## Clinical Uses: DO NOT provide model output to clinicians 
+
+DO NOT provide model output to clinicians
+
+- Clinicians are over-burdened
+- Not ready for new data streams
+
+::: {.notes}
+When we started this work, we believed we were building these models to inform clinicians about their caseload.  
+
+Today's digital therapeutics have clinician dashboards built into them and we, perhaps naively, thought clinicians could use this information to priortize their resources to patients who had the greatest need.
+
+But as we talked to clinicians, it became very clear that they do not want any more info at this point.  
+
+Post-pandemic, they are barely keeping their heads above water and are definitely not ready to add new systems and data streams in place.
+
+However, in constrast, our work with participants suggested that they did see potential value in monitoring their recovery using our sensing system and prediction system.   So we have pivoted to considering what might be useful to provide directly to them.
+:::
 -----------------------------------------------------------------------------
 
 ## Clinical Uses: DO NOT Predict Lapses
@@ -869,7 +1167,15 @@ DO NOT predict class labels  (Lapse vs. No-Lapse)
 :::
 
 ::: {.notes}
-UPDATE
+But lets again first start with how we should NOT use these models with individuals with SUDs.
+
+We have been focusing on the lapse probabilities that are natively output from our prediction models.   However, its common to use these models to predict formal class labels.  In other words, to specifically predict that a lapse will happen or not.  Basically, a threshold is set, for example, 0.5, and if the probability of a lapse exceeds that threshold the model predicts that a lapse will occur.  Otherwise, it predicts that no lapse will occur
+
+But there are several reasons that we DO NOT want to predict dichoutomous class labels.
+
+To start, there may be concerns about possible iatriogenic effects associated with telling a person that they are going to lapse. Or at least this should be a risk that is carefully considered if we provide these blunt dichotomous predictions to individuals.
+
+Second, these days, I think we have all come to understand that taking scores that are natively quantitative like probabilities are, and artificially dichotomoizing them results in substantial loss of information that is potentially valueable.
 :::
 
 -----------------------------------------------------------------------------
@@ -894,7 +1200,21 @@ DO NOT predict class labels  (Lapse vs. No-Lapse)
 :::
 
 ::: {.notes}
-UPDATE
+But perhaps most importantly, when we are predicting class labels and the labels are highly unbalanced, the positive predictive value of those labels will low.
+
+To make this concrete, on the right I am showing you a confusion matrix for class label predictions from the day model.   The columns represent reality, whether the observation was a true lapse on the right or a true no lapse on the left.  And the rows represent class predictions from the model made using a sensible threshold.
+
+As you might expect, these data are unbalanced.  Only 7 percent of observations for any day are true lapses.  That is shown by the right column being narrower than the left.
+
+This model has good specificity.  If you consider the left column, you see that more than 80% of no-lapse days are predicted to be no-lapses.   And it has good sensitivity.  If you consider the right column, you see that the model correctly identifies > 80% of the true lapses as well.
+
+But if we look instead at the rows of matrix, and focus on the bottom row that represents when the model predicts a lapse, we see the problem with binary labels.   Even though only a small portion of the true no-lapses are false positives, shown in the bottom left cell, this number overwhelms the true positives in the bottom right cell because there just arent that many positive cases to detect.
+
+This means that when the model predicts a lapse, it will be correct less than a third of the time.  
+
+Obviously this makes the use of these class labels problematic to say the least.
+
+To be clear, there are methods we can use to increase PPV but given the other reasons to avoid predicting labels we are not pursing them.
 :::
 
 -----------------------------------------------------------------------------
@@ -914,7 +1234,9 @@ DO use lapse probability
 :::
 
 ::: {.notes}
-INSERT NOTES
+Instead of using the models to predict class labels, we believe that there is potentially high value in using the original lapse probabilities directly output by the model.
+
+I've already shown you that these probabilies can discriminate very well between lapse and no-lapse observations, correctly assigning a higher probability to lapses more than 90% of the time.
 :::
 
 -----------------------------------------------------------------------------
@@ -936,7 +1258,15 @@ DO use lapse probability
 :::
 
 ::: {.notes}
-INSERT NOTES
+And critically, these probabilities are very well calibrated and at least ordinal in their relationship with the true probability that a lapse will occur.   
+
+On the right, I am showing you a simple calibration plot.  On the x-axis, I've binned predicted lapse probabilities into bin widths of 10 percent and for each of these bins, I display the actual observed probability of lapses for observations in that bin.  
+
+If the probabilities were perfectly calibrated, the bin means would all fall on the dotted line with the bin from 0 - 10 having an observed probilitiy of .05, the bin from 10 - 20 having a probability of .15, and so on.
+
+And this is essentially what we see for our models.
+
+Given this, we believe that the lapse probabilities can provide precise, fine gradations of risk for clinical decision making.
 :::
 
 -----------------------------------------------------------------------------
@@ -954,7 +1284,9 @@ INSERT NOTES
 :::
 
 ::: {.notes}
-INSERT NOTES
+So let's consider first how to use the temporal information provided by the three models.
+
+FREE TALK
 :::
 
 -----------------------------------------------------------------------------
@@ -965,7 +1297,7 @@ INSERT NOTES
 :::: {.column width="50%"}
 - [Day and Hour prediction windows can be used for "just-in-time" interventions]{style="color: gray;"}
 - Week window may be too coarse for JIT
-- Push week window further into the future to support outside of DTx 
+- Push week window further into the future for support outside of DTx 
 ::::
 
 :::: {.column width="50%"}
@@ -974,7 +1306,7 @@ INSERT NOTES
 :::
 
 ::: {.notes}
-INSERT NOTES
+FREE TALK
 :::
 
 -----------------------------------------------------------------------------
@@ -992,7 +1324,9 @@ INSERT NOTES
 :::
 
 ::: {.notes}
+We can get more than just when lapses are probable from these models.
 
+We can also begin to use tools from the emerging field of interpretable AI to understand WHY they may occur
 :::
 
 -----------------------------------------------------------------------------
@@ -1006,14 +1340,12 @@ INSERT NOTES
 ::::
 
 :::: {.column width="50%"}
-embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day_emaonly >}}
+{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day_emaonly >}}
 ::::
 :::
 
 ::: {.notes}
-UPDATE
-
-In the bottom right figure, I am showing you local SHAP values from the next hour risk prediction model. These SHAP values allow us to know which features contributed most strongly to each individual lapse risk prediction, in other words a prediction for a specific individual at a specific time.
+FREE TALK
 :::
 
 -----------------------------------------------------------------------------
@@ -1028,7 +1360,7 @@ In the bottom right figure, I am showing you local SHAP values from the next hou
 ::::
 
 :::: {.column width="50%"}
-embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day_emaonly >}}
+{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day_emaonly >}}
 ::::
 :::
 
@@ -1038,6 +1370,9 @@ embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day_emaonly >}}
 - A second person might have similarly high lapse probability but instead because they have lapsed a few times in recent weeks. They could be encouraged to complete activities designed to increase their motivation for abstinence. 
 
 - A third person might have a low probability of lapsing because they have reported many recent positive activities. No intervention might be needed for this person but they could receive feedback about how their commitment to their well-being was paying off for their recovery.
+
+
+SLIDE CONTINUE ON NEXT CLICK
 :::
 
 -----------------------------------------------------------------------------
@@ -1052,7 +1387,7 @@ embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day_emaonly >}}
 ::::
 
 :::: {.column width="50%"}
-embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day_emaonly >}}
+{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day_emaonly >}}
 ::::
 :::
 
@@ -1060,6 +1395,8 @@ embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day_emaonly >}}
 As a starting point, the mapping between between important local risk features and specific interventions or supports could be created using clinical domain expertise. In other words, what would a clinician tell their patient to do in those circumstances. We can simply hard code these clinically derived mappings between risk features and support recommendations in the Smart DTx
 
 However, with enough training data, reinforcement learning can also be applied to this problem to allow the model to learn the best intervention to recommend given a set of risk features to reduce subsequent lapse probability.
+
+We are really excited about these possiblities so let me tell you more about where we are going from here
 :::
 
 -----------------------------------------------------------------------------
@@ -1067,15 +1404,15 @@ However, with enough training data, reinforcement learning can also be applied t
 ## (Selective) Next Steps: Passive Sensing 
 
 - Use geolocation and cellular communications
-  - Lower sensing burden
   - More (distinct) risk features for intervention recommendations
+  - Lower sensing burden
 
 ::: {.notes}
-As the sensing and recommendation system continues to mature, we will want a richer, broader set of lapse risk features so that we can distinguish better between different situations that require different supports. We can do this by engineering features from our location and communication signals, which tap into different experiences than what we measure by EMA.
+First, as our sensing and recommendation system continues to mature, we will want a richer, broader set of lapse risk features so that we can distinguish better between different situations that require different supports. We can do this by engineering features from our location and communication signals, which tap into different experiences than what we measure by EMA.
 
-One of the key next steps is to develop models that rely more on passive sensing rather than EMA to lower the patient burden of using these systems long term and to gain access to signals that may not be available by self-report.
+And as an added benefit, the use of passive sensing rather than EMA may also lower the patient burden of using these systems long term.
 
-Let's take a look at two of the more revealing personal sensing methods that we are developing to provide you with some intuition about how we think this will work.
+Let's take a look at what we can get from geolocation and communications signals to provide you with some intuition about how we think this will work.
 :::
 
 -----------------------------------------------------------------------------
@@ -1138,6 +1475,8 @@ We believe we can improve the predictive strength of these geolocation and commu
 ::: {.notes}
 For example, consider the implications of this brief text message thread between a hypothetical patient and their drinking buddy for what you might predict for the probability that they might lapse back to drinking in the coming hours.   
 
+[PAUSE]
+
 ... And how would your prediction change if this wasn’t their drinking buddy but instead, their mom who was a big supporter of their recovery.
 
 This interpersonal context matters!!!
@@ -1151,7 +1490,7 @@ This interpersonal context matters!!!
 
 
 ::: {.notes}
-We can gather this contextual information quickly by asking a few key questions about the people and places we interact with frequently over the first couple of months that we record these signals.  And we can identify these frequent contacts and locations directly from these signals.
+We gather this contextual information quickly by asking a few key questions about the people and places we interact with frequently over the first couple of months that we record these signals.  And we can identify these frequent contacts and locations directly from these signals.
 
 In our current projects, we target people and places that we interact with at least twice a month or more for more detailed follow-up to gather context.    And it turns out that this really isn’t that burdensome.   Most of us are creatures of habit and if we set a threshold for 2x monthly interactions, we typically only have 10-30 people and places that meet this threshold.   And it’s the same people and places each month so we can build this context up when the person first starts to use the system and after that it only needs to be updated occasionally when we go somewhere new or make a new friend.
 :::
@@ -1163,7 +1502,6 @@ In our current projects, we target people and places that we interact with at le
 ![context_gps.png](https://github.com/jjcurtin/lectures/blob/main/images/context_gps.png?raw=true){width="75%"}\ 
 
 ::: {.notes}
-UPDATE
 :::
 
 -----------------------------------------------------------------------------
@@ -1173,18 +1511,9 @@ UPDATE
 ![context_cell.png](https://github.com/jjcurtin/lectures/blob/main/images/context_cell.png?raw=true){width="75%"}\ 
 
 ::: {.notes}
-UPDATE
-To be clear, we have only just begun to train models using GPS.   We have started by focusing on recent locations…..
-DESCRIBE MORE
+TALK FIRST ABOUT CONTEXT
 
-
-There is clearly predictive signal in the geolocation signal but not enough to stand alone as the only features at this point.   We are seeing AUCs in the low .7s when we use only geolocation to predict future lapses.  
-
-However, when we add GPS to the EMA models that I described today, we appear to need fewer unique EMA items to get the same level of model performance.   So the addition of GPS may serve to lower patient burden while maintaining model performance.
-
-The story is pretty much the same right now for cellular communications as well.   At this point we have only worked with the meta data – the contact numbers, call times, durations, etc – combined with context.   We haven’t yet done anything with the text message content.   And models built from the meta data perform about as well at these preliminary GPS models.
-
-But we are hoping to extract more signal from the both of these as we continue to work on feature engineering with it.
+THEN TALK ABOUT PRELIMINARY ANALYSES
 :::
 
 -----------------------------------------------------------------------------
@@ -1193,16 +1522,11 @@ But we are hoping to extract more signal from the both of these as we continue t
 
 - [Use geolocation and cellular communications]{style="color: gray;"}
 - Improve algorithmic fairness
-  - Improve assessment of fairness
+  - Move beyond binary comparisons (e.g., issues of intersectionality) 
   - Explore computational solutions
   - More diversity in training data
 
 ::: {.notes}
-We are excited by the early performance of these machine learning models BUT I want to be clear that these are preliminary research studies.  And they included mostly white participants from our local community in Madison, WI.  
-
-Models trained on these participants would be unlikely to work well with black and brown patients or patients from rural communities.  
-
-Machine learning models must be trained on diverse samples of patients or their use may exacerbate rather than reduce existing mental healthcare disparities. 
 :::
 
 -----------------------------------------------------------------------------
@@ -1212,7 +1536,7 @@ Machine learning models must be trained on diverse samples of patients or their 
 ::: {.medium}
 - Recruiting ~ 400 patients in recovery from Opioid Use Disorder 
 - National sample (size; diversity: demographics, location)
-- More variation in stage of recover (1 – 6 months at start)
+- More variation in stage of recovery (1 – 6 months at start)
 - 12 months of monitoring
 - Closer to real implementation methods
 :::
@@ -1246,13 +1570,7 @@ We are also recruiting for people at different stages in their recovery and foll
 
 
 ::: {.notes}
-Of course, accurately predicting future lapses is only useful if these predictions can be used to sustain engagement with treatments and improve clinical outcomes.  
-
-We have now started to consider how we can use these predictions to help patients personalize their use of a digital therapeutic.  
-
-These models may be able to suggest when more use of the DTx is needed because lapse risk is increasing or high but we are also hoping that we can use the models to recommend which tools and supports in the DTx are best for that patient at that moment in time given their lapse risk probability and important features contributing to the lapse prediction.
-
-We are also sensitive to the fact that these recommendations from the machine learning models will need to be provided to patients in a transparent manner that also encourages them to trust the algorithm and follow its recommendations.  
+INTROCE IDEAL THAT PEOPLE NEED TO TRUST THE FEEDBACK FROM OUR MODELS
 :::
 
 
