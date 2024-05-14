@@ -120,8 +120,8 @@ plot_ci <- function(d, title){
     xlab("") +
     theme(legend.position = "none") +
     scale_y_continuous(breaks = seq(0.6, 1, 0.05), limits = c(0.6, 1)) +
-    scale_color_manual(values = c("orange", "blue")) +
-    theme(title = element_text(size = 18, color = "red"),
+    scale_color_manual(values = c("green", "blue")) +
+    theme(title = element_text(size = 18, color = "orange"),
           axis.text.x = element_text(size = 12, color = "black"),
           axis.text.y = element_text(size = 12, color = "black"),
           axis.title.x = element_text(size = 16, color = "black"),

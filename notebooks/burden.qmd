@@ -232,7 +232,7 @@ make_barplot <- function(d, the_labels, title){
     xlab("Rating") +
     ggtitle(title) +
     theme(
-      title = element_text(size = 16, color = "red"),
+      title = element_text(size = 16, color = "orange"),
       axis.text.x = element_text(size = 12, color = "black"),
       axis.text.y = element_text(size = 12, color = "black"),
       axis.title.x = element_text(size = 16, color = "black"),

@@ -38,7 +38,7 @@ include-after: |
 
 ## Mental Healthcare Needs are High and Unmet 
 
-- In 2019, [52 million]{style="color: red;"} Americans had an active mental illness
+- In 2019, [52 million]{style="color: orange;"} Americans had an active mental illness
   - More than half did not receive any treatment
 
 
@@ -56,7 +56,7 @@ In 2019, **more than half of the 52 million Americans** with an active mental il
   - [More than half did not receive any treatment]{style="color: grey;"}
 
 
-- [20 million]{style="color: red;"} adults had an active substance use disorder
+- [20 million]{style="color: orange;"} adults had an active substance use disorder
   - 9 out of 10 did not receive any treatment
 
 
@@ -76,7 +76,7 @@ And for the 20 million adults suffering with a substance use disorder, it was wo
 - [20 million adults had an active substance use disorder]{style="color: grey;"}
   - [9 out of 10 did not receive any treatment]{style="color: grey;"}
 
-- [Large treatment disparities]{style="color: red;"} exist by race, ethnicity, geography, and income
+- [Large treatment disparities]{style="color: orange;"} exist by race, ethnicity, geography, and income
 
 
 ::: {.notes}
@@ -180,7 +180,7 @@ Their power comes from easy, 24/7 access to their many supports - the treatments
 
 ## Precision Mental Health w/ Smart DTx
 
-- Precision mental health requires us to provide the [right treatments]{style="color: red;"} and supports to the [right people]{style="color: red;"} at the [right time]{style="color: red;"}, [every time]{style="color: red;"}
+- Precision mental health requires us to provide the [right treatments]{style="color: orange;"} and supports to the [right people]{style="color: orange;"} at the [right time]{style="color: orange;"}, [every time]{style="color: orange;"}
 
 - Current DTx can already help with "every time"
 
@@ -264,7 +264,7 @@ UPDATE
 - Early in recovery (1-8 weeks)
 - Committed to abstinence throughout study
 - Followed with sensing for up to 3 months
-  - [Ecological Momentary Assessments]{style="color: red;"}
+  - [Ecological Momentary Assessments]{style="color: orange;"}
   - Contextualized Geolocation
   - Contexualized smartphone communications
   - (also sensed physiology, sleep, coarse self-report)
@@ -366,9 +366,9 @@ On the first EMA each day, they also reported any future risky situations and st
 ::: {.columns}
 :::: {.column width="50%"}
 - Collected self-report measures of acceptability
-  - The [...]{style="color: gray;"} [interfered]{style="color: red;"} with my daily activities
-  - I [disliked]{style="color: red;"} the [...]{style="color: gray;"}
-  - I would be [willing to use]{style="color: red;"} the [...]{style="color: gray;"} [for 1 year]{style="color: red;"} to help with my recovery
+  - The [...]{style="color: gray;"} [interfered]{style="color: orange;"} with my daily activities
+  - I [disliked]{style="color: orange;"} the [...]{style="color: gray;"}
+  - I would be [willing to use]{style="color: orange;"} the [...]{style="color: gray;"} [for 1 year]{style="color: orange;"} to help with my recovery
 
 \
 
@@ -392,7 +392,7 @@ On the first EMA each day, they also reported any future risky situations and st
 ::: {.columns}
 :::: {.column width="50%"}
 
-- 100% opted-in to provide [geolocation]{style="color: red;"}
+- 100% opted-in to provide [geolocation]{style="color: orange;"}
 - Very modest ($10/month) financial incentive
 
 \
@@ -418,7 +418,7 @@ On the first EMA each day, they also reported any future risky situations and st
 ::: {.columns}
 :::: {.column width="50%"}
 
-- 150/151 opted-in to provide [communication logs and text message content]{style="color: red;"} 
+- 150/151 opted-in to provide [communication logs and text message content]{style="color: orange;"} 
 - Very modest ($10/month) financial incentive
 
 \
@@ -458,7 +458,7 @@ On the first EMA each day, they also reported any future risky situations and st
 -----------------------------------------------------------------------------
 ## Modeling: Predictions 
 
-- Predict hour-by-hour probability of [future lapse]{style="color: red;"}
+- Predict hour-by-hour probability of [future lapse]{style="color: orange;"}
 
 - Lapse window widths
   - 1 week 
@@ -583,9 +583,9 @@ And we included these scores both in raw form and as change from baselines for t
 
 ::: {.columns}
 :::: {.column width="60%"}
-- Model predicts [probability]{style="color: red;"} of lapse in next week for “[new]{style="color: red;"}” observations in test sets
+- Model predicts [probability]{style="color: orange;"} of lapse in next week for “[new]{style="color: orange;"}” observations in test sets
 
-- Can panel predictions by [Ground Truth]{style="color: red;"} (i.e., true lapse vs. no lapse observations
+- Can panel predictions by [Ground Truth]{style="color: orange;"} (i.e., true lapse vs. no lapse observations
 
 - Want high probabilities to be high for true lapses and low for true no lapses
 ::::
@@ -1214,10 +1214,40 @@ We are also sensitive to the fact that these recommendations from the machine le
 
 ## Precision Mental Health without Sensing
 
+::: {.columns}
+:::: {.column width="50%"}
+
+::::
+
+:::: {.column width="50%"}
+{{< embed ../../../notebooks/match_figs.qmd#fig-wk4 >}}
+::::
+:::
+
+::: {.notes}
+UPDATE
+:::
 
 
 -----------------------------------------------------------------------------
 
+## Precision Mental Health without Sensing
+
+::: {.columns}
+:::: {.column width="50%"}
+
+::::
+
+:::: {.column width="50%"}
+{{< embed ../../../notebooks/match_figs.qmd#fig-all >}}
+::::
+:::
+
+::: {.notes}
+UPDATE
+:::
+
+-----------------------------------------------------------------------------
 ## CRediTs
 
 ![credits.png](https://github.com/jjcurtin/lectures/blob/main/images/credits_risk1.png?raw=true){.absolute bottom="0%" left="5%" width="92%" height="auto"}\ 
