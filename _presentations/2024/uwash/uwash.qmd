@@ -791,7 +791,7 @@ UPDATE
 ::::
 
 :::: {.column width="50%"}
-{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >}}
+embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >}}
 ::::
 :::
 
@@ -819,7 +819,7 @@ To make these values somewhat meaningful for you, let me remind you these Sh
 ::::
 
 :::: {.column width="50%"}
-{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >}}
+embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >}}
 ::::
 :::
 
@@ -841,7 +841,7 @@ And finally, we see that we can use lapse day and lapse hour to make predictions
 ::::
 
 :::: {.column width="50%"}
-{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >}}
+embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >}}
 ::::
 :::
 
@@ -1006,7 +1006,7 @@ INSERT NOTES
 ::::
 
 :::: {.column width="50%"}
-{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day_emaonly >}}
+embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day_emaonly >}}
 ::::
 :::
 
@@ -1028,7 +1028,7 @@ In the bottom right figure, I am showing you local SHAP values from the next hou
 ::::
 
 :::: {.column width="50%"}
-{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day_emaonly >}}
+embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day_emaonly >}}
 ::::
 :::
 
@@ -1047,12 +1047,12 @@ In the bottom right figure, I am showing you local SHAP values from the next hou
 ::: {.columns}
 :::: {.column width="50%"}
 - [Tools from interpretable AI can help explain why a future lapse is expected]{style="color: gray;"}
-- [Local SHAP values highlight important risk features for a specific individual at a specific moment in time{style="color: gray;"}
+- [Local SHAP values highlight important risk features for a specific individual at a specific moment in time]{style="color: gray;"}
 - If we know [why]{style="color: orange;"}, we can begin to [recommend interventions and supports]{style="color: orange;"} to address these risks
 ::::
 
 :::: {.column width="50%"}
-{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day_emaonly >}}
+embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day_emaonly >}}
 ::::
 :::
 
@@ -1298,7 +1298,9 @@ We are also sensitive to the fact that these recommendations from the machine le
   - Varenicline (e.g., Chantix)
   - NRT patch
   - Combo NRT (patch and lozenge)
-  
+
+ \
+
 - Measured point prevalence abstinence
   - 4 weeks
   - 12 weeks (end of treatment)
