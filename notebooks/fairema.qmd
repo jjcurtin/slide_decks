@@ -158,7 +158,7 @@ plot_age  <- ci |>
 ```{r}
 #| label: fig-fair
 #| fig-height: 6
-#| fig-width: 6
+#| fig-width: 8
 
 cowplot::plot_grid(plot_race, plot_income, plot_sex, plot_age)
 ```

@@ -1023,8 +1023,8 @@ In the bottom right figure, I am showing you local SHAP values from the next hou
 ::: {.columns}
 :::: {.column width="50%"}
 - [Tools from interpretable AI can help explain why a future lapse is expected]{style="color: gray;"}
-- [Local SHAP values highlight important risk features for a specific individual at a specific moment in time{style="color: gray;"}
-- If we know why, we can begin to [recommend interventions and supports]{style="color: orange;"} to address these risks
+- [Local SHAP values highlight important risk features for a specific individual at a specific moment in time]{style="color: gray;"}
+- If we know [why]{style="color: orange;"}, we can begin to [recommend interventions and supports]{style="color: orange;"} to address these risks
 ::::
 
 :::: {.column width="50%"}
@@ -1048,7 +1048,7 @@ In the bottom right figure, I am showing you local SHAP values from the next hou
 :::: {.column width="50%"}
 - [Tools from interpretable AI can help explain why a future lapse is expected]{style="color: gray;"}
 - [Local SHAP values highlight important risk features for a specific individual at a specific moment in time{style="color: gray;"}
-- If we know why, we can begin to [recommend interventions and supports]{style="color: orange;"} to address these risks
+- If we know [why]{style="color: orange;"}, we can begin to [recommend interventions and supports]{style="color: orange;"} to address these risks
 ::::
 
 :::: {.column width="50%"}
@@ -1063,13 +1063,12 @@ However, with enough training data, reinforcement learning can also be applied t
 :::
 
 -----------------------------------------------------------------------------
+
 ## (Selective) Next Steps: Passive Sensing 
 
-
-Use geolocation and cellular communications
-
-- Lower sensing burden
-- More (distinct) risk features for intervention recommendations
+- Use geolocation and cellular communications
+  - Lower sensing burden
+  - More (distinct) risk features for intervention recommendations
 
 ::: {.notes}
 As the sensing and recommendation system continues to mature, we will want a richer, broader set of lapse risk features so that we can distinguish better between different situations that require different supports. We can do this by engineering features from our location and communication signals, which tap into different experiences than what we measure by EMA.
@@ -1077,10 +1076,6 @@ As the sensing and recommendation system continues to mature, we will want a ric
 One of the key next steps is to develop models that rely more on passive sensing rather than EMA to lower the patient burden of using these systems long term and to gain access to signals that may not be available by self-report.
 
 Let's take a look at two of the more revealing personal sensing methods that we are developing to provide you with some intuition about how we think this will work.
-
-
-
-
 :::
 
 -----------------------------------------------------------------------------
@@ -1194,7 +1189,7 @@ But we are hoping to extract more signal from the both of these as we continue t
 
 -----------------------------------------------------------------------------
 
-## (Selective) Next Steps
+## (Selective) Next Steps: Diversity
 
 - [Use geolocation and cellular communications]{style="color: gray;"}
 - Improve algorithmic fairness
@@ -1243,7 +1238,7 @@ We are also recruiting for people at different stages in their recovery and foll
 
 -----------------------------------------------------------------------------
 
-## (Selective) Next Steps
+## (Selective) Next Steps:  Algorithmic Feedback
 
 - [Use geolocation and cellular communications]{style="color: gray;"}
 - [Improve algorithmic fairness]{style="color: gray;"}
@@ -1282,7 +1277,7 @@ We are also sensitive to the fact that these recommendations from the machine le
 
 -----------------------------------------------------------------------------
 
-## (Selective) Next Steps
+## (Selective) Next Steps: Other Precision Mental Health Applications
 
 - [Use geolocation and cellular communications]{style="color: gray;"}
 - [Improve algorithmic fairness]{style="color: gray;"}
