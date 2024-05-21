@@ -44,7 +44,7 @@ preds_hour <- read_rds(file.path(path_models,
 
 ## Faceted Plots
 
-### Faceted plof function
+### Faceted plot function
 
 ```{r}
 plot_probs <- function(df_preds, model) {
