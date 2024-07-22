@@ -1,0 +1,4 @@
+- source: prep.qmd
+  quarto-pub:
+    - id: 587b453e-d59a-4f71-a2dc-5d9b931a654d
+      url: 'https://jjcurtin.quarto.pub/precision-mental-health-for-sud-contributions-from-sensing-and-algorithms'
