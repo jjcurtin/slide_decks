@@ -1,5 +1,5 @@
 #!/bin/bash  
 
-quarto publish quarto-pub uwash.qmd --no-browser
+quarto publish quarto-pub quarto.qmd --no-browser
 rm -r *_files
 rm *.html
