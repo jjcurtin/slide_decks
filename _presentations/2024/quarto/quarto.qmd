@@ -1,0 +1,80 @@
+--- 
+title: "Quarto and Github for Publishing"
+author: "John J. Curtin, Ph.D."
+institute: "University of Wisconsin-Madison"
+format: 
+  revealjs:
+    scrollable: true
+    css: slides.css
+    slide-number: true
+    show-slide-number: all 
+--- 
+
+Today is an informal guided tour
+
+- Give you a sense of some of what you can do with github repos (and a bit of git)
+- Give you a sense of some of what you can do with the Quarto Publishing System
+- See how they work together using R (could do same with Python)
+- Provide some instruction but good docs are available at Github and Quarto (and Quarto is evolving rapidly)
+
+-----
+
+What is git and why do we use it?
+
+- distributed version control system
+- no need for _1, _2 _2024-01-1
+- safe (for students use; for disasters)
+- easy to track changes
+- easy to share with others
+- meant primarily for text (not binary; not data) 
+
+-----
+
+
+What is Github?
+
+- Host remote (vs. local) repo
+- Pull down from remote when starting work
+- Push up to remote when done working
+- Free (for most features)
+- Most well known hosting service (gitlab, sourceforge)
+- Used to distribute code for apps, materials from books/course, code from studies
+
+- Can also be used to easily "publish" and maintain products (studies, books, websites) when combined with a publishing system like Quarto
+
+-----
+
+610 course materials are available in my github repo: 
+
+- [https://github.com/jjcurtin/book_glm](https://github.com/jjcurtin/book_glm)
+
+
+URL is standardized:  github.com/username/repo_name
+
+We have 
+  - public repos for every study we publish (code and now papers, analysis notebooks, not data)
+  - repos for generic code we share: [https://github.com/jjcurtin/lab_support](https://github.com/jjcurtin/lab_support)
+
+-----
+
+Github repos can be configured to display a webpage
+
+  - This webpage can be authored and published using Quarto (and R)
+  - Can use these web pages for course materials and open source books
+  - Study manuscript and notebooks
+  - your personal website/portfolio of products
+  
+These website are accessed at:
+
+  - username/github.io/repo_name
+
+-----
+
+Examples
+
+- Our course website: https://jjcurtin.github.io/book_glm/
+- My machine learning course:  https://jjcurtin.github.io/book_iaml/001_overview.html
+- A recent dissertation: https://jjcurtin.github.io/study_match/
+
+-----
+

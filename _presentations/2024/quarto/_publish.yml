@@ -1,0 +1,4 @@
+- source: quarto.qmd
+  quarto-pub:
+    - id: 859dd9a8-1e94-400f-8064-53adc8336378
+      url: 'https://jjcurtin.quarto.pub/quarto-and-github-for-publishing'
