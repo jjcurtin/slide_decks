@@ -51,9 +51,12 @@ What is Github?
 
 URL is standardized:  github.com/username/repo_name
 
-We have 
-  - public repos for every study we publish (code and now papers, analysis notebooks, not data)
-  - repos for generic code we share: [https://github.com/jjcurtin/lab_support](https://github.com/jjcurtin/lab_support)
+I have public repos for
+
+- courses I teach
+- every study we publish (code and now papers, analysis notebooks, not data)
+- generic code we share: [https://github.com/jjcurtin/lab_support](https://github.com/jjcurtin/lab_support)
+- slide decks
 
 -----
 
