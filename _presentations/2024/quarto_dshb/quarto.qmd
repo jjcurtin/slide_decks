@@ -1,5 +1,5 @@
 --- 
-title: "Quarto and Github for Publishing"
+title: "The Scientific Publishing Toolbox"
 author: "John J. Curtin, Ph.D."
 institute: "University of Wisconsin-Madison"
 format: 
@@ -10,14 +10,44 @@ format:
     show-slide-number: all 
 --- 
 
-Today is an informal guided tour
+# Overview
 
-- Give you a sense of some of what you can do with github repos (and a bit of git)
-- Give you a sense of some of what you can do with the Quarto Publishing System
-- See how they work together using R (could do same with Python)
-- Provide some instruction but good docs are available at Github and Quarto (and Quarto is evolving rapidly)
+Today is an informal guided tour of the tools and systems used for scientific publishing broadly
 
------
+- Quarto Publishing System
+- R Markdown
+- R and the Tidyverse
+- Git and Github
+
+- Provide some instruction but good docs are available at
+  - [Quarto](https://quarto.org/) 
+  - [Github Support](https://support.github.com/)
+  - [Git](https://git-scm.com/docs)
+  - [Tidyverse.org](https://www.tidyverse.org/)
+
+
+# Quarto Publishing System
+
+Quarto is an open-source scientific and technical publishing system
+
+- Can publish numerous products
+  - Reports in html, pdf, or other formats
+  - Manuscripts as html, pdf, or word
+  - Slide decks - locally or on web
+  - Books on web
+  - Websites
+
+- Can reuse the same code for these products
+- Products update as data or analysis decisions are updated
+- Provides for transparency (code and output can be combined)  
+- Text based system works will with version control
+
+# The Evolution of the Quarto Document
+
+1. The R script
+
+
+# Git
 
 What is git and why do we use it?
 
@@ -28,10 +58,8 @@ What is git and why do we use it?
 - easy to share with others
 - meant primarily for text (not binary; not data) 
 
------
 
-
-What is Github?
+# Github
 
 - Host remote (vs. local) repo
 - Pull down from remote when starting work
