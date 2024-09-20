@@ -15,6 +15,7 @@ format:
 Today is an informal guided tour of the tools and systems used for scientific publishing broadly
 
 - Quarto Publishing System
+- RStudio
 - R Markdown
 - R and the Tidyverse
 - Git and Github
