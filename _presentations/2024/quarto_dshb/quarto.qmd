@@ -26,6 +26,17 @@ Today is an informal guided tour of the tools and systems used for scientific pu
   - [Tidyverse.org](https://www.tidyverse.org/)
 
 
+# Evolution of the Quarto Publishing System 
+
+1. The R script (.R) - see [example 1](1_r.r)
+2. R Markdown (.Rmd)
+  - An implementation of Markdown for R to implement notebooks
+  - Similar to Jupyter notebooks but in plain text vs. json (better for version control)
+  - Only used for publishing reports/notebooks in html, pdf, etc
+  - Other packages/systems were needed for books, slides, manuscripts, etc
+3. Enter Quarto Publishing System
+
+
 # Quarto Publishing System
 
 Quarto is an open-source scientific and technical publishing system
@@ -42,10 +53,113 @@ Quarto is an open-source scientific and technical publishing system
 - Provides for transparency (code and output can be combined)  
 - Text based system works will with version control
 
-# The Evolution of the Quarto Document
 
-1. The R script
+# The Quarto Document
 
+The building block of Quarto is the document file (.qmd)
+
+It is similar to a Jupyter notebook  
+
+- Can be used interactively
+- Can be rendered to reports
+- Combines code, output and commentary
+- Better for version control than Jupyter notbooks?
+
+# Components of a Quart Document
+
+It has three types of content
+
+- A YAML header at top 
+- Code chunks
+- Markdown text
+
+Lets look at a [simple example 2](2_qmd.qmd)
+
+
+# Rendering a Quarto Document
+
+Quarto documents are rendered using the `quarto render` command
+
+- Can be rendered to html, pdf, or other formats
+- Can render using RStudio button but more control using command line in terminal
+  - `quarto render 2_quarto.qmd --to pdf` 
+  - `quarto render 2_quarto.qmd --to html`
+  
+# Format Control in YAML
+
+We can control the format of the output in the YAML header (see [example 3](3_quarto.qmd)) 
+
+- Indicated that we will include a table of contents with depth = 2
+- Indicated that the html file will render to a single file (preferred for sharing)
+
+- Lets render it
+  - will default to the format listed
+  - `quarto render 3_quarto.qmd`
+- Can still render to other formats via terminal
+  - `quarto render 3_quarto.qmd --to pdf`
+  
+  
+# Multiple Formats
+
+- Can include multiple formats in the YAML header
+- See [example 4](4_quarto.qmd)
+- Can render in various ways
+  - `quarto render 3_quarto.qmd --to html`
+  - `quarto render 3_quarto.qmd --to pdf`
+  - `quarto render 4_quarto.qmd --to all`
+
+# Publishing Quarto Documents
+
+HTML rendered Quarto documents can be published to the web
+
+- Various options
+  - [QuartoPub](https://quartopub.com/) is a free hosting service that is suitable for public reports
+  - Exploring Posit Connect for private reports (not free)
+
+- Best done from the command line
+  - `quarto publish quarto-pub 3_quarto.qmd`
+  - Follow instructions
+  - May need to log in to QuartoPub and allow access
+  - Public info (no account credentials) about the published document will be saved in `_publish.yml` on first publication
+  - Rendered locally first but don't need local files.  I prefer to delete them by publishing with a bash shell script (see [publish.sh](publish.sh))
+
+
+# Publishing Slide Decks with Quarto
+
+Can publish the same notebooks as slide decks
+
+- Various formats available
+- revealjs is our choice
+- Can be published local or to QuartoPub or other hosting services (QuartoPub preferred)
+- Just need to change/add format in YAML header for revealjs
+- see [example 5](5_quarto.qmd)
+
+# My Slide Decks 
+
+You can see my slide decks for presentations from the last year at [https://github.com/jjcurtin/slide_decks](https://github.com/jjcurtin/slide_decks) 
+
+- NB: This is set up as a manuscript project (more on that in a moment) so the structure is a bit more complicated
+- The slide decks are in the `_presentations` folder
+- This slide deck (and sample documents) is in `_presentations/2024/quarto_dshb`
+- We can clone this repo in a bit...
+
+# Moving Beyond the Quarto Document
+
+Quarto can also be used to publish more complex products
+
+- Manuscripts
+- Books
+- Websites
+
+These require some additional setup files but still very straight forward
+
+Two Examples
+
+- [Manuscript](https://jjcurtin.github.io/study_match/)
+- [Book](https://jjcurtin.github.io/book_glm/)
+
+
+We use Github as repository and host for these products
 
 # Git
 
@@ -68,16 +182,22 @@ What is git and why do we use it?
 - Most well known hosting service (gitlab, sourceforge)
 - Used to distribute code for apps, materials from books/course, code from studies
 
-- Can also be used to easily "publish" and maintain products (studies, books, websites) when combined with a publishing system like Quarto
+- Can also be used to easily "publish" and maintain products (manuscripts, books, websites) when combined with a publishing system like Quarto
 
------
+# Github for Websites
 
-610 course materials are available in my github repo: 
+Github repos can be configured to display a website
 
-- [https://github.com/jjcurtin/book_glm](https://github.com/jjcurtin/book_glm)
+  - This website can be authored and published using Quarto (and R)
+  - Can use these web pages for course materials and open source books
+  - Study manuscript and notebooks
+  - your personal website/portfolio of products
+  
+These website are accessed at:
 
+  - username.github.io/repo_name
 
-URL is standardized:  github.com/username/repo_name
+# My Github
 
 I have public repos for
 
@@ -86,26 +206,24 @@ I have public repos for
 - generic code we share: [https://github.com/jjcurtin/lab_support](https://github.com/jjcurtin/lab_support)
 - slide decks
 
------
+# Gaylen Fronk's Dissertation Manuscript
 
-Github repos can be configured to display a webpage
+We can clone Gaylen's Quarto manuscript project to see how it is set up
 
-  - This webpage can be authored and published using Quarto (and R)
-  - Can use these web pages for course materials and open source books
-  - Study manuscript and notebooks
-  - your personal website/portfolio of products
-  
-These website are accessed at:
+- URL is standardized:  github.com/username/repo_name
+- [https://github.com/jjcurtin/study_match](https://github.com/jjcurtin/study_match)
+- Can get clone URL directly from Github
+- `git clone git@github.com:jjcurtin/study_match.git`
 
-  - username/github.io/repo_name
+- Lets look at it!
 
------
+# 610 book
 
-Examples
+610 course materials are available in my github repo: 
 
-- Our course website: https://jjcurtin.github.io/book_glm/
-- My machine learning course:  https://jjcurtin.github.io/book_iaml/001_overview.html
-- A recent dissertation: https://jjcurtin.github.io/study_match/
+- [https://github.com/jjcurtin/book_glm](https://github.com/jjcurtin/book_glm)
+- `git clone git@github.com:jjcurtin/book_glm.git`
 
------
-
+- Lets look at it
+- You can edit the slide decks for each unit!
+- You can render/publish your own version of the slides locally or on QuartoPub

@@ -1,0 +1,66 @@
+---
+title: "Sample Quarto Document as Slides"
+author: "John Curtin"
+format:
+  revealjs:
+    scrollable: true
+    css: slides.css
+    slide-number: true
+    show-slide-number: all
+editor_options: 
+  chunk_output_type: console
+---
+
+This is a sample Quarto document that will be rendered as slides.
+
+All the same as before but added a few slides at the end without headings.
+
+
+## Introduction
+
+This is a simple notebook that demonstrates the use of the `quarto` package.
+
+We can use section headings of different levels using `#`, `##`, `###`, etc.
+
+There are lots of other formatting options for Markdown text, including **bold**, *italics*, and `code`.
+
+## Lists
+
+We can also make lists
+
+- item 1
+- item 2
+- item 3
+
+## Code Chunks
+And we can include code chunks
+
+```{r}
+#| warning: false
+#| message: false
+
+library(tidyverse)
+```
+
+# Plots
+
+And we can include plots
+
+```{r}
+ggplot(data = mtcars) +
+  geom_point(aes(x = wt, y = mpg))
+```
+
+## Tables
+
+And we can include tables
+
+```{r}
+head(mtcars)
+```
+
+-----
+
+Here is a slide that didnt have a header.  
+
+The new slide was denoted with `-----`

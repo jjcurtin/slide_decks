@@ -1,5 +1,7 @@
 #!/bin/bash  
 
-quarto publish quarto-pub quarto.qmd --no-browser
+FILENAME=$1
+
+quarto publish quarto-pub "$FILENAME" --no-browser
 rm -r *_files
 rm *.html

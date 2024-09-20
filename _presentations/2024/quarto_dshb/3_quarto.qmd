@@ -1,0 +1,61 @@
+---
+title: "Sample Quarto Document"
+author: "John Curtin"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    embed-resources: true
+editor_options: 
+  chunk_output_type: console
+---
+
+The YAML above includes info for formatting html
+
+ - Includes a toc with depth of 2
+ - Embeds resources in the html file (a single file with all resources)
+ - Default is now to render to html with `quarto render 3_quarto.qmd`
+ - Can still render to pdf with: `quarto render 3_quarto.qmd --to pdf`
+ 
+## Introduction
+
+This is a simple notebook that demonstrates the use of the `quarto` package.
+
+We can use section headings of different levels using `#`, `##`, `###`, etc.
+
+There are lots of other formatting options for Markdown text, including **bold**, *italics*, and `code`.
+
+## Lists
+
+We can also make lists
+
+- item 1
+- item 2
+- item 3
+
+## Code Chunks
+And we can include code chunks
+
+```{r}
+#| warning: false
+#| message: false
+
+library(tidyverse)
+```
+
+# Plots
+
+And we can include plots
+
+```{r}
+ggplot(data = mtcars) +
+  geom_point(aes(x = wt, y = mpg))
+```
+
+## Tables
+
+And we can include tables
+
+```{r}
+head(mtcars)
+```
