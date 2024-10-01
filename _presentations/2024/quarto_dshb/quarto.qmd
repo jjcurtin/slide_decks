@@ -2,6 +2,7 @@
 title: "The Scientific Publishing Toolbox"
 author: "John J. Curtin, Ph.D."
 institute: "University of Wisconsin-Madison"
+date: 2024-09-20
 format: 
   revealjs:
     scrollable: true
@@ -15,6 +16,7 @@ format:
 Today is an informal guided tour of the tools and systems used for scientific publishing broadly
 
 - Quarto Publishing System
+- RStudio
 - R Markdown
 - R and the Tidyverse
 - Git and Github
@@ -24,6 +26,8 @@ Today is an informal guided tour of the tools and systems used for scientific pu
   - [Github Support](https://support.github.com/)
   - [Git](https://git-scm.com/docs)
   - [Tidyverse.org](https://www.tidyverse.org/)
+
+- Slide deck is available on QuartoPub at [https://jjcurtin.quarto.pub/](https://jjcurtin.quarto.pub/)
 
 
 # Evolution of the Quarto Publishing System 
@@ -61,9 +65,9 @@ The building block of Quarto is the document file (.qmd)
 It is similar to a Jupyter notebook  
 
 - Can be used interactively
-- Can be rendered to reports
+- Can be rendered to reports in various formats (e.g., html, pdf)
 - Combines code, output and commentary
-- Better for version control than Jupyter notbooks?
+- Better for version control than Jupyter notbooks
 
 # Components of a Quart Document
 
@@ -136,7 +140,7 @@ Can publish the same notebooks as slide decks
 
 # My Slide Decks 
 
-You can see my slide decks for presentations from the last year at [https://github.com/jjcurtin/slide_decks](https://github.com/jjcurtin/slide_decks) 
+You can see my slide decks for presentations from the last two years at [https://github.com/jjcurtin/slide_decks](https://github.com/jjcurtin/slide_decks) 
 
 - NB: This is set up as a manuscript project (more on that in a moment) so the structure is a bit more complicated
 - The slide decks are in the `_presentations` folder
@@ -181,6 +185,7 @@ What is git and why do we use it?
 - Free (for most features)
 - Most well known hosting service (gitlab, sourceforge)
 - Used to distribute code for apps, materials from books/course, code from studies
+- Can communicate with owners and post bug reports
 
 - Can also be used to easily "publish" and maintain products (manuscripts, books, websites) when combined with a publishing system like Quarto
 

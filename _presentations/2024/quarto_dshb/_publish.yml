@@ -2,6 +2,10 @@
   quarto-pub:
     - id: 859dd9a8-1e94-400f-8064-53adc8336378
       url: 'https://jjcurtin.quarto.pub/quarto-and-github-for-publishing'
+- source: 3_quarto.qmd
+  quarto-pub:
+    - id: 1a9c51af-88c3-4d25-babd-69003772661e
+      url: 'https://jjcurtin.quarto.pub/sample-quarto-document'
 - source: 5_quarto.qmd
   quarto-pub:
     - id: 09a36f66-7d23-4bd0-88ec-6278db4e689e
