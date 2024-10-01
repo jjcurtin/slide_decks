@@ -1,14 +1,26 @@
+####################################
 # Setup
+####################################
+
 library(tidyverse)
 theme_set(theme_classic()) 
 
 devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true",
                      sha1 = "a58e57da996d1b70bb9a5b58241325d6fd78890f")
-path_data <- "data/ema"
+path_data <- "data/risk"
+path_mak <- "mak/risk"
 
-### Read in data
-d <- read_csv(here::here(path_data, "demographics.csv"), 
+####################################
+# Read in data
+####################################
+source(here::here(path_mak, "mak_ema_demographics.R")) # make data if needed
+d <- read_csv(here::here(path_data, "ema_demographics.csv"), 
                    show_col_types = FALSE)
+
+
+####################################
+# Plots
+####################################
 
 # Education
 fig_educ <- d |>
@@ -104,7 +116,6 @@ fig_income <- d |>
         axis.title.x = element_text(size = 16),
         axis.title.y = element_text(size = 16)) +
   theme(title = element_text(size = 16, face = "bold"))
-
 
 # AUD Sx
 fig_sx <- d |>

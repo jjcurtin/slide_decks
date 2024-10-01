@@ -403,7 +403,7 @@ And if there is time, I'll end by contrasting this work with other precision men
 #| fig-height: 6
 #| fig-width: 10
 
-source(here::here("figs/ema/fig_demographics.R"))
+source(here::here("figs/risk/figs_ema_demographics.R"))
 cowplot::plot_grid(fig_age, fig_sex, fig_race, fig_ms, fig_educ, fig_income, nrow = 2, ncol = 3)
 ```
 
@@ -565,7 +565,7 @@ And we included these scores both in raw form and as change from baselines for t
 #| fig-height: 6
 #| fig-width: 6
 
-source(here::here("figs/ema/figs_probability.R"))
+source(here::here("figs/risk/figs_probability.R"))
 tibble(model = c("random", "random"),
        specificity = c(1, 1),
        sensitivity = c(0, 0)) |> 

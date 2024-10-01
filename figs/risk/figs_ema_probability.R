@@ -4,9 +4,11 @@
 
 library(tidyverse)
 theme_set(theme_classic()) 
-path_data <- "data/ema" 
+path_data <- "data/risk" 
+path_mak <- "mak/risk"
 
 # Load prediction data
+source(here::here(path_mak, "mak_probability.R"))  # create data if needed
 preds_week <- read_rds(here::here(path_data, "preds_1week.rds"))
 preds_day <- read_rds(here::here(path_data, "preds_1day.rds"))
 preds_hour <- read_rds(here::here(path_data, "preds_1hour.rds")) 
