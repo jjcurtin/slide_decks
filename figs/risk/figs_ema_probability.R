@@ -9,9 +9,9 @@ path_mak <- "mak/risk"
 
 # Load prediction data
 source(here::here(path_mak, "mak_probability.R"))  # create data if needed
-preds_week <- read_rds(here::here(path_data, "preds_1week.rds"))
-preds_day <- read_rds(here::here(path_data, "preds_1day.rds"))
-preds_hour <- read_rds(here::here(path_data, "preds_1hour.rds")) 
+preds_week <- read_rds(here::here(path_data, "ema_preds_1week.rds"))
+preds_day <- read_rds(here::here(path_data, "ema_preds_1day.rds"))
+preds_hour <- read_rds(here::here(path_data, "ema_preds_1hour.rds")) 
 
 # Generate ROC curve data 
 roc_week <- preds_week |> 
@@ -40,7 +40,6 @@ roc_all <- roc_week |>
 ####################
 
 # probability histogram function
-# not current used
 plot_probs <- function(df_preds, model) {
   bar_color <- 
     case_when(
@@ -65,6 +64,83 @@ plot_roc <- function(df, line_colors){
     labs(x = "False Positive Rate",
         y = "True Positive Rate") +
   scale_color_manual(values = line_colors)
+}
+
+# CM Plot functions
+space_fun <- function(x, adjustment, rescale = FALSE) {
+  if (rescale) {
+    x <- x / sum(x)
+  }
+
+  adjustment <- sum(x) / adjustment
+
+  xmax <- cumsum(x) + seq(0, length(x) - 1) * adjustment
+  xmin <- cumsum(x) - x + seq(0, length(x) - 1) * adjustment
+
+  dplyr::tibble(xmin = xmin, xmax = xmax)
+}
+
+space_y_fun <- function(data, id, x_data) {
+  out <- space_fun(data[, id], 100, rescale = TRUE) * -1
+
+  names(out) <- c("ymin", "ymax")
+
+  out$xmin <- x_data[[id, 1]]
+  out$xmax <- x_data[[id, 2]]
+
+  out
+}
+
+cm_mosaic <- function(x) {
+  `%+%` <- ggplot2::`%+%`
+
+  cm_zero <- (as.numeric(x$table == 0) / 2) + x$table
+  x_data <- space_fun(colSums(cm_zero), 200)
+  full_data_list <- lapply(
+    seq_len(ncol(cm_zero)),
+    FUN = function(.x) space_y_fun(cm_zero, .x, x_data))
+  full_data <- dplyr::bind_rows(full_data_list)
+  y1_data <- full_data_list[[1]]
+  tick_labels <- colnames(cm_zero)
+  axis_labels <- get_axis_labels(x)
+  
+  ggplot2::ggplot(full_data) %+%
+    ggplot2::geom_rect(
+      ggplot2::aes(
+        xmin = xmin,
+        xmax = xmax,
+        ymin = ymin,
+        ymax = ymax
+      ), 
+      fill = c("green", "red", "red", "green")
+    ) %+%
+    ggplot2::scale_x_continuous(
+      breaks = (x_data$xmin + x_data$xmax) / 2,
+      labels = tick_labels
+    ) %+%
+    ggplot2::scale_y_continuous(
+      breaks = (y1_data$ymin + y1_data$ymax) / 2,
+      labels = tick_labels
+    ) %+%
+    ggplot2::labs(
+      y = axis_labels$y,
+      x = axis_labels$x
+    ) %+%
+    ggplot2::theme(panel.background = ggplot2::element_blank())
+}
+
+# Note: Always assumes predictions are on the LHS of the table
+get_axis_labels <- function(x) {
+  table <- x$table
+  labels <- names(dimnames(table))
+
+  if (is.null(labels)) {
+    labels <- c("Prediction", "Truth")
+  }
+  list(
+    y = labels[[1]],
+    x = labels[[2]]
+  )
 }
 
 ####################
@@ -134,3 +210,28 @@ fig_roc_all <- roc_all |>
 #  geom_text(x = .80, y = .10,
 #            label = str_c("auROC = ", auROC_hour),
 #            show.legend = FALSE, color = "blue")
+
+
+
+# Confusion matrix 
+j_thres_roc <- roc_day |> 
+  mutate(j = sensitivity + specificity - 1) |> 
+  slice_max(j) |> 
+  pull(.threshold)
+
+cm <- preds_day |> 
+   mutate(estimate = if_else(prob_beta > j_thres_roc, "Lapse", "No lapse"),
+          estimate = fct(estimate, levels = c("No lapse", "Lapse")),
+          label = fct_relevel(label, "No lapse")) |> 
+   yardstick::conf_mat(truth = label, estimate = estimate)
+
+fig_cm_day <- cm_mosaic(cm) +
+  theme(
+    axis.text.x = element_text(size = 16),
+    axis.text.y = element_text(size = 16),
+    axis.title.x = element_text(size = 24),
+    axis.title.y = element_text(size = 24)) +
+  geom_text(x = 350000, y = -.4, label = "612,086", color = "black", size = 6) +
+  geom_text(x = 350000, y = -.9, label = "147,130", color = "black", size = 6) +
+  geom_text(x = 800000, y = -.07, label = "9,244", color = "black", size = 6) +
+  geom_text(x = 800000, y = -.55, label = "54,077", color = "black", size = 6)

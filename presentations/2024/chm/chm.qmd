@@ -173,7 +173,7 @@ Therapists will always be needed for what they do uniquely well.  We simply need
 
 -----------------------------------------------------------------------------
 
-## {#beta_app data-menu-title="Image of beta app" background-image="http://dionysus.psych.wisc.edu/present/meet_faculty/images/beta_app.png" background-size="100%" background-repeat="none"}
+## {#beta_app data-menu-title="Image of beta app" background-image="http://dionysus.psych.wisc.edu/present/beta_app.png" background-size="100%" background-repeat="none"}
 
 
 ::: {.notes}
@@ -400,6 +400,7 @@ And if there is time, I'll end by contrasting this work with other precision men
 ## Participant Characteristics
 
 ```{r}
+#| label: figs_ema_demographics
 #| fig-height: 6
 #| fig-width: 10
 
@@ -429,6 +430,7 @@ I'll return to this later both when we evaluate issues of algorithmic fairness a
 
 :::: {.column width="50%"}
 ```{r}
+#| label: figs_sx
 #| fig-height: 6
 #| fig-width: 6 
 
@@ -553,6 +555,46 @@ And we included these scores both in raw form and as change from baselines for t
 
 -----------------------------------------------------------------------------
 
+## 1 Week: Probabilities for No Lapse and Lapse
+
+::: {.columns}
+:::: {.column width="50%"}
+- Model predicts [probability]{style="color: orange;"} of lapse in next week for “[new]{style="color: orange;"}” observations in test sets
+
+- Can panel predictions by [Ground Truth]{style="color: orange;"} (i.e., true lapse vs. no lapse observations
+
+- Want high probabilities to be high for true lapses and low for true no lapses
+::::
+
+:::: {.column width="50%"}
+<!--Lapse Probability by Ground Truth"-->
+```{r}
+#| label: fig_hist_week
+#| fig-height: 6
+#| fig-width: 8
+
+source(here::here("figs/risk/figs_ema_probability.R"))
+fig_hist_week
+```
+::::
+:::
+
+::: {.notes}
+OK, lets begin to explore how well we can do.
+
+lets start with the model that provides the coarsest level of temporal specificity – 1 week, and let me take a moment to make the predictions that this machine learning model provides more concrete for you
+
+On the right, you are looking at histograms of the lapse probability predictions that the model makes for all the weeks for all the patients in the held out folds.   
+
+I’ve paneled these histograms by whether a lapse did or did not happen in reality for each predicted week.  The top panel is for weeks with lapses and the bottom panel is for weeks with no lapses.
+
+Ideally, you want the predicted probabilities to be very high for weeks when there was a lapse and very low for weeks when there was no lapse.    
+
+And this is exactly what we see for the one week lapse window model
+:::
+
+-----------------------------------------------------------------------------
+
 ## Modeling: Area under ROC curve (auROC) 
 
 ::: {.columns}
@@ -562,10 +604,10 @@ And we included these scores both in raw form and as change from baselines for t
 
 :::: {.column width="50%"}
 ```{r}
+#| label: figs_random_roc
 #| fig-height: 6
 #| fig-width: 6
 
-source(here::here("figs/risk/figs_probability.R"))
 tibble(model = c("random", "random"),
        specificity = c(1, 1),
        sensitivity = c(0, 0)) |> 
@@ -597,6 +639,7 @@ And the auROC for this random classifier would be .50
 
 :::: {.column width="50%"}
 ```{r}
+#| label: figs-perfect-roc-1
 #| fig-height: 6
 #| fig-width: 6
 
@@ -628,6 +671,7 @@ This perfect classifer would have an auROC of 1.0
 
 :::: {.column width="50%"}
 ```{r}
+#| label: figs-perfect-roc-2
 #| fig-height: 6
 #| fig-width: 6
 
@@ -652,44 +696,6 @@ So for example, if a model has an auROC of 0.90, it means that there is a 90 per
 
 -----------------------------------------------------------------------------
 
-## 1 Week: Probabilities for No Lapse and Lapse
-
-::: {.columns}
-:::: {.column width="60%"}
-- Model predicts [probability]{style="color: orange;"} of lapse in next week for “[new]{style="color: orange;"}” observations in test sets
-
-- Can panel predictions by [Ground Truth]{style="color: orange;"} (i.e., true lapse vs. no lapse observations
-
-- Want high probabilities to be high for true lapses and low for true no lapses
-::::
-
-:::: {.column width="40%"}
-<!--Lapse Probability by Ground Truth"-->
-```{r}
-#| fig-height: 6
-#| fig-width: 6
-
-fig_hist_week
-```
-::::
-:::
-
-::: {.notes}
-OK, lets begin to explore how well we can do.
-
-lets start with the model that provides the coarsest level of temporal specificity – 1 week, and let me take a moment to make the predictions that this machine learning model provides more concrete for you
-
-On the right, you are looking at histograms of the lapse probability predictions that the model makes for all the weeks for all the patients in the held out folds.   
-
-I’ve paneled these histograms by whether a lapse did or did not happen in reality for each predicted week.  The top panel is for weeks with lapses and the bottom panel is for weeks with no lapses.
-
-Ideally, you want the predicted probabilities to be very high for weeks when there was a lapse and very low for weeks when there was no lapse.    
-
-And this is exactly what we see for the one week lapse window model
-:::
-
------------------------------------------------------------------------------
-
 ## 1 Week: ROC Curve
 
 ::: {.columns}
@@ -709,6 +715,7 @@ Model auROCs
 :::: {.column width="50%"}
 <!--ROC Curve for Week-->
 ```{r}
+#| label: fig_roc_week
 #| fig-height: 6
 #| fig-width: 6
 
@@ -777,6 +784,7 @@ Model auROCs
 :::: {.column width="50%"}
 <!--ROC Curve for Week & Day-->
 ```{r}
+#| label: fig_roc_week_day
 #| fig-height: 6
 #| fig-width: 6
 
@@ -817,6 +825,7 @@ Model auROCs
 :::: {.column width="50%"}
 <!--ROC Curve for All-->
 ```{r}
+#| label: fig_roc_all
 #| fig-height: 6
 #| fig-width: 6
 
@@ -865,12 +874,22 @@ Its only very recently that we have begin to take this seriously and we must.  I
 ::: {.columns}
 :::: {.column width="35%"}
 - Substantially poorer performance if not white/non-hispanic
+
 - Meaningfully poorer performance for other less priviledged groups
+
 - Not just due to under-representation in training data
 ::::
 
 :::: {.column width="65%"}
-< embed ../../../notebooks/fairema.qmd#fig-fair >
+```{r}
+#| label: figs_fairema_ci
+#| fig-height: 6
+#| fig-width: 8
+
+source(here::here("figs/risk/figs_fairema_ci.R"))
+cowplot::plot_grid(fig_race, fig_income, fig_sex, fig_age)
+```
+
 ::::
 :::
 
@@ -895,12 +914,20 @@ I'll come back to this later when talking about our NIDA project and next steps 
 ## Global Feature Importance
 
 ::: {.columns}
-:::: {.column width="50%"}
+:::: {.column width="40%"}
 - All EMA items impact lapse probability
 ::::
 
-:::: {.column width="50%"}
-< embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >
+:::: {.column width="60%"}
+```{r}
+#| label: figs_global_all
+#| fig-height: 6
+#| fig-width: 8
+
+source(here::here("figs/risk/figs_ema_shaps.R"))
+fig_global_all
+```
+
 ::::
 :::
 
@@ -917,13 +944,19 @@ First, all of EMA items affect predictions about lapse probability across observ
 ## Global Feature Importance
 
 ::: {.columns}
-:::: {.column width="50%"}
+:::: {.column width="40%"}
 - [All EMA items impact lapse probability]{style="color: grey;"}
 - Lapse day and Lapse hour are useful for day and hour level models as expected
 ::::
 
-:::: {.column width="50%"}
-< embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >
+:::: {.column width="60%"}
+```{r}
+#| label: figs_global_all-2
+#| fig-height: 6
+#| fig-width: 8
+
+fig_global_all
+```
 ::::
 :::
 
@@ -938,14 +971,20 @@ These features likely contribute to the superior performance of the hour and to 
 ## Global Feature Importance
 
 ::: {.columns}
-:::: {.column width="50%"}
+:::: {.column width="40%"}
 - [All EMA items impact lapse probability]{style="color: grey;"}
 - [Lapse day and Lapse hour are useful for day and hour level models as expected]{style="color: grey;"}
 - Demographics not particularly important (but limited race/ethnic diversity)
 ::::
 
-:::: {.column width="50%"}
-< embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >
+:::: {.column width="60%"}
+```{r}
+#| label: figs_global_all-3
+#| fig-height: 6
+#| fig-width: 8
+
+fig_global_all
+```
 ::::
 :::
 
@@ -955,7 +994,7 @@ And finally, we see that demographics were not particularly important for predic
 
 -----------------------------------------------------------------------------
 
-## What next?
+## (Selective) Next Steps
 
 - Very strong overall performance
 - Temporally precise models for immediate future lapse risk
@@ -963,11 +1002,12 @@ And finally, we see that demographics were not particularly important for predic
 
 \
 
-- Critical to address issues of algorithmic fairness 
+But...
 
-\
+- Critical to address issues of algorithmic fairness
+- Need to develop broader set of (more passive) features
+- Need to determine how to use these models for clinical benefit
 
-- And how can we use these models for clinical benefit?
 
 ::: {.notes}
 So lets pause here for a quick re-cap of where we are so far
@@ -985,193 +1025,61 @@ Assuming we can do this in our subsequent projects, the next logical question is
 
 -----------------------------------------------------------------------------
 
-## Clinical Uses: DO Use Lapse Probabilities
 
-::: {.columns}
-:::: {.column width="50%"}
-DO use lapse probability
+## (Selective) Next Steps: Diversity and Fairness
 
-- auROCs range from 0.90 - 0.93
-::::
-
-:::: {.column width="50%"}
-<!-- blank  -->
-::::
-:::
+1. Improve algorithmic fairness
+   - Move beyond binary comparisons (e.g., issues of intersectionality) 
+   - Explore computational solutions
+   - More diversity in training data
 
 ::: {.notes}
-Instead of using the models to predict class labels, we believe that there is potentially high value in using the original lapse probabilities directly output by the model.
-
-I've already shown you that these probabilies can discriminate very well between lapse and no-lapse observations, correctly assigning a higher probability to lapses more than 90% of the time.
 :::
 
 -----------------------------------------------------------------------------
 
-## Clinical Uses: DO Use Lapse Probabilities
+## Active Project: Lapse in patients with Opioid Use Disorder 
+
+::: {.medium}
+- Recruiting ~ 300 patients in recovery from Opioid Use Disorder 
+- National sample (size; diversity: demographics, location)
+- More variation in stage of recovery (1 – 6 months at start)
+- 12 months of monitoring
+- Closer to real implementation methods
+:::
 
 ::: {.columns}
-:::: {.column width="50%"}
-DO use lapse probability
 
-- [auROCs range from 0.90 - 0.93]{style="color: gray;"}
-- Probabilities are calibrated and ordinal
-- Provides fine gradations of relative risk for clinical decision-making
+:::: {.column width="60%"}
+![risk2_pis.png](https://github.com/jjcurtin/slide_decks/blob/main/images/risk2_pis.png?raw=true)\ 
 ::::
 
-:::: {.column width="50%"}
-< embed ../../../notebooks/ema_figs_probability.qmd#fig-calibration_plot_day >
+:::: {.column width="40%"}
+![nida_logo.png](https://github.com/jjcurtin/slide_decks/blob/main/images/nida_logo.png?raw=true)\ 
 ::::
 :::
 
+
 ::: {.notes}
-And critically, these probabilities are very well calibrated and at least ordinal in their relationship with the true probability that a lapse will occur.   
+We are now collecting data for a NIDA funded project where we are specifically recruiting for racial, ethnic, and geographic diversity across the entire United States.
 
-On the right, I am showing you a simple calibration plot.  On the x-axis, I've binned predicted lapse probabilities into bin widths of 10 percent and for each of these bins, I display the actual observed probability of lapses for observations in that bin.  
 
-If the probabilities were perfectly calibrated, the bin means would all fall on the dotted line with the bin from 0 - 10 having an observed probilitiy of .05, the bin from 10 - 20 having a probability of .15, and so on.
-
-And this is essentially what we see for our models.
-
-Given this, we believe that the lapse probabilities can provide precise, fine gradations of risk for clinical decision making.
+We are also recruiting for people at different stages in their recovery and following them for a longer period of time – up to 12 months
 :::
 
 -----------------------------------------------------------------------------
 
-## Clinical Uses: Who and When?
+## (Selective) Next Steps: Sensing Geolocation and Communcations
 
-::: {.columns}
-:::: {.column width="50%"}
-- Day and Hour models can be used for "just-in-time" interventions
-::::
-
-:::: {.column width="50%"}
-<!-- blank  -->
-::::
-:::
-
-::: {.notes}
-So let's consider first how to use the temporal information provided by the three models.
-
-FREE TALK
-:::
-
------------------------------------------------------------------------------
-
-## Clinical Uses: Who and When?
-
-::: {.columns}
-:::: {.column width="50%"}
-- [Day and Hour prediction windows can be used for "just-in-time" interventions]{style="color: gray;"}
-- Week window may be too coarse for JIT
-- Push week window further into the future for support outside of DTx 
-::::
-
-:::: {.column width="50%"}
-< embed ../../../notebooks/lag_auroc.qmd#fig-lag_auroc >
-::::
-:::
-
-::: {.notes}
-FREE TALK
-:::
-
------------------------------------------------------------------------------
-
-## Clinical Uses: Which Interventions/Supports?
-
-::: {.columns}
-:::: {.column width="50%"}
-- Tools from interpretable AI can help explain [why]{style="color: orange;"} a future lapse is expected
-::::
-
-:::: {.column width="50%"}
-<!--blank-->
-::::
-:::
-
-::: {.notes}
-We can get more than just when lapses are probable from these models.
-
-We can also begin to use tools from the emerging field of interpretable AI to understand WHY they may occur
-:::
-
------------------------------------------------------------------------------
-
-## Clinical Uses: Which Interventions/Supports?
-
-::: {.columns}
-:::: {.column width="50%"}
-- [Tools from interpretable AI can help explain why a future lapse is expected]{style="color: gray;"}
-- Local SHAP values highlight important risk features for a [specific individual at a specific moment in time]{style="color: orange;"}
-::::
-
-:::: {.column width="50%"}
-< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day_emaonly >
-::::
-:::
-
-::: {.notes}
-FREE TALK
-:::
-
------------------------------------------------------------------------------
-
-## Clinical Uses: Which Interventions/Supports?
-
-::: {.columns}
-:::: {.column width="50%"}
-- [Tools from interpretable AI can help explain why a future lapse is expected]{style="color: gray;"}
-- [Local SHAP values highlight important risk features for a specific individual at a specific moment in time]{style="color: gray;"}
-- If we know [why]{style="color: orange;"}, we can begin to [recommend interventions and supports]{style="color: orange;"} to address these risks
-::::
-
-:::: {.column width="50%"}
-< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day_emaonly >
-::::
-:::
-
-::: {.notes}
-- For example, today one DTx user may show a high lapse probability and the model may have assigned that probability because they have been craving a lot recently. For that person, we could recommend urge surfing techniques and provide them support doing it within the DTx. 
-
-- A second person might have similarly high lapse probability but instead because they have lapsed a few times in recent weeks. They could be encouraged to complete activities designed to increase their motivation for abstinence. 
-
-- A third person might have a low probability of lapsing because they have reported many recent positive activities. No intervention might be needed for this person but they could receive feedback about how their commitment to their well-being was paying off for their recovery.
-
-
-SLIDE CONTINUE ON NEXT CLICK
-:::
-
------------------------------------------------------------------------------
-
-## Clinical Uses: Which Interventions/Supports?
-
-::: {.columns}
-:::: {.column width="50%"}
-- [Tools from interpretable AI can help explain why a future lapse is expected]{style="color: gray;"}
-- [Local SHAP values highlight important risk features for a specific individual at a specific moment in time]{style="color: gray;"}
-- If we know [why]{style="color: orange;"}, we can begin to [recommend interventions and supports]{style="color: orange;"} to address these risks
-::::
-
-:::: {.column width="50%"}
-< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day_emaonly >
-::::
-:::
-
-::: {.notes}
-As a starting point, the mapping between between important local risk features and specific interventions or supports could be created using clinical domain expertise. In other words, what would a clinician tell their patient to do in those circumstances. We can simply hard code these clinically derived mappings between risk features and support recommendations in the Smart DTx
-
-However, with enough training data, reinforcement learning can also be applied to this problem to allow the model to learn the best intervention to recommend given a set of risk features to reduce subsequent lapse probability.
-
-We are really excited about these possiblities so let me tell you more about where we are going from here
-:::
-
------------------------------------------------------------------------------
-
-## (Selective) Next Steps: Passive Sensing 
-
-- Use geolocation and cellular communications
-  - More (distinct) risk features for intervention recommendations
-  - Lower sensing burden
+1. [Improve algorithmic fairness]{style="color: gray;"}
+   - [Move beyond binary comparisons (e.g., issues of intersectionality)]{style="color: gray;"}
+   - [Explore computational solutions]{style="color: gray;"}
+   - [More diversity in training data]{style="color: gray;"}
+  
+2.  Use geolocation and cellular communications
+    - Increase performance?
+    - Lower sensing burden
+    - More (distinct) risk features for intervention recommendations!
 
 ::: {.notes}
 First, as our sensing and recommendation system continues to mature, we will want a richer, broader set of lapse risk features so that we can distinguish better between different situations that require different supports. We can do this by engineering features from our location and communication signals, which tap into different experiences than what we measure by EMA.
@@ -1183,7 +1091,7 @@ Let's take a look at what we can get from geolocation and communications signals
 
 -----------------------------------------------------------------------------
 
-## {#gps_detection_1 data-menu-title="GPS detection, wide view" background-image="https://dionysus.psych.wisc.edu/present/meet_faculty/images/john_gps_wide.png" background-size="100%" background-position="bottom" background-repeat="none"}
+## {#gps_detection_1 data-menu-title="GPS detection, wide view" background-image="https://dionysus.psych.wisc.edu/present/john_gps_wide.png" background-size="100%" background-position="bottom" background-repeat="none"}
 
 
 ::: {.notes}
@@ -1198,7 +1106,7 @@ From these data, you can immediately see that I am runner, with long runs leavin
 
 -----------------------------------------------------------------------------
 
-## {#gps_detection_2 data-menu-title="GPS detection, zoomed" background-image="https://dionysus.psych.wisc.edu/present/meet_faculty/images/john_gps_zoom.png" background-size="100%" background-position="bottom" background-repeat="none"}
+## {#gps_detection_2 data-menu-title="GPS detection, zoomed" background-image="https://dionysus.psych.wisc.edu/present/john_gps_zoom.png" background-size="100%" background-position="bottom" background-repeat="none"}
 
 
 ::: {.notes}
@@ -1265,7 +1173,11 @@ In our current projects, we target people and places that we interact with at le
 
 ## Contextualized Geolocation
 
-![context_gps.png](https://github.com/jjcurtin/lectures/blob/main/images/context_gps.png?raw=true){width="75%"}\ 
+- Location type (e.g., home, home of friend, bar, restaurant, liquor store, work, health care, AA/recovery meeting, gym/fitness center)
+- Is [alcohol available]{style="color: blue;"} at this location
+- Have you [drank alcohol]{stype="color: blue;"} at this location?
+- Is your [experience at this location]{style="color: blue;"} generally pleasant, unpleasant, mixed or neutral?
+- This location is ([high risk, moderate risk, low risk, no risk]{style="color: blue;"}) for my recovery
 
 ::: {.notes}
 :::
@@ -1274,7 +1186,12 @@ In our current projects, we target people and places that we interact with at le
 
 ## Contextualized Communications
 
-![context_cell.png](https://github.com/jjcurtin/lectures/blob/main/images/context_cell.png?raw=true){width="75%"}\ 
+- Have you [drank alcohol]{style="color: blue;"} with this person?
+- What is their [drinking status]{style="color: blue;"} (e.g., drinker, non-drinker)?
+- Would you expect them to [drink in your presence]?{style="color: blue;"}
+- Are they currently [in recovery]{style="color: blue;"} from alcohol or other substances?
+- Do they [know about your recovery goals]{style="color: blue;"} and if so, [are they supportive]{style="color: blue;"}?
+- Are your [experiences with them]{style="color: blue;"} typically pleasant, unpleasant, mixed or neutral?
 
 ::: {.notes}
 TALK FIRST ABOUT CONTEXT
@@ -1284,47 +1201,331 @@ THEN TALK ABOUT PRELIMINARY ANALYSES
 
 -----------------------------------------------------------------------------
 
-## (Selective) Next Steps: Diversity
+## (Selective) Next Steps: How to Yield Clinical Benefits 
 
-- [Use geolocation and cellular communications]{style="color: gray;"}
-- Improve algorithmic fairness
-  - Move beyond binary comparisons (e.g., issues of intersectionality) 
-  - Explore computational solutions
-  - More diversity in training data
+1.  [Improve algorithmic fairness]{style="color: gray;"}
+    - [Move beyond binary comparisons (e.g., issues of intersectionality)]{style="color: gray;"}
+    - [Explore computational solutions]{style="color: gray;"}
+    - [More diversity in training data]{style="color: gray;"}
+  
+2.  [Use geolocation and cellular communications]{style="color: gray;"}
+    - [More (distinct) risk features for intervention recommendations]{style="color: gray;"}
+    - [Lower sensing burden]{style="color: gray;"}
+
+3.  Implement Recovery Monitoring and Support System for Patients
+    - Who to provide model output to?
+    - What output to provide? 
+    - How to increase engagement, trust, utility, and benefits?
+  
+-----------------------------------------------------------------------------
+
+## Clinical Uses: DO NOT provide model output to clinicians 
+
+DO NOT provide model output to clinicians
+
+- Clinicians are over-burdened
+- Not ready for new data streams
 
 ::: {.notes}
+When we started this work, we believed we were building these models to inform clinicians about their caseload.  
+
+Today's digital therapeutics have clinician dashboards built into them and we, perhaps naively, thought clinicians could use this information to priortize their resources to patients who had the greatest need.
+
+But as we talked to clinicians, it became very clear that they do not want any more info at this point.  
+
+Post-pandemic, they are barely keeping their heads above water and are definitely not ready to add new systems and data streams in place.
+
+However, in constrast, our work with participants suggested that they did see potential value in monitoring their recovery using our sensing system and prediction system.   So we have pivoted to considering what might be useful to provide directly to them.
 :::
 
 -----------------------------------------------------------------------------
 
-## Active Project: Lapse in patients with Opioid Use Disorder 
-
-::: {.medium}
-- Recruiting ~ 400 patients in recovery from Opioid Use Disorder 
-- National sample (size; diversity: demographics, location)
-- More variation in stage of recovery (1 – 6 months at start)
-- 12 months of monitoring
-- Closer to real implementation methods
-:::
+## Clinical Uses: DO NOT Predict Lapses
 
 ::: {.columns}
+:::: {.column width="50%"}
+DO NOT predict class labels  (Lapse vs. No-Lapse)
 
-:::: {.column width="60%"}
-![risk2_pis.png](https://github.com/jjcurtin/lectures/blob/main/images/risk2_pis.png?raw=true)\ 
+- Iatriogenic effects?
+- Information loss
 ::::
 
-:::: {.column width="40%"}
-![nida_logo.png](https://github.com/jjcurtin/lectures/blob/main/images/nida_logo.png?raw=true)\ 
+:::: {.column width="50%"}
+<!--Blank-->
 ::::
 :::
-
 
 ::: {.notes}
-We are now collecting data for a NIDA funded project where we are specifically recruiting for racial, ethnic, and geographic diversity across the entire United States.
+But lets again first start with how we should NOT use these models with individuals with SUDs.
 
+We have been focusing on the lapse probabilities that are natively output from our prediction models.   However, its common to use these models to predict formal class labels.  In other words, to specifically predict that a lapse will happen or not.  Basically, a threshold is set, for example, 0.5, and if the probability of a lapse exceeds that threshold the model predicts that a lapse will occur.  Otherwise, it predicts that no lapse will occur
 
-We are also recruiting for people at different stages in their recovery and following them for a longer period of time – up to 12 months
+But there are several reasons that we DO NOT want to predict dichotomous class labels.
+
+To start, there may be concerns about possible iatriogenic effects associated with telling a person that they are going to lapse. Or at least this should be a risk that is carefully considered if we provide these blunt dichotomous predictions to individuals.
+
+Second, these days, I think we have all come to understand that taking scores that are natively quantitative like probabilities are, and artificially dichotomizing them results in substantial loss of information that is potentially valuable.
 :::
+
+-----------------------------------------------------------------------------
+
+## Clinical Uses: DO NOT Predict Lapses
+
+::: {.columns}
+:::: {.column width="45%"}
+DO NOT predict class labels  (Lapse vs. No-Lapse)
+
+- [Iatriogenic effects]{style="color: gray;"}
+- [Information loss?]{style="color: gray;"}
+- Low positive predictive values 
+  - Lapses on only ~7% of days
+  - Spec and Sens > 0.80
+  - PPV ~ 0.27
+::::
+
+:::: {.column width="55%"}
+```{r}
+#| label: fig-cm_day
+#| fig-height: 6
+#| fig-width: 6
+
+fig_cm_day
+```
+
+::::
+:::
+
+::: {.notes}
+But perhaps most importantly, when we are predicting class labels and the labels are highly unbalanced, the positive predictive value of those labels will low.
+
+To make this concrete, on the right I am showing you a confusion matrix for class label predictions from the day model.   The columns represent reality, whether the observation was a true lapse on the right or a true no lapse on the left.  And the rows represent class predictions from the model made using a sensible threshold.
+
+As you might expect, these data are unbalanced.  Only 7 percent of observations for any day are true lapses.  That is shown by the right column being narrower than the left.
+
+This model has good specificity.  If you consider the left column, you see that more than 80% of no-lapse days are predicted to be no-lapses.   And it has good sensitivity.  If you consider the right column, you see that the model correctly identifies > 80% of the true lapses as well.
+
+But if we look instead at the rows of matrix, and focus on the bottom row that represents when the model predicts a lapse, we see the problem with binary labels.   Even though only a small portion of the true no-lapses are false positives, shown in the bottom left cell, this number overwhelms the true positives in the bottom right cell because there just arent that many positive cases to detect.
+
+This means that when the model predicts a lapse, it will be correct less than a third of the time.  
+
+Obviously this makes the use of these class labels problematic to say the least.
+
+To be clear, there are methods we can use to increase PPV but given the other reasons to avoid predicting labels we are not pursing them.
+:::
+
+## Clinical Uses: DO Use Lapse Probabilities
+
+::: {.columns}
+:::: {.column width="50%"}
+DO use lapse probability
+
+- auROCs range from 0.90 - 0.93
+::::
+
+:::: {.column width="50%"}
+<!-- blank  -->
+::::
+:::
+
+::: {.notes}
+Instead of using the models to predict class labels, we believe that there is potentially high value in using the original lapse probabilities directly output by the model.
+
+I've already shown you that these probabilties can discriminate very well between lapse and no-lapse observations, correctly assigning a higher probability to lapses more than 90% of the time.
+:::
+
+-----------------------------------------------------------------------------
+
+## Clinical Uses: DO Use Lapse Probabilities
+
+::: {.columns}
+:::: {.column width="50%"}
+DO use lapse probability
+
+- [auROCs range from 0.90 - 0.93]{style="color: gray;"}
+- Probabilities are calibrated and ordinal
+- Provides fine gradations of relative risk for clinical decision-making
+::::
+
+:::: {.column width="50%"}
+```{r}
+#| label: fig_cal
+#| fig-height: 6
+#| fig-width: 6
+
+fig_cal
+```
+::::
+:::
+
+::: {.notes}
+And critically, these probabilities are very well calibrated and at least ordinal in their relationship with the true probability that a lapse will occur.   
+
+On the right, I am showing you a simple calibration plot.  On the x-axis, I've binned predicted lapse probabilities into bin widths of 10 percent and for each of these bins, I display the actual observed probability of lapses for observations in that bin.  
+
+If the probabilities were perfectly calibrated, the bin means would all fall on the dotted line with the bin from 0 - 10 having an observed probilitiy of .05, the bin from 10 - 20 having a probability of .15, and so on.
+
+And this is essentially what we see for our models.
+
+Given this, we believe that the lapse probabilities can provide precise, fine gradations of risk for clinical decision making.
+:::
+
+-----------------------------------------------------------------------------
+
+## Clinical Uses: Who and When?
+
+::: {.columns}
+:::: {.column width="50%"}
+- Day and Hour models can be used for "just-in-time" interventions
+::::
+
+:::: {.column width="50%"}
+<!-- blank  -->
+::::
+:::
+
+::: {.notes}
+So let's consider first how to use the temporal information provided by the three models.
+
+FREE TALK
+:::
+
+-----------------------------------------------------------------------------
+
+## Clinical Uses: Who and When?
+
+::: {.columns}
+:::: {.column width="50%"}
+- [Day and Hour prediction windows can be used for "just-in-time" interventions]{style="color: gray;"}
+- Week window may be too coarse for JIT
+- Push week window further into the future for support outside of DTx 
+::::
+
+:::: {.column width="50%"}
+```{r}
+#| label: figs_lag_ci
+#| fig-height: 6
+#| fig-width: 6
+
+source(here::here("figs/risk/figs_lag_ci.R"))
+fig_lag_ci
+```
+::::
+:::
+
+::: {.notes}
+FREE TALK
+:::
+
+-----------------------------------------------------------------------------
+
+## Clinical Uses: Which Interventions/Supports?
+
+::: {.columns}
+:::: {.column width="50%"}
+- Tools from interpretable AI can help explain [why]{style="color: orange;"} a future lapse is expected
+::::
+
+:::: {.column width="50%"}
+<!--blank-->
+::::
+:::
+
+::: {.notes}
+We can get more than just when lapses are probable from these models.
+
+We can also begin to use tools from the emerging field of interpretable AI to understand WHY they may occur
+:::
+
+-----------------------------------------------------------------------------
+
+## Clinical Uses: Which Interventions/Supports?
+
+::: {.columns}
+:::: {.column width="50%"}
+- [Tools from interpretable AI can help explain why a future lapse is expected]{style="color: gray;"}
+- Local SHAP values highlight important risk features for a [specific individual at a specific moment in time]{style="color: orange;"}
+::::
+
+:::: {.column width="50%"}
+```{r}
+#| label: figs_global_day
+#| fig-height: 6
+#| fig-width: 6
+
+fig_global_day
+```
+::::
+:::
+
+::: {.notes}
+FREE TALK
+:::
+
+-----------------------------------------------------------------------------
+
+## Clinical Uses: Which Interventions/Supports?
+
+::: {.columns}
+:::: {.column width="50%"}
+- [Tools from interpretable AI can help explain why a future lapse is expected]{style="color: gray;"}
+- [Local SHAP values highlight important risk features for a specific individual at a specific moment in time]{style="color: gray;"}
+- If we know [why]{style="color: orange;"}, we can begin to [recommend interventions and supports]{style="color: orange;"} to address these risks
+::::
+
+:::: {.column width="50%"}
+```{r}
+#| label: figs_global_day-2
+#| fig-height: 6
+#| fig-width: 6
+
+fig_global_day
+```
+::::
+:::
+
+::: {.notes}
+- For example, today one DTx user may show a high lapse probability and the model may have assigned that probability because they have been craving a lot recently. For that person, we could recommend urge surfing techniques and provide them support doing it within the DTx. 
+
+- A second person might have similarly high lapse probability but instead because they have lapsed a few times in recent weeks. They could be encouraged to complete activities designed to increase their motivation for abstinence. 
+
+- A third person might have a low probability of lapsing because they have reported many recent positive activities. No intervention might be needed for this person but they could receive feedback about how their commitment to their well-being was paying off for their recovery.
+
+
+SLIDE CONTINUE ON NEXT CLICK
+:::
+
+-----------------------------------------------------------------------------
+
+## Clinical Uses: Which Interventions/Supports?
+
+::: {.columns}
+:::: {.column width="50%"}
+- [Tools from interpretable AI can help explain why a future lapse is expected]{style="color: gray;"}
+- [Local SHAP values highlight important risk features for a specific individual at a specific moment in time]{style="color: gray;"}
+- If we know [why]{style="color: orange;"}, we can begin to [recommend interventions and supports]{style="color: orange;"} to address these risks
+::::
+
+:::: {.column width="50%"}
+```{r}
+#| label: figs_global_day-3
+#| fig-height: 6
+#| fig-width: 6
+
+fig_global_day
+```
+::::
+:::
+
+::: {.notes}
+As a starting point, the mapping between between important local risk features and specific interventions or supports could be created using clinical domain expertise. In other words, what would a clinician tell their patient to do in those circumstances. We can simply hard code these clinically derived mappings between risk features and support recommendations in the Smart DTx
+
+However, with enough training data, reinforcement learning can also be applied to this problem to allow the model to learn the best intervention to recommend given a set of risk features to reduce subsequent lapse probability.
+
+We are really excited about these possiblities so let me tell you more about where we are going from here
+:::
+
+-----------------------------------------------------------------------------
+
 
 -----------------------------------------------------------------------------
 
