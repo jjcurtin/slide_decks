@@ -1,28 +1,20 @@
 #!/bin/bash  
 
 # ./render.sh FORMAT
-# FORMAT = book, slides, or slides_wide
+# FORMAT = slides, or slides_wide
 
 FORMAT=$1
  
 if [ "$FORMAT" = "slides" ];  then
-  echo ""
-	echo "Publishing prep.qmd to standard slides on quarto-pub"
-  echo ""
   cp slides.css chm.css 
-  quarto publish quarto-pub prep.qmd --no-browser
-  rm -r *_files
-  rm *.html
-  rm chm.css
+  quarto publish quarto-pub chm.qmd --no-browser
 fi
  
 if [ "$FORMAT" = "slides_wide" ];  then
-  echo ""
-	echo "Publishing prep.qmd to wide slides on quarto-pub"
-  echo ""
-  cp slides_wide.css prep.css 
-  quarto publish quarto-pub prep.qmd --no-browser
-  rm -r *_files
-  rm *.html
-  rm chm.css
+  cp slides_wide.css chm.css 
+  quarto publish quarto-pub chm.qmd --no-browser
 fi
+
+rm chm.css
+rm -r *_files
+rm *.html

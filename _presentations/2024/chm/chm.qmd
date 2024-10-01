@@ -1,40 +1,31 @@
 ---
-title: "Precision Mental Health for SUD: Contributions from Sensing and Algorithms" 
+title: 'Developing a "Smart" Recovery Monitoring and Support System'
 author: "John J. Curtin, Ph.D."
 institute: "University of Wisconsin-Madison"
-date: June 20, 2024
-
+date: October 2, 2024
 format: 
   revealjs:
     scrollable: true
-    css: prep.css
-    logo: qr-code.png
+    css: chm.css
     slide-number: false
-
 title-slide-attributes:
   data-background-image: https://github.com/jjcurtin/lectures/blob/main/images/smartphone_know_you.png?raw=true
   data-background-size: 35%
   data-background-repeat: no
   data-background-position: left 10% bottom 10%
-
 include-after: |
   <script type="text/javascript">
     Reveal.on('ready', event => {
       if (event.indexh === 0) {
         document.querySelector("div.has-logo > img.slide-logo").style.display = "block";
-      }
-    });
-    Reveal.addEventListener('slidechanged', (event) => {
       if (event.indexh === 0) {
-        Reveal.configure({ slideNumber: null });
         document.querySelector("div.has-logo > img.slide-logo").style.display = "block";
       }
-      if (event.indexh === 1) { 
-        Reveal.configure({ slideNumber: 'c' });
+        Reveal.configure({ slideNumber: null });
         document.querySelector("div.has-logo > img.slide-logo").style.display = "none";
-      }
-    });
-  </script>      
+        Reveal.configure({ slideNumber: 'c' });
+editor_options: 
+  chunk_output_type: console
 ---
 
 ## Mental Healthcare Needs are High and Unmet 
@@ -408,7 +399,13 @@ And if there is time, I'll end by contrasting this work with other precision men
 
 ## Participant Characteristics
 
-{{< embed ../../../notebooks/ema_demographics.qmd#fig-demographics >}}
+```{r}
+#| fig-height: 6
+#| fig-width: 10
+
+source(here::here("figs/ema/fig_demographics.R"))
+cowplot::plot_grid(fig_age, fig_sex, fig_race, fig_ms, fig_educ, fig_income, nrow = 2, ncol = 3)
+```
 
 ::: {.notes}
 Let me start highlighting the characteristics of the sample we are using to develop and evaluate the AUD lapse models.
@@ -431,7 +428,13 @@ I'll return to this later both when we evaluate issues of algorithmic fairness a
 ::::
 
 :::: {.column width="50%"}
-{{< embed ../../../notebooks/ema_demographics.qmd#fig-aud_symptoms  >}}
+```{r}
+#| fig-height: 6
+#| fig-width: 6 
+
+# plot made in fig_demographics.R
+fig_sx
+```
 ::::
 :::
 
@@ -558,7 +561,17 @@ And we included these scores both in raw form and as change from baselines for t
 ::::
 
 :::: {.column width="50%"}
-{{< embed ../../../notebooks/ema_figs_probability.qmd#fig-roc_random >}}
+```{r}
+#| fig-height: 6
+#| fig-width: 6
+
+source(here::here("figs/ema/figs_probability.R"))
+tibble(model = c("random", "random"),
+       specificity = c(1, 1),
+       sensitivity = c(0, 0)) |> 
+   mutate(model = factor(model, levels = c("random", "perfect"))) |> 
+   plot_roc(line_colors = c("gray", "red"))
+```
 ::::
 :::
 
@@ -583,7 +596,16 @@ And the auROC for this random classifier would be .50
 ::::
 
 :::: {.column width="50%"}
-{{< embed ../../../notebooks/ema_figs_probability.qmd#fig-roc_perfect >}}
+```{r}
+#| fig-height: 6
+#| fig-width: 6
+
+tibble(model = c("random", "random", "perfect", "perfect", "perfect"),
+       specificity = c(1, 1, 1, 1, 0),
+       sensitivity = c(0, 0, 0, 1, 1)) |> 
+   mutate(model = factor(model, levels = c("random", "perfect"))) |> 
+   plot_roc(line_colors = c("gray", "red"))
+```
 ::::
 :::
 
@@ -605,7 +627,16 @@ This perfect classifer would have an auROC of 1.0
 ::::
 
 :::: {.column width="50%"}
-{{< embed ../../../notebooks/ema_figs_probability.qmd#fig-roc_perfect >}}
+```{r}
+#| fig-height: 6
+#| fig-width: 6
+
+tibble(model = c("random", "random", "perfect", "perfect", "perfect"),
+       specificity = c(1, 1, 1, 1, 0),
+       sensitivity = c(0, 0, 0, 1, 1)) |> 
+   mutate(model = factor(model, levels = c("random", "perfect"))) |> 
+   plot_roc(line_colors = c("gray", "red"))
+```
 ::::
 :::
 
@@ -634,7 +665,12 @@ So for example, if a model has an auROC of 0.90, it means that there is a 90 per
 
 :::: {.column width="40%"}
 <!--Lapse Probability by Ground Truth"-->
-{{< embed ../../../notebooks/ema_figs_probability.qmd#fig-week-no_dec_thres >}}
+```{r}
+#| fig-height: 6
+#| fig-width: 6
+
+fig_hist_week
+```
 ::::
 :::
 
@@ -672,7 +708,13 @@ Model auROCs
 
 :::: {.column width="50%"}
 <!--ROC Curve for Week-->
-{{< embed ../../../notebooks/ema_figs_probability.qmd#fig-roc_week >}}
+```{r}
+#| fig-height: 6
+#| fig-width: 6
+
+# plot made in fig_probability.R
+fig_roc_week
+```
 ::::
 :::
 
@@ -734,7 +776,13 @@ Model auROCs
 
 :::: {.column width="50%"}
 <!--ROC Curve for Week & Day-->
-{{< embed ../../../notebooks/ema_figs_probability.qmd#fig-roc_week_day >}}
+```{r}
+#| fig-height: 6
+#| fig-width: 6
+
+# plot made in fig_probability.R
+fig_roc_week_day
+```
 ::::
 :::
 
@@ -768,7 +816,13 @@ Model auROCs
 
 :::: {.column width="50%"}
 <!--ROC Curve for All-->
-{{< embed ../../../notebooks/ema_figs_probability.qmd#fig-roc_all >}}
+```{r}
+#| fig-height: 6
+#| fig-width: 6
+
+# plot made in fig_probability.R
+fig_roc_all
+```
 ::::
 :::
 
@@ -816,7 +870,7 @@ Its only very recently that we have begin to take this seriously and we must.  I
 ::::
 
 :::: {.column width="65%"}
-{{< embed ../../../notebooks/fairema.qmd#fig-fair >}}
+< embed ../../../notebooks/fairema.qmd#fig-fair >
 ::::
 :::
 
@@ -846,7 +900,7 @@ I'll come back to this later when talking about our NIDA project and next steps 
 ::::
 
 :::: {.column width="50%"}
-{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >}}
+< embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >
 ::::
 :::
 
@@ -869,7 +923,7 @@ First, all of EMA items affect predictions about lapse probability across observ
 ::::
 
 :::: {.column width="50%"}
-{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >}}
+< embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >
 ::::
 :::
 
@@ -891,7 +945,7 @@ These features likely contribute to the superior performance of the hour and to 
 ::::
 
 :::: {.column width="50%"}
-{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >}}
+< embed ../../../notebooks/ema_figs_shaps.qmd#fig-global >
 ::::
 :::
 
@@ -965,7 +1019,7 @@ DO use lapse probability
 ::::
 
 :::: {.column width="50%"}
-{{< embed ../../../notebooks/ema_figs_probability.qmd#fig-calibration_plot_day >}}
+< embed ../../../notebooks/ema_figs_probability.qmd#fig-calibration_plot_day >
 ::::
 :::
 
@@ -1013,7 +1067,7 @@ FREE TALK
 ::::
 
 :::: {.column width="50%"}
-{{< embed ../../../notebooks/lag_auroc.qmd#fig-lag_auroc >}}
+< embed ../../../notebooks/lag_auroc.qmd#fig-lag_auroc >
 ::::
 :::
 
@@ -1052,7 +1106,7 @@ We can also begin to use tools from the emerging field of interpretable AI to un
 ::::
 
 :::: {.column width="50%"}
-{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day_emaonly >}}
+< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day_emaonly >
 ::::
 :::
 
@@ -1072,7 +1126,7 @@ FREE TALK
 ::::
 
 :::: {.column width="50%"}
-{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day_emaonly >}}
+< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day_emaonly >
 ::::
 :::
 
@@ -1099,7 +1153,7 @@ SLIDE CONTINUE ON NEXT CLICK
 ::::
 
 :::: {.column width="50%"}
-{{< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day_emaonly >}}
+< embed ../../../notebooks/ema_figs_shaps.qmd#fig-local_day_emaonly >
 ::::
 :::
 
