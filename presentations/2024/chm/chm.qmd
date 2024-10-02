@@ -7,7 +7,8 @@ format:
   revealjs:
     scrollable: true
     css: chm.css
-    slide-number: false
+    slide-number: true
+    show-slide-number: all 
 title-slide-attributes:
   data-background-image: https://github.com/jjcurtin/lectures/blob/main/images/smartphone_know_you.png?raw=true
   data-background-size: 35%
@@ -28,182 +29,49 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Mental Healthcare Needs are High and Unmet 
+## Smart Recovery Monitoring and Support System
 
-- In 2019, [52 million]{style="color: orange;"} Americans had an active mental illness
-  - More than half did not receive any treatment
+\
+\
 
+> “Could you predict not only [who]{style="color: blue;"} might be at greatest risk for relapse … <br>
+ … but precisely [when]{style="color: blue;"} that relapse might occur … <br>
+ … and how [best to intervene]{style="color: blue;"} to prevent it?"
+ 
+ \
+ \
+ 
+![](https://github.com/jjcurtin/slide_decks/blob/main/images/gustafson.jpeg?raw=true){fig-align="right"}
 
 ::: {.notes}
-We have a mental health crisis in the U.S. and it is a crisis of **unmet** high need because our delivery of mental healthcare is deeply flawed. 
+My research team became interested in these issues when my colleague Dave Gustafson, the developer of a leading digital therapeutic for substance use disorders, approached us with a simple question. He asked...
 
-In 2019, **more than half of the 52 million Americans** with an active mental illness did not receive any treatment. 
+"Could you predict not only who might be at greatest risk for relapse
+but precisely when that relapse might occur and
+how best to intervene to prevent it"
 
-**More than half**!
+Dave had just completed a large study demonstrating the effectiveness of his app. However, he also noticed many of the people who relapsed hadn't used the app in the days leading up to that relapse.  And others who had relapsed hadn't used the specific supports in the app that he would have thought would be most effective for them.
+
+The next wave of digital therapeutics, lets call them smart digital therapeutics, must learn to know us well enough to recognize when we are at greatest risk for relapse and they must be smart enough to recommend the specific supports that would be most effective for us at that moment in time to prevent that relapse.
+
+And these apps will do this through the use of built-in artificial intelligence or machine learning algorithms that are powered by personal sensing.
+
 :::
+
 
 -----------------------------------------------------------------------------
 
-## Mental Healthcare Needs are High and Unmet
+## Smart Recovery Monitoring and Support System
 
-- [In 2019, 52 million Americans had an active mental illness]{style="color: grey;"}
-  - [More than half did not receive any treatment]{style="color: grey;"}
+- Precision mental health requires us to provide the [right treatments]{style="color: blue;"} and supports to the [right people]{style="color: blue;"} at the [right time]{style="color: blue;"}, [every time]{style="color: blue;"}
 
+\
 
-- [20 million]{style="color: orange;"} adults had an active substance use disorder
-  - 9 out of 10 did not receive any treatment
+- Digital therapeutics can already help with "every time" given reduced barriers to continuing care
 
+\
 
-::: {.notes}
-And for the 20 million adults suffering with a substance use disorder, it was worse still.
-
-**9 out of 10 without any treatment**
-:::
-
------------------------------------------------------------------------------
-
-## Mental Healthcare Needs are High and Unmet
-
-- [In 2019, 52 million Americans had an active mental illness]{style="color: grey;"}
-  - [More than half did not receive any treatment]{style="color: grey;"}
-
-- [20 million adults had an active substance use disorder]{style="color: grey;"}
-  - [9 out of 10 did not receive any treatment]{style="color: grey;"}
-
-- [Large treatment disparities]{style="color: orange;"} exist by race, ethnicity, geography, and income
-
-
-::: {.notes}
-Our failure to treat is even more troubling for vulnerable groups.  Black and LatinX adults receive mental healthcare services at only half the rate of whites.  
-
-And similar mental healthcare disparities exist for people living in rural communities and for those with lower incomes.
-:::
-
------------------------------------------------------------------------------
-
-## Mental Healthcare Needs are High and Unmet
-
-- Failure to treat is not surprising given many treatment barriers:
-  - Access
-  - Availability
-  - Affordability
-  - Acceptability
-
-
-::: {.notes}
-Our failure to treat is, unfortunately, not surprising.  There are many well known barriers to receiving traditional mental healthcare.
-
-These include problems with access that that affect everyone but are particularly limiting for people living in rural communities
-
-Problems with availability
-
-Treatment costs are often prohibitive for those without health insurance 
-
-and stigma and related issues make traditional treatments for mental illness less acceptable to some patients.  
-:::
-
------------------------------------------------------------------------------
-
-## Digital Therapeutics (DTx)
-
-- Smartphone "apps" that prevent, manage, or treat disease 
-
-- Can augment mental health services to address barriers
-  - Accessible everywhere
-  - Available 24/7
-  - Highly scalable (affordable?)
-
-::: {.notes}
-Fortunately, digital therapeutics are now being developed and used by patients to address many of these treatment barriers.
-
-For those of you that are not yet familiar with this treatment modality, digital therapeutics are smartphone "apps" that are designed to prevent, manage, or treat disease, including substance use disorders and other mental illness. 
-
-These digital therapeutics can be combined with traditional treatments to reduce barriers because they are
-
-- Accessible everywhere
-
-- Available everyday, 24/7
-
-- and highlighly scalable, which may lower costs
-:::
-
------------------------------------------------------------------------------
-
-## Digital Therapeutics (DTx)
-
-- Smartphone "apps" that prevent, manage, or treat disease 
-
-- Can augment mental health services to address barriers
-  - [Accessible everywhere]{style="color: gray;"} 
-  - [Available 24/7]{style="color: gray;"} 
-  - [Highly scalable (affordable?)]{style="color: gray;"} 
-  - Effective!
-
-::: {.notes}
-Of course, these benefits would be meaningless if digital therapeutics were not effective.
-
-But they are.  
-
-For example, patients with substance use disorders who use a digital therapeutic have almost double the odds of being abstinent from alcohol or other drugs
-
-These increases in abstinence from using digital therapeutics are observed not only when compared to patients on wait lists, who have yet to gain access to treatment, but also when digital therapeutics are added on top of traditional treatments for substance use disorders.
-
-And these benefits are durable - they have been documented up to 12 months after the start of treatment.  
-:::
-
------------------------------------------------------------------------------
-
-## Digital Therapeutics (DTx)
-
-- Smartphone "apps" that prevent, manage, or treat disease 
-
-- Can augment mental health services to address barriers
-  - [Accessible everywhere]{style="color: gray;"} 
-  - [Available 24/7]{style="color: gray;"} 
-  - [Highly scalable (affordable?)]{style="color: gray;"} 
-  - Effective!
-
-::: {.notes}
-[PAUSE]
-
-But let me pause for a moment.  I want to be very clear on one point before we move forward.  I do not believe or hope that digital therapeutics will replace human therapists. 
-  
-Therapists will always be needed for what they do uniquely well.  We simply need more than they can provide alone.  Digital therapeutics can provide that "more."
-:::
-
------------------------------------------------------------------------------
-
-## {#beta_app data-menu-title="Image of beta app" background-image="http://dionysus.psych.wisc.edu/present/beta_app.png" background-size="100%" background-repeat="none"}
-
-
-::: {.notes}
-[PAUSE]
-
-So as you likely know, digital therapeutics are in use today with patients with SUD, but I think these apps are still best considered beta versions relative to their full potential. 
-
-Their power comes from easy, 24/7 access to their many supports - the treatments, tools, and services built into these smartphone apps. 
-
-But this is also their Achilles heel. As the patient using these apps, you now have to tackle difficult questions like:
-
-- When should I use them?
-
-- For how long?
-
-- Which of their many supports are best for me?
-
-- And which are best for me **right now**, at this moment in time?
-:::
-
------------------------------------------------------------------------------
-
-## Precision Mental Health w/ Smart DTx
-
-- Precision mental health requires us to provide the [right treatments]{style="color: orange;"} and supports to the [right people]{style="color: orange;"} at the [right time]{style="color: orange;"}, [every time]{style="color: orange;"}
-
-- Current DTx can already help with "every time" given reduced barriers to care
-
-- Smart DTx can address "who", "when" & "why"
-
+- A Smart Recovery Monitoring and Support System can address "who", "when" & "what"
   - Sensing
   - AI/Machine learning
 
@@ -309,7 +177,7 @@ From our perspective, this limits us to smartphones with the major operating sys
 
 - Ecological Momentary Assessments (EMA)
 - Contextualized Geolocation
-- Contexualized smartphone communications
+- Contexualized Smartphone Communications
 
 ::: {.notes}
 Given these sensing requirements, we are focusing the majority of our effort at this point on feature engineering with three separate but complementary sets of raw signals that can be sensed easily on any smartphone. These are
@@ -332,12 +200,21 @@ Instead we want to know precisely when these lapses will occur so that we can in
 ::: {.columns}
 :::: {.column width="60%"}
 - 151 individuals with moderate to severe AUD
+
+\
+
 - Early in recovery (1-8 weeks)
+
+\
+
 - Committed to abstinence throughout study
+
+\
+
 - Followed with sensing for up to 3 months
-  - [Ecological Momentary Assessments]{style="color: orange;"}
+  - [Ecological Momentary Assessments]{style="color: blue;"}
   - Contextualized Geolocation
-  - Contexualized smartphone communications
+  - Contexualized Smartphone Communications
   - (also sensed physiology, sleep, coarse self-report)
 ::::
 
@@ -368,12 +245,21 @@ In other words, we are not looking to find coarse group-level predictors of laps
 ::: {.columns}
 :::: {.column width="60%"}
 - 151 individuals with moderate to severe AUD
+
+\
+
 - Early in recovery (1-8 weeks)
+
+\
+
 - Committed to abstinence throughout study
+
+\
+
 - Followed with sensing for up to 3 months
-  - [Ecological Momentary Assessments]{style="color: orange;"}
+  - [Ecological Momentary Assessments]{style="color: blue;"}
   - Contextualized Geolocation
-  - Contexualized smartphone communications
+  - Contexualized Smartphone Communications
   - (also sensed physiology, sleep, coarse self-report)
 ::::
 
@@ -391,8 +277,6 @@ We are in the early stages of model building at this point and I will focus toda
 However, we are actively working with GPS and cellular communications as well and I will give you a clear sense of how we are developing models with those signals too.  
 
 I'll also give you more detail about how we think we can implement these models for clinical benefits.  
-
-And if there is time, I'll end by contrasting this work with other precision mental health models we are developing to use outside of digital therapeutics
 :::
 
 -----------------------------------------------------------------------------
@@ -405,7 +289,7 @@ And if there is time, I'll end by contrasting this work with other precision men
 #| fig-width: 10
 
 source(here::here("figs/risk/figs_ema_demographics.R"))
-cowplot::plot_grid(fig_age, fig_sex, fig_race, fig_ms, fig_educ, fig_income, nrow = 2, ncol = 3)
+cowplot::plot_grid(fig_age, fig_sex, fig_income, fig_ms, fig_educ, fig_race, nrow = 2, ncol = 3)
 ```
 
 ::: {.notes}
@@ -425,6 +309,9 @@ I'll return to this later both when we evaluate issues of algorithmic fairness a
 ::: {.columns}
 :::: {.column width="50%"}
 - All participants met criteria for moderate to severe AUD
+
+\
+
 - Reported abstinence goals
 ::::
 
@@ -463,6 +350,8 @@ On the right, I am showing you a histogram of the DSM-5 AUD symptom counts to co
   - Stressful events
   - Pleasant events
 
+\
+
 - Future
   - Risky situations
   - Stressful events
@@ -484,7 +373,9 @@ And on the first EMA each day, they also reported any future risky situations an
 
 ## Modeling: Predictions 
 
-- Predict hour-by-hour probability of [future lapse]{style="color: orange;"}
+- Predict hour-by-hour probability of [future lapse]{style="color: blue;"}
+
+\
 
 - Lapse window widths
   - 1 week 
@@ -535,9 +426,15 @@ And again, this is consistent with what we mean by prediction.  We don't care ho
 
 - Features based on recent past experiences (12, 24, 48, 72, 168 hours)
 
+\
+
 - Min, max, and median response (all items)
 
+\
+
 - History (count) of past lapses (item 1) and completed EMAs (compliance)
+
+\
 
 - Raw scores and change scores (from baseline/all past responses)
 
@@ -555,13 +452,17 @@ And we included these scores both in raw form and as change from baselines for t
 
 -----------------------------------------------------------------------------
 
-## 1 Week: Probabilities for No Lapse and Lapse
+## Predicted Lapse Probabilities: 1 Week Model
 
 ::: {.columns}
 :::: {.column width="50%"}
-- Model predicts [probability]{style="color: orange;"} of lapse in next week for “[new]{style="color: orange;"}” observations in test sets
+- Model predicts [probability]{style="color: blue;"} of lapse in next week for “[new]{style="color: blue;"}” observations in test sets
 
-- Can panel predictions by [Ground Truth]{style="color: orange;"} (i.e., true lapse vs. no lapse observations
+\
+
+- Can panel predictions by [Ground Truth]{style="color: blue;"} (i.e., true lapse vs. no lapse observations
+
+\
 
 - Want high probabilities to be high for true lapses and low for true no lapses
 ::::
@@ -595,7 +496,7 @@ And this is exactly what we see for the one week lapse window model
 
 -----------------------------------------------------------------------------
 
-## Modeling: Area under ROC curve (auROC) 
+## Area under ROC curve (auROC): Random Classifier
 
 ::: {.columns}
 :::: {.column width="50%"}
@@ -629,11 +530,14 @@ And the auROC for this random classifier would be .50
 
 -----------------------------------------------------------------------------
 
-## Modeling: Area under ROC curve (auROC) 
+## Area under ROC curve (auROC): Perfect Classifier
 
 ::: {.columns}
 :::: {.column width="50%"}
 - [0.50 for random classifier]{style="color: gray;"}
+
+\
+
 - 1.00 for perfect classifer
 ::::
 
@@ -653,19 +557,25 @@ tibble(model = c("random", "random", "perfect", "perfect", "perfect"),
 :::
 
 ::: {.notes}
-And the red line displays the curve for a perfectly performing classifer.  It pushes up into the top left corner of the plot where the true positve rate is 1.0 and the false positive rate is 0.   
+And the red line displays the curve for a perfectly performing classifier.  It pushes up into the top left corner of the plot where the true positive rate is 1.0 and the false positive rate is 0.   
 
-This perfect classifer would have an auROC of 1.0
+This perfect classifier would have an auROC of 1.0
 :::
 
 -----------------------------------------------------------------------------
 
-## Modeling: Area under ROC curve (auROC) 
+## Area under ROC curve (auROC): Interpretation
 
 ::: {.columns}
 :::: {.column width="50%"}
 - [0.50 for random classifier]{style="color: gray;"}
+
+\
+
 - [1.00 for perfect classifer]{style="color: gray;"}
+
+\
+
 - Likelihood that model will assign a higher lapse probability to randomly selected lapse vs. no-lapse observation
 ::::
 
@@ -696,7 +606,7 @@ So for example, if a model has an auROC of 0.90, it means that there is a 90 per
 
 -----------------------------------------------------------------------------
 
-## 1 Week: ROC Curve
+## Area under ROC curve (auROC): Next Week Model
 
 ::: {.columns}
 :::: {.column width="50%"}
@@ -735,7 +645,7 @@ And the AUC for our 1 week model is .90, which is generally considered excellent
 
 -----------------------------------------------------------------------------
 
-## 1 Day: ROC Curve
+## Area under ROC curve (auROC): Next Week Model
 
 ::: {.columns}
 :::: {.column width="50%"}
@@ -764,7 +674,7 @@ But we were also eager to see how well we could do if we required a higher level
 
 -----------------------------------------------------------------------------
 
-## 1 Day: ROC Curve
+## Area under ROC curve (auROC): Next Day Model
 
 ::: {.columns}
 :::: {.column width="50%"}
@@ -804,7 +714,7 @@ The day level model performed as well as, if not better, than the week level mod
 
 -----------------------------------------------------------------------------
 
-## 1 Hour: ROC Curve
+## Area under ROC curve (auROC): Next Hour Model
 
 ::: {.columns}
 :::: {.column width="50%"}
@@ -874,15 +784,55 @@ Its only very recently that we have begin to take this seriously and we must.  I
 ::: {.columns}
 :::: {.column width="35%"}
 - Substantially poorer performance if not white/non-hispanic
+::::
+
+:::: {.column width="65%"}
+```{r}
+#| label: figs_fairema_ci
+#| fig-height: 6
+#| fig-width: 8
+
+source(here::here("figs/risk/figs_fairema_ci.R"))
+cowplot::plot_grid(fig_race, NULL, NULL, NULL)
+```
+
+::::
+:::
+
+::: {.notes}
+[PAUSE]
+
+And our models have some serious but unfortunately not unexpected problems.
+
+On the right, these are preliminary analyses looking at performance across a variety of binary groups defined by priviledge with respect to SUD treatment access and/or outcomes.  
+
+From these analyses, it is clear that our models perform substantially worse when predicing lapse for anyone who isnt white and non-hispanic.  And this was expected given the lack of racial and ethinic diversity in the sample.
+
+However, there are also some, though smaller, performance issues for other less privleged groups, even when we had reasonable divesity regarding those characteristics in the sample.  And this highlights other sources of potential bias. 
+
+For example, when selecting which EMA questions to ask participants, we based this on domain expetise from decades of research on the risk factors for lapses.  However, that research was done with predominately white, predominately male participants who often had other priviledges that allowed for them to participate in research.  Given this, it may not be suprising that when we use this literature to select EMA items to measure, we may fail to include items that might tap lapse risk for people who are not white men.
+
+I'll come back to this later when talking about our NIDA project and next steps and I hope we can discuss this too during the question period.
+:::
+
+## Algorithmic Fairness
+
+::: {.columns}
+:::: {.column width="35%"}
+- [Substantially poorer performance if not white/non-hispanic]{style="color: gray;"}
+
+\
 
 - Meaningfully poorer performance for other less priviledged groups
+
+\
 
 - Not just due to under-representation in training data
 ::::
 
 :::: {.column width="65%"}
 ```{r}
-#| label: figs_fairema_ci
+#| label: figs_fairema_ci-2
 #| fig-height: 6
 #| fig-width: 8
 
@@ -946,6 +896,9 @@ First, all of EMA items affect predictions about lapse probability across observ
 ::: {.columns}
 :::: {.column width="40%"}
 - [All EMA items impact lapse probability]{style="color: grey;"}
+
+\
+
 - Lapse day and Lapse hour are useful for day and hour level models as expected
 ::::
 
@@ -973,7 +926,13 @@ These features likely contribute to the superior performance of the hour and to 
 ::: {.columns}
 :::: {.column width="40%"}
 - [All EMA items impact lapse probability]{style="color: grey;"}
+
+\
+
 - [Lapse day and Lapse hour are useful for day and hour level models as expected]{style="color: grey;"}
+
+\
+
 - Demographics not particularly important (but limited race/ethnic diversity)
 ::::
 
@@ -1029,6 +988,7 @@ Assuming we can do this in our subsequent projects, the next logical question is
 ## (Selective) Next Steps: Diversity and Fairness
 
 1. Improve algorithmic fairness
+
    - Move beyond binary comparisons (e.g., issues of intersectionality) 
    - Explore computational solutions
    - More diversity in training data
@@ -1072,11 +1032,13 @@ We are also recruiting for people at different stages in their recovery and foll
 ## (Selective) Next Steps: Sensing Geolocation and Communcations
 
 1. [Improve algorithmic fairness]{style="color: gray;"}
-   - [Move beyond binary comparisons (e.g., issues of intersectionality)]{style="color: gray;"}
-   - [Explore computational solutions]{style="color: gray;"}
-   - [More diversity in training data]{style="color: gray;"}
+
+    - [Move beyond binary comparisons (e.g., issues of intersectionality)]{style="color: gray;"}
+    - [Explore computational solutions]{style="color: gray;"}
+    - [More diversity in training data]{style="color: gray;"}
   
 2.  Use geolocation and cellular communications
+
     - Increase performance?
     - Lower sensing burden
     - More (distinct) risk features for intervention recommendations!
@@ -1173,9 +1135,9 @@ In our current projects, we target people and places that we interact with at le
 
 ## Contextualized Geolocation
 
-- Location type (e.g., home, home of friend, bar, restaurant, liquor store, work, health care, AA/recovery meeting, gym/fitness center)
+- [Location type]{style="color: blue;"} (e.g., home, home of friend, bar, restaurant, liquor store, work, health care, AA/recovery meeting, gym/fitness center)
 - Is [alcohol available]{style="color: blue;"} at this location
-- Have you [drank alcohol]{stype="color: blue;"} at this location?
+- Have you [drank alcohol]{style="color: blue;"} at this location?
 - Is your [experience at this location]{style="color: blue;"} generally pleasant, unpleasant, mixed or neutral?
 - This location is ([high risk, moderate risk, low risk, no risk]{style="color: blue;"}) for my recovery
 
@@ -1188,7 +1150,7 @@ In our current projects, we target people and places that we interact with at le
 
 - Have you [drank alcohol]{style="color: blue;"} with this person?
 - What is their [drinking status]{style="color: blue;"} (e.g., drinker, non-drinker)?
-- Would you expect them to [drink in your presence]?{style="color: blue;"}
+- Would you expect them to [drink in your presence]{style="color: blue;"}?
 - Are they currently [in recovery]{style="color: blue;"} from alcohol or other substances?
 - Do they [know about your recovery goals]{style="color: blue;"} and if so, [are they supportive]{style="color: blue;"}?
 - Are your [experiences with them]{style="color: blue;"} typically pleasant, unpleasant, mixed or neutral?
@@ -1203,16 +1165,19 @@ THEN TALK ABOUT PRELIMINARY ANALYSES
 
 ## (Selective) Next Steps: How to Yield Clinical Benefits 
 
-1.  [Improve algorithmic fairness]{style="color: gray;"}
+1. [Improve algorithmic fairness]{style="color: gray;"}
+
     - [Move beyond binary comparisons (e.g., issues of intersectionality)]{style="color: gray;"}
     - [Explore computational solutions]{style="color: gray;"}
     - [More diversity in training data]{style="color: gray;"}
   
-2.  [Use geolocation and cellular communications]{style="color: gray;"}
+2. [Use geolocation and cellular communications]{style="color: gray;"}
+
     - [More (distinct) risk features for intervention recommendations]{style="color: gray;"}
     - [Lower sensing burden]{style="color: gray;"}
 
-3.  Implement Recovery Monitoring and Support System for Patients
+3. Implement Recovery Monitoring and Support System for Patients
+
     - Who to provide model output to?
     - What output to provide? 
     - How to increase engagement, trust, utility, and benefits?
@@ -1375,7 +1340,7 @@ Given this, we believe that the lapse probabilities can provide precise, fine gr
 
 ::: {.columns}
 :::: {.column width="50%"}
-- Day and Hour models can be used for "just-in-time" interventions
+- Hour model might be used for just-in-time interventions but not feasible given low PPV
 ::::
 
 :::: {.column width="50%"}
@@ -1395,9 +1360,30 @@ FREE TALK
 
 ::: {.columns}
 :::: {.column width="50%"}
-- [Day and Hour prediction windows can be used for "just-in-time" interventions]{style="color: gray;"}
-- Week window may be too coarse for JIT
-- Push week window further into the future for support outside of DTx 
+- [Hour model might be used for just-in-time interventions but not feasible given low PPV]{style="color: gray;"}
+- Day model can be used to provide daily support recommendations 
+::::
+
+:::: {.column width="50%"}
+<!-- blank  -->
+::::
+:::
+
+::: {.notes}
+So let's consider first how to use the temporal information provided by the three models.
+
+FREE TALK
+:::
+-----------------------------------------------------------------------------
+
+## Clinical Uses: Who and When?
+
+::: {.columns}
+:::: {.column width="50%"}
+- [Hour model might be used for just-in-time interventions but not feasible given low PPV]{style="color: gray;"}
+- [Day model can be used to provide daily support recommendations]{style="color: gray;"}] 
+- Week window may be too coarse recommending daily support
+- Push week window further into the future for support outside of digital therapeutic 
 ::::
 
 :::: {.column width="50%"}
@@ -1422,7 +1408,7 @@ FREE TALK
 
 ::: {.columns}
 :::: {.column width="50%"}
-- Tools from interpretable AI can help explain [why]{style="color: orange;"} a future lapse is expected
+- Tools from interpretable AI can help explain [why]{style="color: blue;"} a future lapse is expected
 ::::
 
 :::: {.column width="50%"}
@@ -1443,7 +1429,7 @@ We can also begin to use tools from the emerging field of interpretable AI to un
 ::: {.columns}
 :::: {.column width="50%"}
 - [Tools from interpretable AI can help explain why a future lapse is expected]{style="color: gray;"}
-- Local SHAP values highlight important risk features for a [specific individual at a specific moment in time]{style="color: orange;"}
+- Local SHAP values highlight important risk features for a [specific individual at a specific moment in time]{style="color: blue;"}
 ::::
 
 :::: {.column width="50%"}
@@ -1469,7 +1455,7 @@ FREE TALK
 :::: {.column width="50%"}
 - [Tools from interpretable AI can help explain why a future lapse is expected]{style="color: gray;"}
 - [Local SHAP values highlight important risk features for a specific individual at a specific moment in time]{style="color: gray;"}
-- If we know [why]{style="color: orange;"}, we can begin to [recommend interventions and supports]{style="color: orange;"} to address these risks
+- If we know [why]{style="color: blue;"}, we can begin to [recommend interventions and supports]{style="color: blue;"} to address these risks
 ::::
 
 :::: {.column width="50%"}
@@ -1502,7 +1488,7 @@ SLIDE CONTINUE ON NEXT CLICK
 :::: {.column width="50%"}
 - [Tools from interpretable AI can help explain why a future lapse is expected]{style="color: gray;"}
 - [Local SHAP values highlight important risk features for a specific individual at a specific moment in time]{style="color: gray;"}
-- If we know [why]{style="color: orange;"}, we can begin to [recommend interventions and supports]{style="color: orange;"} to address these risks
+- If we know [why]{style="color: blue;"}, we can begin to [recommend interventions and supports]{style="color: blue;"} to address these risks
 ::::
 
 :::: {.column width="50%"}
@@ -1526,14 +1512,11 @@ We are really excited about these possiblities so let me tell you more about whe
 
 -----------------------------------------------------------------------------
 
-
------------------------------------------------------------------------------
-
-## (Selective) Next Steps:  Algorithmic Feedback
+## (Selective) Next Steps:  Implement the Recovery Monitoring and Support System
 
 - [Use geolocation and cellular communications]{style="color: gray;"}
 - [Improve algorithmic fairness]{style="color: gray;"}
-- Optimize algorithmic feedback to increase trust
+- Initial Implementation of Monitoring and Support System - new grant!
 
 
 ::: {.notes}
@@ -1543,16 +1526,21 @@ INTROCE IDEAL THAT PEOPLE NEED TO TRUST THE FEEDBACK FROM OUR MODELS
 
 -----------------------------------------------------------------------------
 
-## Optimize Algorithmic Feedback in Smart DTx
+## Optimize System Support Messages
 
-- Daily updates from Day model based on EMA and and geolocation features
+- Daily support messages from Next Day model based on EMA and and geolocation features
+
+\
+
+- Factorially manipulate (between subjects) four components of support message 
   - Lapse probability for that day
-  - Recent trends in lapse probabilitity 
+  - Recent trends in lapse probability 
   - Locally important features for that day
+  - A risk relevant recommendation
 
-- Manipulate algorithmic transparency in daily message
+\
 
-- Measure trust, risk-relevant engagement, and clinical outcomes
+- Measure engagement, trust, utility, and clinical outcomes
 
 ![niaaa_logo.png](https://github.com/jjcurtin/lectures/blob/main/images/niaaa_logo.png?raw=true){.absolute bottom="5%" right="2%" width="auto" height="auto"}\ 
 
