@@ -1,0 +1,4 @@
+- source: bov.qmd
+  quarto-pub:
+    - id: 5f77b2b8-638a-4a82-9617-11c616ba920b
+      url: 'https://jjcurtin.quarto.pub/a-smart-recovery-monitoring-and-support-system-for-continuing-care-a691'

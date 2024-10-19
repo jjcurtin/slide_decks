@@ -9,7 +9,7 @@ path_out <- "/data/risk"
 if (!file.exists(here::here(path_out, "ema_demographics.csv"))) {
   
   # open disposition df on server  
-  disposition <- read_csv(file.path(path_processed, "disposition.csv"), 
+  disposition <- read_csv(here::here(path_processed, "disposition.csv"), 
                           col_types = "ccDDcccccccccc")
   
   # open screen df on server
