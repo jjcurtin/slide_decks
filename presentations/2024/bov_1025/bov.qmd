@@ -330,12 +330,10 @@ And of course, all of the models would only use data collected prior to 5 pm tod
 ::: {.columns}
 :::: {.column width="50%"}
 
-- Probability that model scores any true lapse higher than any true no-lapse
-
-\
+[auROC]{style="color: blue;"} measures the probability that model scores any true lapse higher than any true no-lapse
 
 - Random performance: auROC = 0.5 
-- Perfect performane: auROC = 1.0 
+- Perfect performance: auROC = 1.0 
 
 :::::{.callout-tip icon=false}
 ## Rules of thumb for auROC 
@@ -353,6 +351,7 @@ And of course, all of the models would only use data collected prior to 5 pm tod
 #| fig-height: 5
 #| fig-width: 5
 
+source(here::here("figs/risk/figs_ema_probability.R"))
 fig_auroc_ci
 ```
 
