@@ -328,12 +328,17 @@ And of course, all of the models would only use data collected prior to 5 pm tod
 ## Model Performance
 
 ::: {.columns}
-:::: {.column width="50%"}
+:::: {.column width="60%"}
 
-[auROC]{style="color: blue;"} measures the probability that model scores any true lapse higher than any true no-lapse
+The Area under the Receiver Operating Characteristic Curve ([auROC]{style="color: blue;"}) indicates:
 
-- Random performance: auROC = 0.5 
-- Perfect performance: auROC = 1.0 
+- Mean proportion of lapses correctly predicted
+
+- Probability that any true lapse is scored higher than any true no-lapse
+
+  - Random performance: auROC = 0.5 
+  - Perfect performance: auROC = 1.0 
+
 
 :::::{.callout-tip icon=false}
 ## Rules of thumb for auROC 
@@ -344,7 +349,7 @@ And of course, all of the models would only use data collected prior to 5 pm tod
 
 ::::
 
-:::: {.column width="50%"}
+:::: {.column width="40%"}
 
 ```{r}
 #| label: figs_auroc_ci
