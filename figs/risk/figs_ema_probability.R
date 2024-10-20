@@ -13,6 +13,16 @@ preds_week <- read_rds(here::here(path_data, "ema_preds_1week.rds"))
 preds_day <- read_rds(here::here(path_data, "ema_preds_1day.rds"))
 preds_hour <- read_rds(here::here(path_data, "ema_preds_1hour.rds")) 
 
+source(here::here(path_mak, "mak_ema_auroc_ci.R"))  # create data if needed
+auroc_ci <- read_csv(here::here(path_data, "ema_auroc_ci.csv"),
+                     show_col_types = FALSE) |>  
+  mutate(model = factor(model, levels = c("Week", "Day", "Hour")))
+
+source(here::here(path_mak, "mak_ema_accuracy_ci.R"))  # create data if needed
+balacc_ci <- read_csv(here::here(path_data, "ema_acc_ci.csv"),
+                     show_col_types = FALSE) |>  
+  mutate(model = factor(model, levels = c("Week", "Day", "Hour")))
+
 # Generate ROC curve data 
 roc_week <- preds_week |> 
   yardstick::roc_curve(prob_beta, truth = label) |> 
@@ -211,21 +221,59 @@ fig_roc_all <- roc_all |>
 #            label = str_c("auROC = ", auROC_hour),
 #            show.legend = FALSE, color = "blue")
 
+# auROC CIs
+fig_auroc_ci <- auroc_ci |>
+  ggplot(aes(x = model)) +
+  geom_point(aes(y = median), size = 2) +
+  geom_errorbar(aes(ymin = lower, ymax = upper),
+    width = .2,
+    position = position_dodge(.9)) +
+  geom_hline(yintercept = 0.5, linetype = "dashed", color = "red") +
+  # coord_flip() +
+  ylab("auROC") +
+  xlab("Prediction Window") +
+  theme(legend.position = "none") +
+  scale_y_continuous(
+    breaks = seq(0.4, 1, 0.10),
+    limits = c(0.4, 1)) +
+  theme(axis.text.x = element_text(size = 14),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_text(size = 16),
+        axis.title.y = element_text(size = 16))
 
-
+# Balanced accuracy fig
+fig_balacc_ci <- balacc_ci |>
+  ggplot(aes(x = model)) +
+    geom_point(aes(y = bal_acc), size = 2) +
+    geom_errorbar(aes(ymin = lower, ymax = upper),
+      width = .2,
+      position = position_dodge(.9)) +
+    geom_hline(yintercept = 0.5, linetype = "dashed", color = "red") +
+    # coord_flip() +
+    ylab("Balanced Accuracy") +
+    xlab("Prediction Window") +
+    theme(legend.position = "none") +
+    scale_y_continuous(
+      breaks = seq(0.4, 1, 0.10),
+      limits = c(0.4, 1)) +
+    theme(axis.text.x = element_text(size = 14),
+          axis.text.y = element_text(size = 12),
+          axis.title.x = element_text(size = 16),
+          axis.title.y = element_text(size = 16))
+  
 # Confusion matrix 
 j_thres_roc <- roc_day |> 
   mutate(j = sensitivity + specificity - 1) |> 
   slice_max(j) |> 
   pull(.threshold)
 
-cm <- preds_day |> 
+cm_day <- preds_day |> 
    mutate(estimate = if_else(prob_beta > j_thres_roc, "Lapse", "No lapse"),
           estimate = fct(estimate, levels = c("No lapse", "Lapse")),
           label = fct_relevel(label, "No lapse")) |> 
    yardstick::conf_mat(truth = label, estimate = estimate)
 
-fig_cm_day <- cm_mosaic(cm) +
+fig_cm_day <- cm_mosaic(cm_day) +
   theme(
     axis.text.x = element_text(size = 16),
     axis.text.y = element_text(size = 16),

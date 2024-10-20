@@ -1,5 +1,5 @@
 ---
-title: 'A "Smart" Recovery Monitoring and Support System for Continuing Care'
+title: 'A "Smart" Recovery Monitoring and Support System for SUD Continuing Care'
 author: "John J. Curtin, Ph.D."
 institute: "University of Wisconsin-Madison"
 date: October 25, 2024
@@ -46,7 +46,7 @@ I'd become a clinical psychologist to help people struggling with alcohol and ot
 
 ## A Smart Recovery Monitoring and Support System
 
-![](https://github.com/jjcurtin/slide_decks/blob/main/images/gustafson.jpeg?raw=true){.absolute bottom=0 right=50}
+![](https://github.com/jjcurtin/slide_decks/blob/main/images/gustafson.jpeg?raw=true){.absolute bottom=0 right=50 width=30%}
 
 ::: {.notes}
 It was around this time that Dave Gustafson reached out to me.  Dave directs a center on campus that develops digital therapeutics for substance use disorders.  These are essentially smartphone apps that provide ongoing continuing care for patients during their recovery.  He had just completed a large randomized controlled trial demonstrating that his app decreased heavy drinking days and increased abstinence rates over the first year of recovery following the completion of an inpatient treatment program.
@@ -68,7 +68,7 @@ However, he also noticed many of the people who had relapsed hadn't used the app
  \
  \
  
-![](https://github.com/jjcurtin/slide_decks/blob/main/images/gustafson.jpeg?raw=true){.absolute bottom=0 right=50}
+![](https://github.com/jjcurtin/slide_decks/blob/main/images/gustafson.jpeg?raw=true){.absolute bottom=0 right=50 width=30%}
 
 ::: {.notes}
 Dave knew that we were exploring the factors that motivated alcohol and other drug use and he asked us a simple question: 
@@ -101,11 +101,11 @@ Successful recovery requires ongoing monitoring and support to prevent relapse. 
 
 ## A Smart Recovery Monitoring and Support System
 
-- [Precision mental health requires us to provide the right treatments and supports to the right people at the right time, every time]{style="color: gray;"}
+- [Precision mental health requires us to provide the right treatments and supports to the right people at the right time, every time]{style="color:gray;"}
 
 \
 
-- [Continuing care for substance use disorders requires long-term monitoring and ongoing lifestyle adjustments and support to prevent relapse]{style="color: gray;"}
+- [Continuing care for substance use disorders requires long-term monitoring and ongoing lifestyle adjustments and support to prevent relapse]{style="color:gray;"}
 
 \
 
@@ -133,6 +133,16 @@ Sensing requires:
 - High temporal granularity 
 - Feasible/acceptable for long term use
 
+\
+- Consistent across platforms/devices
+- Stable/Low churn
+
+\
+
+- Ecological Momentary Assessments (EMA)
+- Contextualized Geolocation
+- Contexualized Smartphone Communications
+
 ::: {.notes}
 The next logical set of questions surround the model inputs.   
 
@@ -143,41 +153,15 @@ We believe that personal sensing will play a big role here.  And when I talk abo
 It must be longitudinal but also with high temporal granularity so that we have the temporal precision to intervene during days and even potentially moments of heightened risk
 
 And it must be acceptable to people for long term use because we know that SUDs are chronic, relapsing disorders that require lifetime management and continuing care.
-:::
 
------------------------------------------------------------------------------
 
-## Personal Sensing
-
-Sensing requires:
-
-- [In Vivo measurement]{style="color: gray;"}
-- [Longitudinal]{style="color: gray;"}
-- [High temporal granularity]{style="color: gray;"}
-- [Feasible/acceptable for long term use]{style="color: gray;"}
-
-\
-
-- Consistent across platforms/devices
-- Stable/Low churn
-
-::: {.notes}
 There are also some practical requirements.  
 
 If we are going to make the sensing and and prediction system widely available, then the measurement must be feasible, consistent, and stable across common equipment that most people own.  
 
 From our perspective, this limits us to smartphones with the major operating systems
-:::
 
------------------------------------------------------------------------------
 
-## Personal Sensing
-
-- Ecological Momentary Assessments (EMA)
-- Contextualized Geolocation
-- Contexualized Smartphone Communications
-
-::: {.notes}
 Given these sensing requirements, we are focusing the majority of our effort at this point on feature engineering with three separate but complementary sets of raw signals that can be sensed easily on any smartphone. These are
 
 - Ecological momentary assessments
@@ -236,6 +220,17 @@ In other words, we are not looking to find coarse group-level predictors of laps
 
 ## Participant Characteristics
 
+
+::: {.notes}
+Let me begin by giving you a sense of the characteristics of the sample we recruited and will use to train the models for our system.
+
+To start, this is a sample of individuals with a moderate to severe presentation of alcohol use disorder based on their symptom counts.  
+:::
+
+-----------------------------------------------------------------------------
+
+## Participant Characteristics
+
 ```{r}
 #| label: figs_ema_demographics
 #| fig-height: 6
@@ -246,44 +241,12 @@ cowplot::plot_grid(fig_age, fig_sex, fig_income, fig_ms, fig_educ, fig_race, nro
 ```
 
 ::: {.notes}
-Let me start highlighting the characteristics of the sample we are using to develop and evaluate the AUD lapse models.
 
 We had reasonable diversity across many participant characteristics including age, sex at birth, martial status, education, and income
 
 However, given the methods we used for recruiting, we have very little racial and ethnic diversity in the sample.  The sample is predominately white and non-Hispanic
 
-I'll return to this later both when we evaluate issues of algorithmic fairness and when I talk about another, larger NIDA funded project where we are correcting this issue of racial and ethnic representation in our models.  
-:::
-
------------------------------------------------------------------------------
-
-## Participant Characteristics
-
-::: {.columns}
-:::: {.column width="50%"}
-- All participants met criteria for moderate to severe AUD
-
-\
-
-- Reported abstinence goals
-::::
-
-:::: {.column width="50%"}
-```{r}
-#| label: figs_sx
-#| fig-height: 6
-#| fig-width: 6 
-
-# plot made in fig_demographics.R
-fig_sx
-```
-::::
-:::
-
-::: {.notes}
-I also want to highlight that this is a sample with clinically meaningful problems with their AUD use, consistent with their pursuit of abstinence goals
-
-On the right, I am showing you a histogram of the DSM-5 AUD symptom counts to confirm that everyone reported 4 or more symptoms of alcohol use disorder consistent with a moderate to severe presentation
+I'll return to this later both when we evaluate issues of algorithmic fairness and when I talk about another, larger NIDA funded project where we are correcting this issue of racial and ethnic representation in our models.
 :::
 
 -----------------------------------------------------------------------------
@@ -292,27 +255,26 @@ On the right, I am showing you a histogram of the DSM-5 AUD symptom counts to co
 
 Unreported lapses 
 
-  - Date
-  - Time
+  - Date/Time
 
 Current Experiences
 
   - Craving
   - Affect
-  - Risky situations
-  - Stressful events
-  - Pleasant event
+  - Recent risky situations
+  - Recent stressful events
+  - Recent pleasant event
 
 Future Expectations
 
   - Risky situations
   - Stressful events
-  - Confidence
+  - Abstinence Confidence
 
-![](https://github.com/jjcurtin/slide_decks/blob/main/images/ema_hand.png?raw=true){.absolute bottom=0 right=50}
+![](https://github.com/jjcurtin/slide_decks/blob/main/images/ema_hand.png?raw=true){.absolute bottom=0 right=50 width=45%}
 
 ::: {.notes}
-So let me tell you a bit more about the 4x daily EMA we collected for three months during their study participation  
+So let me also tell you a bit more about the 4x daily EMA we collected for three months during their study participation  
 
 On each EMA, participants reported the date and time of any lapses back to alcohol use that they hadn’t previously reported. These lapse reports are used for the lapse outcomes that we train our models to predict.  And these laspes were also confirmed by study staff during lab visits using a follow-back procedure.
 
@@ -323,16 +285,16 @@ And on the first EMA each day, they also reported any future risky situations an
 
 -----------------------------------------------------------------------------
 
-## Modeling: Predictions 
+## Model Predictions 
 
 - Predict hour-by-hour probability of [future lapse]{style="color: blue;"}
 
 \
 
 - Lapse window widths
-  - 1 week 
-  - 1 day
-  - 1 hour 
+  - Next week 
+  - Next day
+  - Next hour 
 
 ::: {.notes}
 OK, now that we've talked about sensing, I want to transition to training models to use features from these raw signals to predict lapses.
@@ -344,40 +306,55 @@ We used features from these sensed signals that I just described to make predict
 
 -----------------------------------------------------------------------------
 
-## Modeling: Predictions 
+## Model Predictions 
 
 - Predict hour-by-hour probability of [future lapse]{style="color: blue;"}
 
 \
 
 - Lapse window widths
-  - 1 week 
-  - 1 day
-  - 1 hour 
+  - Next week 
+  - Next day
+  - Next hour 
 
 ::: {.notes}
-For example, if I was in recovery from an AUD, I could use these models to generate the probability that I would lapse after I leave the center today at 4 pm. One model would generate the probability I would lapse at some point between 4 pm today and 4 pm next Wednesday, the second would predict the probability of a lapse between 4 pm today and 4 pm tomorrow and the third and most temporally precise model would provide the probability of a lapse in the next hour, between 4pm today and 5pm today.  
+For example, if I was in recovery from an AUD, I could use these models to generate the probability that I would lapse after this symposium ends at 5 pm. One model would generate the probability I would lapse at some point between 5 pm today and 5 pm next Friday, the second would predict the probability that I would lapse between 5 pm today and 5 pm tomorrow and the third and most temporally precise model would provide the probability that I would lapse in the next hour, between 5pm today and 6pm today.  
 
-And of course, all of the models would only use data collected prior to 4 pm today so that they are “predicting”, in the full sense of the word, into the future and not just demonstrating an association.
+And of course, all of the models would only use data collected prior to 5 pm today so that they are “predicting”, in the full sense of the word, into the future and not just demonstrating an association.
 :::
 
 -----------------------------------------------------------------------------
 
 ## Model Performance
 
-NEED SIMPLE PLOT of Accuracy and auROCs for the three models
-
 ::: {.columns}
 :::: {.column width="50%"}
 
+- Probability that model scores any true lapse higher than any true no-lapse
 
-<!--Acccuracy by Model-->
+\
+
+- Random performance: auROC = 0.5 
+- Perfect performane: auROC = 1.0 
+
+:::::{.callout-tip icon=false}
+## Rules of thumb for auROC 
+.70 - .80 is considered fair  
+.80 - .90 is considered good  
+\> .90 is considered excellent  
+:::::
 
 ::::
 
 :::: {.column width="50%"}
 
-<!--Acccuracy by Model-->
+```{r}
+#| label: figs_auroc_ci
+#| fig-height: 5
+#| fig-width: 5
+
+fig_auroc_ci
+```
 
 ::::
 :::
@@ -399,9 +376,6 @@ So, for example, that random classifier would only have a 50% chance of predicti
 
 And to be clear, we believe all three of these models to have clinically implementable levels of performance such that we can make meaningful decisions about the probability of a future lapse for individual participants at specfic moments or windows in time.
 :::
-
------------------------------------------------------------------------------
-
 ## Model Performance: Lagged Models 
 
 ::: {.columns}
@@ -426,33 +400,6 @@ fig_lag_ci
 Now lets consider how we temporal information provided by the models.
 
 FREE TALK
-:::
-
------------------------------------------------------------------------------
-
-## Global Feature Importance
-
-UPDATE TO ONE PLOT PANELED BY WINDOW WIDTH WITH ONLY EMA ITEMS
-
-ANCHOR TO SAY THAT WE SHOW THIS TO CONNECT LATER TO RECOMMENDATIONS?
-
-
-```{r}
-#| label: figs_global_all
-#| fig-height: 6
-#| fig-width: 8
-
-source(here::here("figs/risk/figs_ema_shaps.R"))
-fig_global_all
-```
-
-
-::: {.notes}
-In the spirit of making this model more transparent and interpretable, lets also briefly look under the hood at global feature importance
-
-The plot on the right shows feature names and their associated importance indexed by mean absolute SHAP values. The width of the bars shows the relative global importance of each feature for each model, globally across all participants and observations.  From this we see a few important characteristics of the model.   
-
-First, all of EMA items affect predictions about lapse probability across observations  As you might expect, history of past lapses has a big influence on the probability of a future lapse.  But self reported abstinence efficacy, craving, history of stress events and other features from the EMA all make meaningful contributions to lapse probability across observations.  
 :::
 
 -----------------------------------------------------------------------------
@@ -585,7 +532,7 @@ We are also recruiting for people at different stages in their recovery and foll
 ## Next Step: Improve Fairness
 
 
-- More diversity in training data{style="color: gray;"}
+- [More diversity in training data]{style="color:gray;"}
 - Explore computational solutions
 - Empirically derived features (e.g., geolocation, language) 
    
@@ -648,7 +595,7 @@ Looking at the red dots indicating the places I visit, the app can detect the re
 
 ## ...Imagine my text messages...
 
-![smartphone_uber.png](https://github.com/jjcurtin/lectures/blob/main/images/smartphone_uber.png?raw=true){.absolute top="15%" left="33%" width="33%" height="auto"}\ 
+![smartphone_uber.png](https://github.com/jjcurtin/lectures/blob/main/images/smartphone_uber.png?raw=true){.absolute top="15%" width="50%" height="auto"}\ 
 
 ::: {.notes}
 In addition to geolocation, we also collected my smartphone communications logs and even the content of my text messages.
@@ -681,53 +628,16 @@ For example, consider the implications of this brief text message thread between
 ... And how would your prediction change if this wasn’t their drinking buddy but instead, their mom who was a big supporter of their recovery.
 
 This interpersonal context matters!!!
-:::
-
------------------------------------------------------------------------------
-
-## Context is Critical
-
-<!--intentional blank page-->
 
 
-::: {.notes}
+
+ADD THIS...
+
 We gather this contextual information quickly by asking a few key questions about the people and places we interact with frequently over the first couple of months that we record these signals.  And we can identify these frequent contacts and locations directly from these signals.
 
-In our current projects, we target people and places that we interact with at least twice a month or more for more detailed follow-up to gather context.    And it turns out that this really isn’t that burdensome.   Most of us are creatures of habit and if we set a threshold for 2x monthly interactions, we typically only have 10-30 people and places that meet this threshold.   And it’s the same people and places each month so we can build this context up when the person first starts to use the system and after that it only needs to be updated occasionally when we go somewhere new or make a new friend.
 :::
 
 -----------------------------------------------------------------------------
-
-## Contextualized Geolocation
-
-- [Location type]{style="color: blue;"} (e.g., home, home of friend, bar, restaurant, liquor store, work, health care, AA/recovery meeting, gym/fitness center)
-- Is [alcohol available]{style="color: blue;"} at this location
-- Have you [drank alcohol]{style="color: blue;"} at this location?
-- Is your [experience at this location]{style="color: blue;"} generally pleasant, unpleasant, mixed or neutral?
-- This location is ([high risk, moderate risk, low risk, no risk]{style="color: blue;"}) for my recovery
-
-::: {.notes}
-:::
-
------------------------------------------------------------------------------
-
-## Contextualized Communications
-
-- Have you [drank alcohol]{style="color: blue;"} with this person?
-- What is their [drinking status]{style="color: blue;"} (e.g., drinker, non-drinker)?
-- Would you expect them to [drink in your presence]{style="color: blue;"}?
-- Are they currently [in recovery]{style="color: blue;"} from alcohol or other substances?
-- Do they [know about your recovery goals]{style="color: blue;"} and if so, [are they supportive]{style="color: blue;"}?
-- Are your [experiences with them]{style="color: blue;"} typically pleasant, unpleasant, mixed or neutral?
-
-::: {.notes}
-TALK FIRST ABOUT CONTEXT
-
-THEN TALK ABOUT PRELIMINARY ANALYSES
-:::
-
------------------------------------------------------------------------------
-
 
 ## Next Step: Monitor and Recommend in Real Time
 
@@ -758,13 +668,7 @@ We can also begin to use tools from the emerging field of interpretable AI to un
 ::::
 
 :::: {.column width="50%"}
-```{r}
-#| label: figs_global_day
-#| fig-height: 6
-#| fig-width: 6
 
-fig_global_day
-```
 ::::
 :::
 
@@ -784,13 +688,6 @@ FREE TALK
 ::::
 
 :::: {.column width="50%"}
-```{r}
-#| label: figs_global_day-2
-#| fig-height: 6
-#| fig-width: 6
-
-fig_global_day
-```
 ::::
 :::
 
@@ -817,13 +714,7 @@ SLIDE CONTINUE ON NEXT CLICK
 ::::
 
 :::: {.column width="50%"}
-```{r}
-#| label: figs_global_day-3
-#| fig-height: 6
-#| fig-width: 6
 
-fig_global_day
-```
 ::::
 :::
 

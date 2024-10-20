@@ -94,7 +94,7 @@ fig_ms <- d |>
 # Age
 fig_age <- d |>
   ggplot(aes(x = age)) +
-  geom_histogram(fill = "blue", color = "black", bins = 30) +
+  geom_histogram(fill = "blue", color = "black", bins = 20) +
   labs(x = "Age", y = "Count") +
   ggtitle("Age") +
   theme(plot.title = element_text(hjust = 0.5)) + 
@@ -107,7 +107,7 @@ fig_age <- d |>
 # Income
 fig_income <- d |>
   ggplot(aes(x = income)) +
-  geom_histogram(fill = "blue", color = "black", bins = 30) +
+  geom_histogram(fill = "blue", color = "black", bins = 20) +
   labs(x = "Income ($ in thousands)", y = "Count") +
   ggtitle("Income") +
   theme(plot.title = element_text(hjust = 0.5)) + 
