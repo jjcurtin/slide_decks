@@ -5,7 +5,7 @@ institute: "University of Wisconsin-Madison"
 date: October 25, 2024
 format: 
   revealjs:
-    scrollable: true
+    scrollable: false 
     css: bov.css
     slide-number: true 
 title-slide-attributes:
@@ -336,7 +336,7 @@ The Area under the Receiver Operating Characteristic Curve ([auROC]{style="color
 
 - Probability that any true lapse is scored higher than any true no-lapse
 
-  - Random performance: auROC = 0.5 
+  - Random performance:  auROC = 0.5 
   - Perfect performance: auROC = 1.0 
 
 
@@ -380,12 +380,14 @@ So, for example, that random classifier would only have a 50% chance of predicti
 
 And to be clear, we believe all three of these models to have clinically implementable levels of performance such that we can make meaningful decisions about the probability of a future lapse for individual participants at specfic moments or windows in time.
 :::
+
+-----------------------------------------------------------------------------
+
 ## Model Performance: Lagged Models 
 
 ::: {.columns}
 :::: {.column width="50%"}
-- Week window may not provide enough temporal precision for recommended specific supports and activities in DTx 
-- Push week window further into the future for support outside of digital therapeutic 
+
 ::::
 
 :::: {.column width="50%"}
@@ -404,6 +406,34 @@ fig_lag_ci
 Now lets consider how we temporal information provided by the models.
 
 FREE TALK
+:::
+
+-----------------------------------------------------------------------------
+
+## Global Feature Importance
+
+::: {.columns}
+:::: {.column width="40%"}
+::::
+
+:::: {.column width="60%"}
+```{r}
+#| label: figs_global_day
+#| fig-height: 6
+#| fig-width: 6
+
+source(here::here("figs/risk/figs_ema_shaps.R"))
+fig_global_day
+```
+::::
+:::
+
+::: {.notes}
+In the spirit of making this model more transparent and interpretable, lets also briefly look under the hood at global feature importance
+
+The plot on the right shows feature names and their associated importance indexed by mean absolute SHAP values. The width of the bars shows the relative global importance of each feature for each model, globally across all participants and observations.  From this we see a few important characteristics of the model.   
+
+First, all of EMA items affect predictions about lapse probability across observations  As you might expect, history of past lapses has a big influence on the probability of a future lapse.  But self reported abstinence efficacy, craving, history of stress events and other features from the EMA all make meaningful contributions to lapse probability across observations.  
 :::
 
 -----------------------------------------------------------------------------
@@ -625,21 +655,71 @@ We believe we can improve the predictive strength of these geolocation and commu
 ![smartphone_context.png](https://github.com/jjcurtin/lectures/blob/main/images/smartphone_context.png?raw=true){.absolute top="15%" left="33%" width="33%" height="auto"}\ 
 
 ::: {.notes}
-For example, consider the implications of this brief text message thread between a hypothetical patient and their drinking buddy for what you might predict for the probability that they might lapse back to drinking in the coming hours.   
+for example, consider the implications of this brief text message thread between a hypothetical patient and their drinking buddy for what you might predict for the probability that they might lapse back to drinking in the coming hours.   
 
-[PAUSE]
+[pause]
 
-... And how would your prediction change if this wasn’t their drinking buddy but instead, their mom who was a big supporter of their recovery.
+... and how would your prediction change if this wasn’t their drinking buddy but instead, their mom who was a big supporter of their recovery.
 
-This interpersonal context matters!!!
+this interpersonal context matters!!!
 
 
 
-ADD THIS...
+add this...
 
-We gather this contextual information quickly by asking a few key questions about the people and places we interact with frequently over the first couple of months that we record these signals.  And we can identify these frequent contacts and locations directly from these signals.
+we gather this contextual information quickly by asking a few key questions about the people and places we interact with frequently over the first couple of months that we record these signals.  and we can identify these frequent contacts and locations directly from these signals.
 
 :::
+
+-----------------------------------------------------------------------------
+
+## Next Step: Monitor and Recommend in Real Time
+
+::: columns
+
+::: {.column width="50%"}
+```{r}
+#| label: figs_tr2
+#| fig-height: 3
+#| fig-width: 5
+
+source(here::here("figs/opt/figs_opt_shaps.R"))
+fig_shap_ex1
+```
+:::
+
+::: {.column width="50%"}
+
+:::
+:::
+
+::: columns
+
+::: {.column width="50%"}
+```{r}
+#| label: figs_bl2
+#| fig-height: 3
+#| fig-width: 5
+
+fig_shap_ex1
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| label: figs_br2
+#| fig-height: 3
+#| fig-width: 5
+
+fig_shap_ex1
+```
+:::
+:::
+
+::: {.notes}
+
+:::
+
 
 -----------------------------------------------------------------------------
 
@@ -723,11 +803,11 @@ SLIDE CONTINUE ON NEXT CLICK
 :::
 
 ::: {.notes}
-As a starting point, the mapping between between important local risk features and specific interventions or supports could be created using clinical domain expertise. In other words, what would a clinician tell their patient to do in those circumstances. We can simply hard code these clinically derived mappings between risk features and support recommendations in the Smart DTx
+as a starting point, the mapping between between important local risk features and specific interventions or supports could be created using clinical domain expertise. in other words, what would a clinician tell their patient to do in those circumstances. we can simply hard code these clinically derived mappings between risk features and support recommendations in the smart dtx
 
-However, with enough training data, reinforcement learning can also be applied to this problem to allow the model to learn the best intervention to recommend given a set of risk features to reduce subsequent lapse probability.
+however, with enough training data, reinforcement learning can also be applied to this problem to allow the model to learn the best intervention to recommend given a set of risk features to reduce subsequent lapse probability.
 
-We are really excited about these possibilities so let me tell you more about how we will implement and optimize our system as part of this new grant. 
+we are really excited about these possibilities so let me tell you more about how we will implement and optimize our system as part of this new grant. 
 :::
 
 -----------------------------------------------------------------------------

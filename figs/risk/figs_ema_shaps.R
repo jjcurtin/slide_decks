@@ -34,9 +34,13 @@ fig_global_all <- global |>
 fig_global_day <- global |>
   filter(window == "day") |> 
   filter(str_detect(variable_grp, "EMA")) |>
+  mutate(variable_grp = str_split_i(variable_grp, " \\(", 1)) |>
   mutate(group = reorder(variable_grp, mean_value, sum)) |>
   ggplot() +
   geom_bar(aes(x = group, y = mean_value), stat = "identity", fill  = "green") +
   ylab("Mean |SHAP| value (in Log-Odds)") +
   xlab("") +
-  coord_flip()
+  coord_flip() +
+  theme(axis.text.y = element_text(size = 14, face  = "bold")) +
+  theme(axis.text.x = element_text(size = 14, face  = "bold")) +
+  theme(axis.title.x = element_text(size = 14, face  = "bold")) 
