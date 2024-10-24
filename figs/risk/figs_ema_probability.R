@@ -179,8 +179,9 @@ fig_cal <- preds_day |>
     geom_abline(slope = 1, intercept = 0, linetype = "dotted") +
     geom_line() +
     geom_point() +
-    xlab("Predicted Lapse Probability (bin mid-point)") +
-    ylab("Observed Lapse Probability") +
+    labs(x = "Predicted Lapse Probability (bin mid-point)",
+         y = "Observed Lapse Probability",
+         title = "Next Day model") +
     scale_x_continuous(breaks = seq(0, 1, bin_width),
                        limits = c(0, 1)) +
     scale_y_continuous(breaks = seq(0, 1, bin_width),

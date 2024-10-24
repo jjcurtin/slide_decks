@@ -4,7 +4,7 @@ devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/format_p
                      sha1 = "a58e57da996d1b70bb9a5b58241325d6fd78890f")
 path_processed <- format_path("studydata/risk/data_processed/ema")
 path_shared <- format_path("studydata/risk/data_processed/shared")
-path_out <- "/data/risk"
+path_out <- "data/risk"
 
 if (!file.exists(here::here(path_out, "ema_demographics.csv"))) {
   
@@ -39,5 +39,5 @@ if (!file.exists(here::here(path_out, "ema_demographics.csv"))) {
   
   # write to slide decks repo
   screen |> 
-    write_csv(here::here("data/risk", "ema_demographics.csv"))
+    write_csv(here::here(path_out, "ema_demographics.csv"))
 }
