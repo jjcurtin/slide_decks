@@ -7,8 +7,6 @@ path_data <- "data/risk"
 path_mak <- "mak/risk"
 
 source(here::here(path_mak, "mak_lag_ci.R"))
-
-
 ci <- read_csv(here::here(path_data, "lag_ci.csv"),
                show_col_types = FALSE) |>
   mutate(model = case_match(model,

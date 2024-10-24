@@ -7,7 +7,7 @@ path_data <- "data/risk"
 if(!file.exists(here::here(path_data, "ema_auroc_ci.csv"))){
   
 q = c(.025, .5, .975)
-ci  <-   read_rds(here::here(path_models, "posteriors_all_0_v5_nested.rds")) |> 
+ci  <-   read_rds(here::here(path_ema, "posteriors_all_0_v5_nested.rds")) |> 
   tidy(seed = 123) |> 
   group_by(model) |> 
   summarize(median = quantile(posterior, probs = q[2]),

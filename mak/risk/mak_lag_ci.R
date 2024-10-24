@@ -16,5 +16,4 @@ if(!file.exists(here::here(path_data, "lag_ci.csv"))){
                           labels = c("0 lag", "24 lag", "72 lag", "168 lag", "336 lag"))) |> 
     arrange(model) |> 
     write_csv(here::here(path_data, "lag_ci.csv"))
-
 } 
