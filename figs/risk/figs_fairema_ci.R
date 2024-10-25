@@ -22,15 +22,14 @@ plot_ci <- function(d, title){
     geom_point(aes(y = median), size = 3) +
     geom_errorbar(aes(ymin = lower, ymax = upper),
       width = .2, position = position_dodge(.9)) +
-    # coord_flip() +
     ylab("auROC") +
     xlab("Group") +
-    ggtitle(title) +
+    labs(subtitle = title) +
     xlab("") +
     theme(legend.position = "none") +
     scale_y_continuous(breaks = seq(0.4, 1, 0.10), limits = c(0.4, 1)) +
-    scale_color_manual(values = c("green", "blue")) +
-    theme(title = element_text(size = 18, color = "orange"),
+    scale_color_manual(values = c("black", "orange")) +
+    theme(subtitle = element_text(size = 16, color = "orange"),
           axis.text.x = element_text(size = 14, color = "black"),
           axis.text.y = element_text(size = 12, color = "black"),
           axis.title.x = element_text(size = 16, color = "black"),
@@ -44,13 +43,13 @@ fig_sex  <- ci |>
   filter(model == "Male" | model == "Female") |>
   mutate(model = fct(model, levels = c("Male", "Female")),
          model = fct_recode(model, "        male" = "Male", "      female" = "Female")) |> 
-  plot_ci("Sex")
+  plot_ci("Sex") 
 
 fig_race  <- ci |>
   filter(model == "white" | model == "non_white") |>
   mutate(model = fct(model, levels = c("white", "non_white")),
-         model = fct_recode(model, "       white" = "white", "       other" = "non_white")) |> 
-  plot_ci("Race/Ethnicity")
+         model = fct_recode(model, "white/non-hispanic" = "white", "       other" = "non_white")) |> 
+  plot_ci("Race/Ethnicity") 
 
 fig_income  <- ci |>
   filter(model == "above_poverty" | model == "below_poverty") |>
@@ -63,3 +62,24 @@ fig_age  <- ci |>
   mutate(model = fct(model, levels = c("younger", "older")),  
          model = fct_recode(model, "       older" = "older", "     younger" = "younger")) |> 
   plot_ci("Age")
+
+fig_race_only  <- ci |>
+  filter(model == "white" | model == "non_white") |>
+  mutate(model = fct(model, levels = c("white", "non_white")),
+         model = fct_recode(model, "White/Non-hispanic" = "white", "Other" = "non_white")) |> 
+  ggplot(aes(x = model, color = model)) +
+    geom_point(aes(y = median), size = 3) +
+    geom_errorbar(aes(ymin = lower, ymax = upper),
+      width = .2, position = position_dodge(.9)) +
+    labs(x = "Race/Ethnicity", y = "auROC") +
+    theme(legend.position = "none") +
+    scale_y_continuous(breaks = seq(0.4, 1, 0.10), limits = c(0.4, 1)) +
+    scale_color_manual(values = c("black", "orange")) +
+    theme(axis.text.x = element_text(size = 14, color = "black"),
+          axis.text.y = element_text(size = 12, color = "black"),
+          axis.title.x = element_text(size = 16, color = "black"),
+          axis.title.y = element_text(size = 16, color = "black")) +
+    geom_hline(yintercept = 0.5, linetype = "dashed", color = "gray") +
+    geom_hline(yintercept = 1.0, linetype = "dashed", color = "gray") +
+    annotate("text", label = "random", x = 0.75, y = .5, size = 6, color = "gray") +
+    annotate("text", label = "perfect", x = 0.75, y = 1, size = 6, color = "gray") 

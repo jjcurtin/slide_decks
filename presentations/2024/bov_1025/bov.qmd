@@ -7,11 +7,11 @@ format:
   revealjs:
     scrollable: false 
     css: bov.css
-    slide-number: true 
-    multiplex: true
+    slide-number: false 
+    multiplex: false 
 title-slide-attributes:
   data-background-image: https://github.com/jjcurtin/lectures/blob/main/images/smartphone_know_you.png?raw=true
-  data-background-size: 35%
+  data-background-size: 45%
   data-background-repeat: no
   data-background-position: left 10% bottom 10%
 include-after: |
@@ -176,7 +176,7 @@ but I will also tell you about how we are expanding our sensing methods to inclu
 
 ## Lapse Prediction for AUD
 
-- 151 individuals with moderate to severe AUD
+- 151 individuals with moderate to severe alcohol use disorder (AUD)
 
 - Early in recovery (1-8 weeks)
 
@@ -199,7 +199,7 @@ We followed these individuals for up to three months, using our three sensing me
 
 -----------------------------------------------------------------------------
 
-## Ecological Momentary Assessments (EMA)
+## Ecological Momentary Assessment (EMA)
 
 - Current/Recent Experiences
   - Craving
@@ -310,12 +310,12 @@ So, for example, that random classifier would only have a 50% chance of predicti
 ::: {.columns}
 :::: {.column width="50%"}
 ```{r}
-#| label: figs_auroc_ci
+#| label: figs_auroc_ci_1
 #| fig-height: 5
 #| fig-width: 5
 
 source(here::here("figs/risk/figs_ema_probability.R"))
-fig_auroc_ci
+fig_auroc_ci_1
 ```
 ::::
 
@@ -345,24 +345,99 @@ And to be clear, we believe all three of these models to have clinically impleme
 
 -----------------------------------------------------------------------------
 
-## Model Performance: Well Calibrated
+## Model Performance: Excellent auROCs
 
 ::: {.columns}
 :::: {.column width="50%"}
 ```{r}
-#| label: figs_auroc_ci-2
+#| label: figs_auroc_ci_2
 #| fig-height: 5
 #| fig-width: 5
 
-fig_auroc_ci
+fig_auroc_ci_2
+```
+::::
+
+::::
+
+<!-- Blank-->
+
+:::: {.column width="50%"}
+:::
+
+::: {.notes}
+UPDATE TO DESCRIBE ACCURACY FIRST BUT THEN auROC
+
+So the range of auROCs is approximately .5 - 1.0 
+
+but the auROC also has an intuitive interpretation that I want you to understand.  
+
+Its value represents the probability that any randomly selected positive observation, in our case, a lapse, will be assigned a higher probability score than a randomly selected negative observation where no lapse occurs.
+
+So, for example, that random classifier would only have a 50% chance of predicting a higher risk score for any specific lapse vs. a no-lapse period.  And conversely, the perfect classifier would have a 100% chance of scoring that lapse event higher than a no-lapse event.  
+
+
+[PAUSE]
+
+And to be clear, we believe all three of these models to have clinically implementable levels of performance such that we can make meaningful decisions about the probability of a future lapse for individual participants at specfic moments or windows in time.
+:::
+
+-----------------------------------------------------------------------------
+
+## Model Performance: Excellent auROCs
+
+::: {.columns}
+:::: {.column width="50%"}
+```{r}
+#| label: figs_auroc_ci_3
+#| fig-height: 5
+#| fig-width: 5
+
+fig_auroc_ci_3
+```
+::::
+
+::::
+
+<!-- Blank-->
+
+:::: {.column width="50%"}
+:::
+
+::: {.notes}
+
+So the range of auROCs is approximately .5 - 1.0 
+
+but the auROC also has an intuitive interpretation that I want you to understand.  
+
+Its value represents the probability that any randomly selected positive observation, in our case, a lapse, will be assigned a higher probability score than a randomly selected negative observation where no lapse occurs.
+
+So, for example, that random classifier would only have a 50% chance of predicting a higher risk score for any specific lapse vs. a no-lapse period.  And conversely, the perfect classifier would have a 100% chance of scoring that lapse event higher than a no-lapse event.  
+
+
+[PAUSE]
+
+And to be clear, we believe all three of these models to have clinically implementable levels of performance such that we can make meaningful decisions about the probability of a future lapse for individual participants at specfic moments or windows in time.
+:::
+
+-----------------------------------------------------------------------------
+
+## Model Performance: Well-Calibrated
+
+::: {.columns}
+:::: {.column width="50%"}
+```{r}
+#| fig-height: 5
+#| fig-width: 5
+
+fig_auroc_ci_3
 ```
 ::::
 
 :::: {.column width="50%"}
 ```{r}
-#| label: fig_cal
-#| fig-height: 6
-#| fig-width: 6
+#| fig-height: 5
+#| fig-width: 5
 
 fig_cal
 ```
@@ -386,10 +461,8 @@ And to be clear, we believe all three of these models to have clinically impleme
 ## Beyond Prediction: Personalized Recommendations 
 
 ::: columns
-
 ::: {.column width="50%"}
 ```{r}
-#| label: figs_tr2
 #| fig-height: 3
 #| fig-width: 5
 
@@ -399,35 +472,21 @@ fig_shap_ex1
 :::
 
 ::: {.column width="50%"}
-
+<!--Blank
 :::
 :::
 
 ::: columns
-
 ::: {.column width="50%"}
-```{r}
-#| label: figs_bl2
-#| fig-height: 3
-#| fig-width: 5
-
-fig_shap_ex1
-```
+<!-- Blank-->
 :::
 
 ::: {.column width="50%"}
-```{r}
-#| label: figs_br2
-#| fig-height: 3
-#| fig-width: 5
-
-fig_shap_ex1
-```
+<!-- Blank-->
 :::
 :::
 
 ::: {.notes}
-
 We can get more than just the days when lapses are probable from these models.
 
 We can also begin to use tools from the emerging field of interpretable AI to understand WHY they may occur
@@ -441,13 +500,110 @@ We can also begin to use tools from the emerging field of interpretable AI to un
 
 -----------------------------------------------------------------------------
 
-## Algorithmic Fairness
+## Beyond Prediction: Personalized Recommendations 
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| fig-height: 3
+#| fig-width: 5
+
+fig_shap_ex1
+```
+:::
+
+::: {.column width="50%"}
+<!--blank-->
+:::
+:::
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| fig-height: 3
+#| fig-width: 5
+
+fig_shap_ex2
+```
+:::
+
+::: {.column width="50%"}
+<!--Blank-->
+:::
+:::
+
+::: {.notes}
+
+:::
+
+-----------------------------------------------------------------------------
+
+## Beyond Prediction: Personalized Recommendations 
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| fig-height: 3
+#| fig-width: 5
+
+fig_shap_ex1
+```
+:::
+
+::: {.column width="50%"}
+<!--Blank-->
+:::
+:::
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| fig-height: 3
+#| fig-width: 5
+
+fig_shap_ex2
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| fig-height: 3
+#| fig-width: 5
+
+fig_shap_ex3
+```
+:::
+:::
+
+::: {.notes}
+
+:::
+
+-----------------------------------------------------------------------------
+
+## Next Steps: Algorithmic Fairness
 
 ::: {.columns}
-:::: {.column width="35%"}
+:::: {.column width="50%"}
+```{r}
+#| label: figs_ema_demographics
+#| fig-height: 5
+#| fig-width: 5 
+
+source(here::here("figs/risk/figs_ema_demographics.R"))
+fig_race
+```
 ::::
 
-:::: {.column width="65%"}
+:::: {.column width="50%"}
+```{r}
+#| label: figs_fairema_ci
+#| fig-height: 5
+#| fig-width: 5
+
+source(here::here("figs/risk/figs_fairema_ci.R"))
+fig_race_only
+```
 ::::
 :::
 
@@ -459,32 +615,6 @@ But, not surprisingly given what I told you earlier about the characteristics of
 When we evaluate model performance, it is critical that we look at performance in protected groups.  And too often, these analyses are not done or reported.  
 
 Its only very recently that we have begin to take this seriously and we must.  If we hope to use our system to address existing dispartities in SUD outcomes then our models must perform well with all groups, regardless of their privilege or the use of these models may exacerbate rather than reduce existing mental healthcare disparities.
-:::
-
------------------------------------------------------------------------------
-
-## Algorithmic Fairness
-
-::: {.columns}
-:::: {.column width="35%"}
-- Substantially poorer performance if not white/non-hispanic
-::::
-
-:::: {.column width="65%"}
-```{r}
-#| label: figs_fairema_ci
-#| fig-height: 6
-#| fig-width: 8
-
-source(here::here("figs/risk/figs_fairema_ci.R"))
-cowplot::plot_grid(fig_race, NULL, NULL, NULL)
-```
-
-::::
-:::
-
-::: {.notes}
-[PAUSE]
 
 And our models have some serious but unfortunately not unexpected problems.
 
@@ -494,59 +624,19 @@ From these analyses, it is clear that our models perform substantially worse whe
 :::
 
 -----------------------------------------------------------------------------
-
-## Algorithmic Fairness
-
-::: {.columns}
-:::: {.column width="35%"}
-- [Substantially poorer performance if not white/non-hispanic]{style="color: gray;"}
-
-\
-
-- Meaningfully poorer performance for other less priviledged groups
-
-\
-
-- Not just due to under-representation in training data
-::::
-
-:::: {.column width="65%"}
-```{r}
-#| label: figs_fairema_ci-2
-#| fig-height: 6
-#| fig-width: 8
-
-source(here::here("figs/risk/figs_fairema_ci.R"))
-cowplot::plot_grid(fig_race, fig_income, fig_sex, fig_age)
-```
-
-::::
-:::
-
-::: {.notes}
-UPDATE TO ADD SOLUTIONS?
-
-
-
-However, there are also some, though smaller, performance issues for other less privileged groups, even when we had reasonable diversity regarding those characteristics in the sample.  And this highlights other sources of potential bias. 
-
-For example, when selecting which EMA questions to ask participants, we based this on domain expertise from decades of research on the risk factors for lapses.  However, that research was done with predominately white, predominately male participants who often had other privileges that allowed for them to participate in research.  Given this, it may not be surprising that when we use this literature to select EMA items to measure, we may fail to include items that might tap lapse risk for people who are not white men.
-
-I'll come back to this later when talking about our NIDA project and next steps and I hope we can discuss this too during the question period.
-:::
-
------------------------------------------------------------------------------
  
 ## NIDA Project: A Larger, More Diverse Sample 
 
-- Recruiting ~ 300 patients in recovery from Opioid Use Disorder 
-- National sample (size; diversity: demographics, location)
+- Recruiting ~ 400 patients in recovery from Opioid Use Disorder 
+- [National sample (size; diversity: demographics, location)]{style="color: blue;"}
 - More variation in stage of recovery (1 – 6 months at start)
-- 12 months of monitoring
-- Closer to real implementation methods
+- Sensing for 12 months
 
+\
 
-![](https://github.com/jjcurtin/slide_decks/blob/main/images/risk2_pi_wide.png?raw=true){.absolute bottom=0}
+Data collection complete in December 2024
+
+![](https://github.com/jjcurtin/slide_decks/blob/main/images/opt_pi_wide.png?raw=true){.absolute bottom=0}
 
 ::: {.notes}
 With respect to the diversity of the training data, we are now collecting data for a NIDA funded project where we are specifically recruiting for racial, ethnic, and geographic diversity across the entire United States.
@@ -556,7 +646,7 @@ We are also recruiting for people at different stages in their recovery and foll
 
 -----------------------------------------------------------------------------
 
-## Sensing Geolocation and Communcations
+## Next Steps: Sensing Geolocation and Communcations
 
 - Increase performance overall and in subgroups (more fair?)
 - Lower sensing burden
@@ -626,61 +716,23 @@ we gather this contextual information quickly by asking a few key questions abou
 
 -----------------------------------------------------------------------------
 
-## Optimize System Support Messages
+## Next Steps: Optimize System Feedback to Patients 
 
-- How to increase engagement, trust, utility, and benefits?
-- Daily support messages from Next Day model based on EMA and and geolocation features
+- Sensing EMA and geolocation for six months
+- Model updated each night (4 am) for next day
+  - Lapse probability prediction
+  - Recent trend in lapse probability
+  - Important risk features
+  - Risk relevant support recommendation
+  
+- Participants receive daily messages varying combinations of these components
 
-\
+- Measure trust, utility, engagement, and clinical outcomes
 
-- Factorially manipulate (between subjects) four components of support message 
-  - Lapse probability for that day
-  - Recent trends in lapse probability 
-  - Locally important features for that day
-  - A risk relevant recommendation
-
-\
-
-- Measure engagement, trust, utility, and clinical outcomes
+Grant funded in September 2024
 
 ![](https://github.com/jjcurtin/slide_decks/blob/main/images/opt_pi_wide.png?raw=true){.absolute bottom=0}
 
 ::: {.notes}
 
-FREE TALK
-
 :::
------------------------------------------------------------------------------
-
-## Participant Characteristics
-
-
-::: {.notes}
-Let me begin by giving you a sense of the characteristics of the sample we recruited and will use to train the models for our system.
-
-To start, this is a sample of individuals with a moderate to severe presentation of alcohol use disorder based on their symptom counts.  They were all people who were experiencing very substantial problems in their lives due to their alcohol use.
-:::
-
------------------------------------------------------------------------------
-
-## Participant Characteristics
-
-```{r}
-#| label: figs_ema_demographics
-#| fig-height: 6
-#| fig-width: 10
-
-source(here::here("figs/risk/figs_ema_demographics.R"))
-cowplot::plot_grid(fig_age, fig_sex, fig_income, fig_ms, fig_educ, fig_race, nrow = 2, ncol = 3)
-```
-
-::: {.notes}
-
-We had reasonable diversity across many participant characteristics including age, sex at birth, martial status, education, and income
-
-However, given the methods we used for recruiting, we have very little racial and ethnic diversity in the sample.  The sample is predominately white and non-Hispanic.
-
-I'll return to this later both when we evaluate issues of algorithmic fairness and when I talk about another, larger NIDA funded project where we are correcting this issue of racial and ethnic representation in our models.
-:::
-
------------------------------------------------------------------------------

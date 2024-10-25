@@ -32,11 +32,45 @@ suppressWarnings(
     mutate(group = fct(group, levels = features)) |>
     ggplot() +
       geom_bar(aes(x = group, y = shap), stat = "identity", fill  = "green") +
-      ylab("|SHAP value|") +
-      xlab("") +
+      labs(x = "", y = "|SHAP value|",
+           subtitle = "P1; Day 30") +
       coord_flip() +
+      theme(plot.subtitle = element_text(color = "blue", face =  "bold")) +
       theme(axis.text.y = element_text(size = 14, face  = "bold")) +
       theme(axis.text.x = element_text(size = 14, face  = "bold")) +
       theme(axis.title.x = element_text(size = 14, face  = "bold")) +
       theme(axis.text.y = element_text(colour = c(rep("black", 7), "red", rep("black", 2))))
+)
+
+suppressWarnings(
+  fig_shap_ex2 <- shaps_examples |>
+    filter(example == 2) |> 
+    mutate(group = fct(group, levels = features)) |>
+    ggplot() +
+      geom_bar(aes(x = group, y = shap), stat = "identity", fill  = "green") +
+      labs(x = "", y = "|SHAP value|",
+           subtitle = "P2; Day 30") +
+      coord_flip() +
+      theme(plot.subtitle = element_text(color = "blue", face =  "bold")) +
+      theme(axis.text.y = element_text(size = 14, face  = "bold")) +
+      theme(axis.text.x = element_text(size = 14, face  = "bold")) +
+      theme(axis.title.x = element_text(size = 14, face  = "bold")) +
+      theme(axis.text.y = element_text(colour = c(rep("black", 9), "red")))
+)
+
+suppressWarnings(
+  fig_shap_ex3 <- shaps_examples |>
+    filter(example == 3) |> 
+    mutate(group = fct(group, levels = features)) |>
+    ggplot() +
+      geom_bar(aes(x = group, y = shap), stat = "identity", fill  = "green") +
+      labs(x = "", y = "|SHAP value|",
+           subtitle = "P2; Day 70") +
+      coord_flip() +
+      theme(plot.subtitle = element_text(color = "blue", face =  "bold")) +
+      theme(axis.text.y = element_text(size = 14, face  = "bold")) +
+      theme(axis.text.x = element_text(size = 14, face  = "bold")) +
+      theme(axis.title.x = element_text(size = 14, face  = "bold")) +
+      theme(axis.text.y = element_text(colour = c(rep("black", 2), "red", rep("black", 3),
+                                                  "red", rep("black", 2))))
 )

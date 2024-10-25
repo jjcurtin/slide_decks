@@ -18,11 +18,6 @@ auroc_ci <- read_csv(here::here(path_data, "ema_auroc_ci.csv"),
                      show_col_types = FALSE) |>  
   mutate(model = factor(model, levels = c("Week", "Day", "Hour")))
 
-source(here::here(path_mak, "mak_ema_accuracy_ci.R"))  # create data if needed
-balacc_ci <- read_csv(here::here(path_data, "ema_acc_ci.csv"),
-                     show_col_types = FALSE) |>  
-  mutate(model = factor(model, levels = c("Week", "Day", "Hour")))
-
 # Generate ROC curve data 
 roc_week <- preds_week |> 
   yardstick::roc_curve(prob_beta, truth = label) |> 
@@ -176,12 +171,14 @@ fig_cal <- preds_day |>
   mutate(bins = as.numeric(bins),
          midpoints = bin_width/2 + bin_width * (bins - 1))  |> 
   ggplot(data = _, aes(x = midpoints, y = mean_lapse)) +
-    geom_abline(slope = 1, intercept = 0, linetype = "dotted") +
-    geom_line() +
-    geom_point() +
+    geom_abline(slope = 1, intercept = 0, linetype = "dashed",
+                color = "gray") +
+    geom_line(color = "green") +
+    geom_point(color = "green") +
     labs(x = "Predicted Lapse Probability (bin mid-point)",
-         y = "Observed Lapse Probability",
-         title = "Next Day model") +
+         y = "Observed Lapse Probability") +
+    annotate("text", label = "Next day model", x = 0.2, y = 1,
+             color = "green", size = 6) +
     scale_x_continuous(breaks = seq(0, 1, bin_width),
                        limits = c(0, 1)) +
     scale_y_continuous(breaks = seq(0, 1, bin_width),
@@ -223,14 +220,18 @@ fig_roc_all <- roc_all |>
 #            show.legend = FALSE, color = "blue")
 
 # auROC CIs
-fig_auroc_ci <- auroc_ci |>
+fig_auroc_ci_3 <- auroc_ci |>
   ggplot(aes(x = model)) +
-  geom_point(aes(y = median), size = 2) +
+  geom_point(aes(y = median), 
+             size = 2, color = c("red", "green", "blue")) +
   geom_errorbar(aes(ymin = lower, ymax = upper),
-    width = .2,
-    position = position_dodge(.9)) +
-  geom_hline(yintercept = 0.5, linetype = "dashed", color = "red") +
-  # coord_flip() +
+                color = c("red", "green", "blue"),
+                width = .2,
+                position = position_dodge(.9)) +
+  geom_hline(yintercept = 0.5, linetype = "dashed", color = "gray") +
+  geom_hline(yintercept = 1.0, linetype = "dashed", color = "gray") +
+  annotate("text", label = "random", x = 0.75, y = .5, size = 6, color = "gray") +
+  annotate("text", label = "perfect", x = 0.75, y = 1, size = 6, color = "gray") +
   ylab("auROC") +
   xlab("Prediction Window") +
   theme(legend.position = "none") +
@@ -242,26 +243,59 @@ fig_auroc_ci <- auroc_ci |>
         axis.title.x = element_text(size = 16),
         axis.title.y = element_text(size = 16))
 
-# Balanced accuracy fig
-fig_balacc_ci <- balacc_ci |>
+# auROC CIs
+fig_auroc_ci_2 <- auroc_ci |>
+  mutate(median =  if_else(model == "Hour", NA, median),
+         lower =  if_else(model == "Hour", NA, lower),
+         upper =  if_else(model == "Hour", NA, upper)) |>
   ggplot(aes(x = model)) +
-    geom_point(aes(y = bal_acc), size = 2) +
-    geom_errorbar(aes(ymin = lower, ymax = upper),
-      width = .2,
-      position = position_dodge(.9)) +
-    geom_hline(yintercept = 0.5, linetype = "dashed", color = "red") +
-    # coord_flip() +
-    ylab("Balanced Accuracy") +
-    xlab("Prediction Window") +
-    theme(legend.position = "none") +
-    scale_y_continuous(
-      breaks = seq(0.4, 1, 0.10),
-      limits = c(0.4, 1)) +
-    theme(axis.text.x = element_text(size = 14),
-          axis.text.y = element_text(size = 12),
-          axis.title.x = element_text(size = 16),
-          axis.title.y = element_text(size = 16))
-  
+  geom_point(aes(y = median), 
+             size = 2, color = c("red", "green", "blue")) +
+  geom_errorbar(aes(ymin = lower, ymax = upper),
+                color = c("red", "green", "blue"),
+                width = .2,
+                position = position_dodge(.9)) +
+  geom_hline(yintercept = 0.5, linetype = "dashed", color = "gray") +
+  geom_hline(yintercept = 1.0, linetype = "dashed", color = "gray") +
+  annotate("text", label = "random", x = 0.75, y = .5, size = 6, color = "gray") +
+  annotate("text", label = "perfect", x = 0.75, y = 1, size = 6, color = "gray") +
+  ylab("auROC") +
+  xlab("Prediction Window") +
+  theme(legend.position = "none") +
+  scale_y_continuous(
+    breaks = seq(0.4, 1, 0.10),
+    limits = c(0.4, 1)) +
+  theme(axis.text.x = element_text(size = 14),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_text(size = 16),
+        axis.title.y = element_text(size = 16))
+
+fig_auroc_ci_1 <- auroc_ci |>
+  mutate(median =  if_else(model == "Week", median, NA),
+         lower =  if_else(model == "Week", lower, NA),
+         upper =  if_else(model == "Week", upper, NA)) |>
+  ggplot(aes(x = model)) +
+  geom_point(aes(y = median), 
+             size = 2, color = c("red", "green", "blue")) +
+  geom_errorbar(aes(ymin = lower, ymax = upper),
+                color = c("red", "green", "blue"),
+                width = .2,
+                position = position_dodge(.9)) +
+  geom_hline(yintercept = 0.5, linetype = "dashed", color = "gray") +
+  geom_hline(yintercept = 1.0, linetype = "dashed", color = "gray") +
+  annotate("text", label = "random", x = 0.75, y = .5, size = 6, color = "gray") +
+  annotate("text", label = "perfect", x = 0.75, y = 1, size = 6, color = "gray") +
+  ylab("auROC") +
+  xlab("Prediction Window") +
+  theme(legend.position = "none") +
+  scale_y_continuous(
+    breaks = seq(0.4, 1, 0.10),
+    limits = c(0.4, 1)) +
+  theme(axis.text.x = element_text(size = 14),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_text(size = 16),
+        axis.title.y = element_text(size = 16))
+
 # Confusion matrix 
 j_thres_roc <- roc_day |> 
   mutate(j = sensitivity + specificity - 1) |> 
