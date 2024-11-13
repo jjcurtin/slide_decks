@@ -1,0 +1,4 @@
+- source: etg.qmd
+  quarto-pub:
+    - id: c626aca7-c025-46b2-932c-ba9728fcc4e3
+      url: 'https://jjcurtin.quarto.pub/smart-recovery-etg'
