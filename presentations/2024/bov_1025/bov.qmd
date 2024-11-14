@@ -6,23 +6,15 @@ date: October 25, 2024
 format: 
   revealjs:
     scrollable: false 
-    css: bov.css
+    css: presentation.css
     slide-number: false 
     multiplex: false 
+    auto-stretch: false
 title-slide-attributes:
-  data-background-image: https://github.com/jjcurtin/lectures/blob/main/images/smartphone_know_you.png?raw=true
+  data-background-image: https://github.com/jjcurtin/lectures/blob/main/images/smartphone_know_you.png?raw=true 
   data-background-size: 45%
   data-background-repeat: no
   data-background-position: left 10% bottom 10%
-include-after: |
-  <script type="text/javascript">
-    Reveal.on('ready', event => {
-      if (event.indexh === 0) {
-        document.querySelector("div.has-logo > img.slide-logo").style.display = "block";
-        document.querySelector("div.has-logo > img.slide-logo").style.display = "block";
-        document.querySelector("div.has-logo > img.slide-logo").style.display = "none";
-        Reveal.configure({ slideNumber: null });
-        Reveal.configure({ slideNumber: 'c' });
 editor_options: 
   chunk_output_type: console
 ---
@@ -52,6 +44,7 @@ And it was those conversations that really got me thinking about how I could re-
 ## A Smart Recovery Monitoring and Support System
 
 ![](https://github.com/jjcurtin/slide_decks/blob/main/images/gustafson.jpeg?raw=true){.absolute bottom=0 right=50 width=30%}
+
 
 ::: {.notes}
 It was around that time that Dave Gustafson reached out to me.  Dave directs a center on campus that develops digital therapeutics for substance use disorders.  These are essentially smartphone apps that provide ongoing continuing care for patients during their recovery.  He had just completed a large randomized controlled trial demonstrating that his app meaningfully decreased heavy drinking days and increased abstinence rates over the first year of recovery. 

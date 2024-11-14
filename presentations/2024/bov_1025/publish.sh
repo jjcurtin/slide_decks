@@ -1,9 +1,6 @@
 #!/bin/bash  
 
-cp slides.css bov.css 
-  quarto publish quarto-pub bov.qmd --no-browser
- 
-rm bov.css
+quarto publish quarto-pub bov.qmd --no-browser
 
 # these commented out because needed for multiplex
 # instead added to gitignore
