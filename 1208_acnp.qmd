@@ -2,7 +2,7 @@
 title: 'A "Smart" Recovery Monitoring and Support System for SUD Continuing Care'
 author: "John J. Curtin, Ph.D."
 institute: "University of Wisconsin-Madison"
-date: October 25, 2024
+date: December 08, 2024
 format: pptx
 title-slide-attributes:
   data-background-image: https://github.com/jjcurtin/lectures/blob/main/images/smartphone_know_you.png?raw=true 
@@ -16,6 +16,18 @@ editor_options:
 ::: {.notes}
 About a decade ago I was approaching the middle of my career.  I had developed a successful basic clinical science research program as a psychophysiologist running experiments to understand the effects of drugs and drug withdrawal on stress.  The work was intellectually stimulating, we were publishing it in good outlets, and we were getting grants, but my heart was increasingly not in it.  
 :::
+
+-----------------------------------------------------------------------------
+
+```{r}
+#| label: figs_tx
+#| fig-height: 6
+#| fig-width: 6
+
+source(here::here("figs/gen/fig_tx.R"))
+fig_tx
+```
+
 
 -----------------------------------------------------------------------------
 
@@ -93,7 +105,7 @@ And, critically, the optimal supports for any specific individual can change mon
 
 ## A Smart Recovery Monitoring and Support System
 
-- [Precision mental health requires us to provide the right treatments and supports to the <br>right people at the right time, every time]{style="color:gray;"}
+- [Precision mental health requires us to provide the right interventions and supports to the <br>right people at the right time, every time]{style="color:gray;"}
 
 \
 
@@ -125,8 +137,8 @@ Personal sensing collects information from smartphones to identify a person's th
 
 Sensing allows for "real-world" measurement that 
 
-- can be sustained for long periods
-- has very high temporal granularity 
+- Can be sustained for long periods
+- Has very high temporal granularity 
 
 ::: {.notes}
 First of all, lets talk briefly about the personal sensing inputs to our system.
@@ -574,10 +586,20 @@ This is obviously unacceptable and we are working now to correct this.
 :::
 
 -----------------------------------------------------------------------------
- 
-## NIDA Project: A Larger, More Diverse Sample 
 
-- Recruiting ~ 400 patients in recovery from Opioid Use Disorder 
+```{r}
+#| fig-height: 6
+#| fig-width: 8
+
+source(here::here("figs/risk/figs_fairema_ci.R"))
+cowplot::plot_grid(fig_race, fig_income, fig_sex, fig_age)
+```
+
+-----------------------------------------------------------------------------
+ 
+## Next Steps: Algorithmic Fairness
+
+- NIDA project is recruiting ~ 400 patients in recovery from Opioid Use Disorder 
 - [National sample (size; diversity: demographics, location)]{style="color: blue;"}
 - More variation in stage of recovery (1 – 6 months at start)
 - Sensing for 12 months

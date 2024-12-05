@@ -50,6 +50,7 @@ fig_race <- d |>
   geom_bar(stat = "identity", width = 1) +
   coord_polar("y", start = 0, direction = -1) +
   #scale_fill_manual(values = c("red", "green", "blue", "yellow")) +
+  scale_fill_manual(values = c("#C5050C", "gold")) +
   geom_text(aes(label = group), position = position_stack(vjust = 0.7),
   size = 6) + 
   theme_void() +

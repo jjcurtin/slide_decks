@@ -24,12 +24,12 @@ plot_ci <- function(d, title){
       width = .2, position = position_dodge(.9)) +
     ylab("auROC") +
     xlab("Group") +
-    labs(subtitle = title) +
+    labs(title = title) +
     xlab("") +
     theme(legend.position = "none") +
     scale_y_continuous(breaks = seq(0.4, 1, 0.10), limits = c(0.4, 1)) +
-    scale_color_manual(values = c("black", "orange")) +
-    theme(subtitle = element_text(size = 16, color = "orange"),
+    scale_color_manual(values = c("orange", "#C5050C")) +
+    theme(title = element_text(size = 16, color = "#C5050C"),
           axis.text.x = element_text(size = 14, color = "black"),
           axis.text.y = element_text(size = 12, color = "black"),
           axis.title.x = element_text(size = 16, color = "black"),
@@ -74,7 +74,7 @@ fig_race_only  <- ci |>
     labs(x = "Race/Ethnicity", y = "auROC") +
     theme(legend.position = "none") +
     scale_y_continuous(breaks = seq(0.4, 1, 0.10), limits = c(0.4, 1)) +
-    scale_color_manual(values = c("black", "orange")) +
+    scale_color_manual(values = c("orange", "#C5050C")) +
     theme(axis.text.x = element_text(size = 14, color = "black"),
           axis.text.y = element_text(size = 12, color = "black"),
           axis.title.x = element_text(size = 16, color = "black"),
