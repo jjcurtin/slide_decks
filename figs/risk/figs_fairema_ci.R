@@ -19,9 +19,11 @@ ci <- read_csv(here::here(path_data, "fairema_ci_1day.csv"),
 plot_ci <- function(d, title){
   d |> 
     ggplot(aes(x = model, color = model)) +
-    geom_point(aes(y = median), size = 3) +
+    geom_point(aes(y = median), size = 4) +
     geom_errorbar(aes(ymin = lower, ymax = upper),
-      width = .2, position = position_dodge(.9)) +
+      width = .2, 
+      position = position_dodge(.9), 
+      linewidth = 2) +
     ylab("auROC") +
     xlab("Group") +
     labs(title = title) +
@@ -30,7 +32,7 @@ plot_ci <- function(d, title){
     scale_y_continuous(breaks = seq(0.4, 1, 0.10), limits = c(0.4, 1)) +
     scale_color_manual(values = c("orange", "#C5050C")) +
     theme(title = element_text(size = 16, color = "#C5050C"),
-          axis.text.x = element_text(size = 14, color = "black"),
+          axis.text.x = element_text(size = 14, color = "black", face = "bold"),
           axis.text.y = element_text(size = 12, color = "black"),
           axis.title.x = element_text(size = 16, color = "black"),
           axis.title.y = element_text(size = 16, color = "black"))
@@ -68,14 +70,16 @@ fig_race_only  <- ci |>
   mutate(model = fct(model, levels = c("white", "non_white")),
          model = fct_recode(model, "White/Non-hispanic" = "white", "Other" = "non_white")) |> 
   ggplot(aes(x = model, color = model)) +
-    geom_point(aes(y = median), size = 3) +
+    geom_point(aes(y = median), size = 4) +
     geom_errorbar(aes(ymin = lower, ymax = upper),
-      width = .2, position = position_dodge(.9)) +
+      width = .2, 
+      position = position_dodge(.9),
+      linewidth = 2) +
     labs(x = "Race/Ethnicity", y = "auROC") +
     theme(legend.position = "none") +
     scale_y_continuous(breaks = seq(0.4, 1, 0.10), limits = c(0.4, 1)) +
     scale_color_manual(values = c("orange", "#C5050C")) +
-    theme(axis.text.x = element_text(size = 14, color = "black"),
+    theme(axis.text.x = element_text(size = 14, color = "black", face = "bold"),
           axis.text.y = element_text(size = 12, color = "black"),
           axis.title.x = element_text(size = 16, color = "black"),
           axis.title.y = element_text(size = 16, color = "black")) +

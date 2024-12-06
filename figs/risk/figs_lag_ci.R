@@ -21,11 +21,15 @@ ci <- read_csv(here::here(path_data, "lag_ci.csv"),
 
 fig_lag_ci <- ci |>
   ggplot(aes(x = model)) +
-  geom_point(aes(y = pp_median), size = 2) +
+  geom_point(aes(y = pp_median), size = 3) +
   geom_errorbar(aes(ymin = pp_lower, ymax = pp_upper),
     width = .2,
-    position = position_dodge(.9)) +
-  geom_hline(yintercept = 0.5, linetype = "dashed", color = "red") +
+    position = position_dodge(.9),
+    linewitdh = 3) +
+    geom_hline(yintercept = 0.5, linetype = "dashed", color = "gray") +
+    geom_hline(yintercept = 1.0, linetype = "dashed", color = "gray") +
+    annotate("text", label = "random", x = 0.85, y = .5, size = 6, color = "gray") +
+    annotate("text", label = "perfect", x = 0.85, y = 1, size = 6, color = "gray") +
   # coord_flip() +
   ylab("auROC") +
   xlab("Prediction Lag") +
@@ -34,7 +38,7 @@ fig_lag_ci <- ci |>
     breaks = seq(0.4, 1, 0.10),
     limits = c(0.4, 1)
   ) +
-  theme(axis.text.x = element_text(size = 14),
+  theme(axis.text.x = element_text(size = 16, face = "bold"),
         axis.text.y = element_text(size = 12),
         axis.title.x = element_text(size = 16),
         axis.title.y = element_text(size = 16))
