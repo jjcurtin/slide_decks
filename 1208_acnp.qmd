@@ -518,6 +518,59 @@ In this way, we can provide personalized recommendations to patients that are ta
 
 -----------------------------------------------------------------------------
 
+## Beyond Prediction: Personalized Recommendations 
+
+- Sensing EMA and geolocation for six months
+- Model updated each night (4 am) for next day
+  - Lapse probability prediction
+  - Recent trend in lapse probability
+  - Important risk features
+  - Risk relevant support recommendation
+  
+- Participants receive daily messages varying combinations of these components
+
+- Measure trust, utility, engagement, and clinical outcomes
+
+Grant funded in September 2024
+
+![](https://github.com/jjcurtin/slide_decks/blob/main/images/opt_pi_wide.png?raw=true){.absolute bottom=0}
+
+::: {.notes}
+And that brings us to perhaps the most important next step.
+
+Just because our prediction models perform well, doesn't guarantee that they will provide meaningful clinical benefits.
+
+We need to be able to provide feedback from these models to patients such that they trust the system, find it useful, and engage with it over time in a way that improves their recovery.
+
+And we were just awarded another grant from the NIAAA to do exactly this.  
+
+In this project, we will be using a model with inputs from both EMA and geolocation.  We will use the model to make 
+
+- daily lapse probability predictions, 
+- identify current personalized lapse risks, 
+- and map those risks to behavioral and support recommendations that are specific to each person each day.   
+
+We can then manipulate what information we include in daily messages from the system to participants to increase their trust and engagement with the system as well as formally evaluating its clinical benefits.
+
+Obviously, we are very excited to get started on this project because it will bring us one step closer to providing meaningful support to individuals in recovery.   
+
+Thanks for your time, and I'd be happy to answer any questions you might have now or later at the end of this session.
+:::
+
+-----------------------------------------------------------------------------
+
+## Advanced Warning: Time Lagged Predictions
+
+```{r}
+#| fig-height: 6
+#| fig-width: 6
+
+source("figs/risk/figs_lag_ci.R")
+fig_lag_ci
+```
+
+-----------------------------------------------------------------------------
+
 ## Next Steps: Algorithmic Fairness
 
 ::: {.notes}
@@ -663,43 +716,3 @@ Both geolocation and communications data are powerful sensed signals that we hav
 And we plan to implement a model with both EMA and geolocation for a new project that we are just launching now.
 :::
 
------------------------------------------------------------------------------
-
-## Next Steps: Optimize System Feedback to Patients 
-
-- Sensing EMA and geolocation for six months
-- Model updated each night (4 am) for next day
-  - Lapse probability prediction
-  - Recent trend in lapse probability
-  - Important risk features
-  - Risk relevant support recommendation
-  
-- Participants receive daily messages varying combinations of these components
-
-- Measure trust, utility, engagement, and clinical outcomes
-
-Grant funded in September 2024
-
-![](https://github.com/jjcurtin/slide_decks/blob/main/images/opt_pi_wide.png?raw=true){.absolute bottom=0}
-
-::: {.notes}
-And that brings us to perhaps the most important next step.
-
-Just because our prediction models perform well, doesn't guarantee that they will provide meaningful clinical benefits.
-
-We need to be able to provide feedback from these models to patients such that they trust the system, find it useful, and engage with it over time in a way that improves their recovery.
-
-And we were just awarded another grant from the NIAAA to do exactly this.  
-
-In this project, we will be using a model with inputs from both EMA and geolocation.  We will use the model to make 
-
-- daily lapse probability predictions, 
-- identify current personalized lapse risks, 
-- and map those risks to behavioral and support recommendations that are specific to each person each day.   
-
-We can then manipulate what information we include in daily messages from the system to participants to increase their trust and engagement with the system as well as formally evaluating its clinical benefits.
-
-Obviously, we are very excited to get started on this project because it will bring us one step closer to providing meaningful support to individuals in recovery.   
-
-Thanks for your time, and I'd be happy to answer any questions you might have now or later at the end of this session.
-:::
