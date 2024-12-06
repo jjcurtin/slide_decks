@@ -1,0 +1,55 @@
+variable_grp,mean_value,window
+lapse hour (other),0,week
+lapse day (other),3.328919093021393e-6,week
+race (demographic),3.467195379755868e-4,week
+education (demographic),0.0011250363105823962,week
+marital (demographic),0.0017516735444858165,week
+age (demographic),0.0031478556308098204,week
+sex (demographic),0.004393102605689741,week
+missing surveys (other),0.007420183818323138,week
+arousal (EMA item),0.010062833640936545,week
+valence (EMA item),0.015896108866748075,week
+past pleasant event (EMA item),0.019465881480504103,week
+future stressful event (EMA item),0.020822798553655937,week
+future risky situation (EMA item),0.027226608461934993,week
+past stressful event (EMA item),0.03032639125218978,week
+past risky situation (EMA item),0.03810391073357947,week
+craving (EMA item),0.1268297813793738,week
+future efficacy (EMA item),0.32367346083673165,week
+past use (EMA item),0.6306823013173783,week
+lapse hour (other),0,day
+race (demographic),4.6516047062754925e-5,day
+education (demographic),1.368498926213597e-4,day
+marital (demographic),0.0015565098976968682,day
+sex (demographic),0.003385769883783694,day
+missing surveys (other),0.004545022072276065,day
+age (demographic),0.0057348814095326255,day
+arousal (EMA item),0.019101730025436067,day
+valence (EMA item),0.019833441852305535,day
+future stressful event (EMA item),0.025258557296595943,day
+lapse day (other),0.032614872913673584,day
+past risky situation (EMA item),0.03437495465745815,day
+past pleasant event (EMA item),0.039166716432016774,day
+future risky situation (EMA item),0.05687718877480487,day
+past stressful event (EMA item),0.08956342891041197,day
+craving (EMA item),0.20157730890165593,day
+future efficacy (EMA item),0.5500928541993697,day
+past use (EMA item),0.8398212975230607,day
+race (demographic),9.089993533182434e-6,hour
+education (demographic),1.5089661237677272e-4,hour
+marital (demographic),2.9624500888252595e-4,hour
+sex (demographic),0.005096947151161311,hour
+age (demographic),0.006571229639403459,hour
+missing surveys (other),0.02903619296219726,hour
+future risky situation (EMA item),0.03836785484298974,hour
+future stressful event (EMA item),0.04136632280580121,hour
+past pleasant event (EMA item),0.04472108895427882,hour
+valence (EMA item),0.04547910260050247,hour
+lapse day (other),0.06775668184599787,hour
+past risky situation (EMA item),0.08785406015046122,hour
+past stressful event (EMA item),0.1110640603767064,hour
+arousal (EMA item),0.13771437356900323,hour
+craving (EMA item),0.37965690931643103,hour
+lapse hour (other),0.591858730909126,hour
+future efficacy (EMA item),0.6530724451898509,hour
+past use (EMA item),0.9405979468421364,hour

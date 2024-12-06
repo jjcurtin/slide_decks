@@ -1,0 +1,152 @@
+age,sex,white,educ,income,ms,aud_total
+57,Male,White/Non-hispanic,4 year college degree,12,Never married,10
+35,Female,White/Non-hispanic,Some college,36.92,Never married,6
+22,Female,White/Non-hispanic,<= High school,20.064,Never married,9
+39,Male,White/Non-hispanic,4 year college degree,130,Married,7
+22,Male,White/Non-hispanic,Some college,5,Never married,11
+38,Male,White/Non-hispanic,Advanced degree,70,Married,6
+38,Female,White/Non-hispanic,Advanced degree,57,Married,7
+25,Male,Other,4 year college degree,10,Never married,6
+53,Female,White/Non-hispanic,4 year college degree,37,Never married,9
+26,Female,Other,4 year college degree,32,Never married,8
+54,Male,White/Non-hispanic,Some college,7,Never married,11
+29,Female,White/Non-hispanic,4 year college degree,15,Never married,7
+21,Male,White/Non-hispanic,<= High school,5,Never married,8
+57,Male,White/Non-hispanic,4 year college degree,43,Divorced,10
+37,Male,White/Non-hispanic,Some college,49.5,Married,9
+29,Male,White/Non-hispanic,4 year college degree,70,Married,9
+44,Female,White/Non-hispanic,Some college,25,Married,9
+42,Female,Other,Advanced degree,26,Divorced,9
+45,Female,White/Non-hispanic,Some college,18,Divorced,7
+27,Male,White/Non-hispanic,Some college,10,Never married,8
+29,Female,White/Non-hispanic,Some college,30,Never married,11
+37,Female,White/Non-hispanic,4 year college degree,60,Married,11
+34,Male,White/Non-hispanic,4 year college degree,200,Married,11
+46,Female,White/Non-hispanic,4 year college degree,7,Never married,9
+40,Female,White/Non-hispanic,Advanced degree,65,Married,7
+23,Male,White/Non-hispanic,Some college,15,Never married,7
+23,Male,White/Non-hispanic,4 year college degree,44,Never married,9
+51,Female,White/Non-hispanic,Advanced degree,150,Divorced,8
+31,Female,White/Non-hispanic,4 year college degree,7.2,Never married,10
+43,Male,White/Non-hispanic,Some college,40,Married,5
+53,Male,White/Non-hispanic,4 year college degree,38,Never married,9
+33,Male,White/Non-hispanic,4 year college degree,28,Never married,6
+26,Female,White/Non-hispanic,4 year college degree,27,Never married,9
+26,Male,White/Non-hispanic,4 year college degree,9.6,Never married,8
+35,Male,White/Non-hispanic,4 year college degree,17,Never married,7
+48,Female,White/Non-hispanic,Some college,20,Never married,10
+50,Female,White/Non-hispanic,Some college,15,Widowed,7
+54,Female,White/Non-hispanic,4 year college degree,43,Divorced,11
+56,Female,White/Non-hispanic,4 year college degree,50,Married,5
+33,Male,White/Non-hispanic,Some college,35,Never married,10
+36,Female,White/Non-hispanic,4 year college degree,0,Married,8
+40,Male,White/Non-hispanic,4 year college degree,36,Never married,10
+57,Male,White/Non-hispanic,Some college,0,Divorced,11
+39,Female,White/Non-hispanic,Advanced degree,60,Never married,11
+38,Female,Other,<= High school,15,Divorced,11
+51,Male,Other,<= High school,0.833,Never married,6
+43,Female,Other,<= High school,0,Divorced,11
+35,Male,White/Non-hispanic,Advanced degree,40,Married,11
+66,Male,White/Non-hispanic,Some college,24,Married,8
+38,Male,Other,<= High school,10,Never married,10
+55,Male,White/Non-hispanic,4 year college degree,16,Divorced,11
+41,Female,Other,Some college,0,Divorced,9
+60,Female,White/Non-hispanic,4 year college degree,12,Divorced,10
+47,Male,White/Non-hispanic,4 year college degree,43,Married,6
+57,Male,White/Non-hispanic,Some college,0,Divorced,10
+26,Female,White/Non-hispanic,Some college,0,Never married,8
+46,Male,White/Non-hispanic,Advanced degree,38,Divorced,10
+21,Male,White/Non-hispanic,Some college,0,Never married,6
+27,Female,Other,Some college,13,Never married,9
+24,Female,White/Non-hispanic,4 year college degree,20,Never married,7
+64,Female,White/Non-hispanic,<= High school,40,Divorced,11
+25,Male,White/Non-hispanic,4 year college degree,14,Never married,7
+48,Male,Other,Advanced degree,65,Divorced,11
+51,Male,White/Non-hispanic,Some college,55,Married,11
+52,Female,Other,Some college,20,Divorced,10
+71,Male,White/Non-hispanic,4 year college degree,50,Married,5
+53,Male,White/Non-hispanic,Some college,50,Married,10
+28,Male,White/Non-hispanic,4 year college degree,40,Never married,10
+51,Female,Other,<= High school,2,Divorced,11
+57,Male,White/Non-hispanic,4 year college degree,4,Divorced,8
+31,Male,Other,Advanced degree,48.4,Never married,4
+57,Male,Other,<= High school,0.012,Divorced,10
+62,Female,Other,Some college,104,Married,7
+42,Female,White/Non-hispanic,<= High school,0,Never married,11
+59,Female,White/Non-hispanic,4 year college degree,51,Divorced,9
+35,Male,White/Non-hispanic,4 year college degree,120,Married,8
+38,Male,White/Non-hispanic,Some college,25,Never married,11
+40,Male,White/Non-hispanic,4 year college degree,65,Married,10
+57,Male,White/Non-hispanic,4 year college degree,25,Never married,10
+50,Male,White/Non-hispanic,Advanced degree,20,Divorced,11
+34,Male,White/Non-hispanic,4 year college degree,20,Married,10
+43,Female,White/Non-hispanic,Advanced degree,42,Never married,6
+48,Male,White/Non-hispanic,Some college,20,Never married,9
+44,Male,White/Non-hispanic,Advanced degree,103,Divorced,11
+58,Female,White/Non-hispanic,4 year college degree,60,Divorced,6
+49,Male,White/Non-hispanic,4 year college degree,102,Married,7
+48,Male,White/Non-hispanic,Some college,23,Never married,10
+31,Female,White/Non-hispanic,4 year college degree,46,Never married,9
+34,Female,White/Non-hispanic,Some college,16,Divorced,11
+53,Female,White/Non-hispanic,Some college,14,Divorced,11
+51,Female,White/Non-hispanic,4 year college degree,20,Married,9
+60,Female,White/Non-hispanic,Some college,50,Divorced,8
+28,Male,White/Non-hispanic,Some college,50,Never married,11
+43,Male,White/Non-hispanic,<= High school,15,Divorced,10
+31,Male,White/Non-hispanic,Some college,15,Never married,8
+47,Female,White/Non-hispanic,Some college,0,Never married,11
+36,Female,White/Non-hispanic,4 year college degree,50,Never married,10
+63,Female,White/Non-hispanic,<= High school,30,Widowed,7
+35,Male,White/Non-hispanic,Some college,31,Divorced,4
+38,Female,White/Non-hispanic,Some college,33,Never married,10
+40,Male,White/Non-hispanic,4 year college degree,7,Divorced,10
+41,Female,White/Non-hispanic,Some college,35,Divorced,9
+34,Female,Other,4 year college degree,35,Never married,11
+52,Female,White/Non-hispanic,Advanced degree,11.232,Divorced,9
+33,Male,White/Non-hispanic,Some college,37,Never married,11
+58,Male,Other,<= High school,14,Married,7
+53,Female,White/Non-hispanic,<= High school,0,Divorced,11
+54,Male,White/Non-hispanic,Advanced degree,98,Divorced,7
+51,Male,White/Non-hispanic,4 year college degree,87.5,Divorced,11
+50,Male,Other,4 year college degree,60,Married,8
+31,Male,White/Non-hispanic,4 year college degree,24,Never married,10
+42,Female,White/Non-hispanic,<= High school,32,Married,9
+34,Female,White/Non-hispanic,4 year college degree,40,Divorced,6
+25,Female,Other,Some college,0,Never married,11
+37,Female,White/Non-hispanic,Some college,74,Divorced,11
+36,Female,White/Non-hispanic,Advanced degree,50,Married,9
+42,Female,White/Non-hispanic,Some college,62,Divorced,10
+37,Male,White/Non-hispanic,Some college,18.72,Never married,11
+33,Male,White/Non-hispanic,Advanced degree,40,Married,11
+25,Female,White/Non-hispanic,Advanced degree,30,Married,7
+37,Male,White/Non-hispanic,4 year college degree,40,Divorced,10
+44,Male,White/Non-hispanic,Advanced degree,120,Divorced,6
+35,Male,White/Non-hispanic,Some college,0,Never married,7
+53,Male,White/Non-hispanic,Some college,0,Never married,9
+30,Male,White/Non-hispanic,Some college,20,Never married,11
+27,Female,White/Non-hispanic,4 year college degree,19,Divorced,11
+56,Female,White/Non-hispanic,Some college,18,Divorced,11
+52,Female,White/Non-hispanic,Some college,1,Divorced,11
+48,Female,White/Non-hispanic,Some college,76,Divorced,8
+48,Female,White/Non-hispanic,Some college,12,Divorced,11
+39,Female,White/Non-hispanic,Advanced degree,26,Married,9
+33,Female,White/Non-hispanic,4 year college degree,26,Never married,11
+23,Male,White/Non-hispanic,Some college,9.5,Never married,11
+47,Female,White/Non-hispanic,4 year college degree,39,Married,6
+72,Male,White/Non-hispanic,Some college,1.136,Divorced,5
+30,Female,White/Non-hispanic,Some college,29,Never married,10
+24,Male,White/Non-hispanic,4 year college degree,14,Never married,7
+25,Male,White/Non-hispanic,Advanced degree,82,Never married,9
+29,Male,White/Non-hispanic,4 year college degree,37,Never married,9
+42,Female,White/Non-hispanic,4 year college degree,50,Divorced,10
+37,Female,White/Non-hispanic,Some college,7,Divorced,5
+31,Female,Other,Advanced degree,28,Divorced,9
+26,Female,White/Non-hispanic,4 year college degree,52,Never married,8
+35,Male,White/Non-hispanic,Advanced degree,55,Never married,8
+21,Female,White/Non-hispanic,4 year college degree,5,Never married,9
+27,Male,White/Non-hispanic,4 year college degree,64,Never married,8
+54,Male,White/Non-hispanic,Some college,40,Divorced,6
+34,Female,White/Non-hispanic,4 year college degree,72,Never married,8
+30,Male,White/Non-hispanic,4 year college degree,25,Never married,7
+31,Female,White/Non-hispanic,Some college,10.3,Never married,10
+53,Female,White/Non-hispanic,Some college,0.01,Divorced,11
