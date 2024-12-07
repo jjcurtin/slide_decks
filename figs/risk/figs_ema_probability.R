@@ -66,7 +66,7 @@ plot_ci <- function(d) {
       scale_y_continuous(
         breaks = seq(0.4, 1, 0.10),
         limits = c(0.4, 1)) +
-      theme(axis.text.x = element_text(size = 14, face = "bold"),
+      theme(axis.text.x = element_text(size = 16, face = "bold"),
             axis.text.y = element_text(size = 12),
             axis.title.x = element_text(size = 16),
             axis.title.y = element_text(size = 16))

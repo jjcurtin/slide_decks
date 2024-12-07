@@ -40,7 +40,7 @@ fig_educ <- d |>
   theme(legend.title = element_blank(), legend.position = "none") +
   ggtitle("Education") +
   theme(plot.title = element_text(hjust = 0.5)) +
-  theme(title = element_text(size = 16, face = "bold"))
+  theme(title = element_text(size = 16, face = "bold", color = "#C5050C"))
 
 # Race/ethnicity
 fig_race <- d |>
@@ -57,7 +57,7 @@ fig_race <- d |>
   theme(legend.title = element_blank(), legend.position = "none") +
   ggtitle("Race/Ethnicity") +
   theme(plot.title = element_text(hjust = 0.5)) +
-  theme(title = element_text(size = 16, face = "bold"))
+  theme(title = element_text(size = 16, face = "bold", color = "#C5050C"))
 
 # Sex
 fig_sex <- d |>
@@ -73,7 +73,7 @@ fig_sex <- d |>
   theme(legend.title = element_blank(), legend.position = "none") +
   ggtitle("Sex at Birth") +
   theme(plot.title = element_text(hjust = 0.5)) +
-  theme(title = element_text(size = 16, face = "bold"))
+  theme(title = element_text(size = 16, face = "bold", color = "#C5050C"))
 
 # Marital status
 fig_ms <- d |>
@@ -89,7 +89,7 @@ fig_ms <- d |>
   theme(legend.title = element_blank(), legend.position = "none") +
   ggtitle("Marital Status") +
   theme(plot.title = element_text(hjust = 0.5)) +
-  theme(title = element_text(size = 16, face = "bold"))
+  theme(title = element_text(size = 16, face = "bold", color = "#C5050C"))
 
 
 # Age
@@ -103,7 +103,7 @@ fig_age <- d |>
         axis.text.y = element_text(size = 12),
         axis.title.x = element_text(size = 16),
         axis.title.y = element_text(size = 16)) +
-  theme(title = element_text(size = 16, face = "bold"))
+  theme(title = element_text(size = 16, face = "bold", color = "#C5050C"))
 
 # Income
 fig_income <- d |>
@@ -116,7 +116,7 @@ fig_income <- d |>
         axis.text.y = element_text(size = 12),
         axis.title.x = element_text(size = 16),
         axis.title.y = element_text(size = 16)) +
-  theme(title = element_text(size = 16, face = "bold"))
+  theme(title = element_text(size = 16, face = "bold", color = "#C5050C"))
 
 # AUD Sx
 fig_sx <- d |>
@@ -131,4 +131,4 @@ fig_sx <- d |>
         axis.text.y = element_text(size = 12),
         axis.title.x = element_text(size = 16),
         axis.title.y = element_text(size = 16)) +
-  theme(title = element_text(size = 16, face = "bold"))
+  theme(title = element_text(size = 16, face = "bold", color = "#C5050C"))

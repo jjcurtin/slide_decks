@@ -627,7 +627,7 @@ fig_race
 #| fig-width: 5
 
 source(here::here("figs/risk/figs_fairema_ci.R"))
-fig_race_only
+fig_race
 ```
 ::::
 :::
@@ -645,7 +645,8 @@ This is obviously unacceptable and we are working now to correct this.
 #| fig-width: 8
 
 source(here::here("figs/risk/figs_fairema_ci.R"))
-cowplot::plot_grid(fig_race, fig_income, fig_sex, fig_age)
+cowplot::plot_grid(fig_race, NULL,
+                   fig_income, fig_sex)
 ```
 
 -----------------------------------------------------------------------------
@@ -668,6 +669,17 @@ For example, we have been awarded a grant from NIDA to collect a more racially d
 
 This sample will also include much needed geographic diversity because the factors that predict lapse in urban settings may be different from those that predict lapse in rural settings.
 :::
+
+-----------------------------------------------------------------------------
+
+```{r}
+#| fig-height: 6
+#| fig-width: 8
+
+source(here::here("figs/risk2/figs_fair_ci.R"))
+cowplot::plot_grid(fig_race, NULL,
+                   fig_income, fig_sex)
+```
 
 -----------------------------------------------------------------------------
 

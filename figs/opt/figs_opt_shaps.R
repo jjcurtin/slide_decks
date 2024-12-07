@@ -31,15 +31,15 @@ suppressWarnings(
     filter(example == 1) |> 
     mutate(group = fct(group, levels = features)) |>
     ggplot() +
-      geom_bar(aes(x = group, y = shap), stat = "identity", fill  = "green") +
+      geom_bar(aes(x = group, y = shap), stat = "identity", fill  = "gray") +
       labs(x = "", y = "|SHAP value|",
-           subtitle = "P1; Day 30") +
+           subtitle = "Patient 1; Day 30") +
       coord_flip() +
-      theme(plot.subtitle = element_text(color = "blue", face =  "bold")) +
+      theme(plot.subtitle = element_text(color = "#C5050C", face =  "bold")) +
       theme(axis.text.y = element_text(size = 14, face  = "bold")) +
       theme(axis.text.x = element_text(size = 14, face  = "bold")) +
       theme(axis.title.x = element_text(size = 14, face  = "bold")) +
-      theme(axis.text.y = element_text(colour = c(rep("black", 7), "red", rep("black", 2))))
+      theme(axis.text.y = element_text(colour = c(rep("black", 7), "#C5050C", rep("black", 2))))
 )
 
 suppressWarnings(
@@ -47,15 +47,15 @@ suppressWarnings(
     filter(example == 2) |> 
     mutate(group = fct(group, levels = features)) |>
     ggplot() +
-      geom_bar(aes(x = group, y = shap), stat = "identity", fill  = "green") +
+      geom_bar(aes(x = group, y = shap), stat = "identity", fill  = "gray") +
       labs(x = "", y = "|SHAP value|",
-           subtitle = "P2; Day 30") +
+           subtitle = "Patient 2; Day 30") +
       coord_flip() +
-      theme(plot.subtitle = element_text(color = "blue", face =  "bold")) +
+      theme(plot.subtitle = element_text(color = "#C5050C", face =  "bold")) +
       theme(axis.text.y = element_text(size = 14, face  = "bold")) +
       theme(axis.text.x = element_text(size = 14, face  = "bold")) +
       theme(axis.title.x = element_text(size = 14, face  = "bold")) +
-      theme(axis.text.y = element_text(colour = c(rep("black", 9), "red")))
+      theme(axis.text.y = element_text(colour = c(rep("black", 9), "#C5050C")))
 )
 
 suppressWarnings(
@@ -63,14 +63,14 @@ suppressWarnings(
     filter(example == 3) |> 
     mutate(group = fct(group, levels = features)) |>
     ggplot() +
-      geom_bar(aes(x = group, y = shap), stat = "identity", fill  = "green") +
+      geom_bar(aes(x = group, y = shap), stat = "identity", fill  = "gray") +
       labs(x = "", y = "|SHAP value|",
-           subtitle = "P2; Day 70") +
+           subtitle = "Patient 2; Day 70") +
       coord_flip() +
-      theme(plot.subtitle = element_text(color = "blue", face =  "bold")) +
+      theme(plot.subtitle = element_text(color = "#C5050C", face =  "bold")) +
       theme(axis.text.y = element_text(size = 14, face  = "bold")) +
       theme(axis.text.x = element_text(size = 14, face  = "bold")) +
       theme(axis.title.x = element_text(size = 14, face  = "bold")) +
-      theme(axis.text.y = element_text(colour = c(rep("black", 2), "red", rep("black", 3),
-                                                  "red", rep("black", 2))))
+      theme(axis.text.y = element_text(colour = c(rep("black", 2), "#C5050C", rep("black", 3),
+                                                  "#C5050C", rep("black", 2))))
 )
