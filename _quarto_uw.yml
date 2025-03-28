@@ -1,0 +1,5 @@
+scrollable: false 
+css: presentation.css
+slide-number: false 
+multiplex: false 
+auto-stretch: false
