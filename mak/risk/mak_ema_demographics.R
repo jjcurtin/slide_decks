@@ -1,12 +1,10 @@
-# set up
-library(tidyverse)
-devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true",
-                     sha1 = "a58e57da996d1b70bb9a5b58241325d6fd78890f")
-path_processed <- format_path("studydata/risk/data_processed/ema")
-path_shared <- format_path("studydata/risk/data_processed/shared")
 path_out <- "data/risk"
-
 if (!file.exists(here::here(path_out, "ema_demographics.csv"))) {
+  
+  library(tidyverse)
+  devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true")
+  path_processed <- format_path("studydata/risk/data_processed/ema")
+  path_shared <- format_path("studydata/risk/data_processed/shared")
   
   # open disposition df on server  
   disposition <- read_csv(here::here(path_processed, "disposition.csv"), 

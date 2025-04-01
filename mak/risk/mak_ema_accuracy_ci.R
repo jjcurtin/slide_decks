@@ -1,10 +1,9 @@
-library(tidyverse)
-devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true",
-                     sha1 = "a58e57da996d1b70bb9a5b58241325d6fd78890f")
-path_ema <- format_path(str_c("studydata/risk/models/ema"))
 path_data <- "data/risk"
-
 if(!file.exists(here::here(path_data, "ema_acc_ci.csv"))){
+  
+  library(tidyverse)
+  devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true")
+  path_ema <- format_path(str_c("studydata/risk/models/ema"))
  
   # open preds 
   source(here::here(path_mak, "mak_probability.R"))  # create data if needed

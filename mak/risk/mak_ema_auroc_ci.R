@@ -1,13 +1,11 @@
-library(tidyverse)
-devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true",
-                     sha1 = "a58e57da996d1b70bb9a5b58241325d6fd78890f")
-path_ema <- format_path(str_c("studydata/risk/models/ema"))
-path_data <- "data/risk"
-
 if(!file.exists(here::here(path_data, "ema_auroc_ci.csv"))){
+  library(tidyverse)
+  devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true")
+  path_ema <- format_path(str_c("studydata/risk/models/ema"))
+  path_data <- "data/risk"
   
-q = c(.025, .5, .975)
-ci  <-   read_rds(here::here(path_ema, "posteriors_all_0_v5_nested.rds")) |> 
+  q = c(.025, .5, .975)
+  ci  <-   read_rds(here::here(path_ema, "posteriors_all_0_v5_nested.rds")) |> 
   tidy(seed = 123) |> 
   group_by(model) |> 
   summarize(median = quantile(posterior, probs = q[2]),
