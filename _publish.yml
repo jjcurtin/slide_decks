@@ -1,0 +1,4 @@
+- source: 1208_acnp.qmd
+  quarto-pub:
+    - id: 8fd6d50d-3bfa-498f-b3ce-dcf21ec3d296
+      url: 'https://jjcurtin.quarto.pub/2024_acnp'
