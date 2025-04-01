@@ -4,8 +4,7 @@
 
 library(tidyverse)
 theme_set(theme_classic()) 
-devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true",
-                     sha1 = "a58e57da996d1b70bb9a5b58241325d6fd78890f")
+devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true")
 path_data <- "data/risk"
 path_mak <- "mak/opt"
 

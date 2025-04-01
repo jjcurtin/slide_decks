@@ -3,7 +3,6 @@ title: 'A "Smart" Recovery Monitoring and Support System for SUD Continuing Care
 author: "John J. Curtin, Ph.D."
 institute: "University of Wisconsin-Madison"
 date: December 08, 2024
-format: pptx
 editor_options: 
   chunk_output_type: console
 ---
@@ -75,11 +74,11 @@ Dave knew that we were exploring the factors that motivated alcohol and other dr
 
 ## Precision Mental Health for Continuing Care 
 
-- Precision mental health requires us to provide the [right interventions]{.uwred} and supports to the [right people]{.uwred} at the [right time]{.uwred}, [every time]{.uwred}
+Precision mental health requires us to provide the [right interventions]{.uwred} and supports to the [right people]{.uwred} at the [right time]{.uwred}, [every time]{.uwred}
 
 \
 
-SUD continuing care requires [long-term monitoring] {.uwred} and [ongoing lifestyle adjustments and support] {.uwred} to prevent relapse
+SUD continuing care requires [long-term monitoring]{.uwred} and [ongoing lifestyle adjustments and support]{.uwred} to prevent relapse
 
 ::: {.notes}
 These questions that Dave was asking are at the heart of what we now call precision mental health.  How can we provide the **right interventions and supports** to the **right people** at the **right time**, **every time**​
@@ -414,6 +413,7 @@ Using SHAP values, we can understand which features contributed most strongly to
 ::: columns
 ::: {.column width="50%"}
 ```{r}
+#| label: figs_opt_shaps_1
 #| fig-height: 3
 #| fig-width: 5
 
@@ -448,6 +448,7 @@ For example, in this first plot,  I am showing you someone who would be predicte
 ::: columns
 ::: {.column width="50%"}
 ```{r}
+#| label: figs_opt_shaps_2
 #| fig-height: 3
 #| fig-width: 5
 
@@ -463,6 +464,7 @@ fig_shap_ex1
 ::: columns
 ::: {.column width="50%"}
 ```{r}
+#| label: figs_opt_shaps_3
 #| fig-height: 3
 #| fig-width: 5
 
@@ -486,6 +488,7 @@ In contrast, a second person might have similarly high lapse probability on day 
 ::: columns
 ::: {.column width="50%"}
 ```{r}
+#| label: figs_opt_shaps_4
 #| fig-height: 3
 #| fig-width: 5
 
@@ -501,6 +504,7 @@ fig_shap_ex1
 ::: columns
 ::: {.column width="50%"}
 ```{r}
+#| label: figs_opt_shaps_5
 #| fig-height: 3
 #| fig-width: 5
 
@@ -510,6 +514,7 @@ fig_shap_ex2
 
 ::: {.column width="50%"}
 ```{r}
+#| label: figs_opt_shaps_6
 #| fig-height: 3
 #| fig-width: 5
 
@@ -572,6 +577,7 @@ Thanks for your time, and I'd be happy to answer any questions you might have no
 ## Advanced Warning: Time Lagged Predictions
 
 ```{r}
+#| label: figs_lag_ci_1
 #| fig-height: 6
 #| fig-width: 6
 
@@ -596,6 +602,7 @@ But not surprisingly, there are still a number of very important issues to addre
 ::: {.columns}
 :::: {.column width="50%"}
 ```{r}
+#| label: figs_ema_demographics_1
 #| fig-height: 5
 #| fig-width: 5 
 
@@ -624,6 +631,7 @@ As one example of this issue, the data we collected to train these models from t
 ::: {.columns}
 :::: {.column width="50%"}
 ```{r}
+#| label: figs_ema_demographics_2
 #| fig-height: 5
 #| fig-width: 5 
 
@@ -633,6 +641,7 @@ fig_race
 
 :::: {.column width="50%"}
 ```{r}
+#| label: figs_ema_demographics_3
 #| fig-height: 5
 #| fig-width: 5
 
@@ -651,6 +660,7 @@ This is obviously unacceptable and we are working now to correct this.
 -----------------------------------------------------------------------------
 
 ```{r}
+#| label: figs_fairema_ci_1
 #| fig-height: 6
 #| fig-width: 8
 
@@ -683,6 +693,7 @@ This sample will also include much needed geographic diversity because the facto
 -----------------------------------------------------------------------------
 
 ```{r}
+#| label: figs_fair_ci_1
 #| fig-height: 6
 #| fig-width: 8
 
