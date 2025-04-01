@@ -1,6 +1,5 @@
 library(tidyverse)
-devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true",
-                     sha1 = "a58e57da996d1b70bb9a5b58241325d6fd78890f")
+devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true")
 path_lag <- format_path(str_c("studydata/risk/models/lag"))
 path_data <- "data/risk"
 

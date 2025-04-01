@@ -8,159 +8,109 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Treatment and Continuing Care
-
-```{r}
-#| fig-height: 6
-#| fig-width: 6
-
-source(here::here("figs/gen/fig_tx.R"))
-fig_tx_1
-```
 
 ::: {.notes}
-In 2022, 28 million adults in the US had an active alcohol use disorder.
+About a decade ago I was approaching the middle of my career. I had developed a successful basic clinical science research program as a psychophysiologist running experiments to understand the effects of drugs and drug withdrawal on stress. 
 
-As you can imagine, the economic and personal costs of this disorder, given both its impact and scale, are very high and I am sure that many of you have seen these some of these costs up close among your own family and friends.
+The work was intellectually stimulating, we were publishing it in good outlets, and we were getting grants, but my heart was increasingly not in it.
 :::
 
 -----------------------------------------------------------------------------
 
-## Treatment and Continuing Care
-
-```{r}
-#| fig-height: 6
-#| fig-width: 6
-
-source(here::here("figs/gen/fig_tx.R"))
-fig_tx_1
-```
-
------------------------------------------------------------------------------
-
-## Treatment and Continuing Care
-
-```{r}
-#| fig-height: 6
-#| fig-width: 6
-
-fig_tx_2
-```
-
 ::: {.notes}
-Unfortunately, despite the high costs, we are exceeding poor at providing treatments for alcohol use disorders. 
+I’d become a clinical psychologist to help people struggling with alcohol and other SUDs.
 
-In 2022, only 1 out of every 9 of those 28 million people suffering from an alcohol use disorder received any clinician delivered treatment.  That leaves almost 25 million people untreated in any given year.
+My paternal grandmother died of complications secondary to alcoholism.
 
-And this is particularly sad because we do have several effective medications and psychosocial treatments available for alcohol and other substance use disorders.
+My dad has struggled with his use of alcohol for his entire adult life and during periods where he lost control it affected all of us.​
+
+My cousin, Stephen, has a severe substance use disorder and has been incarcerated several times for drug related offenses. He has had periods of stability but they have always ended in another relapse.
 :::
 
 -----------------------------------------------------------------------------
 
-## Treatment and Continuing Care
+::: {.notes}
+My Aunt Cathy and Stephen’s brother, Colin, had reached out to me on numerous occasions to ask what could be done to help Stephen.
 
-```{r}
-#| fig-height: 6
-#| fig-width: 6
+And it was those conversations that really got me thinking about how I could re-direct my research program to help people like Stephen and my dad and my grandmother. 
+:::
 
-fig_tx_3
-```
+-----------------------------------------------------------------------------
+
+## Precision Mental Health for Continuing Care
+
+![](https://github.com/jjcurtin/slide_decks/blob/main/images/gustafson.jpeg?raw=true){.absolute bottom=0 right=50}
 
 ::: {.notes}
-[PAUSE]   
+It was around that time that my colleague, Dave Gustafson, reached out to me.  Dave directs a center at UW that develops digital therapeutics for substance use disorders.  These are essentially smartphone apps that provide ongoing continuing care for patients during their recovery.  He had just completed a large randomized controlled trial demonstrating that his app meaningfully decreased heavy drinking days and increased abstinence rates over the first year of recovery.
 
-But as bad as it is for initial treatment, the story is even more bleak for continuing care.
+However, he also noticed many of the people who had relapsed hadn't used the app in the days leading up to that relapse.  And others who had relapsed hadn't used the specific supports in the app that he would have thought would be most effective for them.
+:::
 
-There is no question that for many people, substance use disorders manifest as chronic relapsing conditions.  
+-----------------------------------------------------------------------------
 
-We routinely provide monitoring and support for other chronic health conditions like diabetes and hypertension.  Yet anecdotal evidence suggests that very few people receive consistent continuing care after completing initial treatment for SUD.  And I say anecdotal evidence, because we do not pay enough attention to SUD continuing care for relapse prevention to even collect reliable data to estimate its rate.
+## Precision Mental Health for Continuing Care
+
+\
+\
+
+> “Could you predict not only [who]{style="color: blue;"} might be at greatest risk for relapse … <br>
+ … but precisely [when]{style="color: blue;"} that relapse might occur … <br>
+ … and how [best to intervene]{style="color: blue;"} to prevent it?"
+ 
+ \
+ \
+![](https://github.com/jjcurtin/slide_decks/blob/main/images/gustafson.jpeg?raw=true){.absolute bottom=0 right=50}
+
+::: {.notes}
+Dave knew that we were exploring the factors that motivated alcohol and other drug use and he asked us a simple question: 
+
+"Could you predict not only who might be at greatest risk for relapse but precisely when that relapse might occur and how best to intervene to prevent it"
+
+... because if we could develop a system to do this, he could embed it into his app to guide people to the most effective supports at the most critical moments in their recovery
+:::
+
+
+-----------------------------------------------------------------------------
+
+## Precision Mental Health for Continuing Care 
+
+- Precision mental health requires us to provide the [right interventions]{.uwred} and supports to the [right people]{.uwred} at the [right time]{.uwred}, [every time]{.uwred}
+
+\
+
+SUD continuing care requires [long-term monitoring] {.uwred} and [ongoing lifestyle adjustments and support] {.uwred} to prevent relapse
+
+::: {.notes}
+These questions that Dave was asking are at the heart of what we now call precision mental health.  How can we provide the **right interventions and supports** to the **right people** at the **right time**, **every time**​
+
+And this focus on the **right time** is particularly important for recovery from substance use disorders.  Substance use disorders are chronic relapsing conditions and therefore successful recovery requires lifelong monitoring and support to prevent relapse.
+
+And, critically, the optimal supports for any specific individual can change month to month, day to day, and even from moment to moment.
 :::
 
 -----------------------------------------------------------------------------
 
 ## Precision Mental Health for Continuing Care 
 
-To prevent relapse, SUD continuing care requires 
-
-- Long-term monitoring 
-- Ongoing lifestyle adjustments and supports
-
-::: {.notes}
-Decades of research has established that the risk factors that instigate lapses and relapse are complex, interactive, and non-linear.
-
-These factors differ across individuals and are also dynamic within any specific individual over time.
-
-Given this, continuing care for substance use disorders requires both long-term monitoring and ongoing lifestyle adjustments and supports 
-:::
-
------------------------------------------------------------------------------
-
-## Precision Mental Health for Continuing Care 
-
-[To prevent relapse, SUD continuing care requires]{style="color: blue;"} 
-
-- [Long-term monitoring]{style="color: blue;"} 
-- [Ongoing lifestyle adjustments and support]{style="color: blue;"} 
+[Precision mental health requires us to provide the right interventions and supports to the right people at the right time, every timed]{.gray}
 
 \
 
-A precision mental health approach can provide 
-
-- the [right interventions and supports]{style="color: blue;"} 
-- to the [right people]{style="color: blue;"} 
-- at the [right time]{style="color: blue;"}, 
-- [every time]{style="color: blue;"}
-
-::: {.notes}
-Essentially, effective continuing care requires a precision mental health approach that involves providing the **right interventions and supports** to the **right people** at the **right time**, **every time**
-
-And this focus on the **right time** is particularly important for recovery for substance use disorders where the optimal supports for any specific individual can change month to month, day to day, and even from moment to moment.
-:::
-
------------------------------------------------------------------------------
-
-## A Smart Recovery Monitoring and Support System
-
-A "Smart" Recovery Monitoring and Support System can provide temporally precise, dynamic, personalized continuing care by combining:
-
-  - Sensing
-  - Artificial Intelligence/Machine learning
-
-::: {.notes}
-We believe we can harness and combine two technologies that are rapidly maturing, 
-
-personal sensing and artificial intelligence algorithms, 
-
-to develop a smart recovery monitoring and support system that can both predict lapses before they occur and provide personalized support and recommendations to patients about how to prevent those lapses from occurring.
-:::
-
------------------------------------------------------------------------------
-
-## A Smart Recovery Monitoring and Support System
-
-A "Smart" Recovery Monitoring and Support System can provide temporally precise, dynamic, personalized continuing care by combining:
-
-  - Sensing
-  - Artificial Intelligence/Machine learning
+[SUD continuing care requires long-term monitoring and ongoing lifestyle adjustments and support to prevent relapse]{.gray}
 
 \
 
-It can provide continuing care that is
+A "Smart" Recovery Monitoring and Support System can provide temporally precise, dynamic, personalized continuing care by combining:
 
-- Cost effective,  
-- Highly scalable,
-- Available 24/7 to patients
+- Sensing
+- Artificial Intelligence/Machine learning
 
 ::: {.notes}
-Critically, this monitoring and support system is 
+We believed that we could harness and combine two technologies that were emerging at that time, personal sensing and artificial intelligence algorithms,
+to develop a smart recovery monitoring and support system that could both predict lapses before they occurred and provide personalized support and recommendations to patients about how to prevent those lapses from occurring.
 
-- cost effective,  
-- highly scalable,
-- and available 24/7 to patients
-
-which can address many of the barriers to providing long-term continuing care
-
-And what I'd like to do today is tell you a bit more about how the system works, what we have learned so far, and where we are going next.
+And what I'd like to do today is tell you a bit more about how we are doing this, what we have learned so far, and where we are going next with this system
 :::
 
 -----------------------------------------------------------------------------
@@ -194,10 +144,10 @@ and we can collect these inputs with very high temporal granularity, at least se
 
 \
 
-[Sensing allows for "real-world" measurement that]{style="color:gray;"}
+[Sensing allows for "real-world" measurement that]{.gray}
 
-- [Can be sustained for long periods]{style="color:gray;"}
-- [Has very high temporal granularity]{style="color:gray;"} 
+- [Can be sustained for long periods]{.gray}
+- [Has very high temporal granularity]{.gray} 
 
 \
 
@@ -271,7 +221,7 @@ Participants used these EMAs to report on their current experiences including th
 
 ## Model Predictions 
 
-- Predict hour-by-hour probability of [future lapse]{style="color: blue;"}
+- Predict hour-by-hour probability of [future lapse]{.uwred}
 
 \
 
@@ -290,7 +240,7 @@ And we developed separate models for three future lapse windows – lapses in th
 
 ## Model Predictions 
 
-- Predict hour-by-hour probability of [future lapse]{style="color: blue;"}
+- Predict hour-by-hour probability of [future lapse]{.uwred}
 
 \
 
@@ -431,7 +381,35 @@ But we can, and to be clear, we believe all three of these models to have clinic
 
 -----------------------------------------------------------------------------
 
-## Beyond Prediction: Personalized Recommendations 
+## Personalized Recommendations 
+
+::: columns
+::: {.column width="50%"}
+<!--Blank
+:::
+
+::: {.column width="50%"}
+<!--Blank
+:::
+:::
+
+::: columns
+::: {.column width="50%"}
+<!-- Blank-->
+:::
+
+::: {.column width="50%"}
+<!-- Blank-->
+:::
+:::
+
+::: {.notes}
+But we can get much more than just lapse probabilities from these models. 
+
+Using SHAP values, we can understand which features contributed most strongly to any prediction for a specific person at a specific moment in time.  This allows us to understand not only WHEN a lapse might occur but also WHY and potentially how best to intervene. 
+:::
+
+## Personalized Recommendations 
 
 ::: columns
 ::: {.column width="50%"}
@@ -460,10 +438,6 @@ fig_shap_ex1
 :::
 
 ::: {.notes}
-But we can get much more than just lapse probabilities from these models. 
-
-Using SHAP values, we can understand which features contributed most strongly to any prediction for a specific person at a specific moment in time.  This allows us to understand not only WHEN a lapse might occur but also WHY and potentially how best to intervene. 
-
 For example, in this first plot,  I am showing you someone who would be predicted to have a high lapse probability on day 30 of their recovery because they have been reporting high craving.  For that person, we could recommend urge surfing techniques or remind them that distracting activities can help get them through short periods of craving.
 :::
 
