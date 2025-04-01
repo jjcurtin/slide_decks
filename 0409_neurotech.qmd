@@ -58,7 +58,7 @@ However, he also noticed many of the people who had relapsed hadn't used the app
  
  \
  \
-![](https://github.com/jjcurtin/slide_decks/blob/main/images/gustafson.jpeg?raw=true){.absolute bottom=0 right=50}
+![](https://github.com/jjcurtin/slide_decks/blob/main/images/gustafson.jpeg?raw=true){.absolute bottom=0 right=50 width=4in}
 
 ::: {.notes}
 Dave knew that we were exploring the factors that motivated alcohol and other drug use and he asked us a simple question: 
@@ -188,7 +188,18 @@ The next logical set of questions surround the model inputs.
 
 What will we use as inputs or risk features in these models to predict lapses? And how will we measure the raw signals associated with these risk features?
 
-We believe that personal sensing will play a big role here.  And when I talk about sensing, I am talking about a measurement strategy that allows for in vivo measurement within the context of an individual's day-to-day life.   
+We believe that personal sensing will play a big role here.  
+
+Personal sensing is just a fancy term for methods that allow us to do real-world measurement of people's thoughts, feelings, behaviors, and context.  
+
+These methods allow us to feasibly collect these inputs over very long periods of time from months to even years, which is critical for SUDs because they are chronic, relapsing disorders that require lifetime management and continuing care.
+
+and we can collect these inputs with very high temporal granularity, at least several times per day and in some instances continuously, which is also very important so that we have the temporal precision to intervene during days and even potentially moments of heightened risk
+
+
+
+
+nd when I talk about sensing, I am talking about a measurement strategy that allows for in vivo measurement within the context of an individual's day-to-day life.   
 
 It must be longitudinal but also with high temporal granularity so that we have the temporal precision to intervene during days and even potentially moments of heightened risk
 
