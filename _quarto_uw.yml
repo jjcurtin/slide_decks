@@ -1,3 +1,4 @@
+date-format: long
 format: 
   revealjs:
     scrollable: true
@@ -5,3 +6,8 @@ format:
     slide-number: false 
     multiplex: false 
     auto-stretch: false
+title-slide-attributes:
+  data-background-image: images/title_slide.png
+  data-background-size: cover
+  data-background-repeat: no
+  data-background-position: right top

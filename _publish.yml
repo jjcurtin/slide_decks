@@ -2,3 +2,7 @@
   quarto-pub:
     - id: 8fd6d50d-3bfa-498f-b3ce-dcf21ec3d296
       url: 'https://jjcurtin.quarto.pub/2024_acnp'
+- source: 0409_neurotech.qmd
+  quarto-pub:
+    - id: ac018721-be55-457c-a42b-ce36abb0bb6a
+      url: 'https://jjcurtin.quarto.pub/2025_neurotech'
