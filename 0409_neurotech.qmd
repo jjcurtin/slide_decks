@@ -1641,3 +1641,159 @@ Thanks for your time, and I'd be happy to answer any questions you might have no
 ## CRediTs
 
 ![credits.png](https://github.com/jjcurtin/lectures/blob/main/images/credits_risk1.png?raw=true){.absolute bottom="15%" left="5%" width="92%" height="auto"}\ 
+
+## Acknowledgements (recent projects first){.smaller}
+
+::::: {.columns}
+
+:::: {.column width="48%"}
+
+:::{style="text-align: center;"}
+
+**Co-Investigators **
+
+:::
+
+![](/images/people/gustafson.png){style="margin:0 !important;" width="23%"}
+
+![](/images/people/mohr.png){style="margin:0 !important;" width="23%"}
+
+![](/images/people/kornfield.png){style="margin:0 !important;" width="23%"}
+
+![](/images/people/vanswol.png){style="margin:0 !important;" width="23%"}  
+
+![](/images/people/ammerman.png){style="margin:0 !important;" width="23%"}
+
+![](/images/people/murphy.png){style="margin:0 !important;" width="23%"}
+
+![](/images/people/shah.png){style="margin:0 !important;" width="23%"}
+
+![](/images/people/zhu.png){style="margin:0 !important;" width="23%"}  
+
+![](/images/people/brown.png){style="margin:0 !important;" width="23%"}
+
+![](/images/people/huang.png){style="margin:0 !important;" width="23%"}
+
+![](/images/people/sethares.png){style="margin:0 !important;" width="23%"}
+
+![](/images/people/alagoz){style="margin:0 !important;" width="23%"}
+
+::::
+
+:::: {.column width="24%"}
+
+:::{style="text-align: center;"}
+
+**Graduate Students**
+
+:::
+
+![](/images/people/wyant.png){style="margin:0 !important;" width="47%"}
+
+![](/images/people/punturieri.png){style="margin:0 !important;" width="47%"}
+
+![](/images/people/yu.png){style="margin:0 !important;" width="47%"}
+
+![](/images/people/santana.png){style="margin:0 !important;" width="47%"}
+
+![](/images/people/fronk.png){style="margin:0 !important;" width="47%"}
+
+::::
+
+:::: {.column width="24%"}
+
+:::{style="text-align: center;"}
+
+**Staff**
+
+:::
+
+![](/images/people/wanta.png){style="margin:0 !important;" width="47%"}
+
+![](/images/people/papp.png){style="margin:0 !important;" width="47%"}  
+
+![](/images/people/colmenares.png){style="margin:0 !important;" width="47%"}
+
+![](/images/people/lightheart.png){style="margin:0 !important;" width="47%"}
+
+::::
+
+:::::
+
+## Acknowledgements (alphabetized) {.smaller}
+
+::::: {.columns}
+
+:::: {.column width="48%"}
+
+:::{style="text-align: center;"}
+
+**Co-Investigators **
+
+:::
+
+![](/images/people/alagoz){style="margin:0 !important;" width="23%"}
+
+![](/images/people/ammerman.png){style="margin:0 !important;" width="23%"}
+
+![](/images/people/brown.png){style="margin:0 !important;" width="23%"}
+
+![](/images/people/gustafson.png){style="margin:0 !important;" width="23%"}
+
+![](/images/people/huang.png){style="margin:0 !important;" width="23%"}
+
+![](/images/people/kornfield.png){style="margin:0 !important;" width="23%"}
+
+![](/images/people/mohr.png){style="margin:0 !important;" width="23%"}
+
+![](/images/people/murphy.png){style="margin:0 !important;" width="23%"}
+
+![](/images/people/sethares.png){style="margin:0 !important;" width="23%"}
+
+![](/images/people/shah.png){style="margin:0 !important;" width="23%"}
+
+![](/images/people/vanswol.png){style="margin:0 !important;" width="23%"}
+
+![](/images/people/zhu.png){style="margin:0 !important;" width="23%"}  
+
+::::
+
+:::: {.column width="24%"}
+
+:::{style="text-align: center;"}
+
+**Graduate Students**
+
+:::
+
+![](/images/people/fronk.png){style="margin:0 !important;" width="47%"}
+
+![](/images/people/punturieri.png){style="margin:0 !important;" width="47%"}
+
+![](/images/people/santana.png){style="margin:0 !important;" width="47%"}
+
+![](/images/people/wyant.png){style="margin:0 !important;" width="47%"}
+
+![](/images/people/yu.png){style="margin:0 !important;" width="47%"}
+
+::::
+
+:::: {.column width="24%"}
+
+:::{style="text-align: center;"}
+
+**Staff**
+
+:::
+
+![](/images/people/colmenares.png){style="margin:0 !important;" width="47%"}
+
+![](/images/people/lightheart.png){style="margin:0 !important;" width="47%"}
+
+![](/images/people/papp.png){style="margin:0 !important;" width="47%"}
+
+![](/images/people/wanta.png){style="margin:0 !important;" width="47%"}
+
+::::
+
+:::::
