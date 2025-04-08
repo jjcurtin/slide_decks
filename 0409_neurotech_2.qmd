@@ -49,6 +49,7 @@ However, he also noticed many of the people who had relapsed hadn't used the app
 
 ## Precision Mental Health for Continuing Care
 
+
 \
 \
 
@@ -173,7 +174,7 @@ So for these reasons, we are developing risk models that predict the probability
 
 ## Model Inputs: Personal Sensing
 
-Personal sensing collects information from smartphones and other sensors to identify a person’s [thoughts, feelings, behaviors, and context]{.uwred}.
+Personal sensing collects information from smartphones and wearable sensors to identify a person’s [thoughts, feelings, behaviors, and context]{.uwred}.
 
 ::: {.notes}
 [PAUSE]
@@ -184,28 +185,26 @@ What will we use as inputs or risk features in these models to predict lapses? A
 
 We believe that personal sensing will play a big role here.  
 
-Personal sensing is just a fancy term for methods that allow us to do real-world measurement of people's thoughts, feelings, behaviors, and context.  
+Personal sensing is just a fancy term for a broad category of methods that allow us to do real-world monitoring of people's thoughts, feelings,       behaviors, and context.
 :::
 
 -----------------------------------------------------------------------------
 
 ## Model Inputs: Personal Sensing
 
-[Personal sensing collects information from smartphones and other sensors to identify a person’s thoughts, feelings, behaviors, and context.]{.gray}
+[Personal sensing collects information from smartphones and wearable sensors to identify a person’s thoughts, feelings, behaviors, and context.]{.gray}
 
 \
 
-Sensing provides measurement that is/has:
+Sensing allows for "real-world" measurement that
 
-- "Real world" (in vivo)
-- Longitudinal
-- High temporal granularity 
-- Feasible/acceptable for long term use
+- Can be sustained for long periods
+- Has very high temporal granularity
 
 ::: {.notes}
-These methods allow us to feasibly collect these inputs over very long periods of time from months to even years, which is critical for SUDs because they are chronic, relapsing disorders that require lifetime management and continuing care.
+These methods allow us to collect these inputs over very long periods of   time from months to even years, which is critical for SUDs because they    are chronic, relapsing disorders that require lifetime management and      continuing care.
 
-and we can collect these inputs with very high temporal granularity, at least several times per day and in some instances continuously, which is also very important so that we have the temporal precision to intervene during days and even potentially moments of heightened risk
+and we can collect these inputs with very high temporal granularity, at    least several times per day and in some instances continuously, which is   also very important so that we have the temporal precision to intervene    during days and even potentially moments of heightened risk.
 :::
 
 -----------------------------------------------------------------------------
@@ -216,25 +215,25 @@ and we can collect these inputs with very high temporal granularity, at least se
 
 \
 
-[Sensing provides measurement that is/has:]{.gray}
+[Sensing allows for "real-world" measurement that]{.gray}
 
-- ["Real world" (in vivo)]{.gray}
-- [Longitudinal]{.gray}
-- [High temporal granularity]{.gray}
-- [Feasible/acceptable for long term use]{.gray}
+- [Can be sustained for long periods]{.gray}
+- [Has very high temporal granularity]{.gray}
 
 \
 
-Sensing requires:
+Practical requirements
 
+- Feasible/acceptable for long term use
 - Consistent across platforms/devices
-- Stable/Low churn
+- Stable/Low churn over time in necessary hardware/software 
 
 ::: {.notes}
 There are also some practical requirements.  
 
-If we are going to make the sensing and and prediction system widely available, then the measurement must be feasible, consistent, and stable across common equipment that most people own.  
-From our perspective, this limits us to smartphones with the major operating systems
+If we are going to make our recovery monitoring and support system widely  available, then the measurement must be feasible and acceptable to people  for long term use.
+
+And the measurements must also be consistent and stable across common      equipment that most people own.
 :::
 
 -----------------------------------------------------------------------------
@@ -246,16 +245,40 @@ From our perspective, this limits us to smartphones with the major operating sys
 - Contexualized Smartphone Communications
 
 ::: {.notes}
-Given our sensing goals and requirements, we are focusing the majority of our effort at this point on feature engineering with three separate but complementary sets of raw signals that can be sensed easily on any smartphone. These are
+From our perspective, these requirements limit us to sensing methods that  use only smartphones with the major operating systems but I'd be happy to  talk more about this decision and the experiences we have had with other   sensing methods that we have explored during the discussion period if      there is interest.
+
+[PAUSE]
+
+These same requirements have also focused our smartphone sensing efforts   on three separate but complementary sets of raw signals that we believe    can be used to derive many important lapse risk features to input to our   prediction models.  These raw signals are
 
 - Ecological momentary assessments
 - Geolocation
 - Cellular communications meta data and text message content
-
-Our goal is to use features from these powerful signals to develop lapse prediction models with exceptionally high temporal resolution.  In other words, we aren’t looking to simply identify individuals at high risk for lapses.  Instead we want to know precisely when these lapses will occur so that we can intervene to prevent them
 :::
 
 -----------------------------------------------------------------------------
+
+## Model Inputs: Personal Sensing
+
+We use smartphone sensing methods to collect
+
+- Ecological Momentary Assessments (EMA)
+- Contextualized Geolocation
+- Contexualized Smartphone Communications
+
+::: {.notes}
+Our broad goal is to use features from these powerful signals to develop a recovery monitoring and support system that can BOTH
+
+- predict future lapses with exceptionally high temporal resolution AND
+
+- understand the risk factors contributing to those predicted lapses so    that we can recommend personalized recovery activities, supports, and      lifestyle adjustments in advance of those lapses to prevent them.
+
+And critically, this system must perform well enough to be useful when     applied to individuals.
+
+In other words, we are not looking to find coarse group-level predictors   of lapses but instead to make predictions for specific individuals at      specific moments in time that are actionable and useful for them.
+:::
+
+-------------------------------------------------------------------------
 
 ## Lapse Prediction for AUD
 
@@ -287,17 +310,11 @@ Our goal is to use features from these powerful signals to develop lapse predict
 :::
 
 ::: {.notes}
-So let me transition now to describing how we are taking the first steps toward developing this monitoring and support system for SUD
+So let me transition now to describing the progress we have made so far to develop this recovery monitoring and support system for SUD
 
-We have recently completed a NIAAA funded project where we collected data from 151 participants who were in early recovery from a moderate to severe alcohol use disorder.  
+As the first step, in 2020 we completed a first NIAAA funded project where we recruited 151 participants who were in early recovery from a moderate   to severe alcohol use disorder.
 
-These participants were committed to abstinence at the start of the study and we followed them for up to 3 months, collecting a variety of personal sensing data streams including the three I just mentioned.
-
-Our broad goal was to develop a monitoring and support system that could both predict future lapses and understand the risk factors contributing to those predicted lapses so that we can recommend appropriate lifestyle adjustements and supports in advance
-
-And critically, this system must perform well enough to be useful when applied to individuals.  
-
-In other words, we are not looking to find coarse group-level predictors of lapses but instead to make predictions for specific individuals at specific moments in time that are actionable and useful for them.
+These participants were committed to abstinence at the start of the study  and we followed them for up to three months, using our three sensing       methods and also recording any lapses back to alcohol use.
 :::
 
 -----------------------------------------------------------------------------
@@ -319,7 +336,7 @@ In other words, we are not looking to find coarse group-level predictors of laps
 \
 
 - Followed with sensing for up to 3 months
-  - [Ecological Momentary Assessments]{style="color: blue;"}
+  - [Ecological Momentary Assessments]{.uwred}
   - Contextualized Geolocation
   - Contexualized Smartphone Communications
   - (also sensed physiology, sleep, coarse self-report)
@@ -351,7 +368,8 @@ I'll also give you more detail about how we think we can implement these models 
 #| fig-width: 10
 
 source(here::here("figs/risk/figs_ema_demographics.R"))
-cowplot::plot_grid(fig_age, fig_sex, fig_income, fig_ms, fig_educ, fig_race, nrow = 2, ncol = 3)
+cowplot::plot_grid(fig_age, fig_income, fig_sex_bar,
+                   fig_educ_bar, fig_ms_bar, fig_race_bar, nrow = 2, ncol  = 3)
 ```
 
 ::: {.notes}
