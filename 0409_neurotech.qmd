@@ -37,7 +37,7 @@ And it was those conversations that really got me thinking about how I could re-
 
 ## Precision Mental Health for Continuing Care
 
-![](https://github.com/jjcurtin/slide_decks/blob/main/images/gustafson.jpeg?raw=true){.absolute bottom=0 right=50}
+![](https://github.com/jjcurtin/slide_decks/blob/main/images/gustafson.jpeg?raw=true){.absolute bottom=0 right=10 width=4in}
 
 ::: {.notes}
 It was around that time that my colleague, Dave Gustafson, reached out to me.  Dave directs a center at UW that develops digital therapeutics for substance use disorders.  These are essentially smartphone apps that provide ongoing continuing care for patients during their recovery.  He had just completed a large randomized controlled trial demonstrating that his app meaningfully decreased heavy drinking days and increased abstinence rates over the first year of recovery.
@@ -58,7 +58,7 @@ However, he also noticed many of the people who had relapsed hadn't used the app
  
  \
  \
-![](https://github.com/jjcurtin/slide_decks/blob/main/images/gustafson.jpeg?raw=true){.absolute bottom=0 right=50 width=4in}
+![](https://github.com/jjcurtin/slide_decks/blob/main/images/gustafson.jpeg?raw=true){.absolute bottom=0 right=10 width=4in}
 
 ::: {.notes}
 Dave knew that we were exploring the factors that motivated alcohol and other drug use and he asked us a simple question: 
@@ -114,9 +114,6 @@ to develop a smart recovery monitoring and support system that could both predic
 
 And what I'd like to do today is tell you a bit more about how we are doing this, what we have learned so far, and where we are going next with this system
 :::
-
-CONTINUE HERE!!
-
 
 -----------------------------------------------------------------------------
 
@@ -176,14 +173,11 @@ So for these reasons, we are developing risk models that predict the probability
 
 ## Model Inputs: Personal Sensing
 
-Sensing requires:
-
-- In Vivo measurement
-- Longitudinal
-- High temporal granularity 
-- Feasible/acceptable for long term use
+Personal sensing collects information from smartphones and other sensors to identify a person’s [thoughts, feelings, behaviors, and context]{.uwred}.
 
 ::: {.notes}
+[PAUSE]
+
 The next logical set of questions surround the model inputs.   
 
 What will we use as inputs or risk features in these models to predict lapses? And how will we measure the raw signals associated with these risk features?
@@ -191,33 +185,47 @@ What will we use as inputs or risk features in these models to predict lapses? A
 We believe that personal sensing will play a big role here.  
 
 Personal sensing is just a fancy term for methods that allow us to do real-world measurement of people's thoughts, feelings, behaviors, and context.  
-
-These methods allow us to feasibly collect these inputs over very long periods of time from months to even years, which is critical for SUDs because they are chronic, relapsing disorders that require lifetime management and continuing care.
-
-and we can collect these inputs with very high temporal granularity, at least several times per day and in some instances continuously, which is also very important so that we have the temporal precision to intervene during days and even potentially moments of heightened risk
-
-
-
-
-nd when I talk about sensing, I am talking about a measurement strategy that allows for in vivo measurement within the context of an individual's day-to-day life.   
-
-It must be longitudinal but also with high temporal granularity so that we have the temporal precision to intervene during days and even potentially moments of heightened risk
-
-And it must be acceptable to people for long term use because we know that SUDs are chronic, relapsing disorders that require lifetime management and continuing care.
 :::
 
 -----------------------------------------------------------------------------
 
 ## Model Inputs: Personal Sensing
 
-Sensing requires:
-
-- [In Vivo measurement]{style="color: gray;"}
-- [Longitudinal]{style="color: gray;"}
-- [High temporal granularity]{style="color: gray;"}
-- [Feasible/acceptable for long term use]{style="color: gray;"}
+[Personal sensing collects information from smartphones and other sensors to identify a person’s thoughts, feelings, behaviors, and context.]{.gray}
 
 \
+
+Sensing provides measurement that is/has:
+
+- "Real world" (in vivo)
+- Longitudinal
+- High temporal granularity 
+- Feasible/acceptable for long term use
+
+::: {.notes}
+These methods allow us to feasibly collect these inputs over very long periods of time from months to even years, which is critical for SUDs because they are chronic, relapsing disorders that require lifetime management and continuing care.
+
+and we can collect these inputs with very high temporal granularity, at least several times per day and in some instances continuously, which is also very important so that we have the temporal precision to intervene during days and even potentially moments of heightened risk
+:::
+
+-----------------------------------------------------------------------------
+
+## Model Inputs: Personal Sensing
+
+[Personal sensing collects information from smartphones and other sensors to identify a person’s thoughts, feelings, behaviors, and context.]{.gray}
+
+\
+
+[Sensing provides measurement that is/has:]{.gray}
+
+- ["Real world" (in vivo)]{.gray}
+- [Longitudinal]{.gray}
+- [High temporal granularity]{.gray}
+- [Feasible/acceptable for long term use]{.gray}
+
+\
+
+Sensing requires:
 
 - Consistent across platforms/devices
 - Stable/Low churn
@@ -226,7 +234,6 @@ Sensing requires:
 There are also some practical requirements.  
 
 If we are going to make the sensing and and prediction system widely available, then the measurement must be feasible, consistent, and stable across common equipment that most people own.  
-
 From our perspective, this limits us to smartphones with the major operating systems
 :::
 
@@ -239,7 +246,7 @@ From our perspective, this limits us to smartphones with the major operating sys
 - Contexualized Smartphone Communications
 
 ::: {.notes}
-Given these sensing requirements, we are focusing the majority of our effort at this point on feature engineering with three separate but complementary sets of raw signals that can be sensed easily on any smartphone. These are
+Given our sensing goals and requirements, we are focusing the majority of our effort at this point on feature engineering with three separate but complementary sets of raw signals that can be sensed easily on any smartphone. These are
 
 - Ecological momentary assessments
 - Geolocation
@@ -392,34 +399,30 @@ On the right, I am showing you a histogram of the DSM-5 AUD symptom counts to co
 
 ## Ecological Momentary Assessments 
  
-::: {.columns}
-:::: {.column width="60%"}
-![risk1_ema_questions.png](https://github.com/jjcurtin/lectures/blob/main/images/risk1_ema_questions.png?raw=true){.absolute width="60%" top="15%" height="auto"}\    
-::::
-
-:::: {.column width="30%"}
-- Current
+- Current/Recent Experiences
   - Craving
-  - Affect
-  - Risky situations
-  - Stressful events
-  - Pleasant events
+  - Emotional state 
+  - Recent past alcohol use
+  - Recent risky situations
+  - Recent stressful events
+  - Recent pleasant event
 
 \
 
-- Future
+- Future Expectations
   - Risky situations
   - Stressful events
-  - Confidence
-::::
-:::
+  - Abstinence Confidence
+
+![](https://github.com/jjcurtin/slide_decks/blob/main/images/ema_hand.png?raw=true){.absolute bottom=0 right=50 width=45%}
+
 
 ::: {.notes}
-So let me tell you a bit more about the 4x daily EMA we collected for three months during their study participation  
+So let me tell you a bit more about the ecological momentary assessments (or EMAs) that we used as part of our sensing methods. These EMAs are brief surveys that participants completed on their smartphones. They take 20-30 seconds to complete and we collected them several times per day.
 
 On each EMA, participants reported the date and time of any lapses back to alcohol use that they hadn’t previously reported. These lapse reports are used for the lapse outcomes that we train our models to predict.  And these laspes were also confirmed by study staff during lab visits using a follow-back procedure.
 
-All of the EMAs also asked participants about their current craving, affective valence and arousal, recent risky situations, and recent stressful and pleasant events since their last EMA.
+All of the EMAs also asked participants about their current craving, emotional state, recent risky situations, and recent stressful and pleasant events since their last EMA.
 
 And on the first EMA each day, they also reported any future risky situations and stressful events that they expected in the next week and their confidence that they would remain abstinent. 
 :::
@@ -459,9 +462,9 @@ We used features from these sensed signals that I just described to make predict
   - 1 hour 
 
 ::: {.notes}
-For example, if I was in recovery from an AUD, I could use these models to generate the probability that I would lapse after I leave the center today at 4 pm. One model would generate the probability I would lapse at some point between 4 pm today and 4 pm next Wednesday, the second would predict the probability of a lapse between 4 pm today and 4 pm tomorrow and the third and most temporally precise model would provide the probability of a lapse in the next hour, between 4pm today and 5pm today.  
+For example, if I was in recovery from an AUD, I could use these models to generate the probability that I would lapse after I leave the presentation today at 7pm. One model would generate the probability I would lapse at some point between 7 pm today and 7 pm next Wednesday, the second would predict the probability of a lapse between 7 pm today and 7 pm tomorrow and the third and most temporally precise model would provide the probability of a lapse in the next hour, between 7pm today and 8pm today.  
 
-And of course, all of the models would only use data collected prior to 4 pm today so that they are “predicting”, in the full sense of the word, into the future and not just demonstrating an association.
+And of course, all of the models would only use data collected prior to 7 pm today so that they are “predicting”, in the full sense of the word, into the future and not just demonstrating an association.
 :::
 -----------------------------------------------------------------------------
 
@@ -484,7 +487,7 @@ We are evaluating machine learning model configurations that differ by common st
 
 And we are rigorously evaluating the performance of these models using grouped, nested, repeated k-fold cross validation.  
 
-For our purposes, what this means is that we evalute model performance in 30 separate held out test sets and each of these sets contain new observatations from new participants that were not used to train the models.  
+For our purposes, what this means is that we evaluate model performance in 30 separate held out test sets and each of these sets contain new observations from new participants that were not used to train the models.  
 
 And again, this is consistent with what we mean by prediction.  We don't care how our models perform with the participants we used to train them. We want to know how well the models will work when we implement them with new people in the future.
 :::
@@ -521,7 +524,7 @@ And we included these scores both in raw form and as change from baselines for t
 
 -----------------------------------------------------------------------------
 
-## Predicted Lapse Probabilities: 1 Week Model
+## Predicted Lapse Probabilities: Next Week Model
 
 ::: {.columns}
 :::: {.column width="50%"}
@@ -552,7 +555,7 @@ fig_hist_week
 ::: {.notes}
 OK, lets begin to explore how well we can do.
 
-lets start with the model that provides the coarsest level of temporal specificity – 1 week, and let me take a moment to make the predictions that this machine learning model provides more concrete for you
+Lets start with the model that provides the coarsest level of temporal specificity – 1 week, and let me take a moment to make the predictions that this machine learning model provides more concrete for you
 
 On the right, you are looking at histograms of the lapse probability predictions that the model makes for all the weeks for all the patients in the held out folds.   
 
@@ -565,176 +568,90 @@ And this is exactly what we see for the one week lapse window model
 
 -----------------------------------------------------------------------------
 
-## Area under ROC curve (auROC): Random Classifier
+## Model Performance: Area under ROC curve (auROC) 
+
+The Area under the Receiver Operating Characteristic Curve (auROC) indicates the probability that any true lapse is scored higher than any true no-lapse by the model
+
+- Random performance:  auROC = 0.5 
+- Perfect performance: auROC = 1.0 
 
 ::: {.columns}
-:::: {.column width="50%"}
-- 0.50 for random classifier
+:::: {.column width="40%"}
+![](https://github.com/jjcurtin/slide_decks/blob/main/images/auroc_rules.jpeg?raw=true){.absolute bottom=0 left=20 width=30%}
 ::::
-
-:::: {.column width="50%"}
-```{r}
-#| label: figs_random_roc
-#| fig-height: 6
-#| fig-width: 6
-
-tibble(model = c("random", "random"),
-       specificity = c(1, 1),
-       sensitivity = c(0, 0)) |> 
-   mutate(model = factor(model, levels = c("random", "perfect"))) |> 
-   plot_roc(line_colors = c("gray", "red"))
-```
+:::: {.column width="60%"}
+<!--BLANK-->
 ::::
 :::
 
 ::: {.notes}
 But we can quantify the performance of our models more precisely with a performance metric called the Area under the Receiver Operating Characteristic curve or auROC for short.
 
-The ROC curve plots a models true positive rate by its false positive rate.
+The auROC is a measure of the model's ability to discriminate between true lapse and no-lapse observations when making lapse probability predictions.  
 
-The dotted line on the right shows the curve for a classifier with random features that are unrelated to the outcome.  For any increase in the true positive rate, there is a comparable increase in the false positive rate.
+The auROC can range from 0.5 to 1.0 where an auROC of .5 indicates a model whose accuracy is no better than random guessing, 
 
-And the auROC for this random classifier would be .50
+and an auROC of 1.0 indicates perfect accuracy 
+
+And models with auROCs of .90 or higher are considered to have excellent performance.
 :::
 
 -----------------------------------------------------------------------------
 
-## Area under ROC curve (auROC): Perfect Classifier
+## Model Performance: Area under ROC curve (auROC) 
+The Area under the Receiver Operating Characteristic Curve (auROC) indicates the probability that any true lapse is scored higher than any true no-lapse by the model
+
+- Random performance:  auROC = 0.5 
+- Perfect performance: auROC = 1.0 
 
 ::: {.columns}
-:::: {.column width="50%"}
-- [0.50 for random classifier]{style="color: gray;"}
-
-\
-
-- 1.00 for perfect classifer
+:::: {.column width="40%"}
+![](https://github.com/jjcurtin/slide_decks/blob/main/images/auroc_rules.jpeg?raw=true){.absolute bottom=0 left=20 width=30%}
 ::::
 
-:::: {.column width="50%"}
-```{r}
-#| label: figs-perfect-roc-1
-#| fig-height: 6
-#| fig-width: 6
-
-tibble(model = c("random", "random", "perfect", "perfect", "perfect"),
-       specificity = c(1, 1, 1, 1, 0),
-       sensitivity = c(0, 0, 0, 1, 1)) |> 
-   mutate(model = factor(model, levels = c("random", "perfect"))) |> 
-   plot_roc(line_colors = c("gray", "red"))
-```
+:::: {.column width="60%"}
+<!--BLANK-->
 ::::
 :::
 
 ::: {.notes}
-And the red line displays the curve for a perfectly performing classifier.  It pushes up into the top left corner of the plot where the true positive rate is 1.0 and the false positive rate is 0.   
 
-This perfect classifier would have an auROC of 1.0
-:::
-
------------------------------------------------------------------------------
-
-## Area under ROC curve (auROC): Interpretation
-
-::: {.columns}
-:::: {.column width="50%"}
-- [0.50 for random classifier]{style="color: gray;"}
-
-\
-
-- [1.00 for perfect classifer]{style="color: gray;"}
-
-\
-
-- Likelihood that model will assign a higher lapse probability to randomly selected lapse vs. no-lapse observation
-::::
-
-:::: {.column width="50%"}
-```{r}
-#| label: figs-perfect-roc-2
-#| fig-height: 6
-#| fig-width: 6
-
-tibble(model = c("random", "random", "perfect", "perfect", "perfect"),
-       specificity = c(1, 1, 1, 1, 0),
-       sensitivity = c(0, 0, 0, 1, 1)) |> 
-   mutate(model = factor(model, levels = c("random", "perfect"))) |> 
-   plot_roc(line_colors = c("gray", "red"))
-```
-::::
-:::
-
-::: {.notes}
-So the range of auROCs is approximately .5 - 1.0 
+[PAUSE]
 
 but the auROC also has an intuitive interpretation that I want you to understand.  
 
-Its value represents the probability that any randomly selected positive observation, in our case, a lapse, will be assigned a higher probability score than a randomly selected negative observation where no lapse occurs.
+Its value represents the probability that any randomly selected positive observation, in our case, a lapse, will be assigned a higher lapse probability score than a randomly selected negative observation where no lapse occurs.
 
-So, for example, that random classifier would only have a 50% chance of predicting a higher risk score for any specific lapse vs. a no-lapse period.  And conversely, the perfect classifier would have a 100% chance of scoring that lapse event higher than a no-lapse event.  
+So, for example, that random classifier with an auROC of 0.5 would only have a 50% chance of predicting a higher lapse risk score for any specific lapse vs. a no-lapse period.  
+
+And conversely, the perfect classifier would have a 100% chance of scoring that lapse higher than a no-lapse observation. 
 :::
 
 -----------------------------------------------------------------------------
 
-## Area under ROC curve (auROC): Next Week Model
+## Model Performance: Next Week Model
 
 ::: {.columns}
-:::: {.column width="50%"}
-Model auROCs
-
-- Next week = [0.90]{style="color: orange;"}; [0.88 - 0.91]
-
-:::::{.callout-tip icon=false}
-## Coarse rules of thumb for auROC 
-.70 - .80 are considered fair  
-.80 - .90 are considered good  
-\> .90 are considered excellent  
-:::::
+:::: {.column width="40%"}
+![](https://github.com/jjcurtin/slide_decks/blob/main/images/auroc_rules.jpeg?raw=true){.absolute bottom=0 left=20 width=30%}
 ::::
 
-:::: {.column width="50%"}
-<!--ROC Curve for Week-->
+:::: {.column width="60%"}
 ```{r}
-#| label: fig_roc_week
+#| label: figs_auroc_ci_1
 #| fig-height: 6
 #| fig-width: 6
 
-# plot made in fig_probability.R
-fig_roc_week
+source(here::here("figs/risk/figs_ema_probability.R"))
+fig_auroc_ci_1
 ```
 ::::
 :::
 
 ::: {.notes}
-And here is the ROC curve and the auROC for our week level model. 
+So given this, we were very excited to see that our one week prediction model had excellent performance with an auROC of approximately .90, which indicates that there is a 90% chance that the model will score a lapse higher than a no-lapse period.  
 
-Its auROC is .90, which indicates that there is a 90% chance that the model will score a lapse higher than a no-lapse period.  This is generally considered excellent performance for a prediction model.  
-:::
-
------------------------------------------------------------------------------
-
-## Area under ROC curve (auROC): Next Week Model
-
-::: {.columns}
-:::: {.column width="50%"}
-Model auROCs
-
-- Next week = [0.90]{style="color: orange;"}; [0.88 - 0.91]
-
-:::::{.callout-tip icon=false}
-## Coarse rules of thumb for auROC 
-.70 - .80 are considered fair  
-.80 - .90 are considered good  
-\> .90 are considered excellent  
-:::::
-::::
-
-:::: {.column width="50%"}
-<!--Blank-->
-::::
-:::
-
-::: {.notes}
-So we were very encouraged by the performance of this model because it exceeded the performance of the only other published week level lapse prediction model that we were aware of.   
+This exceeded the performance of the only other published week level lapse prediction model that we were aware of.   
 
 But we were also eager to see how well we could do if we required a higher level of temporal precision by developing a day level model.
 :::
@@ -744,39 +661,23 @@ But we were also eager to see how well we could do if we required a higher level
 ## Area under ROC curve (auROC): Next Day Model
 
 ::: {.columns}
-:::: {.column width="50%"}
-Model auROCs
-
-- Next week = [0.90]{style="color: orange;"}; [0.88 - 0.91]
-- Next day  = [0.91]{style="color: green;"}; [0.89 - 0.92]
-
-:::::{.callout-tip icon=false}
-## Coarse rules of thumb for auROC 
-.70 - .80 are considered fair  
-.80 - .90 are considered good  
-\> .90 are considered excellent  
-:::::
+:::: {.column width="40%"}
+![](https://github.com/jjcurtin/slide_decks/blob/main/images/auroc_rules.jpeg?raw=true){.absolute bottom=0 left=20 width=30%}
 ::::
 
-:::: {.column width="50%"}
-<!--ROC Curve for Week & Day-->
+:::: {.column width="60%"}
 ```{r}
-#| label: fig_roc_week_day
+#| label: figs_auroc_ci_2
 #| fig-height: 6
 #| fig-width: 6
 
-# plot made in fig_probability.R
-fig_roc_week_day
+fig_auroc_ci_2
 ```
 ::::
 :::
 
 ::: {.notes}
-And here is the ROC curve and the auROC for the day level model in green, superimposed on the week level model in orange
-
-The day level model performed as well as, if not better, than the week level model with an auROC of .91
-
-[PAUSE]
+And our model that made predictions about the lapse probability in the next day performed even better that the week level model, with an auROC of .91.
 :::
 
 -----------------------------------------------------------------------------
@@ -784,43 +685,32 @@ The day level model performed as well as, if not better, than the week level mod
 ## Area under ROC curve (auROC): Next Hour Model
 
 ::: {.columns}
-:::: {.column width="50%"}
-Model auROCs
-
-- Next week = [0.90]{style="color: orange;"}; [0.88 - 0.91]
-- Next day  = [0.91]{style="color: green;"}; [0.89 - 0.92]
-- Next hour = [0.93]{style="color: blue;"}; [0.92 - 0.94]
-
-:::::{.callout-tip icon=false}
-## Coarse rules of thumb for auROC 
-.70 - .80 are considered fair  
-.80 - .90 are considered good  
-\> .90 are considered excellent  
-:::::
+:::: {.column width="40%"}
+![](https://github.com/jjcurtin/slide_decks/blob/main/images/auroc_rules.jpeg?raw=true){.absolute bottom=0 left=20 width=30%}
 ::::
 
-:::: {.column width="50%"}
-<!--ROC Curve for All-->
+:::: {.column width="60%"}
 ```{r}
-#| label: fig_roc_all
+#| label: figs_auroc_ci_3
 #| fig-height: 6
 #| fig-width: 6
 
-# plot made in fig_probability.R
-fig_roc_all
+fig_auroc_ci_3
 ```
 ::::
 :::
 
 ::: {.notes}
-And it turns out that we can do somewhat better still with hour level predictions.  Here the blue curve represents the ROC curve for the hour level model, which had the best auROC yet, .93
+and our one hour model had the highest performance of all with an auROC of 0.93.
 
-[PAUSE]
 
-And to be clear, we believe all three of these models to have clinically implementable levels of performance such that we can make meaningful decisions about the probability of a future lapse for individual participants at specfic moments or windows in time.
+Candidly, we hadn’t anticipated that we could do this well with such high levels of temporal precision.
 
-Thats the good news.
+But we can, and to be clear, we believe all three of these models to have clinically implementable levels of performance such that we can use them to make meaningful decisions for individual participants at specific moments in time.
+
+So that is the good news......
 :::
+
 
 -----------------------------------------------------------------------------
 
@@ -841,7 +731,7 @@ But, not surprisingly given what I told you earlier about the characteristics of
 
 When we evaluate model performance, it is critical that we look at performance in protected groups.  And too often, these analyses are not done or reported.  
 
-Its only very recently that we have begin to take this seriously and we must.  If we hope to use our system to address existing dispartities in SUD outcomes then our models must perform well with all groups, regardless of their privilege or the use of these models may exacerbate rather than reduce existing mental healthcare disparities.
+Its only very recently that we have begin to take this seriously and we must.  If we hope to use our system to address existing disparities in SUD outcomes then our models must perform well with all groups, regardless of their privilege or the use of these models may exacerbate rather than reduce existing mental healthcare disparities.
 :::
 
 -----------------------------------------------------------------------------
