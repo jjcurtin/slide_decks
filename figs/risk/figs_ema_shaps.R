@@ -43,3 +43,18 @@ fig_global_day <- global |>
   theme(axis.text.y = element_text(size = 14, face  = "bold")) +
   theme(axis.text.x = element_text(size = 14, face  = "bold")) +
   theme(axis.title.x = element_text(size = 14, face  = "bold")) 
+
+fig_global_hour <- global |>
+  filter(window == "hour") |> 
+  mutate(variable_grp = if_else(variable_grp == "arousal (EMA item)", "emotional state (EMA item)", variable_grp),
+         variable_grp = if_else(variable_grp == "valence (EMA item)", "emotional state (EMA item)", variable_grp)) |>
+  mutate(variable_grp = str_split_i(variable_grp, " \\(", 1)) |>
+  mutate(group = reorder(variable_grp, mean_value, sum)) |>
+  ggplot() +
+  geom_bar(aes(x = group, y = mean_value), stat = "identity", fill  = "gray") +
+  ylab("Mean |SHAP| value (in Log-Odds)") +
+  xlab("") +
+  coord_flip() +
+  theme(axis.text.y = element_text(size = 14, face  = "bold")) +
+  theme(axis.text.x = element_text(size = 14, face  = "bold")) +
+  theme(axis.title.x = element_text(size = 14, face  = "bold")) 

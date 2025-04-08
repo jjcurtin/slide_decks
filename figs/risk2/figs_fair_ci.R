@@ -44,19 +44,19 @@ plot_ci <- function(d, title, delta, y = .85){
 ################################
 
 delta <- ci[2, "median"] - ci[1, "median"]
-fig_sex  <- ci |>
+fig_fair_sex_2  <- ci |>
   filter(model == "male" | model == "female") |>
   mutate(model = fct(model, levels = c("male", "female"))) |> 
   plot_ci("Sex", delta)
 
 delta <- ci[4, "median"] - ci[3, "median"]
-fig_race  <- ci |>
+fig_fair_race_2  <- ci |>
   filter(model == "white/non-hispanic" | model == "other") |>
   mutate(model = fct(model, levels = c("white/non-hispanic", "other"))) |> 
   plot_ci("Race/Ethnicity", delta)
 
 delta <- ci[6, "median"] - ci[5, "median"]
-fig_income  <- ci |>
+fig_fair_income_2  <- ci |>
   filter(model == "above poverty" | model == "below poverty") |>
   mutate(model = fct(model, levels = c("above poverty", "below poverty"))) |> 
   plot_ci("Income", delta) 
