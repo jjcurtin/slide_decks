@@ -1,7 +1,7 @@
 date-format: long
 format: 
   revealjs:
-    scrollable: true
+    scrollable: false
     css: presentation.css
     slide-number: false 
     multiplex: false 

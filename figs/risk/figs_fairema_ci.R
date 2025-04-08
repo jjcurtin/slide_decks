@@ -48,28 +48,28 @@ plot_ci <- function(d, title, delta, y = .70){
 ################################
 
 delta <- round(ci[1, "median"] - ci[2, "median"], 2)
-fig_sex  <- ci |>
+fig_fair_sex_1  <- ci |>
   filter(model == "Male" | model == "Female") |>
   mutate(model = fct(model, levels = c("Male", "Female")),
          model = fct_recode(model, "        male" = "Male", "      female" = "Female")) |> 
   plot_ci("Sex", delta, .78) 
 
 delta <- round(ci[3, "median"] - ci[4, "median"], 2)
-fig_race  <- ci |>
+fig_fair_race_1  <- ci |>
   filter(model == "white" | model == "non_white") |>
   mutate(model = fct(model, levels = c("white", "non_white")),
          model = fct_recode(model, "white/non-hispanic" = "white", "other" = "non_white")) |> 
   plot_ci("Race/Ethnicity", delta, .59) 
 
 delta <- round(ci[6, "median"] - ci[5, "median"], 2)
-fig_income  <- ci |>
+fig_fair_income_1  <- ci |>
   filter(model == "above_poverty" | model == "below_poverty") |>
   mutate(model = fct(model, levels = c("above_poverty", "below_poverty")),
          model = fct_recode(model, "above poverty" = "above_poverty", "below poverty" = "below_poverty")) |> 
   plot_ci("Income", delta, .65)
   
 delta <- ci[7, "median"] - ci[8, "median"]
-fig_age  <- ci |>
+fig_fair_age_1  <- ci |>
   filter(model == "younger" | model == "older") |>
   mutate(model = fct(model, levels = c("younger", "older")),  
          model = fct_recode(model, "       older" = "older", "     younger" = "younger")) |> 

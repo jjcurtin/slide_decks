@@ -678,21 +678,19 @@ cowplot::plot_grid(fig_race, NULL,
  
 ## Next Steps: Algorithmic Fairness
 
-- NIDA project is recruiting ~ 400 patients in recovery from Opioid Use Disorder 
-- [National sample (size; diversity: demographics, location)]{style="color: blue;"}
+- NIDA project recruited ~ 400 patients in recovery from Opioid Use Disorder 
+- National sample (size; diversity: demographics, location)
 - More variation in stage of recovery (1 – 6 months at start)
 - Sensing for 12 months
 
-\
 
-Data collection will finish in December 2024
 
 ![](https://github.com/jjcurtin/slide_decks/blob/main/images/risk2_pi_wide.png?raw=true){.absolute bottom=0}
 
 ::: {.notes}
-For example, we have been awarded a grant from NIDA to collect a more racially diverse sample using nationwide recruiting techniques.  
+For example, we have just recently completed data collection for a NIDA funded project that collected a more racially diverse sample using nationwide recruiting techniques.  
 
-This sample will also include much needed geographic diversity because the factors that predict lapse in urban settings may be different from those that predict lapse in rural settings.
+This sample also includes much needed geographic diversity because the factors that predict lapse in urban settings may be different from those that predict lapse in rural settings.
 :::
 
 -----------------------------------------------------------------------------
