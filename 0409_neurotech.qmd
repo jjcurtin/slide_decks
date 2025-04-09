@@ -1,5 +1,5 @@
 ---
-title: 'Developing a "Smart" Recovery Monitoring and Support System'
+title: "Developing a 'Smart' Recovery \n\nMonitoring and Support System"
 author: "John J. Curtin, Ph.D."
 institute: "University of Wisconsin-Madison"
 date: "April 9, 2025"
@@ -20,7 +20,7 @@ I’d become a clinical psychologist to help people struggling with alcohol and 
 
 My paternal grandmother died of complications secondary to alcoholism.
 
-My dad has struggled with his use of alcohol for his entire adult life and during periods where he lost control it affected all of us.​
+My dad has struggled with his use of alcohol for his entire adult life and during periods where he lost control it affected all of us.
 
 My cousin, Stephen, has a severe substance use disorder and has been incarcerated several times for drug related offenses. He has had periods of stability but they have always ended in another relapse.
 :::
@@ -53,9 +53,9 @@ However, he also noticed many of the people who had relapsed hadn't used the app
 \
 \
 
-> “Could you predict not only [who]{style="color: blue;"} might be at greatest risk for relapse … <br>
- … but precisely [when]{style="color: blue;"} that relapse might occur … <br>
- … and how [best to intervene]{style="color: blue;"} to prevent it?"
+> “Could you predict not only [who]{.uwred} might be at greatest risk for relapse … <br>
+ … but precisely [when]{.uwred} that relapse might occur … <br>
+ … and how [best to intervene]{.uwred} to prevent it?"
  
  \
  \
@@ -74,11 +74,16 @@ Dave knew that we were exploring the factors that motivated alcohol and other dr
 
 ## Precision Mental Health for Continuing Care 
 
+\
+
 Precision mental health requires us to provide the [right interventions]{.uwred} and supports to the [right people]{.uwred} at the [right time]{.uwred}, [every time]{.uwred}
 
 \
 
-SUD continuing care requires [long-term monitoring]{.uwred} and [ongoing lifestyle adjustments and support]{.uwred} to prevent relapse
+SUD continuing care requires 
+
+- Long-term monitoring
+- Ongoing lifestyle adjustments and support
 
 ::: {.notes}
 These questions that Dave was asking are at the heart of what we now call precision mental health.  How can we provide the **right interventions and supports** to the **right people** at the **right time**, **every time**​
@@ -94,11 +99,16 @@ And, critically, the optimal supports for any specific individual can change mon
 
 ## Precision Mental Health for Continuing Care 
 
+\
+
 [Precision mental health requires us to provide the right interventions and supports to the right people at the right time, every timed]{.gray}
 
 \
 
-[SUD continuing care requires long-term monitoring and ongoing lifestyle adjustments and support to prevent relapse]{.gray}
+[SUD continuing care requires ]{.gray}
+
+- [Long-term monitoring]{.gray}
+- [Ongoing lifestyle adjustments and support]{.gray}
 
 \
 
@@ -119,6 +129,8 @@ And what I'd like to do today is tell you a bit more about how we are doing this
 -----------------------------------------------------------------------------
 
 ## Model Output: Lapses 
+
+\
 
 Lapses
 
@@ -144,6 +156,8 @@ Our focus is on future lapses rather than other clinically meaningful outcomes l
 -----------------------------------------------------------------------------
 
 ## Model Output: Lapses 
+
+\
 
 Lapses
 
@@ -174,6 +188,8 @@ So for these reasons, we are developing risk models that predict the probability
 
 ## Model Inputs: Personal Sensing
 
+\
+
 Personal sensing collects information from smartphones and wearable sensors to identify a person’s [thoughts, feelings, behaviors, and context]{.uwred}.
 
 ::: {.notes}
@@ -191,6 +207,8 @@ Personal sensing is just a fancy term for a broad category of methods that allow
 -----------------------------------------------------------------------------
 
 ## Model Inputs: Personal Sensing
+
+\
 
 [Personal sensing collects information from smartphones and wearable sensors to identify a person’s thoughts, feelings, behaviors, and context.]{.gray}
 
@@ -210,6 +228,8 @@ and we can collect these inputs with very high temporal granularity, at    least
 -----------------------------------------------------------------------------
 
 ## Model Inputs: Personal Sensing
+
+\
 
 [Personal sensing collects information from smartphones and other sensors to identify a person’s thoughts, feelings, behaviors, and context.]{.gray}
 
@@ -231,25 +251,29 @@ Practical requirements
 ::: {.notes}
 There are also some practical requirements.  
 
-If we are going to make our recovery monitoring and support system widely  available, then the measurement must be feasible and acceptable to people  for long term use.
+If we are going to make our recovery monitoring and support system widely available, then the measurement must be feasible and acceptable to people  for long term use.
 
-And the measurements must also be consistent and stable across common      equipment that most people own.
+And the measurements must also be consistent and stable across common equipment that most people own.
 :::
 
 -----------------------------------------------------------------------------
 
 ## Model Inputs: Personal Sensing
 
+\
+
+We use smartphone sensing methods to collect
+
 - Ecological Momentary Assessments (EMA)
 - Contextualized Geolocation
 - Contexualized Smartphone Communications
 
 ::: {.notes}
-From our perspective, these requirements limit us to sensing methods that  use only smartphones with the major operating systems but I'd be happy to  talk more about this decision and the experiences we have had with other   sensing methods that we have explored during the discussion period if      there is interest.
+From our perspective, these requirements limit us to sensing methods that use only smartphones with the major operating systems but I'd be happy to talk more about this decision and the experiences we have had with other sensing methods that we have explored during the discussion period if there is interest.
 
 [PAUSE]
 
-These same requirements have also focused our smartphone sensing efforts   on three separate but complementary sets of raw signals that we believe    can be used to derive many important lapse risk features to input to our   prediction models.  These raw signals are
+These same requirements have also focused our smartphone sensing efforts on three separate but complementary sets of raw signals that we believe can be used to derive many important lapse risk features to input to our prediction models.  These raw signals are
 
 - Ecological momentary assessments
 - Geolocation
@@ -259,6 +283,8 @@ These same requirements have also focused our smartphone sensing efforts   on th
 -----------------------------------------------------------------------------
 
 ## Model Inputs: Personal Sensing
+
+\
 
 We use smartphone sensing methods to collect
 
@@ -271,16 +297,18 @@ Our broad goal is to use features from these powerful signals to develop a recov
 
 - predict future lapses with exceptionally high temporal resolution AND
 
-- understand the risk factors contributing to those predicted lapses so    that we can recommend personalized recovery activities, supports, and      lifestyle adjustments in advance of those lapses to prevent them.
+- understand the risk factors contributing to those predicted lapses so that we can recommend personalized recovery activities, supports, and lifestyle adjustments in advance of those lapses to prevent them.
 
-And critically, this system must perform well enough to be useful when     applied to individuals.
+And critically, this system must perform well enough to be useful when applied to individuals.
 
-In other words, we are not looking to find coarse group-level predictors   of lapses but instead to make predictions for specific individuals at      specific moments in time that are actionable and useful for them.
+In other words, we are not looking to find coarse group-level predictors of lapses but instead to make predictions for specific individuals at specific moments in time that are actionable and useful for them.
 :::
 
 -------------------------------------------------------------------------
 
 ## Lapse Prediction for AUD
+
+\
 
 ::: {.columns}
 :::: {.column width="60%"}
@@ -301,6 +329,7 @@ In other words, we are not looking to find coarse group-level predictors   of la
   - Contextualized Geolocation
   - Contexualized Smartphone Communications
   - (also sensed physiology, sleep, coarse self-report)
+  
 ::::
 
 :::: {.column width="40%"}
@@ -312,14 +341,16 @@ In other words, we are not looking to find coarse group-level predictors   of la
 ::: {.notes}
 So let me transition now to describing the progress we have made so far to develop this recovery monitoring and support system for SUD
 
-As the first step, in 2020 we completed a first NIAAA funded project where we recruited 151 participants who were in early recovery from a moderate   to severe alcohol use disorder.
+As the first step, in 2020 we completed a first NIAAA funded project where we recruited 151 participants who were in early recovery from a moderate to severe alcohol use disorder.
 
-These participants were committed to abstinence at the start of the study  and we followed them for up to three months, using our three sensing       methods and also recording any lapses back to alcohol use.
+These participants were committed to abstinence at the start of the study and we followed them for up to three months, using our three sensing methods and also recording any lapses back to alcohol use.
 :::
 
 -----------------------------------------------------------------------------
 
 ## Lapse Prediction for AUD
+
+\
 
 ::: {.columns}
 :::: {.column width="60%"}
@@ -388,6 +419,9 @@ I'll return to this later both when we evaluate issues of algorithmic fairness a
 
 ::: {.columns}
 :::: {.column width="50%"}
+
+\
+
 - All participants met criteria for moderate to severe AUD
 
 \
@@ -416,7 +450,9 @@ On the right, I am showing you a histogram of the DSM-5 AUD symptom counts to co
 -----------------------------------------------------------------------------
 
 ## Ecological Momentary Assessments 
- 
+
+\
+
 - Current/Recent Experiences
   - Craving
   - Emotional state 
@@ -449,7 +485,9 @@ And on the first EMA each day, they also reported any future risky situations an
 
 ## Modeling: Predictions 
 
-- Predict hour-by-hour probability of [future lapse]{style="color: blue;"}
+\
+
+- Predict hour-by-hour probability of [future lapse]{.uwred}
 
 \
 
@@ -470,7 +508,9 @@ We used features from these sensed signals that I just described to make predict
 
 ## Modeling: Predictions 
 
-- Predict hour-by-hour probability of [future lapse]{style="color: blue;"}
+\
+
+- Predict hour-by-hour probability of [future lapse]{.uwred}
 
 \
 
@@ -487,6 +527,8 @@ And of course, all of the models would only use data collected prior to 7 pm tod
 -----------------------------------------------------------------------------
 
 ## Modeling: Algorithms and Resampling
+
+\
 
 - XGBoost - Boosted decision trees
 - Also considered:
@@ -513,6 +555,8 @@ And again, this is consistent with what we mean by prediction.  We don't care ho
 -----------------------------------------------------------------------------
 
 ## Modeling: Feature Engineering 
+
+\
 
 - Features based on recent past experiences (12, 24, 48, 72, 168 hours)
 
@@ -546,15 +590,18 @@ And we included these scores both in raw form and as change from baselines for t
 
 ::: {.columns}
 :::: {.column width="50%"}
-- Model predicts [probability]{style="color: blue;"} of lapse in next week for “[new]{style="color: blue;"}” observations in test sets
 
 \
 
-- Can panel predictions by [Ground Truth]{style="color: blue;"} (i.e., true lapse vs. no lapse observations
+- Model predicts [probability]{.uwred} of lapse in next week for “[new]{.uwred} observations in test sets
 
 \
 
-- Want high probabilities to be high for true lapses and low for true no lapses
+- Can panel predictions by [Ground Truth]{.uwred} (i.e., true lapse vs. no lapse observations
+
+\
+
+- Want high probabilities for true lapses and low probabilities for true no lapses
 ::::
 
 :::: {.column width="50%"}
@@ -588,6 +635,8 @@ And this is exactly what we see for the one week lapse window model
 
 ## Model Performance: Area under ROC curve (auROC) 
 
+\
+
 The Area under the Receiver Operating Characteristic Curve (auROC) indicates the probability that any true lapse is scored higher than any true no-lapse by the model
 
 - Random performance:  auROC = 0.5 
@@ -617,6 +666,9 @@ And models with auROCs of .90 or higher are considered to have excellent perform
 -----------------------------------------------------------------------------
 
 ## Model Performance: Area under ROC curve (auROC) 
+
+\
+
 The Area under the Receiver Operating Characteristic Curve (auROC) indicates the probability that any true lapse is scored higher than any true no-lapse by the model
 
 - Random performance:  auROC = 0.5 
@@ -676,7 +728,7 @@ But we were also eager to see how well we could do if we required a higher level
 
 -----------------------------------------------------------------------------
 
-## Area under ROC curve (auROC): Next Day Model
+## Model Performance: Next Day Model
 
 ::: {.columns}
 :::: {.column width="40%"}
@@ -700,7 +752,7 @@ And our model that made predictions about the lapse probability in the next day 
 
 -----------------------------------------------------------------------------
 
-## Area under ROC curve (auROC): Next Hour Model
+## Model Performance: Next Hour Model
 
 ::: {.columns}
 :::: {.column width="40%"}
@@ -750,7 +802,10 @@ But we can also use it to understand the global feature importance of each featu
 
 ::: {.columns}
 :::: {.column width="40%"}
-- All EMA items impact lapse probability]
+
+\
+
+- All EMA items impact lapse probability
 ::::
 
 :::: {.column width="60%"}
@@ -781,11 +836,14 @@ First, all of EMA items affect predictions about lapse probability across observ
 
 ::: {.columns}
 :::: {.column width="40%"}
+
+\
+
 - [All EMA items impact lapse probability]{.gray}
 
 \
 
-- Lapse day and Lapse hour are useful as expected
+- Lapse day and lapse hour are useful
 ::::
 
 :::: {.column width="60%"}
@@ -811,11 +869,14 @@ These features likely contribute to the superior performance of the hour model r
 
 ::: {.columns}
 :::: {.column width="40%"}
+
+\
+
 - [All EMA items impact lapse probability]{.gray}
 
 \
 
-- [Lapse day and Lapse hour are useful for day and hour level models as expected]{.gray}
+- [Lapse day and lapse hour are useful]{.gray}
 
 \
 
@@ -842,6 +903,8 @@ But we should be careful to remember that we had limited racial and ethnicity di
 -----------------------------------------------------------------------------
 
 ## Interium Summary and Next Steps
+
+\
 
 - Very strong overall performance
 - Temporally precise models for immediate future lapse risk
@@ -884,7 +947,7 @@ Its only very recently that we have begin to take this seriously and we must.  I
 #| fig-height: 6
 #| fig-width: 8
 
-fig_race
+fig_race_bar
 ```
 ::::
 
@@ -908,7 +971,7 @@ As one example of this issue, the data we collected to train these models from t
 #| fig-height: 6
 #| fig-width: 8
 
-fig_race
+fig_race_bar
 ```
 ::::
 
@@ -951,6 +1014,8 @@ This is obviously unacceptable and we are working now to correct this.
 
 ## Next Steps: Algorithmic Fairness
 
+\
+
 - NIDA project recruited ~ 400 patients in recovery from Opioid Use Disorder 
 - National sample (size; diversity: demographics, location)
 - More variation in stage of recovery (1 – 6 months at start)
@@ -987,7 +1052,6 @@ An auROC of .94
 
 ## Next Steps: Algorithmic Fairness
 
-
 - [Excellent performance: auROC ~ 0.94]{.gray}
 
 ```{r}
@@ -1009,7 +1073,6 @@ But let me explicitly say that issues related to fairness and the potential to e
 
 I’d be happy to dive a bit deeper into this during the discussion period if people are interested to engage more with this.
 :::
-
 
 -----------------------------------------------------------------------------
 
@@ -1115,6 +1178,8 @@ In our current projects, we target people and places that we interact with at le
 
 ## Contextualized Geolocation
 
+\
+
 - [Location type]{.uwred} (e.g., home, home of friend, bar, restaurant, liquor store, work, health care, AA/recovery meeting, gym/fitness center)
 - Is [alcohol available]{.uwred} at this location
 - Have you [drank alcohol]{.uwred} at this location?
@@ -1132,6 +1197,8 @@ NOTE THAT SOME CAN COME FROM PUBLIC DATA
 
 ## Contextualized Communications
 
+\
+
 - Have you [drank alcohol]{.uwred} with this person?
 - What is their [drinking status]{.uwred} (e.g., drinker, non-drinker)?
 - Would you expect them to [drink in your presence]{.uwred}?
@@ -1147,7 +1214,7 @@ THEN TALK ABOUT PRELIMINARY ANALYSES FROM CLAIRE, COCO, AND KENDRA
 
 -----------------------------------------------------------------------------
 
-## Next Steps: How to Yield Clinical Benefits 
+## Next Steps: Clinical Uses
   
 ::: {.notes}
 Finally, we need to determine how to use these models for clinical benefit.  And we are just now starting to focus on this goal with a grant that was just funded by NIAAA this past Fall.   
@@ -1156,9 +1223,11 @@ So let me spend a bit of time unpacking how we are thinking about implementing t
 :::
 -----------------------------------------------------------------------------
 
-## Clinical Uses: DO NOT provide model output to clinicians 
+## Next Steps: Clinical Uses
 
-DO NOT provide model output to clinicians
+\
+
+Do [NOT]{.uwred} provide model output to clinicians
 
 - Clinicians are over-burdened
 - Not ready for new data streams
@@ -1175,11 +1244,14 @@ However, in contrast, our work with participants suggested that they did see pot
 
 -----------------------------------------------------------------------------
 
-## Clinical Uses: DO NOT Predict Lapses
+## Next Steps: Clinical Uses
 
 ::: {.columns}
 :::: {.column width="50%"}
-DO NOT predict class labels  (Lapse vs. No-Lapse)
+
+\
+
+Do [NOT]{.uwred} predict class labels  (Lapse vs. No-Lapse)
 
 - Iatriogenic effects?
 - Information loss
@@ -1200,11 +1272,14 @@ But there are several reasons that we DO NOT want to predict dichotomous class l
 
 -----------------------------------------------------------------------------
 
-## Clinical Uses: DO NOT Predict Lapses
+## Next Steps: Clinical Uses
 
 ::: {.columns}
 :::: {.column width="50%"}
-DO NOT predict class labels  (Lapse vs. No-Lapse)
+
+\
+
+Do [NOT]{.uwred} predict class labels  (Lapse vs. No-Lapse)
 
 - Iatriogenic effects?
 - Information loss
@@ -1223,11 +1298,14 @@ Second, these days, I think we have all come to understand that taking scores th
 
 -----------------------------------------------------------------------------
 
-## Clinical Uses: DO Use Lapse Probabilities
+## Next Steps: Clinical Uses
 
 ::: {.columns}
 :::: {.column width="50%"}
-DO use lapse probability
+
+\
+
+[DO]{.uwred} use lapse probability
 
 - auROCs range from 0.90 - 0.94
 ::::
@@ -1245,11 +1323,14 @@ I've already shown you that these probabilities can discriminate very well betwe
 
 -----------------------------------------------------------------------------
 
-## Clinical Uses: DO Use Lapse Probabilities
+## Next Steps: Clinical Uses
 
 ::: {.columns}
 :::: {.column width="50%"}
-DO use lapse probability
+
+\
+
+[DO]{.uwred} use lapse probability
 
 - [auROCs range from 0.90 - 0.94]{.gray}
 - Probabilities are calibrated and ordinal
@@ -1281,14 +1362,17 @@ Given this, we believe that the lapse probabilities can provide precise, fine gr
 
 ## Next Steps: Personalized Daily Support Recommendations
 
+\
+
 - SHAP values can identify the most important risk features for a [specific individual each day]{.uwred}
 - Day model can be used to identify each patients daily lapse risk, risk features, and personalized supports or activities to address those risks. 
 - Morning messages could:w
 
 
+HERE
 ::: {.notes}
 
-But we can get much more than just lapse probabilities from these models.​
+But we can get much more than just lapse probabilities from these models.
 
 Previously I showed you how we can use SHAP values across all observations to determine which features are globally important across all people and timepoints.   
 
@@ -1296,12 +1380,14 @@ We can also use those same SHAP values to understand which features contributed 
 
 For example, we could deploy the next day model to get :::
 
+:::
+
 -----------------------------------------------------------------------------
 
-## Beyond Prediction: Personalized Recommendations 
+## Next Steps: Personalized Daily Support Recommendations
 
 ::: columns
-::: {.column width="50%"}
+:::: {.column width="50%"}
 ```{r}
 #| fig-height: 3
 #| fig-width: 5
@@ -1309,21 +1395,21 @@ For example, we could deploy the next day model to get :::
 source(here::here("figs/opt/figs_opt_shaps.R"))
 fig_shap_ex1
 ```
-:::
+::::
 
-::: {.column width="50%"}
+:::: {.column width="50%"}
 <!--Blank
-:::
+::::
 :::
 
 ::: columns
-::: {.column width="50%"}
+:::: {.column width="50%"}
 <!-- Blank-->
-:::
+::::
 
-::: {.column width="50%"}
+:::: {.column width="50%"}
 <!-- Blank-->
-:::
+::::
 :::
 
 ::: {.notes}
@@ -1332,36 +1418,36 @@ For example, in this first plot,  I am showing you someone who would be predicte
 
 -----------------------------------------------------------------------------
 
-## Beyond Prediction: Personalized Recommendations 
+## Next Steps: Personalized Daily Support Recommendations
 
 ::: columns
-::: {.column width="50%"}
+:::: {.column width="50%"}
 ```{r}
 #| fig-height: 3
 #| fig-width: 5
 
 fig_shap_ex1
 ```
-:::
+::::
 
-::: {.column width="50%"}
+:::: {.column width="50%"}
 <!--blank-->
-:::
+::::
 :::
 
 ::: columns
-::: {.column width="50%"}
+:::: {.column width="50%"}
 ```{r}
 #| fig-height: 3
 #| fig-width: 5
 
 fig_shap_ex2
 ```
-:::
+::::
 
-::: {.column width="50%"}
+:::: {.column width="50%"}
 <!--Blank-->
-:::
+::::
 :::
 
 ::: {.notes}
@@ -1370,41 +1456,41 @@ In contrast, a second person might have similarly high lapse probability on day 
 
 -----------------------------------------------------------------------------
 
-## Beyond Prediction: Personalized Recommendations 
+## Next Steps: Personalized Daily Support Recommendations
 
 ::: columns
-::: {.column width="50%"}
+:::: {.column width="50%"}
 ```{r}
 #| fig-height: 3
 #| fig-width: 5
 
 fig_shap_ex1
 ```
-:::
+::::
 
-::: {.column width="50%"}
+:::: {.column width="50%"}
 <!--Blank-->
-:::
+::::
 :::
 
 ::: columns
-::: {.column width="50%"}
+:::: {.column width="50%"}
 ```{r}
 #| fig-height: 3
 #| fig-width: 5
 
 fig_shap_ex2
 ```
-:::
+::::
 
-::: {.column width="50%"}
+:::: {.column width="50%"}
 ```{r}
 #| fig-height: 3
 #| fig-width: 5
 
 fig_shap_ex3
 ```
-:::
+::::
 :::
 
 ::: {.notes}
@@ -1417,7 +1503,7 @@ In this way, we can provide personalized recommendations to patients that are ta
 
 -----------------------------------------------------------------------------
 
-## Beyond Prediction: Personalized Recommendations 
+## Next Steps: Personalized Daily Support Recommendations
 
 ::: {.columns}
 :::: {.column width="50%"}
@@ -1441,7 +1527,7 @@ We are really excited about these possibilities so let me tell you more about ho
 
 -----------------------------------------------------------------------------
 
-## Clinical Uses: Advanced Warning 
+## Next Steps: Advanced Warning 
 
 ::: {.columns}
 :::: {.column width="50%"}
@@ -1470,18 +1556,19 @@ FREE TALK
 
 ## Next Steps: Optimize System Feedback to Patients 
 
-- Sensing EMA and geolocation for six months
-- Model updated each night (4 am) for next day
-  - Lapse probability prediction
-  - Recent trend in lapse probability
+\
+
+- Sensing EMA and geolocation for four months
+
+- Model updated each night for next day
+  - Lapse probability predictions
   - Important risk features
-  - Risk relevant support recommendation
-  
+  - Risk relevant support recommendations
+
 - Participants receive daily messages varying combinations of these components
 
-- Measure trust, utility, engagement, and clinical outcomes
+- Measure trust, engagement, and clinical outcomes
 
-Grant funded in September 2024
 
 ![](https://github.com/jjcurtin/slide_decks/blob/main/images/opt_pi_wide.png?raw=true){.absolute bottom=0}
 

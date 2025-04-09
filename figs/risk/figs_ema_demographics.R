@@ -32,29 +32,33 @@ fig_educ_bar <- d |>
     labs(title = "Education", x = NULL, y = "count") +
     theme(legend.title = element_blank(), legend.position = "none") +
     theme(axis.text = element_text(size = 12, face = "bold")) + 
-    theme(axis.text.x = element_text(size = 10, color = "#C5050C", angle = 20, hjust = 1)) + 
+    theme(axis.text.x = element_text(size = 10, color = "black", angle = 20, hjust = 1)) + 
     theme(plot.title = element_text(size = 15, face = "bold", color = "#C5050C"))
 
 # Race
 fig_race_bar <- d |>
+  mutate(white = fct(white, levels = c(
+    "White/Non-hispanic", "Other"))) |>
   count(white) |>
   ggplot(aes(x = white, y = n, fill = white)) +
     geom_bar(stat = "identity", width = 1) +
     labs(title = "Race/Ethnicity", x = NULL, y = "count") +
     theme(legend.title = element_blank(), legend.position = "none") +
     theme(axis.text = element_text(size = 12, face = "bold")) + 
-    theme(axis.text.x = element_text(size = 10, color = "#C5050C", angle = 20, hjust = 1)) + 
+    theme(axis.text.x = element_text(size = 10, color = "black", angle = 20, hjust = 1)) + 
     theme(plot.title = element_text(size = 15, face = "bold", color = "#C5050C"))
 
 # Sex
 fig_sex_bar <- d |>
+  mutate(sex = fct(sex, levels = c(
+    "Male", "Female"))) |>
   count(sex) |>
   ggplot(aes(x = sex, y = n, fill = sex)) +
     geom_bar(stat = "identity", width = 1) +
     labs(title = "Sex at Birth", x = NULL, y = "count") +
     theme(legend.title = element_blank(), legend.position = "none") +
     theme(axis.text = element_text(size = 12, face = "bold")) + 
-    theme(axis.text.x = element_text(size = 10, color = "#C5050C", angle = 20, hjust = 1)) + 
+    theme(axis.text.x = element_text(size = 10, color = "black", angle = 20, hjust = 1)) + 
     theme(plot.title = element_text(size = 15, face = "bold", color = "#C5050C"))
 
 # Marital status
@@ -65,7 +69,7 @@ fig_ms_bar <- d |>
     labs(title = "Marital Status", x = NULL, y = "count") +
     theme(legend.title = element_blank(), legend.position = "none") +
     theme(axis.text = element_text(size = 12, face = "bold")) + 
-    theme(axis.text.x = element_text(size = 10, color = "#C5050C", angle = 20, hjust = 1)) + 
+    theme(axis.text.x = element_text(size = 10, color = "black", angle = 20, hjust = 1)) + 
     theme(plot.title = element_text(size = 15, face = "bold", color = "#C5050C"))
 
 # Age
@@ -74,7 +78,7 @@ fig_age <- d |>
   geom_histogram(fill = "gray", color = "black", bins = 12) +
   labs(title = "Age (in years)", x = NULL, y = "count") +
   theme(axis.text = element_text(size = 12, face = "bold")) + 
-  theme(axis.text.x = element_text(size = 10, color = "#C5050C")) + 
+  theme(axis.text.x = element_text(size = 10, color = "black")) + 
   theme(plot.title = element_text(size = 15, face = "bold", color = "#c5050c"))
 
 # Income
@@ -83,7 +87,7 @@ fig_income <- d |>
   geom_histogram(fill = "gray", color = "black", bins = 12) +
   labs(title = "Income (in thousands)", x = NULL, y = "count") +
   theme(axis.text = element_text(size = 12, face = "bold")) + 
-  theme(axis.text.x = element_text(size = 10, color = "#C5050C")) + 
+  theme(axis.text.x = element_text(size = 10, color = "black")) + 
   theme(plot.title = element_text(size = 15, face = "bold", color = "#c5050c"))
 
 # AUD Sx
@@ -94,7 +98,7 @@ fig_sx <- d |>
   scale_x_continuous(breaks = seq(0, 11),
                        limits = c(0, 11)) +
   theme(axis.text = element_text(size = 12, face = "bold")) + 
-  theme(axis.text.x = element_text(size = 10, color = "#C5050C")) + 
+  theme(axis.text.x = element_text(size = 10, color = "black")) + 
   theme(plot.title = element_text(size = 15, face = "bold", color = "#c5050c"))
 
 ####################################

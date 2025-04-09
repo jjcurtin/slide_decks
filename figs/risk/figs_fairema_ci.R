@@ -15,6 +15,12 @@ ci <- read_csv(here::here(path_data, "fairema_ci_1day.csv"),
 ################################
 # Function to plot CIs
 ################################
+gg_color_hue <- function(n) {
+  hues = seq(15, 375, length = n + 1)
+  hcl(h = hues, l = 65, c = 100)[1:n]
+}
+
+col_groups <- gg_color_hue(2)
 
 plot_ci <- function(d, title, delta, y = .70){
   the_label <- str_c("Delta = ", sprintf("%.2f", delta))
@@ -30,7 +36,7 @@ plot_ci <- function(d, title, delta, y = .70){
       ylab("auROC") +
       theme(legend.position = "none") +
       scale_y_continuous(breaks = seq(0.4, 1, 0.10), limits = c(0.4, 1)) +
-      scale_color_manual(values = c("orange", "#C5050C")) +
+      scale_color_manual(values = col_groups) +
       theme(title = element_text(size = 16, color = "#C5050C", face = "bold"),
             axis.text.x = element_text(size = 14, color = "black", face = "bold"),
             axis.text.y = element_text(size = 12, color = "black"),

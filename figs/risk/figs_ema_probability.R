@@ -76,7 +76,7 @@ plot_ci <- function(d) {
 plot_probs <- function(df_preds, model) {
   bar_color <- 
     case_when(
-      tolower(model) == "week" ~ "orange",
+      tolower(model) == "week" ~ "red",
       tolower(model) == "day" ~ "green",
       tolower(model) == "hour" ~ "blue",
     )
