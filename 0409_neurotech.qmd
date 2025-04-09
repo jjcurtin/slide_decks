@@ -775,7 +775,7 @@ and our one hour model had the highest performance of all with an auROC of 0.93.
 
 Candidly, we hadn’t anticipated that we could do this well with such high levels of temporal precision.
 
-But we can, and to be clear, we believe all three of these models to have clinically implementable levels of performance such that we can use them to make meaningful decisions for individual participants at specific moments in time if we can embed these models within a recovery monitoring and support system. :::
+But we can, and to be clear, we believe all three of these models to have clinically implementable levels of performance such that we can use them to make meaningful decisions for individual participants at specific moments in time if we can embed these models within a recovery monitoring and support system. 
 :::
 
 -----------------------------------------------------------------------------
@@ -824,11 +824,13 @@ fig_global_hour
 
 [PAUSE]
 
-The plot on the right shows feature names and their associated importance as indexed by mean absolute SHAP values across all the predictions made by the Next Hour Model. 
+The plot on the right shows feature categories and their associated importance as indexed by mean absolute SHAP values across all the predictions made by the Next Hour Model. 
 
-The bar width shows the relative importance of each feature for each model, globally across all participants and observations.  From this we see a few important characteristics of the NEXT HOUR model.   
+The bar width shows the relative importance of each feature, globally across all participants and observations.  From this we see a few important characteristics of the NEXT HOUR model.   
 
-First, all of EMA items affect predictions about lapse probability across observations  As you might expect, history of past lapses has a big influence on the probability of a future lapse.  But self reported abstinence efficacy, craving, emotional state, history of stress events, and other features from the EMA all make meaningful contributions to lapse probability in the next hour across observations.  
+First, all of EMA items affect predictions about lapse probability across observations.  
+
+As you might expect, history of past lapses has a big influence on the probability of a future lapse.  But self reported abstinence efficacy, craving, emotional state, history of stressful events, and other features from the EMA all make meaningful contributions to lapse probability in the next hour across observations.  
 :::
 -----------------------------------------------------------------------------
 
@@ -858,7 +860,9 @@ fig_global_hour
 :::
 
 ::: {.notes}
-We also see that we can use lapse day and lapse hour to make predictions of the lapse probability in the next hour.  Not surprisingly, people are more likely to lapse on weekends and during evening hours and the hour level model can use that information to improve its lapse predictions.  
+We also see that we can use lapse day and lapse hour to make predictions of the lapse probability in the next hour.  
+
+Not surprisingly, people are more likely to lapse on weekends and during evening hours and the hour level model can use that information to improve its lapse predictions.  
 
 These features likely contribute to the superior performance of the hour model relative to the day and week interval prediction models.  
 :::
@@ -897,7 +901,7 @@ fig_global_hour
 ::: {.notes}
 And finally, we see that demographics were not particularly important for predicting lapses. In other words, the frequency of observed lapses did not differ meaningfully by these demographic characteristics.  
 
-But we should be careful to remember that we had limited racial and ethnicity diversity in the sample and this may have limited our ability to detect differences in lapse risk by those characteristics.
+This shouldnt be too surprising either, because these demographic characteristics are stable for an individual over time and therefore can't explain changes in lapse probability within an individual over time. 
 :::
 
 -----------------------------------------------------------------------------
@@ -1065,7 +1069,7 @@ cowplot::plot_grid(fig_fair_race_2, fig_fair_income_2, fig_fair_sex_2,
 ```
 
 ::: {.notes}
-And much more importantly, this next day prediction model appears much fairer with respect to its performance in all three of the subgroups where our original models were deficient.
+And more importantly, this next day prediction model appears much fairer with respect to its performance in all three of the subgroups where our original models were deficient.
 
 [PAUSE]
 
@@ -1263,7 +1267,7 @@ Do [NOT]{.uwred} predict class labels  (Lapse vs. No-Lapse)
 :::
 
 ::: {.notes}
-But lets again first start with how we should NOT use this system with individuals with SUDs.
+Lets start first with how we should NOT use this system with individuals with SUDs.
 
 We have been focusing on the lapse probabilities that are natively output from our prediction models.   However, its common to use these models to predict formal class labels.  In other words, to specifically predict that a lapse will happen or not.  Basically, a threshold is set, for example, 0.5, and if the probability of a lapse exceeds that threshold the model predicts that a lapse will occur.  Otherwise, it predicts that no lapse will occur
 
@@ -1375,7 +1379,7 @@ Previously I showed you how we can use global SHAP values to determine which fea
 
 We can also use SHAP values to understand which features contributed most strongly to any single prediction for a specific person at a specific moment in time. 
 
-This allows us to understand not only WHEN a lapse might occur but also WHY and potentially how best to intervene.
+This allows us to understand not only WHEN a lapse might occur but also WHY and therefore potentially how best to intervene.
 :::
 
 -----------------------------------------------------------------------------
@@ -1409,7 +1413,7 @@ fig_shap_ex1
 :::
 
 ::: {.notes}
-For example, in this first plot,  I am showing you someone who would be predicted to have a high lapse probability on day 30 of their recovery because they have been reporting high craving.  For that person, we could recommend urge surfing techniques or remind them that distracting activities can help get them through short periods of craving.
+For example, in this first plot,  I am showing you SHAP values for someone who would be predicted to have a high lapse probability on day 30 of their recovery because they have been reporting high craving.  For that person, we could recommend urge surfing techniques or remind them that distracting activities can help get them through short periods of craving that day.
 :::
 
 -----------------------------------------------------------------------------
@@ -1490,7 +1494,7 @@ fig_shap_ex3
 :::
 
 ::: {.notes}
-And at a later point in time, that same person may have improved their abstinence motivation but now be at increased risk for a lapse because of a string of recent past and anticipated stressors.   
+And at a later point in time, on day 70, that same person may have improved their abstinence motivation but now be at increased risk for a lapse because of a string of recent past and anticipated stressors.   
 
 Now they could be provided with guided stress reduction or relaxation techniques that they could use each day.  
 
@@ -1508,7 +1512,7 @@ In this way, we can provide personalized recommendations to patients that are ta
 - We can also [eventually learn]{.uwred} which interventions are best for which risk
 
 ::: {.notes}
-As a starting point, the mapping between between important local risk features and specific interventions or supports can be created using clinical domain expertise. In other words, what would a clinician tell their patient to do in those circumstances. We can simply hard code these clinically derived mappings between risk features and support recommendations in our monitoring and support system.
+As a starting point, the mapping between between important local risk features and specific interventions or supports can be created using clinical domain expertise. In other words, what would a clinician tell their patient to do in those circumstances. We can simply hard code these clinically derived mappings between risk features and support recommendations in our monitoring and support system.  And this is what we are doing currently.
 
 However, with enough training data, reinforcement learning can also be applied to this problem to allow the model to learn the best intervention to recommend given a set of risk features to reduce subsequent lapse probability.
 :::
@@ -1570,11 +1574,11 @@ fig_lag_ci
 Given this, we have begun to explore various methods for predicting lapse probabilities further into the future.  
 
 
-As a first step, we took the model which predicted lapses in the next week and lagged it by different periods from one day up to one week.   For example, the two week lagged model predicts the probability of a lapse that will occur during a one week period but that period begins two weeks from now.  
+As a first step, we took the model which predicted lapses in the next week and lagged it by different periods from one day up to two weeks into the future.   For example, the two week lagged model predicts the probability of a lapse that will occur during a one week period but that period begins two weeks from now.  
 
 And as you can see from the plot on the right, this approach does result in a drop in performance as we move further into the future.  But even with a two week lag, we still have an auROC of .85 which is still potentially clinically useful.
 
-And we are currently exploring other methods for predicting lapse probabilities further into the future that may perform better than this simple lagging approach and I'd be happy to talk more about those during the discussion period if anyone is intersted.
+And we are currently exploring other methods for predicting lapse probabilities further into the future that may perform better than this simple lagging approach and I'd be happy to talk more about those during the discussion period if anyone is interested.
 :::
 
 -----------------------------------------------------------------------------
@@ -1618,7 +1622,7 @@ We can then manipulate what information we include in daily messages from the sy
 
 Obviously, we are very excited to get started on this project because it will bring us one step closer to providing meaningful support to individuals in recovery.   
 
-Thanks for your time, and I'd be happy to answer any questions you might have now or later at the end of this session.
+Thanks for your time.  I am eager to hear your reactions to all of this and I'd be happy to answer any questions.
 :::
 
 -----------------------------------------------------------------------------
