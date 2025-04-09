@@ -884,7 +884,7 @@ These features likely contribute to the superior performance of the hour model r
 
 \
 
-- Demographics not particularly important (but limited race/ethnic diversity)
+- Demographics not particularly important
 ::::
 
 :::: {.column width="60%"}
@@ -1229,12 +1229,21 @@ So let me spend a bit of time unpacking how we are thinking about implementing t
 
 ## Next Steps: Clinical Uses
 
+::: {.columns}
+:::: {.column width="50%"}
+
 \
 
-Do [NOT]{.uwred} provide model output to clinicians
+Do [NOT]{.uwred} provide model [output to clinicians]{.uwred}
 
 - Clinicians are over-burdened
 - Not ready for new data streams
+::::
+
+:::: {.column width="50%"}
+<!--Blank-->
+::::
+:::
 
 ::: {.notes}
 When we started this work, we believed we were building this system to inform clinicians about their caseload.  
@@ -1255,7 +1264,7 @@ However, in contrast, our work with participants suggested that they did see pot
 
 \
 
-Do [NOT]{.uwred} predict class labels  (Lapse vs. No-Lapse)
+Do [NOT]{.uwred} predict [class labels]{.uwred}  (lapse vs. no-lapse)
 
 - Iatriogenic effects?
 - Information loss
@@ -1283,7 +1292,7 @@ But there are several reasons that we DO NOT want to predict dichotomous class l
 
 \
 
-Do [NOT]{.uwred} predict class labels  (Lapse vs. No-Lapse)
+Do [NOT]{.uwred} predict [class labels]{.uwred}  (lapse vs. no-lapse)
 
 - Iatriogenic effects?
 - Information loss
@@ -1309,7 +1318,7 @@ Second, these days, I think we have all come to understand that taking scores th
 
 \
 
-[DO]{.uwred} use lapse probability
+[DO]{.uwred} use [lapse probability]{.uwred}
 
 - auROCs range from 0.90 - 0.94
 ::::
@@ -1334,7 +1343,7 @@ I've already shown you that these probabilities can discriminate very well betwe
 
 \
 
-[DO]{.uwred} use lapse probability
+[DO]{.uwred} use [lapse probability]{.uwred}
 
 - [auROCs range from 0.90 - 0.94]{.gray}
 - Probabilities are calibrated and ordinal
@@ -1369,6 +1378,9 @@ Given this, we believe that the lapse probabilities can provide precise, fine gr
 \
 
 - SHAP values from the NEXT DAY model can identify the most important risk features for a [specific individual]{.uwred} on [each day]{.uwred}
+
+\
+
 - These features can be used to [personalize]{.uwred} daily support recommendations
 
 ::: {.notes}
@@ -1508,7 +1520,13 @@ In this way, we can provide personalized recommendations to patients that are ta
 \
 
 - [SHAP values from the NEXT DAY model can identify the most important risk features for a specific individual on each day]{.gray}
+
+\
+
 - [These features can be used to [personalize]{.uwred} daily support recommendations]{.gray}
+
+\
+
 - We can also [eventually learn]{.uwred} which interventions are best for which risk
 
 ::: {.notes}
@@ -1523,8 +1541,8 @@ However, with enough training data, reinforcement learning can also be applied t
 
 ::: {.columns}
 :::: {.column width="50%"}
-- These previous models only predict immediate future - next week, next day, next hour
-- People may need advanced warning to put some types of supports into place 
+- These previous models only predict immediate future 
+- Advanced warning needed for some types of supports 
 ::::
 
 :::: {.column width="50%"}
@@ -1549,12 +1567,12 @@ However, for some types of support, people may need some advanced warning to put
 
 ::: {.columns}
 :::: {.column width="50%"}
-- [These previous models only predict immediate future - next week, next day, next hour]{.gray}
-- [People may need advanced warning to put some types of supports into place]{.gray}
+- [These previous models only predict immediate future]{.gray}
+- [Advanced warning needed for some types of supports]{.gray} 
 
 \
 
-- We explored lagging the one week model up to two weeks into the future
+- Can lag model up to two weeks into the future
 - Performance drops but still remains good
 :::
 

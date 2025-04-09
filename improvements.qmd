@@ -1,0 +1,13 @@
+color feature categories in global shap as we talk about each conclusion
+
+add in feature importance for ema/gps model
+
+order still not perfect.  Some confusion when talking about new NIAAA grant
+
+Fewer words on slides?
+
+
+3 panel fairness plots have x-axis label issues.  Also size issues
+
+
+calibration plot is odd color and line too thin
