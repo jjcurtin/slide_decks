@@ -1523,7 +1523,7 @@ In this way, we can provide personalized recommendations to patients that are ta
 
 \
 
-- [These features can be used to [personalize]{.uwred} daily support recommendations]{.gray}
+- [These features can be used to personalize daily support recommendations]{.gray}
 
 \
 
@@ -1541,7 +1541,7 @@ However, with enough training data, reinforcement learning can also be applied t
 
 ::: {.columns}
 :::: {.column width="50%"}
-- These previous models only predict immediate future 
+- Previous models only predict immediate future 
 - Advanced warning needed for some types of supports 
 ::::
 
@@ -1567,7 +1567,7 @@ However, for some types of support, people may need some advanced warning to put
 
 ::: {.columns}
 :::: {.column width="50%"}
-- [These previous models only predict immediate future]{.gray}
+- [Previous models only predict immediate future]{.gray}
 - [Advanced warning needed for some types of supports]{.gray} 
 
 \
