@@ -231,7 +231,7 @@ and we can collect these inputs with very high temporal granularity, at    least
 
 \
 
-[Personal sensing collects information from smartphones and other sensors to identify a person’s thoughts, feelings, behaviors, and context.]{.gray}
+[Personal sensing collects information from smartphones and wearable sensors to identify a person’s thoughts, feelings, behaviors, and context.]{.gray}
 
 \
 
@@ -1127,7 +1127,6 @@ Looking at the red dots indicating the places I visit, the app can detect the re
 
 ## ...Imagine my text messages...
 
-![smartphone_uber.png](https://github.com/jjcurtin/lectures/blob/main/images/smartphone_uber.png?raw=true){.absolute top="15%" left="33%" width="33%" height="auto"}\ 
 
 ::: {.notes}
 In addition to geolocation, we also collected my smartphone communications logs and even the content of my text messages.
