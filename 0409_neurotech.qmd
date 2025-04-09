@@ -1364,22 +1364,18 @@ Given this, we believe that the lapse probabilities can provide precise, fine gr
 
 \
 
-- SHAP values can identify the most important risk features for a [specific individual each day]{.uwred}
-- Day model can be used to identify each patients daily lapse risk, risk features, and personalized supports or activities to address those risks. 
-- Morning messages could:w
+- SHAP values from the NEXT DAY model can identify the most important risk features for a [specific individual]{.uwred} on [each day]{.uwred}
+- These features can be used to [personalize]{.uwred} daily support recommendations
 
-
-HERE
 ::: {.notes}
 
 But we can get much more than just lapse probabilities from these models.
 
 Previously I showed you how we can use SHAP values across all observations to determine which features are globally important across all people and timepoints.   
 
-We can also use those same SHAP values to understand which features contributed most strongly to any prediction for a specific person at a specific moment in time. This allows us to understand not only WHEN a lapse might occur but also WHY and potentially how best to intervene.
+We can also use those same SHAP values to understand which features contributed most strongly to any prediction for a specific person at a specific moment in time. 
 
-For example, we could deploy the next day model to get :::
-
+This allows us to understand not only WHEN a lapse might occur but also WHY and potentially how best to intervene.
 :::
 
 -----------------------------------------------------------------------------
@@ -1505,11 +1501,11 @@ In this way, we can provide personalized recommendations to patients that are ta
 
 ## Next Steps: Personalized Daily Support Recommendations
 
-::: {.columns}
-:::: {.column width="50%"}
-- [Tools from interpretable AI can help explain why a future lapse is expected]{style="color: gray;"}
-- [Local SHAP values highlight important risk features for a specific individual at a specific moment in time]{style="color: gray;"}
-- We can also [eventually learn]{style="color: blue;"} which interventions are best for which risk
+\
+
+- [SHAP values from the NEXT DAY model can identify the most important risk features for a specific individual on each day]{.gray}
+- [These features can be used to [personalize]{.uwred} daily support recommendations]{.gray}
+- We can also [eventually learn]{.uwred} which interventions are best for which risk
 ::::
 
 :::: {.column width="50%"}
@@ -1581,7 +1577,9 @@ We need to be able to provide feedback from these models to patients such that t
 
 And we were just awarded another grant from the NIAAA to do exactly this.  
 
-In this project, we will be using a model with inputs from both EMA and geolocation.  We will use the model to make 
+In this project, we have embedded a prediction model that uses inputs from both EMA and geolocation within a recovery monitoring and support app. 
+
+This app will provide participants 
 
 - daily lapse probability predictions, 
 - identify current personalized lapse risks, 
