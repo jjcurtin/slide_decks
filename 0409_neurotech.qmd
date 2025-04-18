@@ -332,7 +332,7 @@ In other words, we are not looking to find coarse group-level predictors of laps
   
 ::::
 
-:::: {.column width="40%"}
+:::: {.column width="36%"}
 ![risk1_pis.png](https://github.com/jjcurtin/lectures/blob/main/images/risk1_pis.png?raw=true)\    
 ![niaaa_logo.png](https://github.com/jjcurtin/lectures/blob/main/images/niaaa_logo.png?raw=true)\    
 ::::
@@ -373,7 +373,7 @@ These participants were committed to abstinence at the start of the study and we
   - (also sensed physiology, sleep, coarse self-report)
 ::::
 
-:::: {.column width="40%"}
+:::: {.column width="36%"}
 ![risk1_pis.png](https://github.com/jjcurtin/lectures/blob/main/images/risk1_pis.png?raw=true)\    
 ![niaaa_logo.png](https://github.com/jjcurtin/lectures/blob/main/images/niaaa_logo.png?raw=true)\    
 ::::
@@ -483,6 +483,38 @@ And on the first EMA each day, they also reported any future risky situations an
 
 -----------------------------------------------------------------------------
 
+## Modeling: Feature Engineering 
+
+\
+
+- Features based on recent past experiences (12, 24, 48, 72, 168 hours)
+
+\
+
+- Min, max, and median response (all items)
+
+\
+
+- History (count) of past lapses (item 1) and completed EMAs (compliance)
+
+\
+
+- Raw scores and change scores (from baseline/all past responses)
+
+::: {.notes}
+We used the raw responses to the EMAs to engineer about 300 features to use in our models to predict future lapses
+
+We formed features by aggregating EMA items over various past time periods ranging from 12 - 168 hours in the past relative to the window we want to predict into.
+
+We calculated mins, maxes and medians for the EMA items in these time periods
+
+We also calculated counts of past lapses and counts of past missing EMAs to index engagement with our monitoring system.
+
+And we included these scores both in raw form and as change from baseline for the participant based on all their previous responses since the start of the study.
+:::
+
+-----------------------------------------------------------------------------
+
 ## Modeling: Predictions 
 
 \
@@ -497,11 +529,14 @@ And on the first EMA each day, they also reported any future risky situations an
   - 1 hour 
 
 ::: {.notes}
-OK, now that we've talked about sensing, I want to transition to training models to use features from these raw signals to predict lapses.
+
+[PAUSE]
+
+OK, now that we've talked about sensing and features, I want to transition to talk about how we train models to use these features to predict lapses.
 
 For our purposes today I wont dive deep into the machine learning methods but let me highlight a few high level details 
 
-We used features from these sensed signals that I just described to make predictions about the hour-by-hour probability of a future lapse.  We are developing separate models for three future lapse windows – lapses in the next week, lapses in the next day, and lapses in the next hour.  
+We used the features that I just described to make predictions about the hour-by-hour probability of a future lapse.  We are developing separate models for three future lapse windows – lapses in the next week, lapses in the next day, and lapses in the next hour.  
 :::
 
 -----------------------------------------------------------------------------
@@ -550,38 +585,6 @@ And we are rigorously evaluating the performance of these models using grouped, 
 For our purposes, what this means is that we evaluate model performance in 30 separate held out test sets and each of these sets contain new observations from new participants that were not used to train the models.  
 
 And again, this is consistent with what we mean by prediction.  We don't care how our models perform with the participants we used to train them. We want to know how well the models will work when we implement them with new people in the future.
-:::
-
------------------------------------------------------------------------------
-
-## Modeling: Feature Engineering 
-
-\
-
-- Features based on recent past experiences (12, 24, 48, 72, 168 hours)
-
-\
-
-- Min, max, and median response (all items)
-
-\
-
-- History (count) of past lapses (item 1) and completed EMAs (compliance)
-
-\
-
-- Raw scores and change scores (from baseline/all past responses)
-
-::: {.notes}
-We used the raw responses to the EMAs to engineer about 300 features to use in our models to predict future lapses
-
-We formed features by aggregating EMA items over various past time periods ranging from 12 - 168 hours in the past relative to the window we want to predict into.
-
-We calculated mins, maxes and medians for the EMA items in these time periods
-
-We also calculated counts of past lapses and counts of past EMAs completed to index engagment with our monitoring system.
-
-And we included these scores both in raw form and as change from baselines for the participant based on all their previous responses since the start of the study.
 :::
 
 -----------------------------------------------------------------------------
@@ -643,7 +646,7 @@ The Area under the Receiver Operating Characteristic Curve (auROC) indicates the
 - Perfect performance: auROC = 1.0 
 
 ::: {.columns}
-:::: {.column width="40%"}
+:::: {.column width="36%"}
 ![](https://github.com/jjcurtin/slide_decks/blob/main/images/auroc_rules.jpeg?raw=true){.absolute bottom=20 left=20 width=30%}
 ::::
 :::: {.column width="60%"}
@@ -658,7 +661,7 @@ The auROC is a measure of the model's ability to discriminate between true lapse
 
 The auROC can range from 0.5 to 1.0 where an auROC of .5 indicates a model whose accuracy is no better than random guessing, 
 
-and an auROC of 1.0 indicates perfect accuracy 
+and an auROC of 1.0 indicates perfect performance 
 
 And models with auROCs of .90 or higher are considered to have excellent performance.
 :::
@@ -675,7 +678,7 @@ The Area under the Receiver Operating Characteristic Curve (auROC) indicates the
 - Perfect performance: auROC = 1.0 
 
 ::: {.columns}
-:::: {.column width="40%"}
+:::: {.column width="36%"}
 ![](https://github.com/jjcurtin/slide_decks/blob/main/images/auroc_rules.jpeg?raw=true){.absolute bottom=20 left=20 width=30%}
 ::::
 
@@ -702,7 +705,7 @@ And conversely, the perfect classifier would have a 100% chance of scoring that 
 ## Model Performance: Next Week Model
 
 ::: {.columns}
-:::: {.column width="40%"}
+:::: {.column width="36%"}
 ![](https://github.com/jjcurtin/slide_decks/blob/main/images/auroc_rules.jpeg?raw=true){.absolute bottom=20 left=20 width=30%}
 ::::
 
@@ -731,7 +734,7 @@ But we were also eager to see how well we could do if we required a higher level
 ## Model Performance: Next Day Model
 
 ::: {.columns}
-:::: {.column width="40%"}
+:::: {.column width="36%"}
 ![](https://github.com/jjcurtin/slide_decks/blob/main/images/auroc_rules.jpeg?raw=true){.absolute bottom=20 left=20 width=30%}
 ::::
 
@@ -755,7 +758,7 @@ And our model that made predictions about the lapse probability in the next day 
 ## Model Performance: Next Hour Model
 
 ::: {.columns}
-:::: {.column width="40%"}
+:::: {.column width="36%"}
 ![](https://github.com/jjcurtin/slide_decks/blob/main/images/auroc_rules.jpeg?raw=true){.absolute bottom=20 left=20 width=30%}
 ::::
 
@@ -775,7 +778,7 @@ and our one hour model had the highest performance of all with an auROC of 0.93.
 
 Candidly, we hadn’t anticipated that we could do this well with such high levels of temporal precision.
 
-But we can, and to be clear, we believe all three of these models to have clinically implementable levels of performance such that we can use them to make meaningful decisions for individual participants at specific moments in time if we can embed these models within a recovery monitoring and support system. 
+But we can, and to be clear, we believe that all three of these models  have clinically implementable levels of performance such that we can use them to make meaningful decisions for individual participants at specific moments in time if we can embed these models within a recovery monitoring and support system.
 :::
 
 -----------------------------------------------------------------------------
@@ -791,9 +794,9 @@ Of course, if we want to implement these models in a real world system, we need 
 
 One of the more promising of these tools is SHAP or Shapley Additive Explanations.  SHAP is a method for interpreting the output of machine learning models that is based on cooperative game theory.  It provides a principled way to assign each feature or category of features an importance value for a particular prediction. 
 
-We can use this approach to understand why the model makes a specific prediction for a specific participant at a specific moment in time.  And I will do this a bit later when we talk about how to make personalized support recommends.  
+We can use this approach to understand why the model makes a specific prediction for a specific participant at a specific moment in time.  And I will do this a bit later when we talk about how to make personalized support recommendations.  
 
-But we can also use it to understand the global feature importance of each feature across all participants and observations for any of our models, so lets take a look at this first.
+But we can also use SHAP values to understand the global feature importance of each feature across all participants and observations for any of our models, so lets take a look at this first.
 :::
 
 -----------------------------------------------------------------------------
@@ -801,7 +804,7 @@ But we can also use it to understand the global feature importance of each featu
 ## Understanding the Models: Next Hour Model
 
 ::: {.columns}
-:::: {.column width="40%"}
+:::: {.column width="36%"}
 
 \
 
@@ -837,7 +840,7 @@ As you might expect, history of past lapses has a big influence on the probabili
 ## Understanding the Models: Next Hour Model
 
 ::: {.columns}
-:::: {.column width="40%"}
+:::: {.column width="36%"}
 
 \
 
@@ -872,7 +875,7 @@ These features likely contribute to the superior performance of the hour model r
 ## Understanding the Models: Next Hour Model
 
 ::: {.columns}
-:::: {.column width="40%"}
+:::: {.column width="36%"}
 
 \
 
@@ -901,7 +904,7 @@ fig_global_hour
 ::: {.notes}
 And finally, we see that demographics were not particularly important for predicting lapses. In other words, the frequency of observed lapses did not differ meaningfully by these demographic characteristics.  
 
-This shouldnt be too surprising either, because these demographic characteristics are stable for an individual over time and therefore can't explain changes in lapse probability within an individual over time. 
+This shouldn't be too surprising either, because these demographic characteristics are stable for an individual over time and therefore can't explain changes in lapse probability within an individual over time. 
 :::
 
 -----------------------------------------------------------------------------
@@ -935,7 +938,7 @@ So, obviously, we are really excited about the potential capabilities of a recov
 ::: {.notes}
 To start, our models have some serious but unfortunately not unexpected problems given what I told you earlier about the some of the demographic limitations of our training data.  
 
-I've already shown you that our models perform exceptionally well when evaluated across the full sample.  However, when we evaluate model performance, it is critical that we look at performance in protected subgroups.  And too often, these analyses are not done or reported.  
+I've already shown you that our models perform exceptionally well when evaluated across the full sample.  However, when we evaluate model performance, it is critical that we look at performance in subgroups that experience health disparities.  And too often, these analyses are not done or reported.  
 
 Its only very recently that we have begin to take this seriously and we must.  If we hope to use our system to address existing disparities in SUD outcomes then our models must perform well with all groups, regardless of their privilege or the use of these models may exacerbate rather than reduce existing mental healthcare disparities.
 :::
@@ -1034,7 +1037,7 @@ For example, we have just recently completed data collection for a NIDA funded p
 
 This sample also includes much needed geographic diversity because the factors that predict lapse in urban settings may be different from those that predict lapse in rural settings.
 
-I should also note that in this project, we only administered EMAs once per day to reduce measurement burden given that we tracked participants for up to a full year.
+I should also note that in this project, we also administered EMAs only once per day to reduce measurement burden given that we tracked participants for up to a full year.
 :::
 
 -----------------------------------------------------------------------------
@@ -1088,7 +1091,7 @@ I’d be happy to dive a bit deeper into this during the discussion period if pe
 
 As our monitoring and support system continues to mature, we will also want a richer, broader set of lapse risk features so that we can distinguish better between different situations that require different supports. We can do this by engineering features from our location and communication signals, which tap into different experiences than what we measure by EMA.
 
-And as an added benefit, the use of passive sensing rather than EMA may also lower the patient burden of using these systems long term.
+And as an added benefit, the use of passive sensing rather than EMA, which requires active input from the user, may also lower the patient burden of using these systems long term.
 
 Let's take a look at what we can get from geolocation and communications signals to provide you with some intuition about how we think this will work.
 :::
@@ -1220,9 +1223,10 @@ THEN TALK ABOUT PRELIMINARY ANALYSES FROM CLAIRE, COCO, AND KENDRA
 ## Next Steps: Clinical Uses
   
 ::: {.notes}
-Finally, we need to determine how to use these models for clinical benefit.  And we are just now starting to focus on this goal with a grant that was just funded by NIAAA this past Fall.   
 
-So let me spend a bit of time unpacking how we are thinking about implementing this system for patients.
+[PAUSE]
+
+OK, now that you have a sense of how we have developed our prediction models and their capabilities, I'd like to spend the remaining time unpacking how we are thinking about implementing and evaluating this system for patients.
 :::
 -----------------------------------------------------------------------------
 
@@ -1249,9 +1253,9 @@ When we started this work, we believed we were building this system to inform cl
 
 Today's digital therapeutics have clinician dashboards built into them and we, perhaps naively, thought clinicians could use this information to prioritize their resources to patients who had the greatest need.
 
-But as we talked to clinicians, it became very clear that they do not want any more info at this point.  Post-pandemic, they are barely keeping their heads above water and are definitely not ready to add new systems and data streams in place.
+But as we talked to clinicians, it became very clear that they do not want any more info at this point.  Post-pandemic, they are barely keeping their heads above water and are definitely not ready to add new systems and data streams in place.  This may change in the future, but we've moved away from this idea for now.
 
-However, in contrast, our work with participants suggested that they did see potential value in monitoring their recovery using our monitoring and support system.   So we have pivoted to considering what might be useful to provide directly to them.
+In contrast, our work with participants suggested that they did see potential value in monitoring their recovery using our monitoring and support system.   So we have pivoted to considering what information might be most useful to provide directly to them.
 :::
 
 -----------------------------------------------------------------------------
@@ -1277,7 +1281,7 @@ Do [NOT]{.uwred} predict [class labels]{.uwred}  (lapse vs. no-lapse)
 ::: {.notes}
 Lets start first with how we should NOT use this system with individuals with SUDs.
 
-We have been focusing on the lapse probabilities that are natively output from our prediction models.   However, its common to use these models to predict formal class labels.  In other words, to specifically predict that a lapse will happen or not.  Basically, a threshold is set, for example, 0.5, and if the probability of a lapse exceeds that threshold the model predicts that a lapse will occur.  Otherwise, it predicts that no lapse will occur
+I have been intentionally focusing on the lapse probabilities that are natively output from our prediction models.   However, its common for  others to use these models to predict formal class labels.  In other words, to specifically predict that a lapse will happen or not.  Basically, a threshold is set, for example, 0.5, and if the probability of a lapse exceeds that threshold the model predicts that a lapse will occur.  Otherwise, it predicts that no lapse will occur
 
 But there are several reasons that we DO NOT want to predict dichotomous class labels.
 :::
@@ -1365,7 +1369,7 @@ And critically, these probabilities are very well calibrated and at least ordina
 
 On the right, I am showing you a simple calibration plot.  On the x-axis, I've binned predicted lapse probabilities into bin widths of 10 percent and for each of these bins, I display the actual observed probability of lapses for observations in that bin.  
 
-If the probabilities were perfectly calibrated, the bin means would all fall on the dotted line with the bin from 0 - 10 having an observed probability of .05, the bin from 10 - 20 having a probability of .15, and so on.  And this is essentially what we see for our models.
+If the probabilities were perfectly calibrated, the bin means would all fall on the dotted line with the bin from 0 - .1 having an observed probability of .05, the bin from .1 - .2 having a probability of .15, and so on.  And this is essentially what we see for our models.
 
 Given this, we believe that the lapse probabilities can provide precise, fine gradations of risk for clinical decision making.
 :::
@@ -1557,7 +1561,7 @@ However, with enough training data, reinforcement learning can also be applied t
 
 Now, you might have noticed that up until this point, I've only talked about predictions for the immediate future - the next week, the next day, or the next hour.  And in these past few examples, I've been talking about using one of those immediate models - the next day model - to provide personalized support recommendations that the patient can implement that next day.
 
-However, for some types of support, people may need some advanced warning to put those supports into place.   For example, if you need to meet with your AA sponsor or get into see your therapist, you will need some lead time to schedule those meetings or appointments.   
+However, for some types of support, people may need some advanced warning to put those supports into place.   For example, if you need to meet with your AA sponsor or get in to see your therapist, you will need some lead time to schedule those meetings or appointments.   
 :::
 
 -----------------------------------------------------------------------------
@@ -1626,13 +1630,35 @@ Just because our prediction models perform well, doesn't guarantee that they wil
 We need to be able to provide feedback from these models to patients such that they trust the system and its feedback, find it useful, and engage with it over time in a way that improves their recovery.  Questions about what information to provide, how to present it, and when to present it are all critical to the success of this system.
 
 And we were just awarded another grant from the NIAAA to do exactly this.  
+:::
 
+-----------------------------------------------------------------------------
+
+## Next Steps: Optimize System Feedback to Patients 
+
+\
+
+- Sensing EMA and geolocation for four months
+
+- Model updated each night for next day
+  - Lapse probability predictions
+  - Important risk features
+  - Risk relevant support recommendations
+
+- Participants receive daily messages varying combinations of these components
+
+- Measure trust, engagement, and clinical outcomes
+
+
+![](https://github.com/jjcurtin/slide_decks/blob/main/images/opt_pi_wide.png?raw=true){.absolute bottom=0}
+
+::: {.notes}
 In this project, we have embedded a prediction model that uses inputs from both EMA and geolocation within our Smart recovery monitoring and support system. 
 
 Participants will use this system for 4 months.  Each day, the model will 
 
-- make daily lapse probability predictions, 
-- identify current personalized lapse risks, 
+- make daily lapse probability predictions for each participant
+- identify current personalized lapse risks contributing to that prediction, 
 - and map those risks to behavioral and support recommendations that are specific to each person each day.   
 
 We can then manipulate what information we include in daily messages from the system to participants to increase their trust and engagement with the system as well as formally evaluating its clinical benefits.
@@ -1644,12 +1670,7 @@ Thanks for your time.  I am eager to hear your reactions to all of this and I'd 
 
 -----------------------------------------------------------------------------
 
-## CRediTs
-
-![credits.png](https://github.com/jjcurtin/lectures/blob/main/images/credits_risk1.png?raw=true){.absolute bottom="5%" left="5%" width="85%" height="auto"}\ 
-
-
-## Acknowledgements (alphabetized) {.smaller}
+## Acknowledgements {.smaller}
 
 ::::: {.columns}
 
@@ -1661,29 +1682,18 @@ Thanks for your time.  I am eager to hear your reactions to all of this and I'd 
 
 :::
 
-![](/images/people/alagoz){style="margin:0 !important;" width="23%"}
-
-![](/images/people/ammerman.png){style="margin:0 !important;" width="23%"}
-
-![](/images/people/brown.png){style="margin:0 !important;" width="23%"}
-
-![](/images/people/gustafson.png){style="margin:0 !important;" width="23%"}
-
-![](/images/people/huang.png){style="margin:0 !important;" width="23%"}
-
-![](/images/people/kornfield.png){style="margin:0 !important;" width="23%"}
-
-![](/images/people/mohr.png){style="margin:0 !important;" width="23%"}
-
-![](/images/people/murphy.png){style="margin:0 !important;" width="23%"}
-
-![](/images/people/sethares.png){style="margin:0 !important;" width="23%"}
-
-![](/images/people/shah.png){style="margin:0 !important;" width="23%"}
-
-![](/images/people/vanswol.png){style="margin:0 !important;" width="23%"}
-
-![](/images/people/zhu.png){style="margin:0 !important;" width="23%"}  
+![](/images/people/alagoz){style="margin:0 !important;" width="18%"}
+![](/images/people/ammerman.png){style="margin:0 !important;" width="18%"}
+![](/images/people/brown.png){style="margin:0 !important;" width="18%"}
+![](/images/people/gustafson.png){style="margin:0 !important;" width="18%"}
+![](/images/people/huang.png){style="margin:0 !important;" width="18%"}
+![](/images/people/kornfield.png){style="margin:0 !important;" width="18%"}
+![](/images/people/mohr.png){style="margin:0 !important;" width="18%"}
+![](/images/people/murphy.png){style="margin:0 !important;" width="18%"}
+![](/images/people/sethares.png){style="margin:0 !important;" width="18%"}
+![](/images/people/shah.png){style="margin:0 !important;" width="18%"}
+![](/images/people/vanswol.png){style="margin:0 !important;" width="18%"}
+![](/images/people/zhu.png){style="margin:0 !important;" width="18%"}  
 
 ::::
 
@@ -1695,15 +1705,13 @@ Thanks for your time.  I am eager to hear your reactions to all of this and I'd 
 
 :::
 
-![](/images/people/fronk.png){style="margin:0 !important;" width="47%"}
+![](/images/people/fronk.png){style="margin:0 !important;" width="36%"}
+![](/images/people/punturieri.png){style="margin:0 !important;" width="36%"}
 
-![](/images/people/punturieri.png){style="margin:0 !important;" width="47%"}
+![](/images/people/santana.png){style="margin:0 !important;" width="36%"}
+![](/images/people/wyant.png){style="margin:0 !important;" width="36%"}
 
-![](/images/people/santana.png){style="margin:0 !important;" width="47%"}
-
-![](/images/people/wyant.png){style="margin:0 !important;" width="47%"}
-
-![](/images/people/yu.png){style="margin:0 !important;" width="47%"}
+![](/images/people/yu.png){style="margin:0 !important;" width="36%"}
 
 ::::
 
@@ -1715,13 +1723,11 @@ Thanks for your time.  I am eager to hear your reactions to all of this and I'd 
 
 :::
 
-![](/images/people/colmenares.png){style="margin:0 !important;" width="47%"}
+![](/images/people/colmenares.png){style="margin:0 !important;" width="36%"}
+![](/images/people/lightheart.png){style="margin:0 !important;" width="36%"}
 
-![](/images/people/lightheart.png){style="margin:0 !important;" width="47%"}
-
-![](/images/people/papp.png){style="margin:0 !important;" width="47%"}
-
-![](/images/people/wanta.png){style="margin:0 !important;" width="47%"}
+![](/images/people/papp.png){style="margin:0 !important;" width="36%"}
+![](/images/people/wanta.png){style="margin:0 !important;" width="36%"}
 
 ::::
 
