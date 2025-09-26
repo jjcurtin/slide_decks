@@ -38,7 +38,7 @@ plot_ci <- function(d, title, delta, y = .70){
       scale_y_continuous(breaks = seq(0.4, 1, 0.10), limits = c(0.4, 1)) +
       scale_color_manual(values = col_groups) +
       theme(title = element_text(size = 16, color = "#C5050C", face = "bold"),
-            axis.text.x = element_text(size = 14, color = "black", face = "bold"),
+            axis.text.x = element_text(size = 12, color = "black", face = "bold"),
             axis.text.y = element_text(size = 12, color = "black"),
             axis.title.x = element_text(size = 16, color = "black"),
             axis.title.y = element_text(size = 16, color = "black")) + 
@@ -81,25 +81,25 @@ fig_fair_age_1  <- ci |>
          model = fct_recode(model, "       older" = "older", "     younger" = "younger")) |> 
   plot_ci("Age", delta, .70)
 
-# fig_race_only  <- ci |>
-#   filter(model == "white" | model == "non_white") |>
-#   mutate(model = fct(model, levels = c("white", "non_white")),
-#          model = fct_recode(model, "White/Non-hispanic" = "white", "Other" = "non_white")) |> 
-#   ggplot(aes(x = model, color = model)) +
-#     geom_point(aes(y = median), size = 4) +
-#     geom_errorbar(aes(ymin = lower, ymax = upper),
-#       width = .2, 
-#       position = position_dodge(.9),
-#       linewidth = 2) +
-#     labs(x = "Race/Ethnicity", y = "auROC") +
-#     theme(legend.position = "none") +
-#     scale_y_continuous(breaks = seq(0.4, 1, 0.10), limits = c(0.4, 1)) +
-#     scale_color_manual(values = c("orange", "#C5050C")) +
-#     theme(axis.text.x = element_text(size = 14, color = "black", face = "bold"),
-#           axis.text.y = element_text(size = 12, color = "black"),
-#           axis.title.x = element_text(size = 16, color = "black"),
-#           axis.title.y = element_text(size = 16, color = "black")) +
-#     geom_hline(yintercept = 0.5, linetype = "dashed", color = "gray") +
-#     geom_hline(yintercept = 1.0, linetype = "dashed", color = "gray") +
-#     annotate("text", label = "random", x = 0.75, y = .5, size = 6, color = "gray") +
-#     annotate("text", label = "perfect", x = 0.75, y = 1, size = 6, color = "gray") 
+fig_race_only  <- ci |>
+  filter(model == "white" | model == "non_white") |>
+  mutate(model = fct(model, levels = c("white", "non_white")),
+         model = fct_recode(model, "White/Non-hispanic" = "white", "Other" = "non_white")) |>
+  ggplot(aes(x = model, color = model)) +
+    geom_point(aes(y = median), size = 4) +
+    geom_errorbar(aes(ymin = lower, ymax = upper),
+      width = .2,
+      position = position_dodge(.9),
+      linewidth = 2) +
+    labs(x = "Race/Ethnicity", y = "auROC") +
+    theme(legend.position = "none") +
+    scale_y_continuous(breaks = seq(0.4, 1, 0.10), limits = c(0.4, 1)) +
+    scale_color_manual(values = c("orange", "#C5050C")) +
+    theme(axis.text.x = element_text(size = 14, color = "black", face = "bold"),
+          axis.text.y = element_text(size = 12, color = "black"),
+          axis.title.x = element_text(size = 16, color = "black"),
+          axis.title.y = element_text(size = 16, color = "black")) +
+    geom_hline(yintercept = 0.5, linetype = "dashed", color = "gray") +
+    geom_hline(yintercept = 1.0, linetype = "dashed", color = "gray") +
+    annotate("text", label = "random", x = 0.75, y = .5, size = 6, color = "gray") +
+    annotate("text", label = "perfect", x = 0.75, y = 1, size = 6, color = "gray")

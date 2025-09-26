@@ -5,7 +5,7 @@
 library(tidyverse)
 theme_set(theme_classic()) 
 
-devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true")
+source("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true")
 path_data <- "data/risk"
 path_mak <- "mak/risk"
 

@@ -6,3 +6,7 @@
   quarto-pub:
     - id: ac018721-be55-457c-a42b-ce36abb0bb6a
       url: 'https://jjcurtin.quarto.pub/2025_neurotech'
+- source: 0926_meet_faculty.qmd
+  quarto-pub:
+    - id: b71e7ed6-a2b9-40ae-a83f-d94f0f668177
+      url: 'https://jjcurtin.quarto.pub/0926_meet_faculty'
