@@ -2,7 +2,7 @@
 title: 'A "Smart" Recovery Monitoring and Support System for SUD Continuing Care'
 author: "John J. Curtin, Ph.D."
 institute: "University of Wisconsin-Madison"
-date: September 26, 2025
+date: March 5th, 2026 
 editor_options: 
   chunk_output_type: console
 ---
@@ -656,21 +656,19 @@ This is obviously unacceptable and we are working now to correct this.
  
 ## NIDA Project: A Larger, More Diverse Sample 
 
-- Recruiting ~ 400 patients in recovery from Opioid Use Disorder 
+- Recruited ~ 300 patients in recovery from Opioid Use Disorder 
 - [National sample (size; diversity: demographics, location)]{style="color: blue;"}
 - More variation in stage of recovery (1 – 6 months at start)
 - Sensing for 12 months
 
 \
 
-Data collection will finish in December 2024
-
 ![](https://github.com/jjcurtin/slide_decks/blob/main/images/risk2_pi_wide.png?raw=true){.absolute bottom=0}
 
 ::: {.notes}
-For example, we have been awarded a grant from NIDA to collect a more racially diverse sample using nationwide recruiting techniques.  
+For example, we were awarded a grant from NIDA to collect a more racially diverse sample using nationwide recruiting techniques.  
 
-This sample will also include much needed geographic diversity because the factors that predict lapse in urban settings may be different from those that predict lapse in rural settings.
+This sample also included much needed geographic diversity because the factors that predict lapse in urban settings may be different from those that predict lapse in rural settings.
 :::
 
 -----------------------------------------------------------------------------
@@ -683,7 +681,7 @@ This sample will also include much needed geographic diversity because the facto
 
 [PAUSE]
 
-We have just begun to train models using EMA features from this new dataset so these next results and data figures should be considered preliminary but we are excited to see that even with only 1 EMA per day, we are now getting the best performance we have seen to date when predicting lapses in the next day.
+We are in the midst of finalizing model training using these data but I'll give you a peek at performance for models using EMA features similar to the AUD models models I showed you previously.   We are particularly excited by these models because we restricted the EMAs to only 1 per day but we are still seeing the best performance we have seen to date when predicting lapses in the next day.
 
 An auROC of .94
 :::
@@ -776,7 +774,7 @@ And we plan to implement a model with both EMA and geolocation for a new project
 
 - Measure trust, utility, engagement, and clinical outcomes
 
-Grant funded in September 2024
+Data collection begins in ~ 1 month
 
 ![](https://github.com/jjcurtin/slide_decks/blob/main/images/opt_pi_wide.png?raw=true){.absolute bottom=0}
 
