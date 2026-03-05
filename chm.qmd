@@ -2,7 +2,7 @@
 title: 'A "Smart" Recovery Monitoring and Support System for SUD Continuing Care'
 author: "John J. Curtin, Ph.D."
 institute: "University of Wisconsin-Madison"
-date: March 5th, 2026 
+date: "March 5th, 2026"
 editor_options: 
   chunk_output_type: console
 ---
