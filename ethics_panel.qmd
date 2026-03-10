@@ -1,0 +1,97 @@
+---
+title: 'A "Smart" Recovery Monitoring and Support System for SUD Continuing Care'
+author: "John J. Curtin, Ph.D."
+institute: "University of Wisconsin-Madison"
+date: "March 5, 2026"
+---
+
+I was trained as a psychophysiologist and for the first half of my career I used those skills to conduct laboratory experiments to study the effects of drugs and drug withdrawal on the brain.  But about a decade ago,  [I found that my heart was increasingly not in the work]{style="font-weight: bold;"}.
+
+I'd become a clinical psychologist to help people struggling with SUDs.  
+
+- My paternal grandmother died of complications secondary to alcoholism. 
+
+- My dad has struggled with his use of alcohol for his entire adult life and during periods where he lost control it affected all of us.
+
+- My cousin, Stephen, has a severe substance use disorder and has been incarcerated several times for drug related offenses.  He has completed several treatment programs and has had periods of stability but they have always ended in another relapse.  
+
+My Aunt Cathy and Stephen's brother, Colin, had reached out to me on numerous occasions to ask what could be done to help Stephen.  And it was those conversations that really got me thinking about how I could re-direct my research program to help people like Stephen and my dad and my grandmother. 
+
+----------------------
+
+Stephen's experiences in particular capture several core features of substance use disorders and our existing treatment infrastructure that make it so difficult to help people like him.  
+
+First, we have effective treatments to help patients initially reduce or stop their harmful use for a period of time.  However, substance use disorders are chronic relapsing conditions that require ongoing monitoring and support to prevent relapse.
+
+And that is where our current treatment infrastructure falls short.  Our treatment system has very little capacity to provide this essential long-term continuing care.
+
+------------------------
+
+Its also true that the causes and risk factors for relapse are myriad.  
+
+Patients differ widely on their lapse risks and critically, both the risks and the optimal supports needed even for one specific person like Stephen, can change month to month, day to day, and even from moment to moment.
+
+------------------------
+
+So about a decade ago, my lab brought fresh eyes to look at these barriers to providing personalized, long-term continuing care to patients and we believed that we could harness and combine two technologies that were emerging at that time, 
+
+- personal sensing,
+- and artificial intelligence algorithms, 
+
+to develop a highly scalable, smart recovery monitoring and support system that could both predict lapses back to substance use before they occurred and provide personalized support and recommendations to patients about how to prevent those lapses from occurring.
+
+-------------------------
+
+Fast forward to today and I can now both 
+
+- describe the system we have been developing, 
+- make clear how it works with an eye to the components that are relevant to today's focus on ethics and social impacts, 
+- and foreshadow our next steps
+
+--------------------------
+
+To start, the system relies on data from three sources:
+
+- Users provide brief daily reports on risk factors for lapse that are collected using their smartphones.  These include experiences like craving, mood, and stressors to name a few.
+
+- We also passively monitor their moment-by-moment location using their smartphones
+
+- And we have been experimenting with passively collecting their cellular communications data
+
+These are all clearly private and sensitive data and I'd be happy to talk later about our experiences with these inputs
+
+--------------------------
+
+We've had two large grants funded by the NIH to use these inputs to train machine learning models [to predict future lapses]{style="color: red;"}.
+
+And as a result of this work, we now know we can do this 
+
+- both with exceptionally high accuracy,
+- and a very high degree of temporal resolution; calculating lapse probabilities with as precise as hour-by-hour resolution
+
+And critically, beyond making lapse probability predictions, we can also use these same machine learning models [to understand which lapse risk factors are most influential]{style="color: red;"} for any [specific individual]{style="color: red;"} at a [specific moment in time]{style="color: red;"}. 
+
+This allows us to understand not only WHEN a lapse might occur but also WHY and potentially how best to intervene or support that person to prevent the lapse from happening. 
+
+--------------------------
+
+We also have been thinking carefully about a variety of ethical issues.  
+
+For example, we routinely look for algorithmic bias by comparing model performance in sub-groups that experience health disparities surrounding SUD.  
+
+And, in fact, our initial models performed more poorly when used with patients of color and to a lessor extent with women.  But we've corrected this in a variety of ways and now see comparable performance across all sub-groups we evaluate.
+
+We also routinely meet with diverse community advisory boards to get their feedback both 
+
+- on the needs we are seeking to meet with our system,
+- and also its design, including its inputs and outputs
+
+---------------------------
+
+Finally, we are now in very exciting moment where we have received new funding from the NIH 
+
+- to implement the system in real-time,
+- to tune it to optimize long-term patient engagement, 
+- and to explicitly evaluate its impact on clinical outcomes associated with harmful substance use.  
+
+And I'm also happy to report that my heart is back in my work, and I look forward to discussing with you some of the complex ethical issues that arise as we move forward with this work.
