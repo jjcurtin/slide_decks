@@ -5,7 +5,7 @@ institute: "University of Wisconsin-Madison"
 date: "March 5, 2026"
 ---
 
-I was trained as a psychophysiologist and for the first half of my career I used those skills to conduct laboratory experiments to study the effects of drugs and drug withdrawal on the brain.  But about a decade ago,  [I found that my heart was increasingly not in the work]{style=style="color: red;"}.
+I started my career as a psychophysiologist conducting laboratory experiments to study the effects of drugs and drug withdrawal on the brain.  But about a decade ago,  [I found that my heart was increasingly not in the work]{style=style="color: red;"}.
 
 I'd become a clinical psychologist to help people struggling with SUDs.  
 
