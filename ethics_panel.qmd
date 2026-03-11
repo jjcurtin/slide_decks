@@ -5,7 +5,7 @@ institute: "University of Wisconsin-Madison"
 date: "March 5, 2026"
 ---
 
-I was trained as a psychophysiologist and for the first half of my career I used those skills to conduct laboratory experiments to study the effects of drugs and drug withdrawal on the brain.  But about a decade ago,  [I found that my heart was increasingly not in the work]{style="font-weight: bold;"}.
+I was trained as a psychophysiologist and for the first half of my career I used those skills to conduct laboratory experiments to study the effects of drugs and drug withdrawal on the brain.  But about a decade ago,  [I found that my heart was increasingly not in the work]{style=style="color: red;"}.
 
 I'd become a clinical psychologist to help people struggling with SUDs.  
 
@@ -33,7 +33,7 @@ Patients differ widely on their lapse risks and critically, both the risks and t
 
 ------------------------
 
-So about a decade ago, my lab brought fresh eyes to look at these barriers to providing personalized, long-term continuing care to patients and we believed that we could harness and combine two technologies that were emerging at that time, 
+So about a decade ago, my lab brought fresh eyes to look at these barriers to providing personalized, long-term continuing care and we believed that we could harness and combine two technologies that were emerging at that time, 
 
 - personal sensing,
 - and artificial intelligence algorithms, 
@@ -52,11 +52,11 @@ Fast forward to today and I can now both
 
 To start, the system relies on data from three sources:
 
-- Users provide brief daily reports on risk factors for lapse that are collected using their smartphones.  These include experiences like craving, mood, and stressors to name a few.
+- Users provide brief daily reports on risk factors for lapse that are collected using their smartphones.  These include experiences like craving, mood, and stressors to name a few
 
-- We also passively monitor their moment-by-moment location using their smartphones
+- We also passively monitor their moment-by-moment location
 
-- And we have been experimenting with passively collecting their cellular communications data
+- And we have been experimenting with collecting their cellular communications data
 
 These are all clearly private and sensitive data and I'd be happy to talk later about our experiences with these inputs
 
@@ -79,7 +79,7 @@ We also have been thinking carefully about a variety of ethical issues.
 
 For example, we routinely look for algorithmic bias by comparing model performance in sub-groups that experience health disparities surrounding SUD.  
 
-And, in fact, our initial models performed more poorly when used with patients of color and to a lessor extent with women.  But we've corrected this in a variety of ways and now see comparable performance across all sub-groups we evaluate.
+And, in fact, our initial models performed more poorly when used with patients of color and to a lessor extent with women.  But we've corrected this using a variety of methods and now see comparable performance across all sub-groups we evaluate.
 
 We also routinely meet with diverse community advisory boards to get their feedback both 
 
@@ -92,6 +92,6 @@ Finally, we are now in very exciting moment where we have received new funding f
 
 - to implement the system in real-time,
 - to tune it to optimize long-term patient engagement, 
-- and to explicitly evaluate its impact on clinical outcomes associated with harmful substance use.  
+- and to explicitly evaluate its impact on clinical outcomes.  
 
 And I'm also happy to report that my heart is back in my work, and I look forward to discussing with you some of the complex ethical issues that arise as we move forward with this work.
