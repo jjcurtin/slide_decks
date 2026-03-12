@@ -5,7 +5,7 @@ institute: "University of Wisconsin-Madison"
 date: "March 5, 2026"
 ---
 
-I started my career as a psychophysiologist conducting laboratory experiments to study the effects of drugs and drug withdrawal on the brain.  But about a decade ago,  [I found that my heart was increasingly not in the work]{style=style="color: red;"}.
+I started my career as a psychophysiologist conducting laboratory experiments to study the effects of drugs on the brain.  But about a decade ago,  [I found that my heart was increasingly not in the work]{style="color: red;"}.
 
 I'd become a clinical psychologist to help people struggling with SUDs.  
 
@@ -13,15 +13,15 @@ I'd become a clinical psychologist to help people struggling with SUDs.
 
 - My dad has struggled with his use of alcohol for his entire adult life and during periods where he lost control it affected all of us.
 
-- My cousin, Stephen, has a severe substance use disorder and has been incarcerated several times for drug related offenses.  He has completed several treatment programs and has had periods of stability but they have always ended in another relapse.  
+- My cousin, Stephen, has a severe substance use disorder.  He has completed several treatment programs and has had periods of stability but they have always ended in another relapse.  
 
-My Aunt Cathy and Stephen's brother, Colin, had reached out to me on numerous occasions to ask what could be done to help Stephen.  And it was those conversations that really got me thinking about how I could re-direct my research program to help people like Stephen and my dad and my grandmother. 
+My Aunt Cathy had reached out to me on numerous occasions to ask what could be done to help Stephen.  And it was those conversations that really got me thinking about how I could re-direct my research program to help people like Stephen and my dad and my grandmother. 
 
 ----------------------
 
-Stephen's experiences in particular capture several core features of substance use disorders and our existing treatment infrastructure that make it so difficult to help people like him.  
+Stephen's experiences in particular capture several key challenges that make it so difficult to help people like him.  
 
-First, we have effective treatments to help patients initially reduce or stop their harmful use for a period of time.  However, substance use disorders are chronic relapsing conditions that require ongoing monitoring and support to prevent relapse.
+First, we have effective treatments to help patients initially reduce or stop their harmful use for a period of time.  However, substance use disorders are chronic relapsing conditions that require life-long monitoring and support to prevent relapse.
 
 And that is where our current treatment infrastructure falls short.  Our treatment system has very little capacity to provide this essential long-term continuing care.
 
@@ -38,7 +38,7 @@ So about a decade ago, my lab brought fresh eyes to look at these barriers to pr
 - personal sensing,
 - and artificial intelligence algorithms, 
 
-to develop a highly scalable, smart recovery monitoring and support system that could both predict lapses back to substance use before they occurred and provide personalized support and recommendations to patients about how to prevent those lapses from occurring.
+to develop a highly scalable, smart recovery monitoring and support system that could both predict lapses before they occur and provide personalized support and recommendations to patients about how to prevent those lapses from occurring.
 
 -------------------------
 
@@ -52,7 +52,7 @@ Fast forward to today and I can now both
 
 To start, the system relies on data from three sources:
 
-- Users provide brief daily reports on risk factors for lapse that are collected using their smartphones.  These include experiences like craving, mood, and stressors to name a few
+- Users provide brief daily reports on key risks for lapse that are collected using their smartphones.  
 
 - We also passively monitor their moment-by-moment location
 
@@ -67,19 +67,19 @@ We've had two large grants funded by the NIH to use these inputs to train machin
 And as a result of this work, we now know we can do this 
 
 - both with exceptionally high accuracy,
-- and a very high degree of temporal resolution; calculating lapse probabilities with as precise as hour-by-hour resolution
+- and a very high degree of temporal resolution; even down to the specific hour of the lapse.
 
 And critically, beyond making lapse probability predictions, we can also use these same machine learning models [to understand which lapse risk factors are most influential]{style="color: red;"} for any [specific individual]{style="color: red;"} at a [specific moment in time]{style="color: red;"}. 
 
-This allows us to understand not only WHEN a lapse might occur but also WHY and potentially how best to intervene or support that person to prevent the lapse from happening. 
+This allows us to understand not only WHEN a lapse might occur but also WHY and potentially how best to intervene to prevent it.
 
 --------------------------
 
 We also have been thinking carefully about a variety of ethical issues.  
 
-For example, we routinely look for algorithmic bias by comparing model performance in sub-groups that experience health disparities surrounding SUD.  
+For example, we routinely look for algorithmic bias by comparing model performance in sub-groups that experience health disparities.
 
-And, in fact, our initial models performed more poorly when used with patients of color and to a lessor extent with women.  But we've corrected this using a variety of methods and now see comparable performance across all sub-groups we evaluate.
+As a result, we learned that our initial models performed more poorly when used with patients of color.  But we've now corrected these biases and see comparable performance for our models across sub-groups.
 
 We also routinely meet with diverse community advisory boards to get their feedback both 
 
@@ -88,10 +88,11 @@ We also routinely meet with diverse community advisory boards to get their feedb
 
 ---------------------------
 
-Finally, we are now in very exciting moment where we have received new funding from the NIH 
+Finally, we are now in very exciting moment where we have received new funding from the NIH to implement the system for the first time in real-time,
 
-- to implement the system in real-time,
+This will allow us
+
 - to tune it to optimize long-term patient engagement, 
 - and to explicitly evaluate its impact on clinical outcomes.  
 
-And I'm also happy to report that my heart is back in my work, and I look forward to discussing with you some of the complex ethical issues that arise as we move forward with this work.
+And I'm also happy to report that my heart is back in my work, and I look forward to discussing with you some of the complex ethical issues that arise as we move forward with this system.

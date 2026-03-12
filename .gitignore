@@ -7,6 +7,7 @@
 .Rdata
 .httr-oauth
 .DS_Store
+_quarto.yml
 
 /.quarto/
 
