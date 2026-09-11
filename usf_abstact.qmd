@@ -1,0 +1,8 @@
+Digital therapeutic algorithms for precision mental health with substance use disorders
+
+
+Digital therapeutics (DTx) are software programs or “apps” that prevent, manage, or treat disease including substance use disorders and other mental illness. These DTx can readily incorporate both personal sensing and machine learning algorithm capabilities to provider temporally precise psychiatric risk prediction and highly personalized micro-interventions that adapt to both characteristics of the patient and that moment in time.  
+
+In this talk, Prof Curtin describes findings from his program of research developing prediction algorithms for substance use disorders (SUD).  He describes methods for active and passive sensing of risk features for substance use lapses among patients in recovery from SUD.  Next, he presents results from two large clinical trials that developed specific algorithms to predict lapses for patients with alcohol and opioid use disorders, respectively.  Across these trials, he characterizes overall algorithm performance, examines the temporal precision of predictions, addresses issues of algorithmic fairness, and uses tools from interpretable AI to better understand risk features for substance use lapses.  Following this, he discusses current research designed to optimize these algorithms and incorporate them into digital therapeutics that provide daily personalized insights and interventions to improve patients' recovery health.
+
+
