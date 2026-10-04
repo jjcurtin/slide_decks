@@ -17,3 +17,5 @@ _quarto.yml
 /data/
 
 slide_decks.Rproj
+
+**/*.quarto_ipynb

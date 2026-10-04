@@ -1,0 +1,555 @@
+---
+title: 'Power Analysis and Statistical Validity'
+author: "John J. Curtin, Ph.D."
+institute: "University of Wisconsin-Madison"
+date: "October 8, 2026"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+#| echo: false
+#| message: false
+
+library(tidyverse)
+options(scipen = 999) # turns off scientific notation
+options(knitr.kable.NA = '')
+```
+
+--------------------------------------------------------------------------------
+
+```{r}
+tibble("Research Concludes" = c("FAIL TO REJECT NULL", 
+                                "REJECT NULL"),
+       "NO EFFECT" = c("CORRECT FTR; True Negative (TN)", 
+                                 "TYPE I ERROR; False Positive (FP)"),
+       "EFFECT EXISTS" = c("TYPE II ERROR; False Negative (FN)", 
+                                     "CORRECT R; True Positive (TP)")) |> 
+  kableExtra::kbl() |> 
+  kableExtra::column_spec(1, bold = TRUE) |>
+  kableExtra::add_header_above(c(" ", "Reality" = 2)) 
+```
+
+--------------------------------------------------------------------------------
+
+## Power
+
+Power: The probability of rejecting the null hypothesis when it is false
+
+- Symbol is 1 - $\beta$, where $\beta$ is the probability of making a Type II error - failing to reject the null hypothesis when you should
+
+- Power is the probability of concluding that predictors are related (or groups differ) to outcome based on inferential statistics calculated in your sample when the predictors are related (or groups differ) in the population
+
+--------------------------------------------------------------------------------
+
+## What Determines Power?
+
+Some statistical tests are more powerful (i.e., better at detecting real/non-zero population effects) than others.     
+
+Parametric tests often are more powerful than non-parametric, because they work with more information from the data.  
+
+GLM is MVUE when assumptions are met.   
+
+--------------------------------------------------------------------------------
+
+## What Factors Affect Power in GLM?
+
+1.  **Alpha ($\alpha$)**: As alpha increases (e.g., goes from .01 to .05), power increases.  As alpha increases:
+  - Larger rejection region in sampling distribution for $b$ given $H_0$
+
+2. **Sample size**: As $N$ increases, power increases. As $N$ increases:
+  - $SE_b$ decreases 
+  - Narrower sampling distribution for $b$, so $b is more extreme (in tail)
+  - $t$ statistic will be larger
+
+3. **Magnitude of effect in the population**: As magnitude of the effect in the population increases (e.g., bigger $\beta$), power increases.  As $b$ increases:
+  – $b$ will be more extreme (in tail) in sampling distribution for $b$ 
+  - $t$ statistic will be larger
+
+::: {.footer}
+Additional factors on next slide
+:::
+
+--------------------------------------------------------------------------------
+
+## What Factors Affect Power in GLM (continued)?
+
+4. **Number of parameters in augmented model**: As $P_a$ increases (i.e., augmented model gets more complex/more $X$), power decreases. As $P_a$ increases:
+  - $SE_b$ increases 
+  - Wider sampling distribution for $b$ (so $b$ is less extreme)
+  - $t$ statistic will be smaller
+
+5. **Number of parameters in effect (multi-parameter comparisons)**: As $P_a - P_c$ increases, power decreases. As $P_a - P_c$ increases:
+  - Sampling distribution for $F$ gets wider (we don't see this directly from model results), so F less extreme (with smaller p-value)
+  
+6. **Error (unexplained variance in $Y$)**:  As $SSE_a$ increases (and model $R^2$ decreases), power decreases.  As $SSE_a$ increases:
+  – $SE_b$ increases 
+  - $b$ will be less extreme in sampling distribution for $b$
+  - $t$ statistic will be smaller
+
+--------------------------------------------------------------------------------
+
+## Power Conventions
+
+Desired level of power: 
+
+- Depends on purpose, but usually the more the better 
+- The value of .80 has become a minimum threshold standard (much like alpha = .05 for significance testing.   
+- Higher power also means more precision in estimating the magnitude of the effect (narrower CI).   
+
+
+## Power Analysis Strategies
+
+There are two general strategies for power analyses
+
+1. A priori: Determine number of subjects needed ($N$) for given level of power (e.g. .80).  Used to determine sample size for pending study.
+
+2. Post hoc: Determine power for a given design (e.g., completed experiment with fixed $N$).   
+
+You should almost always do (and report) an a priori power analysis (maybe not if no control over $N$?)
+
+::: {.callout-important}
+# Question
+When will you do a post hoc power analysis?
+:::
+
+::: {.fragment}
+When you do not find a hypothesized effect to be significant.  Can reduce concern that this is a type II error.
+:::
+
+--------------------------------------------------------------------------------
+
+**Power can be calculated for tests of:**    
+
+- Effect of single regressor (i.e., $b$).
+- Effect of subset of regressors (i.e., multi-parameter model comparison).  
+- Effect of all regressors in the model (multi-parameter model comparison to mean-only model).
+
+**A priori power analysis:**   
+
+1. Must set alpha level, $P_a$, $P_c$, and desired power.   
+2. Specify (calculate) effect size (e.g., $\eta_p^2$ or $\Delta R^2$).
+3. $N$ will be a function of the above factors.   
+
+
+**Post hoc power analysis:**   
+
+1. Must set alpha level, $P_a$, $P_c$, and $N$.
+2. Specify minimum effect size of interest. Be very conservative.
+3. Power will be a function of above factors.
+
+--------------------------------------------------------------------------------
+
+## Effect Size: $\eta_p^2$
+
+You can calculate $\eta_p^2$ for any reported effect.   
+
+- $\eta_p^2 = \frac{F*\text{df}_{num}}{F*\text{df}_{nun} + \text{df}_{dem}}$    
+
+:::{.footer}
+$\text{df}_{num}$ and $\text{df}_{dem}$ are numerator and denominator degrees of freedom from the F statistic.
+:::
+
+--------------------------------------------------------------------------------
+
+## Cohen (1992) Rules of Thumb for partial eta-squared 
+
+The values of $\eta_p^2$ that Cohen implicitly defines as small, medium, and large vary across research context/statistical test.  
+
+- Use MR (multiple regression) effect sizes if you are testing model $R^2$ or a set (>1) of regressors from quantitative predictors   
+- Use ANOVA/t effect sizes if you are testing one categorical predictor.
+- Use r effect sizes if you are testing one quantitative predictor.
+
+
+```{r}
+#| echo: false
+
+tibble("Effect" = c("Small", "Medium", "Large"),
+       "MR" = c(".02 (R<sup>2</sup>  = .02)", ".13 (R<sup>2</sup>  = .13)", ".26 (R<sup>2</sup>  = .26)"),
+       "ANOVA" = c(".01 (F = .10)", ".06 (F = .25", ".14 (F = .40"),
+       "t-test" = c(".01 (d = .20)",".06 (d = .50)", ".14 (d = .80)"),
+       "r" = c(".01 (r = .10)", ".09 (r = .30)", ".25 (r = .50)")) |> 
+  kableExtra::kbl(escape = FALSE) 
+```
+
+--------------------------------------------------------------------------------
+
+## Power Analysis 
+
+You can use the `pwr.f2.test()` function in the `pwr` package to calculate power.   
+
+It takes the following parameters:   
+
+- `u` = Numerator degrees of freedom for F statistic ($P_a - P_c$)
+- `v` = Denominator degrees of freedom for F statistic ($N - P_a$)
+- `f2` = effect size estimate	
+- `sig.level` = Significance level (Type I error probability; $\alpha$)
+- `power`	= Power of test (1 minus Type II error probability; 1 - $\beta$)
+
+f2 can be calculated from either $\eta_p^2$ or $\Delta R^2$ and $R_2$
+
+- $f^2$ = $\frac{\eta_p^2}{1-\eta_p^2}$ 
+- $f^2$ = $\frac{\Delta R^2}{(1 - R^2)}$
+
+--------------------------------------------------------------------------------
+
+## A Priori Power Analysis
+
+::: {.callout-important}
+# Question
+How many subjects are needed for 80% power to detect a $\eta_p^2$ of .09 for one quantitative predictor in a model with 5 quantitative predictors at an alpha of 0.05?
+:::
+
+:::{.fragment}
+```{r}
+pwr::pwr.f2.test(u = 1, 
+                 v = NULL, #<1>
+                 f2 = .09/(1-.09), 
+                 sig.level = .05, 
+                 power = .80)
+```
+
+1. Since we do not yet have a sample size (this is what we are trying to determine!), we set `v` to `NULL`.   
+
+[$N = v + P_a = 79.327 + 6 = 85.327$]{style="color: blue;"}
+:::
+
+--------------------------------------------------------------------------------
+
+::: {.callout-important}
+# Question
+
+How many subjects are needed for 85% power to detect a $\Delta R^2$ of .05 for one quantitative predictor in a model with 3 quantitatve predictors and an $R^2$ of .30 at an alpha of 0.05?
+:::
+
+:::{.fragment}
+```{r}
+pwr::pwr.f2.test(u = 1, 
+                 v = NULL,
+                 f2 = .05/(1-.30), 
+                 sig.level = .05, 
+                 power = .85)
+```
+
+[$N = v + P_a = 125.648 + 4 = 129.648$]{style="color: blue;"}
+:::
+
+--------------------------------------------------------------------------------
+
+## Hefner et al. (2013)*
+
+We analyzed startle potentiation during uncertain threat cues in General Linear Model with a between-subjects regressor for beverage group (coded as alcohol = 0.5 and control = -0.5). We included baseline startle response (mean-centered) as an additive regressor to increase power. **As predicted, we observed a significant effect of beverage group, $b = -22.2, \eta_p^2 = 0.16, t(64) = -3.45, p = .001$.**, indicating that alcohol decreased startle potentiation to uncertain threat by approximately 22 microvolts.
+
+::: {.callout-important}
+# Question
+How many subjects are needed to detect an effect of beverage group based on the effect size observed in Hefner et al. with 90% power and an alpha of .05?
+:::
+
+:::{.fragment}
+
+$\eta_p^2 = \frac{F * \text{df}_n}{F*\text{df}_n + \text{df}_d} = \frac{3.45^2*1}{3.45^2*1+64} = .157$
+
+```{r}
+pwr::pwr.f2.test(u = 1, 
+                 v = NULL, 
+                 f2 = .157/(1-.157), 
+                 sig.level = .05, 
+                 power = .90)
+```
+
+[$N = v + P_a = 56.408 + 3 = 59.408$]{style="color: blue;"}
+:::
+
+:::{.footer}
+* study results modified slightly to remove repeated measures on cue
+
+:::
+
+--------------------------------------------------------------------------------
+
+## Post Hoc Power Analysis
+
+::: {.callout-important}
+# Question
+How much power did Hefner et al. have to detect a moderate effect size ($\eta_p^2 = .06$), with alpha of .05?
+:::
+
+:::{.fragment}
+```{r}
+pwr::pwr.f2.test(u = 1, 
+                 v = 64, 
+                 f2 = .06/(1-.06), 
+                 sig.level = .05, 
+                 power = NULL)
+```
+
+[Power = 0.525]{style="color: blue;"}
+:::
+
+--------------------------------------------------------------------------------
+
+## Problems from Low Power
+
+1. Low probability of finding true effects.   
+2. Low positive predictive value (PPV). 
+3. An exaggerated estimate of the magnitude of the effect when a true effect is discovered. 
+
+--------------------------------------------------------------------------------
+
+## Missed True Effects
+
+Low power, by definition, means that the chance of discovering effects that are genuinely true is low.   
+
+If a study has 20% power and there really is an effect, you only have a 20% chance of finding it.  
+
+Low-powered studies produce more false negatives (misses) than high-powered studies.   
+
+We tend to focus on false alarms, but misses can be equally costly (e.g., new treatments).   
+You waste resources (time, money) with low-powered studies. One high-powered study (N) > Two low-powered studies (N/2).
+
+--------------------------------------------------------------------------------
+
+## Low Positive Predictive Value (PPV)
+
+The lower the power of a study, the lower the probability that an observed **significant** effect (among the set of all significant effects) reflects a true non-zero effect in the population (vs. a false alarm).     
+
+Called the Positive Predictive Value (PPV) of a claimed discovery.    
+
+It is NOT equal to alpha (which is a column probability in confusion matrix).  It is a row probability in the confusion matrix (more on this in a moment).
+
+--------------------------------------------------------------------------------
+
+$\text{PPV} = \frac{(1 - \beta) * \text{OR}}{(1 - \beta) * \text{OR} + \alpha}$   
+
+Where:    
+
+- $(1 - \beta)$ is the power.   
+- $\beta$ is the type II error rate.   
+- $\alpha$ is the type I error rate.
+- $\text{Odds}$ is the pre-study odds that an effect is indeed non-null among the effects being tested in a field or other set.
+
+Formula can be rewritten as:   
+
+- $\text{PPV} = \frac{\text{Power * Odds}}{\text{Power * Odds} + \alpha}$
+
+--------------------------------------------------------------------------------
+
+A priori odds that effect exists: Odds = 1 (p = .5)  
+Power: 80%   
+Simulate: 200 studies   
+
+- $\text{PPV} = \frac{(1 - \beta) * \text{Odds}}{(1 - \beta) * \text{Odss} + \alpha}$    
+- $\text{PPV} = \frac{(1 - .20) *1}{(1 - .20) * 1 + .05} = \frac{.80}{.85} = .94$   
+
+```{r}
+#| echo: false
+
+tibble("Research Concludes" = c("FAIL TO REJECT NULL; NO EFFECT", 
+                                "REJECT NULL; EFFECT EXISTS", " "),
+       "NO EFFECT" = c("CORRECT FTR; <b>95</b>", 
+                       "TYPE I ERROR; <b>5</b>",
+                       "<b>100</b>"),
+       "EFFECT EXISTS" = c("TYPE II ERROR; <b>20</b>",
+                           "CORRECT R; <b>80</b>",
+                           "<b>100</b>")) |> 
+  kableExtra::kbl(escape = FALSE) |> 
+  kableExtra::column_spec(1, bold = TRUE) |>
+  kableExtra::add_header_above(c(" ", "Reality" = 2)) |> 
+  kableExtra::row_spec(2, background = "yellow")
+```
+
+--------------------------------------------------------------------------------
+
+A priori odds that effect exists: 1 (p = .5)  
+Power: 20%   
+Simulate: 200 studies   
+
+- $\text{PPV} = \frac{(1 - \beta) * \text{OR}}{(1 - \beta) * \text{OR} + \alpha}$    
+- $\text{PPV} = \frac{(1 - .80) *1}{(1 - .80) * 1 + .05} = \frac{.20}{.25} = .80$   
+
+```{r}
+#| echo: false
+
+tibble("Research Concludes" = c("FAIL TO REJECT NULL; NO EFFECT", 
+                                "REJECT NULL; EFFECT EXISTS", " "),
+       "NO EFFECT" = c("CORRECT FTR; <b>95</b>", 
+                       "TYPE I ERROR; <b>5</b>",
+                       "<b>100</b>"),
+       "EFFECT EXISTS" = c("TYPE II ERROR; <b>80</b>",
+                           "CORRECT R; <b>20</b>",
+                           "<b>100</b>")) |> 
+  kableExtra::kbl(escape = FALSE) |> 
+  kableExtra::column_spec(1, bold = TRUE) |>
+  kableExtra::add_header_above(c(" ", "Reality" = 2)) |> 
+  kableExtra::row_spec(2, background = "yellow")
+```
+
+--------------------------------------------------------------------------------
+
+A priori odds that effect exists: .25 (p = .2)  
+Power: 20%   
+Simulate: 200 studies   
+
+- $\text{PPV} = \frac{(1 - \beta) * \text{Odds}}{(1 - \beta) * \text{Odds} + \alpha}$    
+- $\text{PPV} = \frac{(1 - .80) *.25}{(1 - .80) * .25 + .05} = \frac{.05}{.10} = .50$   
+
+```{r}
+#| echo: false
+
+tibble("Research Concludes" = c("FAIL TO REJECT NULL; NO EFFECT", 
+                                "REJECT NULL; EFFECT EXISTS", " "),
+       "NO EFFECT" = c("CORRECT FTR; <b>152</b>", 
+                       "TYPE I ERROR; <b>8</b>",
+                       "<b>160</b>"),
+       "EFFECT EXISTS" = c("TYPE II ERROR; <b>32</b>",
+                           "CORRECT R; <b>8</b>",
+                           "<b>40</b>")) |> 
+  kableExtra::kbl(escape = FALSE) |> 
+  kableExtra::column_spec(1, bold = TRUE) |>
+  kableExtra::add_header_above(c(" ", "Reality" = 2)) |> 
+  kableExtra::row_spec(2, background = "yellow")
+```
+
+--------------------------------------------------------------------------------
+
+## What does this imply about papers in Science?
+
+![](figures/power_science.png)
+
+--------------------------------------------------------------------------------
+  
+## Sample Estimate of Effect is Too Large
+
+When an under-powered study discovers a true effect (i.e., finds effect signficant), it is likely that the estimate of the magnitude of that effect provided by that study will be exaggerated.    
+
+Effect inflation is worst for small, low-powered studies, which can only detect sample parameter estimates effects that happen to be large.    
+
+::: {.callout-important}
+# Question
+Why does this make sense?
+:::
+
+::: {.fragment}
+Consider an example where $\beta = 5, SE = 4$. Draw sampling distribution. Indicate region where sample $b$s would be significant. What can we conclude about estimates ($b$) for $\beta$ in any one study or across a bunch of studies?
+:::
+
+--------------------------------------------------------------------------------
+
+## Other Biases That Often Come With Low Power
+
+1. Vibration of effects.
+2. Publication bias, selective data analysis, and selective reporting of outcomes.
+3. May be of lower quality in other aspects of their design.
+
+--------------------------------------------------------------------------------
+
+## Vibration of Effects
+
+**Vibration of effects** refers to the situation in which a study obtains different estimates of the magnitude of the effect depending on the analytical options it implements.   
+
+These options could include the statistical model, the definition of the variables of interest, the use (or not) of adjustments for certain potential confounders but not others, the use of filters to include or exclude specific observations and so on.    
+
+This is more often the case for small studies.    
+
+Results can vary markedly depending on the analysis strategy when power is low because of small N.
+
+--------------------------------------------------------------------------------
+
+## Publication Bias and Selective Reporting
+
+Publication bias and selective reporting of outcomes and analyses are more likely to affect smaller, under-powered studies.   
+
+Smaller studies “disappear” into a file drawer (larger studies are known and anticipated).     
+
+Larger null results may be published because low power isn't a viable explanation for null effect.
+
+The protocols of large (clinical) studies are more likely to have been registered or otherwise made publicly available. Deviations in the analysis plan and choice of outcomes may be more obvious.   
+
+Smaller studies may have a worse design quality than larger studies.    
+
+Small studies may be opportunistic, quick and dirty experiments. Data collection and analysis may have been conducted with little planning.      
+
+Large studies often require more funding and personnel resources. Designs are examined more carefully before data collection, and analysis and reporting may be more structured.    
+
+--------------------------------------------------------------------------------
+
+Simmons, J. P., Nelson, L. D., & Simonsohn, U. (2011). False-positive psychology: Undisclosed flexibility in data collection and analysis allows presenting anything as significant. Psychological Science, 22(11), 1359–1366.
+
+
+![](figures/Simmons_fig_1.png)
+
+
+--------------------------------------------------------------------------------
+
+Simmons, J. P., Nelson, L. D., & Simonsohn, U. (2011). False-positive psychology: Undisclosed flexibility in data collection and analysis allows presenting anything as significant. Psychological Science, 22(11), 1359–1366.
+
+![](figures/Simmons_fig_2.png)
+
+--------------------------------------------------------------------------------
+
+Simmons, J. P., Nelson, L. D., & Simonsohn, U. (2011). False-positive psychology: Undisclosed flexibility in data collection and analysis allows presenting anything as significant. Psychological Science, 22(11), 1359–1366.
+
+![](figures/Simmons_fig_3.png)
+
+--------------------------------------------------------------------------------
+
+Simmons, J. P., Nelson, L. D., & Simonsohn, U. (2011). False-positive psychology: Undisclosed flexibility in data collection and analysis allows presenting anything as significant. Psychological Science, 22(11), 1359–1366.
+
+![](figures/Simmons_fig_4.png)
+
+--------------------------------------------------------------------------------
+
+## The 21 Word Solution
+
+Simmons, J. P., Nelson, L. D., & Simonsohn, U. (2012). A 21 word solution. Retrieved from: [http://dx.doi.org/10.2139/ssrn.2160588](http://dx.doi.org/10.2139/ssrn.2160588)   
+
+We have adopted the recommendation to report 
+
+- how we determined our sample size
+- all data exclusions
+- all manipulations
+- all study measures. 
+
+We will include the following brief (21 word) statement in all papers we submit for publication:      
+
+"We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study.”
+
+--------------------------------------------------------------------------------
+
+I routinely include the following text in reviews for journal manuscripts
+
+
+"I have three additional requests that follow from the increased efforts directed at transparency and open science more generally in our field.    
+
+
+1. Add a statement to the paper confirming that you have reported all measures, conditions, data exclusions, and how you determined the sample size. You should, of course, add any additional text to ensure this statement is accurate. This is the standard disclosure request endorsed by the Center for Open Science (see [http://osf.io/hadz3](http://osf.io/hadz3)).
+
+2. Add a statement to the manuscript to confirm that the study was or was not pre-registered. If it was not, provide the rationale for why.
+
+3. Make data, measures, and analysis code publicly available, online, hosted by a reliable third party (e.g., [https://osf.io/](https://osf.io/)), and provide a persistent link to these materials in the paper."
+
+--------------------------------------------------------------------------------
+
+## Important Research Degrees of Freedom
+
+1. IVs and how they will be “scored” (levels, processing, etc)   
+2. DVs and how they will be  scored  
+3. Analytic model (additive, interactive, other model features)  
+4. Covariates and how they will be selected   
+5. Plans to use transformations (when and what transformations)
+6. Plans to identify and handle outliers and influential observations
+7. N
+
+These should generally always be pre-registered
+
+--------------------------------------------------------------------------------
+
+## Resources
+
+**Pre-registration FAQ:**     
+[https://www.psychologicalscience.org/observer/research-preregistration-101](https://www.psychologicalscience.org/observer/research-preregistration-101)   
+
+**Pre-registration examples:**    
+[https://osf.io/ukhcf/register/564d31db8c5e4a7c9694b2be](https://osf.io/ukhcf/register/564d31db8c5e4a7c9694b2be)    
+
+[https://osf.io/m8jmp/register/564d31db8c5e4a7c9694b2c0](https://osf.io/m8jmp/register/564d31db8c5e4a7c9694b2c0)
