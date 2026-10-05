@@ -18,17 +18,14 @@ options(knitr.kable.NA = '')
 
 --------------------------------------------------------------------------------
 
-```{r}
-tibble("Research Concludes" = c("FAIL TO REJECT NULL", 
-                                "REJECT NULL"),
-       "NO EFFECT" = c("CORRECT FTR; True Negative (TN)", 
-                                 "TYPE I ERROR; False Positive (FP)"),
-       "EFFECT EXISTS" = c("TYPE II ERROR; False Negative (FN)", 
-                                     "CORRECT R; True Positive (TP)")) |> 
-  kableExtra::kbl() |> 
-  kableExtra::column_spec(1, bold = TRUE) |>
-  kableExtra::add_header_above(c(" ", "Reality" = 2)) 
-```
+## The Decision (Confusion) Matrix
+
+|                         | No Effect                         | Effect Exists                      |
+|-------------------------|-----------------------------------|------------------------------------|
+| **Fail to Reject Null** | Correct (True Negative, TN)       | Type II Error (False Negative, FN) |
+| **Reject Null**         | Type I Error (False Positive, FP) | Correct (True Positive, TP)        |
+
+: Columns show reality; rows show what the research concludes {tbl-colwidths="[26,37,37]"}
 
 --------------------------------------------------------------------------------
 
