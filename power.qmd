@@ -20,24 +20,148 @@ options(knitr.kable.NA = '')
 
 ## The Decision (Confusion) Matrix
 
-|                         | No Effect                         | Effect Exists                      |
-|-------------------------|-----------------------------------|------------------------------------|
-| **Fail to Reject Null** | Correct (True Negative, TN)       | Type II Error (False Negative, FN) |
-| **Reject Null**         | Type I Error (False Positive, FP) | Correct (True Positive, TP)        |
+<!-- To highlight, add class="hl" (color fill):
+       - whole row:    on the <tr>
+       - whole column: on each cell (<th>/<td>) in that column -->
 
-: Columns show reality; rows show what the research concludes {tbl-colwidths="[26,37,37]"}
+<table>
+<thead>
+<tr>
+  <th></th>
+  <th>No Effect</th>
+  <th>Effect Exists</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Fail to Reject Null</strong></td>
+  <td><span style="color:forestgreen;">Correct (True Negative, TN)</span></td>
+  <td><span style="color:red;">Type II Error (False Negative, FN)</span></td>
+</tr>
+<tr>
+  <td><strong>Reject Null</strong></td>
+  <td><span style="color:red;">Type I Error (False Positive, FP)</span></td>
+  <td><span style="color:forestgreen;">Correct (True Positive, TP)</span></td>
+</tr>
+</tbody>
+</table>
+
+#### Understanding the Matrix {style="margin-top: 4rem; color: #c5050c;"}
+
+- Columns define reality (is there a true effect in the population of scores)
+- Rows define the researchers' decision based on the statistical analysis (Reject vs. Fail to Reject)
+
+<br>
+
+- Cells colored in green are correct decisions
+- Cells colored in red are errors
+
+<!--other options for spacing are <div style="height: 1.5rem;"></div> or <br>-->
 
 --------------------------------------------------------------------------------
 
-## Power
+## The Decision (Confusion) Matrix
 
-Power: The probability of rejecting the null hypothesis when it is false
+<table>
+<thead>
+<tr>
+  <th></th>
+  <th>No Effect</th>
+  <th>Effect Exists</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Fail to Reject Null</strong></td>
+  <td><span style="color:forestgreen;">Correct (True Negative, TN)</span></td>
+  <td><span style="color:red;">Type II Error (False Negative, FN)</span></td>
+</tr>
+<tr>
+  <td><strong>Reject Null</strong></td>
+  <td><span style="color:red;">Type I Error (False Positive, FP)</span></td>
+  <td><span style="color:forestgreen;">Correct (True Positive, TP)</span></td>
+</tr>
+</tbody>
+</table>
 
-- Symbol is 1 - $\beta$, where $\beta$ is the probability of making a Type II error - failing to reject the null hypothesis when you should
+#### Statistical Validity Requires: {style="margin-top: 4rem; color: #c5050c;"}
 
-- Power is the probability of concluding that predictors are related (or groups differ) to outcome based on inferential statistics calculated in your sample when the predictors are related (or groups differ) in the population
+- Nominal control of Type 1 error rate at specified value
+- High statistical power
+- Low false discovery rate
 
 --------------------------------------------------------------------------------
+
+## The Decision (Confusion) Matrix - Type 1 Error Rate
+
+<table>
+<thead>
+<tr>
+  <th></th>
+  <th class="hl">No Effect</th>
+  <th>Effect Exists</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Fail to Reject Null</strong></td>
+  <td class="hl"><span style="color:forestgreen;">Correct (True Negative, TN)</span></td>
+  <td><span style="color:red;">Type II Error (False Negative, FN)</span></td>
+</tr>
+<tr>
+  <td><strong>Reject Null</strong></td>
+  <td class="hl"><span style="color:red;">Type I Error (False Positive, FP)</span></td>
+  <td><span style="color:forestgreen;">Correct (True Positive, TP)</span></td>
+</tr>
+</tbody>
+</table>
+
+#### Type 1 Error Rate: {style="margin-top: 4rem; color: #c5050c;"}
+
+- This is the probability that you will reject the NULL hypothesis when it is TRUE (this is an error)
+- Also called False Alarm Rate
+- FP / (FP + TN)
+- [Its inverse is called Specificity; TN / (FP + TN)]
+- Controlled by choice for alpha ($\alpha$; true only under assumptions for statistical test)
+- Can be simulated when assumptions are violated
+- We typically focus on *test-wise* Type 1 error rate but should consider *family-wise* Type 1 error as well
+
+--------------------------------------------------------------------------------
+
+## The Decision (Confusion) Matrix - Statistical Power
+
+<table>
+<thead>
+<tr>
+  <th></th>
+  <th>No Effect</th>
+  <th class="hl">Effect Exists</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Fail to Reject Null</strong></td>
+  <td><span style="color:forestgreen;">Correct (True Negative, TN)</span></td>
+  <td class="hl"><span style="color:red;">Type II Error (False Negative, FN)</span></td>
+</tr>
+<tr>
+  <td><strong>Reject Null</strong></td>
+  <td><span style="color:red;">Type I Error (False Positive, FP)</span></td>
+  <td class="hl"><span style="color:forestgreen;">Correct (True Positive, TP)</span></td>
+</tr>
+</tbody>
+</table>
+
+
+#### Statistical Power: {style="margin-top: 4rem; color: #c5050c;"}
+
+- This is the probability that you will reject the NULL hypothesis when it is FALSE (this is a correct decision)
+- [Also called Sensitivity]
+- TP / (TP + FN)
+- Impacted by many factors (next slides) but can be simulated
+
+--------------------------------------------------------------------------------
+
 
 ## What Determines Power?
 
@@ -45,9 +169,10 @@ Some statistical tests are more powerful (i.e., better at detecting real/non-zer
 
 Parametric tests often are more powerful than non-parametric, because they work with more information from the data.  
 
-GLM is MVUE when assumptions are met.   
+GLM is MVUE (Minimum Variance Unbiased Estimators) when assumptions are met.   
 
 --------------------------------------------------------------------------------
+
 
 ## What Factors Affect Power in GLM?
 
@@ -114,176 +239,6 @@ When will you do a post hoc power analysis?
 When you do not find a hypothesized effect to be significant.  Can reduce concern that this is a type II error.
 :::
 
---------------------------------------------------------------------------------
-
-**Power can be calculated for tests of:**    
-
-- Effect of single regressor (i.e., $b$).
-- Effect of subset of regressors (i.e., multi-parameter model comparison).  
-- Effect of all regressors in the model (multi-parameter model comparison to mean-only model).
-
-**A priori power analysis:**   
-
-1. Must set alpha level, $P_a$, $P_c$, and desired power.   
-2. Specify (calculate) effect size (e.g., $\eta_p^2$ or $\Delta R^2$).
-3. $N$ will be a function of the above factors.   
-
-
-**Post hoc power analysis:**   
-
-1. Must set alpha level, $P_a$, $P_c$, and $N$.
-2. Specify minimum effect size of interest. Be very conservative.
-3. Power will be a function of above factors.
-
---------------------------------------------------------------------------------
-
-## Effect Size: $\eta_p^2$
-
-You can calculate $\eta_p^2$ for any reported effect.   
-
-- $\eta_p^2 = \frac{F*\text{df}_{num}}{F*\text{df}_{nun} + \text{df}_{dem}}$    
-
-:::{.footer}
-$\text{df}_{num}$ and $\text{df}_{dem}$ are numerator and denominator degrees of freedom from the F statistic.
-:::
-
---------------------------------------------------------------------------------
-
-## Cohen (1992) Rules of Thumb for partial eta-squared 
-
-The values of $\eta_p^2$ that Cohen implicitly defines as small, medium, and large vary across research context/statistical test.  
-
-- Use MR (multiple regression) effect sizes if you are testing model $R^2$ or a set (>1) of regressors from quantitative predictors   
-- Use ANOVA/t effect sizes if you are testing one categorical predictor.
-- Use r effect sizes if you are testing one quantitative predictor.
-
-
-```{r}
-#| echo: false
-
-tibble("Effect" = c("Small", "Medium", "Large"),
-       "MR" = c(".02 (R<sup>2</sup>  = .02)", ".13 (R<sup>2</sup>  = .13)", ".26 (R<sup>2</sup>  = .26)"),
-       "ANOVA" = c(".01 (F = .10)", ".06 (F = .25", ".14 (F = .40"),
-       "t-test" = c(".01 (d = .20)",".06 (d = .50)", ".14 (d = .80)"),
-       "r" = c(".01 (r = .10)", ".09 (r = .30)", ".25 (r = .50)")) |> 
-  kableExtra::kbl(escape = FALSE) 
-```
-
---------------------------------------------------------------------------------
-
-## Power Analysis 
-
-You can use the `pwr.f2.test()` function in the `pwr` package to calculate power.   
-
-It takes the following parameters:   
-
-- `u` = Numerator degrees of freedom for F statistic ($P_a - P_c$)
-- `v` = Denominator degrees of freedom for F statistic ($N - P_a$)
-- `f2` = effect size estimate	
-- `sig.level` = Significance level (Type I error probability; $\alpha$)
-- `power`	= Power of test (1 minus Type II error probability; 1 - $\beta$)
-
-f2 can be calculated from either $\eta_p^2$ or $\Delta R^2$ and $R_2$
-
-- $f^2$ = $\frac{\eta_p^2}{1-\eta_p^2}$ 
-- $f^2$ = $\frac{\Delta R^2}{(1 - R^2)}$
-
---------------------------------------------------------------------------------
-
-## A Priori Power Analysis
-
-::: {.callout-important}
-# Question
-How many subjects are needed for 80% power to detect a $\eta_p^2$ of .09 for one quantitative predictor in a model with 5 quantitative predictors at an alpha of 0.05?
-:::
-
-:::{.fragment}
-```{r}
-pwr::pwr.f2.test(u = 1, 
-                 v = NULL, #<1>
-                 f2 = .09/(1-.09), 
-                 sig.level = .05, 
-                 power = .80)
-```
-
-1. Since we do not yet have a sample size (this is what we are trying to determine!), we set `v` to `NULL`.   
-
-[$N = v + P_a = 79.327 + 6 = 85.327$]{style="color: blue;"}
-:::
-
---------------------------------------------------------------------------------
-
-::: {.callout-important}
-# Question
-
-How many subjects are needed for 85% power to detect a $\Delta R^2$ of .05 for one quantitative predictor in a model with 3 quantitatve predictors and an $R^2$ of .30 at an alpha of 0.05?
-:::
-
-:::{.fragment}
-```{r}
-pwr::pwr.f2.test(u = 1, 
-                 v = NULL,
-                 f2 = .05/(1-.30), 
-                 sig.level = .05, 
-                 power = .85)
-```
-
-[$N = v + P_a = 125.648 + 4 = 129.648$]{style="color: blue;"}
-:::
-
---------------------------------------------------------------------------------
-
-## Hefner et al. (2013)*
-
-We analyzed startle potentiation during uncertain threat cues in General Linear Model with a between-subjects regressor for beverage group (coded as alcohol = 0.5 and control = -0.5). We included baseline startle response (mean-centered) as an additive regressor to increase power. **As predicted, we observed a significant effect of beverage group, $b = -22.2, \eta_p^2 = 0.16, t(64) = -3.45, p = .001$.**, indicating that alcohol decreased startle potentiation to uncertain threat by approximately 22 microvolts.
-
-::: {.callout-important}
-# Question
-How many subjects are needed to detect an effect of beverage group based on the effect size observed in Hefner et al. with 90% power and an alpha of .05?
-:::
-
-:::{.fragment}
-
-$\eta_p^2 = \frac{F * \text{df}_n}{F*\text{df}_n + \text{df}_d} = \frac{3.45^2*1}{3.45^2*1+64} = .157$
-
-```{r}
-pwr::pwr.f2.test(u = 1, 
-                 v = NULL, 
-                 f2 = .157/(1-.157), 
-                 sig.level = .05, 
-                 power = .90)
-```
-
-[$N = v + P_a = 56.408 + 3 = 59.408$]{style="color: blue;"}
-:::
-
-:::{.footer}
-* study results modified slightly to remove repeated measures on cue
-
-:::
-
---------------------------------------------------------------------------------
-
-## Post Hoc Power Analysis
-
-::: {.callout-important}
-# Question
-How much power did Hefner et al. have to detect a moderate effect size ($\eta_p^2 = .06$), with alpha of .05?
-:::
-
-:::{.fragment}
-```{r}
-pwr::pwr.f2.test(u = 1, 
-                 v = 64, 
-                 f2 = .06/(1-.06), 
-                 sig.level = .05, 
-                 power = NULL)
-```
-
-[Power = 0.525]{style="color: blue;"}
-:::
-
---------------------------------------------------------------------------------
 
 ## Problems from Low Power
 
@@ -314,6 +269,32 @@ Called the Positive Predictive Value (PPV) of a claimed discovery.
 
 It is NOT equal to alpha (which is a column probability in confusion matrix).  It is a row probability in the confusion matrix (more on this in a moment).
 
+## The Decision (Confusion) Matrix - False Discovery Rate
+
+<table>
+<thead>
+<tr>
+  <th></th>
+  <th>No Effect</th>
+  <th>Effect Exists</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Fail to Reject Null</strong></td>
+  <td><span style="color:forestgreen;">Correct (True Negative, TN)</span></td>
+  <td><span style="color:red;">Type II Error (False Negative, FN)</span></td>
+</tr>
+<tr class="hl">
+  <td><strong>Reject Null</strong></td>
+  <td><span style="color:red;">Type I Error (False Positive, FP)</span></td>
+  <td><span style="color:forestgreen;">Correct (True Positive, TP)</span></td>
+</tr>
+</tbody>
+</table>
+
+
+--------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
 $\text{PPV} = \frac{(1 - \beta) * \text{OR}}{(1 - \beta) * \text{OR} + \alpha}$   

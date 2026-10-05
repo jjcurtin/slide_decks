@@ -5,7 +5,7 @@
 FILE=$1
 
 echo ""
-echo "Publishing $FILE to quarto-pub"
+echo "Publishing $FILE to Posit Connect Cloud"
 echo ""
 
 cp _quarto_uw.yml _quarto.yml
