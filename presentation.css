@@ -250,6 +250,22 @@ figcaption {
 display: none !important;
 }
 
+/* --- Table row/column highlighting ---
+   Color fill:  <tr class="hl"> for a row, or class="hl" on each cell for a column
+   Box outline: use "hlbox" the same way                                        */
+.reveal table tr.hl td,
+.reveal table td.hl,
+.reveal table th.hl {
+  background-color: #ffe08a !important;
+}
+
+.reveal table tr.hlbox td,
+.reveal table td.hlbox,
+.reveal table th.hlbox {
+  outline: 4px solid #c5050c !important;
+  outline-offset: -4px;
+}
+
 .rect_outline {
   border: 5px solid;
   border-color: red;
