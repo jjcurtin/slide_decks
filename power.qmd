@@ -18,7 +18,7 @@ options(knitr.kable.NA = '')
 
 --------------------------------------------------------------------------------
 
-## The Decision (Confusion) Matrix
+## The Decision Matrix
 
 <!-- To highlight, add class="hl" (color fill):
        - whole row:    on the <tr>
@@ -46,7 +46,7 @@ options(knitr.kable.NA = '')
 </tbody>
 </table>
 
-#### Understanding the Matrix {style="margin-top: 4rem; color: #c5050c;"}
+#### Understanding the Matrix {style="margin-top: 3rem; color: #c5050c;"}
 
 - Columns define reality (is there a true effect in the population of scores)
 - Rows define the researchers' decision based on the statistical analysis (Reject vs. Fail to Reject)
@@ -56,11 +56,15 @@ options(knitr.kable.NA = '')
 - Cells colored in green are correct decisions
 - Cells colored in red are errors
 
+<br>
+
+- Also called confusion matrix in machine learning context 
+
 <!--other options for spacing are <div style="height: 1.5rem;"></div> or <br>-->
 
 --------------------------------------------------------------------------------
 
-## The Decision (Confusion) Matrix
+## The Decision Matrix
 
 <table>
 <thead>
@@ -84,7 +88,7 @@ options(knitr.kable.NA = '')
 </tbody>
 </table>
 
-#### Statistical Validity Requires: {style="margin-top: 4rem; color: #c5050c;"}
+#### Statistical Validity Requires: {style="margin-top: 3rem; color: #c5050c;"}
 
 - Nominal control of Type 1 error rate at specified value
 - High statistical power
@@ -92,7 +96,7 @@ options(knitr.kable.NA = '')
 
 --------------------------------------------------------------------------------
 
-## The Decision (Confusion) Matrix - Type 1 Error Rate
+## The Decision Matrix - Type 1 Error Rate
 
 <table>
 <thead>
@@ -116,19 +120,24 @@ options(knitr.kable.NA = '')
 </tbody>
 </table>
 
-#### Type 1 Error Rate: {style="margin-top: 4rem; color: #c5050c;"}
+#### Type 1 Error Rate: {style="margin-top: 3rem; color: #c5050c;"}
 
 - This is the probability that you will reject the NULL hypothesis when it is TRUE (this is an error)
-- Also called False Alarm Rate
+- Also called False Alarm Rate [Its inverse is called Specificity in machine learning]
+
+ <br>
+ 
 - FP / (FP + TN)
-- [Its inverse is called Specificity; TN / (FP + TN)]
+
+<br> 
+
 - Controlled by choice for alpha ($\alpha$; true only under assumptions for statistical test)
 - Can be simulated when assumptions are violated
 - We typically focus on *test-wise* Type 1 error rate but should consider *family-wise* Type 1 error as well
 
 --------------------------------------------------------------------------------
 
-## The Decision (Confusion) Matrix - Statistical Power
+## The Decision Matrix - Statistical Power
 
 <table>
 <thead>
@@ -153,11 +162,17 @@ options(knitr.kable.NA = '')
 </table>
 
 
-#### Statistical Power: {style="margin-top: 4rem; color: #c5050c;"}
+#### Statistical Power: {style="margin-top: 3rem; color: #c5050c;"}
 
 - This is the probability that you will reject the NULL hypothesis when it is FALSE (this is a correct decision)
+- The inverse is the Type II error rate
 - [Also called Sensitivity]
+
+<br>
 - TP / (TP + FN)
+
+<br>
+
 - Impacted by many factors (next slides) but can be simulated
 
 --------------------------------------------------------------------------------
@@ -165,26 +180,28 @@ options(knitr.kable.NA = '')
 
 ## What Determines Power?
 
+<br>
+
 Some statistical tests are more powerful (i.e., better at detecting real/non-zero population effects) than others.     
 
-Parametric tests often are more powerful than non-parametric, because they work with more information from the data.  
+- Parametric tests often are more powerful than non-parametric, because they work with more information from the data.  
 
-GLM is MVUE (Minimum Variance Unbiased Estimators) when assumptions are met.   
+- GLM is MVUE (Minimum Variance Unbiased Estimators) when assumptions are met.   
 
 --------------------------------------------------------------------------------
 
 
 ## What Factors Affect Power in GLM?
 
-1.  **Alpha ($\alpha$)**: As alpha increases (e.g., goes from .01 to .05), power increases.  As alpha increases:
+- **Alpha ($\alpha$)**: As alpha increases (e.g., goes from .01 to .05), power increases.  As alpha increases:
   - Larger rejection region in sampling distribution for $b$ given $H_0$
 
-2. **Sample size**: As $N$ increases, power increases. As $N$ increases:
+- **Sample size**: As $N$ increases, power increases. As $N$ increases:
   - $SE_b$ decreases 
   - Narrower sampling distribution for $b$, so $b is more extreme (in tail)
   - $t$ statistic will be larger
 
-3. **Magnitude of effect in the population**: As magnitude of the effect in the population increases (e.g., bigger $\beta$), power increases.  As $b$ increases:
+- **Magnitude of effect in the population**: As magnitude of the effect in the population increases (e.g., bigger $\beta$), power increases.  As $b$ increases:
   – $b$ will be more extreme (in tail) in sampling distribution for $b$ 
   - $t$ statistic will be larger
 
@@ -196,15 +213,15 @@ Additional factors on next slide
 
 ## What Factors Affect Power in GLM (continued)?
 
-4. **Number of parameters in augmented model**: As $P_a$ increases (i.e., augmented model gets more complex/more $X$), power decreases. As $P_a$ increases:
+- **Number of parameters in augmented model**: As $P_a$ increases (i.e., augmented model gets more complex/more $X$), power decreases. As $P_a$ increases:
   - $SE_b$ increases 
   - Wider sampling distribution for $b$ (so $b$ is less extreme)
   - $t$ statistic will be smaller
 
-5. **Number of parameters in effect (multi-parameter comparisons)**: As $P_a - P_c$ increases, power decreases. As $P_a - P_c$ increases:
+- **Number of parameters in effect (multi-parameter comparisons)**: As $P_a - P_c$ increases, power decreases. As $P_a - P_c$ increases:
   - Sampling distribution for $F$ gets wider (we don't see this directly from model results), so F less extreme (with smaller p-value)
   
-6. **Error (unexplained variance in $Y$)**:  As $SSE_a$ increases (and model $R^2$ decreases), power decreases.  As $SSE_a$ increases:
+- **Error (unexplained variance in $Y$)**:  As $SSE_a$ increases (and model $R^2$ decreases), power decreases.  As $SSE_a$ increases:
   – $SE_b$ increases 
   - $b$ will be less extreme in sampling distribution for $b$
   - $t$ statistic will be smaller
@@ -219,31 +236,12 @@ Desired level of power:
 - The value of .80 has become a minimum threshold standard (much like alpha = .05 for significance testing.   
 - Higher power also means more precision in estimating the magnitude of the effect (narrower CI).   
 
-
-## Power Analysis Strategies
-
-There are two general strategies for power analyses
-
-1. A priori: Determine number of subjects needed ($N$) for given level of power (e.g. .80).  Used to determine sample size for pending study.
-
-2. Post hoc: Determine power for a given design (e.g., completed experiment with fixed $N$).   
-
-You should almost always do (and report) an a priori power analysis (maybe not if no control over $N$?)
-
-::: {.callout-important}
-# Question
-When will you do a post hoc power analysis?
-:::
-
-::: {.fragment}
-When you do not find a hypothesized effect to be significant.  Can reduce concern that this is a type II error.
-:::
-
+--------------------------------------------------------------------------------
 
 ## Problems from Low Power
 
 1. Low probability of finding true effects.   
-2. Low positive predictive value (PPV). 
+2. High false discovery rate 
 3. An exaggerated estimate of the magnitude of the effect when a true effect is discovered. 
 
 --------------------------------------------------------------------------------
@@ -257,19 +255,24 @@ If a study has 20% power and there really is an effect, you only have a 20% chan
 Low-powered studies produce more false negatives (misses) than high-powered studies.   
 
 We tend to focus on false alarms, but misses can be equally costly (e.g., new treatments).   
+
 You waste resources (time, money) with low-powered studies. One high-powered study (N) > Two low-powered studies (N/2).
 
 --------------------------------------------------------------------------------
 
-## Low Positive Predictive Value (PPV)
+## High False Discovery Rate 
 
-The lower the power of a study, the lower the probability that an observed **significant** effect (among the set of all significant effects) reflects a true non-zero effect in the population (vs. a false alarm).     
+The lower the power of a study, the higher the probability that an observed **significant** effect (among the set of all significant effects) reflects a false alarm (error) vs  a true non-zero effect in the population. 
 
-Called the Positive Predictive Value (PPV) of a claimed discovery.    
+- When a significant effect reported in the literature is wrong (the true population effect is NULL), it is called a **False Discovery** and the likelihood of this happening is called the False Discovery Rate.  
 
-It is NOT equal to alpha (which is a column probability in confusion matrix).  It is a row probability in the confusion matrix (more on this in a moment).
+- It is NOT equal to alpha (which is a column probability in confusion matrix).  It is a row probability in the confusion matrix (more on this in a moment).
 
-## The Decision (Confusion) Matrix - False Discovery Rate
+- The inverse of the FDR is called the positive predictive value of a claimed discovery (mostly from machine learning)
+
+--------------------------------------------------------------------------------
+
+## The Decision Matrix - False Discovery Rate
 
 <table>
 <thead>
@@ -294,7 +297,6 @@ It is NOT equal to alpha (which is a column probability in confusion matrix).  I
 </table>
 
 
---------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
 $\text{PPV} = \frac{(1 - \beta) * \text{OR}}{(1 - \beta) * \text{OR} + \alpha}$   
@@ -454,26 +456,26 @@ Large studies often require more funding and personnel resources. Designs are ex
 Simmons, J. P., Nelson, L. D., & Simonsohn, U. (2011). False-positive psychology: Undisclosed flexibility in data collection and analysis allows presenting anything as significant. Psychological Science, 22(11), 1359–1366.
 
 
-![](figures/Simmons_fig_1.png)
+![](power_simmons1.png)
 
 
 --------------------------------------------------------------------------------
 
 Simmons, J. P., Nelson, L. D., & Simonsohn, U. (2011). False-positive psychology: Undisclosed flexibility in data collection and analysis allows presenting anything as significant. Psychological Science, 22(11), 1359–1366.
 
-![](figures/Simmons_fig_2.png)
+![](power_simmons_2.png)
 
 --------------------------------------------------------------------------------
 
 Simmons, J. P., Nelson, L. D., & Simonsohn, U. (2011). False-positive psychology: Undisclosed flexibility in data collection and analysis allows presenting anything as significant. Psychological Science, 22(11), 1359–1366.
 
-![](figures/Simmons_fig_3.png)
+![](power_simmons3.png)
 
 --------------------------------------------------------------------------------
 
 Simmons, J. P., Nelson, L. D., & Simonsohn, U. (2011). False-positive psychology: Undisclosed flexibility in data collection and analysis allows presenting anything as significant. Psychological Science, 22(11), 1359–1366.
 
-![](figures/Simmons_fig_4.png)
+![](power_simmons4.png)
 
 --------------------------------------------------------------------------------
 
@@ -494,40 +496,165 @@ We will include the following brief (21 word) statement in all papers we submit 
 
 --------------------------------------------------------------------------------
 
-I routinely include the following text in reviews for journal manuscripts
+## Power Analysis Strategies
+
+There are two general strategies for power analyses
+
+1. A priori: Determine number of subjects needed ($N$) for given level of power (e.g. .80).  Used to determine sample size for pending study.
+
+2. Post hoc: Determine power for a given design (e.g., completed experiment with fixed $N$).   
+
+You should almost always do (and report) an a priori power analysis (maybe not if no control over $N$?)
+
+::: {.callout-important}
+# Question
+When will you do a post hoc power analysis?
+:::
+
+::: {.fragment}
+When you do not find a hypothesized effect to be significant.  Can reduce concern that this is a type II error.
+:::
 
 
-"I have three additional requests that follow from the increased efforts directed at transparency and open science more generally in our field.    
-
-
-1. Add a statement to the paper confirming that you have reported all measures, conditions, data exclusions, and how you determined the sample size. You should, of course, add any additional text to ensure this statement is accurate. This is the standard disclosure request endorsed by the Center for Open Science (see [http://osf.io/hadz3](http://osf.io/hadz3)).
-
-2. Add a statement to the manuscript to confirm that the study was or was not pre-registered. If it was not, provide the rationale for why.
-
-3. Make data, measures, and analysis code publicly available, online, hosted by a reliable third party (e.g., [https://osf.io/](https://osf.io/)), and provide a persistent link to these materials in the paper."
-
---------------------------------------------------------------------------------
-
-## Important Research Degrees of Freedom
-
-1. IVs and how they will be “scored” (levels, processing, etc)   
-2. DVs and how they will be  scored  
-3. Analytic model (additive, interactive, other model features)  
-4. Covariates and how they will be selected   
-5. Plans to use transformations (when and what transformations)
-6. Plans to identify and handle outliers and influential observations
-7. N
-
-These should generally always be pre-registered
 
 --------------------------------------------------------------------------------
 
-## Resources
+## Power Simulations 
 
-**Pre-registration FAQ:**     
-[https://www.psychologicalscience.org/observer/research-preregistration-101](https://www.psychologicalscience.org/observer/research-preregistration-101)   
 
-**Pre-registration examples:**    
-[https://osf.io/ukhcf/register/564d31db8c5e4a7c9694b2be](https://osf.io/ukhcf/register/564d31db8c5e4a7c9694b2be)    
+--------------------------------------------------------------------------------
 
-[https://osf.io/m8jmp/register/564d31db8c5e4a7c9694b2c0](https://osf.io/m8jmp/register/564d31db8c5e4a7c9694b2c0)
+## Example 1: Two group design
+
+All simulations done in Tidyverse ecosystem
+
+- Kept simple here for understanding
+- Can expand to use parallel processing with `foreach`
+
+```{r}
+#| message: false
+#| warning: false
+
+library(tidyverse)
+```
+
+--------------------------------------------------------------------------------
+
+## Example 1: Two group design
+
+
+Start by writing function for data generating process
+
+- Equal N in two groups
+- GLM assumptions met (independent observations, residuals normally distributed with mean of 0 and constant variance)
+- Can specify the sample size (`n`) and size of X effect (`b`)
+
+```{r}
+get_data <- function(n, b){
+  x <- rep(c(0,1), n/2)
+  # y = b0 + b1*x + e  
+  y <- 0 + b*x + rnorm(n = n, mean = 0, sd = 10)
+  tibble(x = x, y = y)
+}
+```
+
+Simple test/demonstration
+```{r}
+d <- get_data(10, 5)
+
+d
+```
+
+
+--------------------------------------------------------------------------------
+
+## Example 1: Two group design
+
+Write function to fit the analysis model
+
+- Added benefit - precise preregistration of analysis
+
+```{r}
+fit_model <- function(data){
+  lm(y ~ x, data = data)
+}
+```
+
+
+extract_stats <- function(model){
+  results <- summary(model)
+  b <- results$coefficients["x", "Estimate"] 
+  p <- results$coefficients["x", "Pr(>|t|)"] 
+  sig <- if_else(p < .05, 1, 0) 
+  tibble(b, p, sig)
+}
+
+
+# single run
+d <- get_data(100, 5)
+d |> glimpse()
+
+m <- fit_model(data)
+summary(m)
+
+extract_stats(m)
+
+# set up sims 
+n_sims <- 1000
+b <- 5
+n <- c(40, 80, 120, 160)
+
+sims <- expand_grid(b = b, n = n, n_sim = 1:n_sims)
+nrow(sims)
+head(sims)
+tail(sims)
+
+sims <- sims |> 
+  mutate(model_b = NA,
+         model_p = NA,
+         model_sig = NA)
+
+head(sims)
+
+
+
+# run the sims
+set.seed(12345)
+for (i in 1:nrow(sims)){
+ 
+  d <- get_data(sims$n[i], sims$b[i])
+  m <- fit_model(d)
+  stats <- extract_stats(m) 
+  sims$model_b[i] <- stats$b
+  sims$model_p[i] <- stats$p
+  sims$model_sig[i] <- stats$sig
+  
+}
+
+
+sims |> 
+  summarise(power = mean(model_sig), .by = n) |> 
+  ggplot(aes(x = n, y = power)) +
+  geom_line() +
+  geom_point() +
+  labs(x = "Sample size (n)", y = "Power") +
+  theme_minimal()
+
+
+# plot estimated power (mean of model_sig) by n
+sims |> 
+  summarise(power = mean(model_sig), .by = n) |> 
+  ggplot(aes(x = n, y = power)) +
+  geom_line() +
+  geom_point() +
+  labs(x = "Sample size (n)", y = "Power (P(significant))")
+
+
+# The tidyverse way...
+
+sims <- sims |> 
+  mutate(data = map2(n, b, 
+                     \(n, b) get_data(n, b)),
+         model = map(data, 
+                     \(data) fit_model(data)))
+
