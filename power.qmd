@@ -521,6 +521,11 @@ When you do not find a hypothesized effect to be significant.  Can reduce concer
 
 ## Power Simulations 
 
+STANDARD OPTION FROM SOFTWARE OR TABLES
+
+TALK ABOUT BENEFITS FROM SIMULATIONS  
+
+TALK ABOUT GENERAL WORKFLOW
 
 --------------------------------------------------------------------------------
 
@@ -550,17 +555,17 @@ Start by writing function for data generating process
 - Can specify the sample size (`n`) and size of X effect (`b`)
 
 ```{r}
-get_data <- function(n, b){
-  x <- rep(c(0,1), n/2)
+get_data_ex1 <- function(n, b){
+  x <- rep(c(0, 1), n/2)
   # y = b0 + b1*x + e  
-  y <- 0 + b*x + rnorm(n = n, mean = 0, sd = 10)
+  y <- 100 + b*x + rnorm(n = n, mean = 0, sd = 10)
   tibble(x = x, y = y)
 }
 ```
 
 Simple test/demonstration
 ```{r}
-d <- get_data(10, 5)
+d <- get_data_ex1(10, 5)
 
 d
 ```
@@ -575,63 +580,146 @@ Write function to fit the analysis model
 - Added benefit - precise preregistration of analysis
 
 ```{r}
-fit_model <- function(data){
+fit_lm <- function(data){
   lm(y ~ x, data = data)
 }
 ```
 
 
-extract_stats <- function(model){
+Simple test/demonstration
+```{r}
+m <- fit_lm(d)
+
+summary(m)
+```
+
+--------------------------------------------------------------------------------
+
+## Example 1: Two group design
+
+Write function to extract key stats from model
+
+- In these case, we want `b`, `p` for that `b`, and a variable (`sig`), to track if the test of `b` was significant
+- Could add this the `fit_model()` but separate here for clarity
+
+```{r}
+extract_lm <- function(model){
   results <- summary(model)
   b <- results$coefficients["x", "Estimate"] 
   p <- results$coefficients["x", "Pr(>|t|)"] 
   sig <- if_else(p < .05, 1, 0) 
   tibble(b, p, sig)
 }
+```
 
 
-# single run
-d <- get_data(100, 5)
-d |> glimpse()
+Simple test/demonstration
+```{r}
+r <- extract_lm(m) 
 
-m <- fit_model(data)
-summary(m)
+r
+```
 
-extract_stats(m)
 
-# set up sims 
-n_sims <- 1000
+--------------------------------------------------------------------------------
+
+## Example 1: Two group design
+
+Create a control file to guide the simulations
+
+- one row per simulation
+- specificity key settings for each simulation
+  - effect size (`b` = 5).  Could include several different effect sizes
+  - sample size (we will calculate power for several sample sizes)
+  - plan `n_sims` simulations for each combo of `b` and `n`
+- Cross these three factors to generate full control file
+
+
+```{r}
 b <- 5
 n <- c(40, 80, 120, 160)
+n_sims <- 10000   
 
 sims <- expand_grid(b = b, n = n, n_sim = 1:n_sims)
-nrow(sims)
-head(sims)
-tail(sims)
+```
 
+Take a quick look for clarity
+```{r}
+nrow(sims) # 1 (b) x 4 (n) x 10,000 (n_sims) = 40,000
+
+head(sims)
+
+tail(sims)
+```
+
+--------------------------------------------------------------------------------
+
+## Example 1: Two group design
+
+
+Add three more columns to contain the stats we will extract from the analysis model
+
+```{r}
 sims <- sims |> 
   mutate(model_b = NA,
          model_p = NA,
          model_sig = NA)
+```
 
+Peek again
+```{r}
 head(sims)
+```
 
+--------------------------------------------------------------------------------
 
+## Example 1: Two group design
 
-# run the sims
-set.seed(12345)
+Now loop over the `sims` control file to do the power analysis
+
+- Set a seed to make power simulation reproducible
+- Simulations take time, so save the output
+
+```{r}
+set.seed(12345) 
+  
 for (i in 1:nrow(sims)){
  
-  d <- get_data(sims$n[i], sims$b[i])
-  m <- fit_model(d)
-  stats <- extract_stats(m) 
+  d <- get_data_ex1(n = sims$n[i], b = sims$b[i]) # make a data set
+  m <- fit_lm(d) # fit analysis model to dataset                    
+  stats <- extract_lm(m)  # extract stats
+ 
+  # put model stats into appropriate columns in the sims control file
   sims$model_b[i] <- stats$b
   sims$model_p[i] <- stats$p
   sims$model_sig[i] <- stats$sig
-  
 }
 
+sims |> write_csv("ex1.csv") # save simulation results
+```
 
+
+--------------------------------------------------------------------------------
+
+## Example 1: Two group design
+
+Lets loop at results
+
+- first 5 simulations
+```{r}
+head(sims)
+```
+
+- Power at each `n`
+```{r}
+sims |> 
+  summarise(power = mean(model_sig), 
+            mean_b = mean(model_b),   # can assess for parameter estimate bias too!
+            .by = n)
+```
+
+- Plot power curve
+```{r}
 sims |> 
   summarise(power = mean(model_sig), .by = n) |> 
   ggplot(aes(x = n, y = power)) +
@@ -639,22 +727,407 @@ sims |>
   geom_point() +
   labs(x = "Sample size (n)", y = "Power") +
   theme_minimal()
+```
+
+Pretty cool......   But there's more......
 
 
-# plot estimated power (mean of model_sig) by n
+--------------------------------------------------------------------------------
+
+## Example 1: Two group design
+
+We can also evaluate the false alarm (Type 1 error) rate given the proposed data generating process
+
+- This is not required, but is recommended
+- We can use the same control file with additional columns
+
+```{r}
+
+sims <- sims |> 
+  mutate(null_b = NA,
+         null_p = NA,
+         null_sig = NA)
+```
+
+
+--------------------------------------------------------------------------------
+
+## Example 1: Two group design
+
+Only thing that is different is that we set `b` = 0 and we store results in different (last slide) columns
+
+
+```{r}
+for (i in 1:nrow(sims)){
+ 
+  d <- get_data_ex1(n = sims$n[i], b = 0) # NOTE b = 0! 
+  m <- fit_model(d) 
+  stats <- extract_stats(m)  
+ 
+  # put model stats into appropriate columns in the sims control file
+  sims$null_b[i] <- stats$b
+  sims$null_p[i] <- stats$p
+  sims$null_sig[i] <- stats$sig
+}
+
+sims |> write_csv("ex1.csv") # save updated simulation results
+```
+
+
+--------------------------------------------------------------------------------
+
+## Example 1: Two group design
+
+False Alarm Rate (because b = 0) at each `n`
+```{r}
 sims |> 
+  summarise(far = mean(null_sig), 
+            mean_b = mean(null_b),
+            .by = n)
+```
+
+Plot false alarm curve
+```{r}
+sims |> 
+  summarise(far = mean(null_sig), .by = n) |> 
+  ggplot(aes(x = n, y = far)) +
+  geom_line() +
+  geom_point() +
+  labs(x = "Sample size (n)", y = "False Alarm Rate") +
+  ylim (0, .15) +
+  theme_minimal()
+```
+
+All looks good!
+
+--------------------------------------------------------------------------------
+
+## Extensions
+
+This is the basic workflow for power analysis simulations
+
+From here we can: 
+
+- Simulate different data generate processes
+  - model assumption violations
+  - repeated or nested data
+  - dichotomous or other categorical outcomes
+  
+- Compare different analytic approaches (on both power and false alarm rate)
+  - Simpler or more complex models
+  - Protection for multiple comparisons
+
+- Update to parallel processing (can be important)
+
+--------------------------------------------------------------------------------
+
+## Example 2 - Two groups with unequal variance and unequal n
+
+Let's simulate some data with unequal variances (maybe the intervention increases variance because of IDs in response to it) but with unequal N because the intervention is also costly. 
+
+We need a DGP to represent this.  Below we make the SD of the residuals a function of group/condition membership
+```{r}
+get_data_ex2 <- function(n, b){
+  x <- c(rep(0, n * .75), rep(1, n * .25))
+ 
+  # THIS IS THE ASSUMPTION VIOLATION 
+  unequal_sd = 10 + x * 10  # SD of 10 for x = 0 and 20 for x = 1
+  
+  # y = b0 + b1*x + e  
+  y <- 100 + b*x + rnorm(n = n, mean = 0, sd = unequal_sd)  # uses sd from above
+  tibble(x = x, y = y)
+}
+```
+
+Simple test/demonstration
+```{r}
+d <- get_data_ex2(1000, 5)
+
+d |> summarise(mean_y = mean(y), sd_y = sd(y), n = n(), 
+               .by = x)
+```
+
+
+--------------------------------------------------------------------------------
+
+## Example 2 - Two groups with unequal variance and unequal n
+
+We can use `fit_lm()` and `extract_lm()` from earlier.  No changes there
+
+Create a new control file to guide the simulations.  Same as before...
+
+```{r}
+b <- 5
+n <- c(40, 80, 120, 160)
+n_sims <- 10000   
+
+sims2 <- expand_grid(b = b, n = n, n_sim = 1:n_sims) |> 
+  mutate(model_b = NA,
+         model_p = NA,
+         model_sig = NA,
+         null_b = NA,
+         null_p = NA,
+         null_sig = NA)
+```
+
+--------------------------------------------------------------------------------
+
+## Example 2 - Two groups with unequal variance and unequal n
+
+```{r}
+set.seed(32454) 
+  
+for (i in 1:nrow(sims2)){
+ 
+  d <- get_data_ex2(n = sims2$n[i], b = sims2$b[i]) # use UPDATED DGP
+  m <- fit_lm(d) 
+  stats <- extract_lm(m)  
+ 
+  # put model stats into appropriate columns in the sims control file
+  sims2$model_b[i] <- stats$b
+  sims2$model_p[i] <- stats$p
+  sims2$model_sig[i] <- stats$sig
+}
+
+sims2 |> write_csv("ex2.csv") # save simulation results
+```
+
+--------------------------------------------------------------------------------
+
+## Example 2 - Two groups with unequal variance and unequal n
+
+Power at each `n`
+
+- Power is lower because sd/variance higher in one group
+- Parameter estimate is still unbiased 
+```{r}
+sims2 |> 
+  summarise(power = mean(model_sig), 
+            mean_b = mean(model_b),   # can assess for parameter estimate bias too!
+            .by = n)
+```
+
+Plot power curve
+```{r}
+sims2 |> 
   summarise(power = mean(model_sig), .by = n) |> 
   ggplot(aes(x = n, y = power)) +
   geom_line() +
   geom_point() +
-  labs(x = "Sample size (n)", y = "Power (P(significant))")
+  labs(x = "Sample size (n)", y = "Power") +
+  theme_minimal()
+```
+
+--------------------------------------------------------------------------------
+
+## Example 2 - Two groups with unequal variance and unequal n
+
+Evaluate false alarm rate
+
+```{r}
+for (i in 1:nrow(sims2)){
+ 
+  d <- get_data_ex2(n = sims2$n[i], b = 0) # NOTE b = 0! 
+  m <- fit_model(d) 
+  stats <- extract_stats(m)  
+ 
+  # put model stats into appropriate columns in the sims control file
+  sims2$null_b[i] <- stats$b
+  sims2$null_p[i] <- stats$p
+  sims2$null_sig[i] <- stats$sig
+}
+
+sims |> write_csv("ex2.csv") # save simulation results
+```
+
+--------------------------------------------------------------------------------
+
+## Example 2 - Two groups with unequal variance and unequal n
+
+False Alarm Rate (because b = 0) at each `n`
+```{r}
+sims2 |> 
+  summarise(far = mean(null_sig), 
+            mean_b = mean(null_b),
+            .by = n)
+```
+
+Plot false alarm curve
+```{r}
+sims |> 
+  summarise(power = mean(null_sig), .by = n) |> 
+  ggplot(aes(x = n, y = power)) +
+  geom_line() +
+  geom_point() +
+  labs(x = "Sample size (n)", y = "False Alarm Rate") +
+  ylim (0, .15) +
+  theme_minimal()
+```
+
+--------------------------------------------------------------------------------
+
+## Example 2B - Two groups with unequal variance/n - Consider Welchs t test
+
+Didnt we learn at some point that Welch's t-test addresses this case?  Lets see...
+
+- We can reuse the DGP from ex2
+- Need to fit a new analysis model
+- Need a new extractor function
 
 
-# The tidyverse way...
+```{r}
+fit_welch <- function(data){
+  t.test(y ~ x, var.equal = FALSE,
+         data = data)
+}
+```
 
-sims <- sims |> 
-  mutate(data = map2(n, b, 
-                     \(n, b) get_data(n, b)),
-         model = map(data, 
-                     \(data) fit_model(data)))
 
+Simple test/demonstration
+```{r}
+m <- fit_welch(d)
+m
+```
+
+
+```{r}
+extract_welch <- function(model){
+  b <- model$estimate[2] - model$estimate[1]
+  p <- model$p.value
+  sig <- if_else(p < .05, 1, 0) 
+  tibble(b, p, sig)
+}
+```
+
+
+Simple test/demonstration
+```{r}
+r <- extract_lm(m) 
+
+r
+```
+--------------------------------------------------------------------------------
+
+## Example 2 - Two groups with unequal variance and unequal n
+## Example 2B - Two groups with unequal variance/n - Consider Welchs t test
+
+
+We can use `fit_lm()` and `extract_lm()` from earlier.  No changes there
+
+Create a new control file to guide the simulations.  Same as before...
+
+```{r}
+b <- 5
+n <- c(40, 80, 120, 160)
+n_sims <- 10000   
+
+sims2 <- expand_grid(b = b, n = n, n_sim = 1:n_sims) |> 
+  mutate(model_b = NA,
+         model_p = NA,
+         model_sig = NA,
+         null_b = NA,
+         null_p = NA,
+         null_sig = NA)
+```
+
+--------------------------------------------------------------------------------
+
+## Example 2 - Two groups with unequal variance and unequal n
+## Example 2B - Two groups with unequal variance/n - Consider Welchs t test
+
+
+```{r}
+set.seed(32454) 
+  
+for (i in 1:nrow(sims2)){
+ 
+  d <- get_data_ex2(n = sims2$n[i], b = sims2$b[i]) # use UPDATED DGP
+  m <- fit_lm(d) 
+  stats <- extract_lm(m)  
+ 
+  # put model stats into appropriate columns in the sims control file
+  sims2$model_b[i] <- stats$b
+  sims2$model_p[i] <- stats$p
+  sims2$model_sig[i] <- stats$sig
+}
+
+sims2 |> write_csv("ex2.csv") # save simulation results
+```
+
+--------------------------------------------------------------------------------
+
+## Example 2 - Two groups with unequal variance and unequal n
+## Example 2B - Two groups with unequal variance/n - Consider Welchs t test
+
+
+Power at each `n`
+
+- Power is lower because sd/variance higher in one group
+- Parameter estimate is still unbiased 
+```{r}
+sims2 |> 
+  summarise(power = mean(model_sig), 
+            mean_b = mean(model_b),   # can assess for parameter estimate bias too!
+            .by = n)
+```
+
+Plot power curve
+```{r}
+sims2 |> 
+  summarise(power = mean(model_sig), .by = n) |> 
+  ggplot(aes(x = n, y = power)) +
+  geom_line() +
+  geom_point() +
+  labs(x = "Sample size (n)", y = "Power") +
+  theme_minimal()
+```
+
+--------------------------------------------------------------------------------
+
+## Example 2 - Two groups with unequal variance and unequal n
+## Example 2B - Two groups with unequal variance/n - Consider Welchs t test
+
+
+Evaluate false alarm rate
+
+```{r}
+for (i in 1:nrow(sims2)){
+ 
+  d <- get_data_ex2(n = sims2$n[i], b = 0) # NOTE b = 0! 
+  m <- fit_model(d) 
+  stats <- extract_stats(m)  
+ 
+  # put model stats into appropriate columns in the sims control file
+  sims2$null_b[i] <- stats$b
+  sims2$null_p[i] <- stats$p
+  sims2$null_sig[i] <- stats$sig
+}
+
+sims |> write_csv("ex2.csv") # save simulation results
+```
+
+--------------------------------------------------------------------------------
+
+## Example 2 - Two groups with unequal variance and unequal n
+## Example 2B - Two groups with unequal variance/n - Consider Welchs t test
+
+
+False Alarm Rate (because b = 0) at each `n`
+```{r}
+sims2 |> 
+  summarise(far = mean(null_sig), 
+            mean_b = mean(null_b),
+            .by = n)
+```
+
+Plot false alarm curve
+```{r}
+sims |> 
+  summarise(power = mean(null_sig), .by = n) |> 
+  ggplot(aes(x = n, y = power)) +
+  geom_line() +
+  geom_point() +
+  labs(x = "Sample size (n)", y = "False Alarm Rate") +
+  ylim (0, .15) +
+  theme_minimal()
+```
