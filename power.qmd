@@ -14,7 +14,11 @@ editor_options:
 - Overview of Issues and Concepts in Statistical Validity
   - Keep it brief but important to orient us
 
+<div class="gap-xs"></div>
+
 - Rationale, benefits, and meta structure for power simulations
+
+<div class="gap-xs"></div>
 
 - Clear examples with code
   - Two group design with quantitative Y
@@ -22,6 +26,8 @@ editor_options:
   - Logistic regression example
   - Multilevel data (students within schools)
   - Simple causal modeling (mediation)
+
+<div class="gap-xs"></div>
 
 - How to implement when computationally costly
 
@@ -207,13 +213,13 @@ Some statistical tests are more powerful than others.
 [Sample size]{.uwred}:  As $N$ increases, power increases. 
 
 - $SE_b$ decreases 
-- Narrower sampling distribution for $b$, so $b$ is more extreme (in tail)
+- Narrower sampling distribution for $b$ given $H_0$, so sample $b$ is more extreme (in tail)
 - $t$ statistic will be larger
 
 
 [Effect size in the population]{.uwred}: As effect effect size increases (e.g., bigger $\beta$), power increases.  
 
-- $b$ will be more extreme (in tail) in sampling distribution for $b$ 
+- sample $b$ will be more extreme (in tail) in sampling distribution for $b$ given $H_0$ 
 - $t$ statistic will be larger
 
 
@@ -229,7 +235,7 @@ Additional factors on next slide
 [Number of parameters in augmented model]{.uwred}: As $P_a$ increases (i.e., augmented model gets more complex/more $X$; lower ddf), power decreases. 
 
 - $SE_b$ increases 
-- Wider sampling distribution for $b$ (so $b$ is less extreme)
+- Wider sampling distribution for $b$ given $H_0$ (so sample $b$ is less extreme)
 - $t$ statistic will be smaller
 
 
@@ -241,7 +247,7 @@ Additional factors on next slide
 [Error (unexplained variance in $Y$)]{.uwred}:  As $SSE_a$ increases (and model $R^2$ decreases), power decreases. 
 
 - $SE_b$ increases 
-- $b$ will be less extreme in sampling distribution for $b$
+- sample $b$ will be less extreme in sampling distribution for $b$ given $H_0$
 - $t$ statistic will be smaller
 
 
@@ -292,6 +298,8 @@ Low power, by definition, means that the chance of discovering effects that are 
 3. An exaggerated effect size estimate 
 4. Vibration of effects
 5. Publication bias, selective data analysis, and selective reporting of outcomes
+
+
 --------------------------------------------------------------------------------
 
 ## High False Discovery Rate 
@@ -371,7 +379,7 @@ In other words, power only matters after the fact if you fail to reject?
  
 - increases with higher $\alpha$,  
 - increases with lower power
-- increases with lower probability of a true effect:    
+- increases with lower probability of a true effect
 
 
 --------------------------------------------------------------------------------
@@ -513,6 +521,10 @@ What does this mean about how much you should trust findings published in Scienc
 :::
 :::
 
+<div class="gap-lg"></div>
+
+"Extraordinary claims require extraordinary evidence" 
+
 
 --------------------------------------------------------------------------------
 
@@ -639,12 +651,11 @@ When will you do a post hoc power analysis?
 
 ## Power Simulations: Why do them?
 
-Conventional approaches (tables/code based tables; proprietary software)
+Conventional approaches (tables; proprietary software)
 
 - Can be opaque
-- Can be inflexible (what if your data are oddly distributed)
+- Can be inflexible (what if your data are oddly distributed?)
 - Not available for all analyses or an analysis workflow (e.g., including protected testing for alpha inflation)
-
 
 <div class="gap-sm"></div>
 
@@ -753,7 +764,7 @@ d
 
 Write function to fit the analysis model
 
-- Added benefit - precise preregistration of analysis
+- Added benefit - precise pre-registration of analysis
 
 ```{r}
 fit_lm <- function(data){
@@ -810,11 +821,11 @@ stats
 
 Create a control file to guide the simulations
 
-- one row per simulation
-- specify key settings for each simulation
+- One row per simulation
+- Specify key settings for each simulation
   - effect size (`b` = 5).  Could include several different effect sizes
-  - sample size (we will calculate power for several sample sizes)
-  - plan `N_SIMS` simulations for each combo of `b` and `n`
+  - Sample size (we will calculate power for several sample sizes)
+  - Plan `N_SIMS` simulations for each combo of `b` and `n`
 - Cross these three factors to generate full control file
 
 
@@ -916,6 +927,8 @@ head(sims)
 ## Example 1: Two group design
 
 Power at each `n`
+
+`mean_b` should match `b` if the parameter estimate from the analysis is unbiased (GLM is under model assumptions)
 ```{r}
 sims |> 
   summarise(power = mean(model_sig), 
@@ -1050,7 +1063,7 @@ From here we can:
 
 --------------------------------------------------------------------------------
 
-## Example 2 - Two groups with unequal variance and unequal n
+## Example 2 - Two groups with unequal variance and n
 
 Example 2 violates linear model assumptions
 
@@ -1063,7 +1076,7 @@ Example 2 violates linear model assumptions
 
 --------------------------------------------------------------------------------
 
-## Example 2 - Two groups with unequal variance and unequal n
+## Example 2 - Two groups with unequal variance and n
 
 We need a DGP to represent these data  
 
@@ -1087,7 +1100,7 @@ get_data_ex2 <- function(n, b){
 
 --------------------------------------------------------------------------------
 
-## Example 2 - Two groups with unequal variance and unequal n
+## Example 2 - Two groups with unequal variance and n
 
 Simple test/demonstration
 ```{r}
@@ -1099,7 +1112,7 @@ d |> summarise(mean_y = mean(y), sd_y = sd(y), n = n(),
 
 --------------------------------------------------------------------------------
 
-## Example 2 - Two groups with unequal variance and unequal n
+## Example 2 - Two groups with unequal variance and n
 
 We can use `fit_lm()` and `extract_lm()` from earlier.  No changes needed.
 
@@ -1123,7 +1136,7 @@ sims2 <- expand_grid(b = b, n = n, n_sim = 1:N_SIMS) |>
 
 --------------------------------------------------------------------------------
 
-## Example 2 - Two groups with unequal variance and unequal n
+## Example 2 - Two groups with unequal variance and n
 
 ```{r}
 #| label: sim-power-ex2
@@ -1145,7 +1158,7 @@ for (i in 1:nrow(sims2)){
 
 --------------------------------------------------------------------------------
 
-## Example 2 - Two groups with unequal variance and unequal n
+## Example 2 - Two groups with unequal variance and n
 
 Power at each `n`
 
@@ -1161,7 +1174,7 @@ sims2 |>
 
 --------------------------------------------------------------------------------
 
-## Example 2 - Two groups with unequal variance and unequal n
+## Example 2 - Two groups with unequal variance and n
 
 Plot power curve
 ```{r}
@@ -1177,7 +1190,7 @@ sims2 |>
 
 --------------------------------------------------------------------------------
 
-## Example 2 - Two groups with unequal variance and unequal n
+## Example 2 - Two groups with unequal variance and n
 
 Now simulate false positive rate
 
@@ -1206,7 +1219,7 @@ sims2 |> write_csv("ex2.csv")
 
 --------------------------------------------------------------------------------
 
-## Example 2 - Two groups with unequal variance and unequal n
+## Example 2 - Two groups with unequal variance and n
 
 False Positive Rate (because b = 0) at each `n`
 ```{r}
@@ -1216,10 +1229,11 @@ sims2 |>
             .by = n)
 ```
 
+FPR is not 0.05!
 
 --------------------------------------------------------------------------------
 
-## Example 2 - Two groups with unequal variance and unequal n
+## Example 2 - Two groups with unequal variance and n
 
 Plot false positive curve
 ```{r}
@@ -1229,7 +1243,7 @@ sims2 |>
   geom_line() +
   geom_point() +
   labs(x = "Sample size (n)", y = "False Positive Rate") +
-  ylim (0, .15) +
+  ylim (0, .20) +
   theme_minimal()
 ```
 
@@ -1319,7 +1333,7 @@ sims2b <- expand_grid(b = b, n = n, n_sim = 1:N_SIMS) |>
 
 Simulation loop
 
-- Use same seed to compare two analyses in same simulated datasets
+- Use same seed as example 2 to compare two analyses in same simulated datasets
 ```{r}
 #| label: sim-power-ex2b-welch
 #| cache: true
@@ -1348,7 +1362,7 @@ Power at each `n`
 ```{r}
 sims2b |> 
   summarise(power = mean(model_sig), 
-            mean_b = mean(model_b),   # can assess for parameter estimate bias too!
+            mean_b = mean(model_b),   
             .by = n)
 ```
 
@@ -1418,7 +1432,7 @@ sims2b |>
   geom_line() +
   geom_point() +
   labs(x = "Sample size (n)", y = "False Positive Rate") +
-  ylim (0, .15) +
+  ylim (0, .20) +
   theme_minimal()
 ```
 
@@ -1457,6 +1471,7 @@ sims2 |>
   geom_line() +
   geom_point() +
   labs(x = "Sample size (n)", y = "False Positive Rate", color = "Analysis") +
+  ylim(0, .20) +
   theme_minimal()
 ```
 
@@ -1471,7 +1486,9 @@ sims2 |>
 
 ## More on Extractor Functions
 
-There are three functions we need to write to run these simulations.   Lets spend a bit of time to understand each better
+There are three functions we need to write to run these simulations.   
+
+Lets spend a bit of time to understand each better, starting with extractor functions
 
 <div class="gap-sm"></div>
 
@@ -1493,6 +1510,11 @@ d <- get_data_ex1(100, 5)
 m_lm <- fit_lm(d)
 m_lm
 ```
+
+
+--------------------------------------------------------------------------------
+
+## More on Extractor Functions
 
 We can better understand the model object with `names()`
 ```{r}
@@ -1556,12 +1578,12 @@ names(results)
 
 Both the coefficients/estimates and p-values are in the coefficients column as matrix
 ```{r}
-results$coefficients
+round(results$coefficients, 4)
 ```
 
 ```{r}
-results$coefficients["x", "Estimate"] 
-results$coefficients["x", "Pr(>|t|)"] 
+round(results$coefficients["x", "Estimate"], 4)
+round(results$coefficients["x", "Pr(>|t|)"] , 4)
 ```
 
 
@@ -1569,7 +1591,7 @@ results$coefficients["x", "Pr(>|t|)"]
 
 ## More on Extractor Functions
 
-You can follow this model to explore any analysis object
+You can follow this approach to explore any analysis object
 
 ```{r}
 extract_welch <- function(model){
@@ -1612,6 +1634,10 @@ The analysis function simply executes the code to run your planned analysis
 - Our analyses are split across fit and extract functions to make this easier to teach
 - Your pre-registration should put this together and apply it to a single simulated dataset
 
+
+--------------------------------------------------------------------------------
+
+## More on Analysis Functions
 
 ```{r}
 # Use planned sample size, and effect you want to detect
@@ -1659,6 +1685,10 @@ We then specify:
 - The mean difference between groups/conditions as $\beta_1$
 
 
+--------------------------------------------------------------------------------
+
+## DGP Functions - Experimental Manipulations and RCTs
+
 ```{r}
 get_data_ex1 <- function(n, b){
   
@@ -1685,6 +1715,11 @@ For an observational study with multiple Xs and Y measured but not manipulated, 
 - You can re-scale to variances/covariances after if you want to model variances for your measured variable (not generally necessary)
 - You could pass sigma in as an argument to the function if you want to explore different effect sizes for the relationships among the Xs and Y
 
+
+--------------------------------------------------------------------------------
+
+## DGP Functions - Independent Observations (No Manipulations) 
+
 ```{r}
 get_data_obs <- function(n) {
   # variance 1 on the diagonal; off-diagonals are the specified correlations
@@ -1707,8 +1742,10 @@ get_data_obs <- function(n) {
 ## DGP Functions - Independent Observations (No Manipulations) 
 
 Confirm that sample is consistent with these population means and correlations.
+
+Use BIG N or use `empirical = TRUE for testing
 ```{r}
-d <- get_data_obs(n = 10000)  # BIG N or use empirical = TRUE for testing
+d <- get_data_obs(n = 10000)  
 cor(d)
 
 d |> 
@@ -1724,6 +1761,11 @@ If you wanted one of the Xs to be an observed dichotomous rather than normally d
 
 - Median split will get you about equal N.  
 - Could split other ways depending on what you want for the n in each group
+
+
+--------------------------------------------------------------------------------
+
+## DGP Functions - Independent Observations (No Manipulations) 
 
 ```{r}
 get_data_obs2 <- function(n) {
@@ -1761,6 +1803,11 @@ Experiments and RCTs often include measurement of covariates at baseline.
 
 - Here is an example of a DGP for this situation
 - Added a manipulated x: random assignment to 0/1 with equal n, independent of the observed covariates
+
+
+--------------------------------------------------------------------------------
+
+## DGP Functions - Experimental Manipulation with Observed Baseline Covariates 
 
 ```{r}
 get_data_xcovs <- function(n, b) {
@@ -1800,14 +1847,13 @@ When $Y$ is dichotomous rather than quantitative/normal, we need a different fun
 
 Here is an example with two non-manipulated Xs
 
-- hard coded the Xs as standard normal with r = 0.3 between them
+- Hard coded the Xs as standard normal with r = 0.3 between them
 - $\beta_0$ specifies the log odds of Y at Xs = 0
 - log-odds of y are a linear function of the Xs
 - Use `plogis()` to convert from log-odds to probability
 ```{r}
 get_logistic <- function(n, b){
   
-  # standard normal Xs with a correlation of 0.3
   vars <- c("x1", "x2")
   sigma <- matrix(c(1.0, 0.3,
                     0.3, 1.0),
@@ -1818,7 +1864,6 @@ get_logistic <- function(n, b){
     as_tibble() |> 
     mutate(
       log_odds = b[1] + b[2] * x1 + b[3] * x2,
-      # convert log-odds to probability, then draw dichotomous y
       y = rbinom(n = n, size = 1, prob = plogis(log_odds))
     ) |> 
     select(x1, x2, y)
@@ -1847,6 +1892,11 @@ For example, we might design a school level intervention and collect observation
 - We need to specify the n for the levels (schools and students within schools).  In this example, we will require the same number for students within each school.
 - We need to specify the effect of the intervention (`b`).  Because this is a school-level intervention, `x` is assigned at the school level (whole schools are treated or not).
 - We need to specify the variance components: how much schools differ from one another (the random intercept SD, `sd_school`) and how much students differ within a school (the residual SD, `sd_resid`).  Larger between-school variance makes the clustering more consequential.
+
+
+--------------------------------------------------------------------------------
+
+## DGP Functions - Non-Independent Observations
 
 ```{r}
 get_multilevel <- function(n_schools, n_students, b,
@@ -1909,7 +1959,8 @@ We can simulate power for statistical tests in a causal model (path model or SEM
 As a final example, lets do a full power simulation for the test of an indirect/mediated effect in a simple causal model.
 
 - We have X, M, and Y
-- We need to specify direct and indirect path coefficients.  Here is a diagram
+- We need to specify direct and indirect path coefficients (diagram below)
+- The indirect (mediated) effect is $a \times b = 0.3 \times 0.2 = 0.06$, and the total effect of X on Y is $c' + ab = 0.1 + 0.06 = 0.16$.
 
 ```{r}
 #| echo: false
@@ -1930,8 +1981,6 @@ digraph mediation {
 }
 ")
 ```
-
-The indirect (mediated) effect is $a \times b = 0.3 \times 0.2 = 0.06$, and the total effect of X on Y is $c' + ab = 0.1 + 0.06 = 0.16$.
 
 
 --------------------------------------------------------------------------------
@@ -1968,6 +2017,11 @@ fit_mediation <- function(data, sims = 1000) {
           boot = TRUE, boot.ci.type = "bca", sims = sims)
 }
 ```
+
+
+--------------------------------------------------------------------------------
+
+## Causal Modeling - DGP, Fit, and Extract Functions
 
 The extractor pulls the bootstrapped indirect effect (the average causal mediation effect, ACME) and its p-value.
 
@@ -2055,10 +2109,12 @@ sims3 |> write_csv("ex3.csv")
 ## Causal Modeling - Power for the Indirect Effect
 
 Power at each `n`
+
+ True indirect effect = 0.3 * 0.2 = 0.06
 ```{r}
 sims3 |>
   summarise(power = mean(model_sig),
-            mean_ab = mean(model_ab),   # true indirect effect = 0.3 * 0.2 = 0.06
+            mean_ab = mean(model_ab),   
             .by = n)
 ```
 
@@ -2066,7 +2122,7 @@ sims3 |>
 
 ## Causal Modeling - Run the Simulation
 
-Plot power curve
+Plot power curve (Very noisy with only 25 sims.  Need more!)
 ```{r}
 sims3 |>
   summarise(power = mean(model_sig), .by = n) |>
@@ -2273,16 +2329,13 @@ We still do **not** pre-allocate result columns; each job returns its own result
 #| label: sim-power-ex1-parallel
 #| cache: true
 
-# set.seed() before a %dorng% loop makes the parallel run reproducible
 set.seed(12345)
-
 sims_power <- foreach(j = sort(unique(sims$job)),
                       .combine = bind_rows,
                       .packages = c("dplyr", "tibble")) %dorng% {
   
-  sims_j <- filter(sims, job == j)   # the rows assigned to this job
+  sims_j <- filter(sims, job == j)
   
-  # inner serial loop over the rows in this job (the original for loop)
   out <- vector("list", nrow(sims_j))
   for (k in seq_len(nrow(sims_j))) {
     d <- get_data_ex1(n = sims_j$n[k], b = sims_j$b[k])
@@ -2304,6 +2357,11 @@ sims_power <- foreach(j = sort(unique(sims$job)),
 ```{r}
 head(sims_power)
 ```
+
+
+--------------------------------------------------------------------------------
+
+## Power: results
 
 Power at each `n`:
 
@@ -2339,7 +2397,6 @@ Same structure, but set `b = 0`:
 #| cache: true
 
 set.seed(86753)
-
 sims_fpr <- foreach(j = sort(unique(sims$job)),
                     .combine = bind_rows,
                     .packages = c("dplyr", "tibble")) %dorng% {
@@ -2369,6 +2426,10 @@ sims_fpr |>
             .by = n)
 ```
 
+
+--------------------------------------------------------------------------------
+
+## False positive rate: results
 ```{r}
 sims_fpr |> 
   summarise(fpr = mean(sig), .by = n) |> 
