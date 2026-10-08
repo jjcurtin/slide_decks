@@ -2,7 +2,7 @@ date-format: long
 format: 
   revealjs:
     html-math-method: katex
-    scrollable: false
+    scrollable: true 
     css: presentation.css
     slide-number: false 
     multiplex: false 

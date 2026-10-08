@@ -119,6 +119,7 @@ h1.title  {
  color: #c5050c !important;
  font-weight:bold !important;
  font-size: 40px !important;
+ margin-bottom: 0.6em !important;
 }
 
 .reveal h2::after {
@@ -184,6 +185,13 @@ color:gray !important;
 text-align:center;
 }
 
+/* Vertical spacers: finer control than <br>.
+   Use <div class="gap-sm"></div> between blocks. */
+.gap-xs { height: 0.25rem; }
+.gap-sm { height: 0.5rem; }
+.gap-md { height: 1rem; }
+.gap-lg { height: 1.5rem; }
+
 .smaller {
 font-size: 0.7em !important;
 }
@@ -244,6 +252,13 @@ left: 0%;
 bottom: 0%; 
 width: 300px;
 height: auto;
+}
+
+/* Full-width callout: wrap the callout in a ::: {.callout-wide} div.
+   Overrides the fixed 300px absolute box above. */
+.callout-wide .callout {
+position: static !important;
+width: 100% !important;
 }
 
 figcaption {
