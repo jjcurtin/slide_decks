@@ -51,18 +51,18 @@ https://jjcurtin-power.share.connect.posit.cloud/
 <tbody>
 <tr>
   <td><strong>Fail to Reject Null</strong></td>
-  <td><span style="color:forestgreen;">Correct (True Negative, TN)</span></td>
-  <td><span style="color:red;">Type II Error (False Negative, FN)</span></td>
+  <td><span class="green">Correct (True Negative, TN)</span></td>
+  <td><span class="red">Type II Error (False Negative, FN)</span></td>
 </tr>
 <tr>
   <td><strong>Reject Null</strong></td>
-  <td><span style="color:red;">Type I Error (False Positive, FP)</span></td>
-  <td><span style="color:forestgreen;">Correct (True Positive, TP)</span></td>
+  <td><span class="red">Type I Error (False Positive, FP)</span></td>
+  <td><span class="green">Correct (True Positive, TP)</span></td>
 </tr>
 </tbody>
 </table>
 
-#### Understanding the Matrix {style="margin-top: 3rem; color: #c5050c;"}
+#### Understanding the Matrix {.uwred style="margin-top: 3rem;"}
 
 - Columns define reality (is there a true effect in the population of scores)
 - Rows define the researchers' decision based on the statistical analysis (Reject vs. Fail to Reject)
@@ -89,18 +89,18 @@ https://jjcurtin-power.share.connect.posit.cloud/
 <tbody>
 <tr>
   <td><strong>Fail to Reject Null</strong></td>
-  <td><span style="color:forestgreen;">Correct (True Negative, TN)</span></td>
-  <td><span style="color:red;">Type II Error (False Negative, FN)</span></td>
+  <td><span class="green">Correct (True Negative, TN)</span></td>
+  <td><span class="red">Type II Error (False Negative, FN)</span></td>
 </tr>
 <tr>
   <td><strong>Reject Null</strong></td>
-  <td><span style="color:red;">Type I Error (False Positive, FP)</span></td>
-  <td><span style="color:forestgreen;">Correct (True Positive, TP)</span></td>
+  <td><span class="red">Type I Error (False Positive, FP)</span></td>
+  <td><span class="green">Correct (True Positive, TP)</span></td>
 </tr>
 </tbody>
 </table>
 
-#### Statistical Validity Requires: {style="margin-top: 3rem; color: #c5050c;"}
+#### Statistical Validity Requires: {.uwred style="margin-top: 3rem;"}
 
 - Nominal control of Type I error rate at specified value
 - High statistical power
@@ -122,18 +122,18 @@ https://jjcurtin-power.share.connect.posit.cloud/
 <tbody>
 <tr>
   <td><strong>Fail to Reject Null</strong></td>
-  <td class="hl"><span style="color:forestgreen;">Correct (True Negative, TN)</span></td>
-  <td><span style="color:red;">Type II Error (False Negative, FN)</span></td>
+  <td class="hl"><span class="green">Correct (True Negative, TN)</span></td>
+  <td><span class="red">Type II Error (False Negative, FN)</span></td>
 </tr>
 <tr>
   <td><strong>Reject Null</strong></td>
-  <td class="hl"><span style="color:red;">Type I Error (False Positive, FP)</span></td>
-  <td><span style="color:forestgreen;">Correct (True Positive, TP)</span></td>
+  <td class="hl"><span class="red">Type I Error (False Positive, FP)</span></td>
+  <td><span class="green">Correct (True Positive, TP)</span></td>
 </tr>
 </tbody>
 </table>
 
-#### Type I Error Rate: {style="margin-top: 3rem; color: #c5050c;"}
+#### Type I Error Rate: {.uwred style="margin-top: 3rem;"}
 
 - This is the probability that you will reject the NULL hypothesis when it is TRUE
 - FP / (FP + TN)
@@ -164,19 +164,19 @@ https://jjcurtin-power.share.connect.posit.cloud/
 <tbody>
 <tr>
   <td><strong>Fail to Reject Null</strong></td>
-  <td><span style="color:forestgreen;">Correct (True Negative, TN)</span></td>
-  <td class="hl"><span style="color:red;">Type II Error (False Negative, FN)</span></td>
+  <td><span class="green">Correct (True Negative, TN)</span></td>
+  <td class="hl"><span class="red">Type II Error (False Negative, FN)</span></td>
 </tr>
 <tr>
   <td><strong>Reject Null</strong></td>
-  <td><span style="color:red;">Type I Error (False Positive, FP)</span></td>
-  <td class="hl"><span style="color:forestgreen;">Correct (True Positive, TP)</span></td>
+  <td><span class="red">Type I Error (False Positive, FP)</span></td>
+  <td class="hl"><span class="green">Correct (True Positive, TP)</span></td>
 </tr>
 </tbody>
 </table>
 
 
-#### Statistical Power: {style="margin-top: 3rem; color: #c5050c;"}
+#### Statistical Power: {.uwred style="margin-top: 3rem;"}
 
 - This is the probability that you will reject the NULL hypothesis when it is FALSE
 - TP / (TP + FN)
@@ -315,13 +315,13 @@ Low power, by definition, means that the chance of discovering effects that are 
 <tbody>
 <tr>
   <td><strong>Fail to Reject Null</strong></td>
-  <td><span style="color:forestgreen;">Correct (True Negative, TN)</span></td>
-  <td><span style="color:red;">Type II Error (False Negative, FN)</span></td>
+  <td><span class="green">Correct (True Negative, TN)</span></td>
+  <td><span class="red">Type II Error (False Negative, FN)</span></td>
 </tr>
 <tr class="hl">
   <td><strong>Reject Null</strong></td>
-  <td><span style="color:red;">Type I Error (False Positive, FP)</span></td>
-  <td><span style="color:forestgreen;">Correct (True Positive, TP)</span></td>
+  <td><span class="red">Type I Error (False Positive, FP)</span></td>
+  <td><span class="green">Correct (True Positive, TP)</span></td>
 </tr>
 </tbody>
 </table>
@@ -355,19 +355,19 @@ In other words, power only matters after the fact if you fail to reject?
 <tbody>
 <tr>
   <td><strong>Fail to Reject Null</strong></td>
-  <td><span style="color:forestgreen;">True Negative (TN)</span></td>
-  <td><span style="color:red;">False Negative (FN)</span></td>
+  <td><span class="green">True Negative (TN)</span></td>
+  <td><span class="red">False Negative (FN)</span></td>
 </tr>
 <tr class="hl">
   <td><strong>Reject Null</strong></td>
-  <td><span style="color:red;">False Positive (FP)</span></td>
-  <td><span style="color:forestgreen;">True Positive (TP)</span></td>
+  <td><span class="red">False Positive (FP)</span></td>
+  <td><span class="green">True Positive (TP)</span></td>
 </tr>
 </tbody>
 </table>
 
 
-#### False Discovery Rate (FDR): {style="margin-top: 3rem; color: #c5050c;"}
+#### False Discovery Rate (FDR): {.uwred style="margin-top: 3rem;"}
 
 - FDR is the probability that a significant effect is a false positive vs. a true positive
 - It is not equal to $\alpha$ and it is a row, not a column, probability
@@ -402,13 +402,13 @@ Example 1 (200 studies)
 <tbody>
 <tr>
   <td><strong>Fail to Reject Null</strong></td>
-  <td><span style="color:forestgreen;">True Negative:  95</span></td>
-  <td><span style="color:red;">False Negative: 20</span></td>
+  <td><span class="green">True Negative:  95</span></td>
+  <td><span class="red">False Negative: 20</span></td>
 </tr>
 <tr class="hl">
   <td><strong>Reject Null</strong></td>
-  <td><span style="color:red;">False Positive: 5</span></td>
-  <td><span style="color:forestgreen;">True Positive: 80</span></td>
+  <td><span class="red">False Positive: 5</span></td>
+  <td><span class="green">True Positive: 80</span></td>
 </tr>
 <tr>
   <td></td>
@@ -444,13 +444,13 @@ Example 2 (200 studies)
 <tbody>
 <tr>
   <td><strong>Fail to Reject Null</strong></td>
-  <td><span style="color:forestgreen;">True Negative:  95</span></td>
-  <td><span style="color:red;">False Negative: 80</span></td>
+  <td><span class="green">True Negative:  95</span></td>
+  <td><span class="red">False Negative: 80</span></td>
 </tr>
 <tr class="hl">
   <td><strong>Reject Null</strong></td>
-  <td><span style="color:red;">False Positive: 5</span></td>
-  <td><span style="color:forestgreen;">True Positive: 20</span></td>
+  <td><span class="red">False Positive: 5</span></td>
+  <td><span class="green">True Positive: 20</span></td>
 </tr>
 <tr>
   <td></td>
@@ -486,13 +486,13 @@ Example 3 (200 studies)
 <tbody>
 <tr>
   <td><strong>Fail to Reject Null</strong></td>
-  <td><span style="color:forestgreen;">True Negative: 152</span></td>
-  <td><span style="color:red;">False Negative: 32</span></td>
+  <td><span class="green">True Negative: 152</span></td>
+  <td><span class="red">False Negative: 32</span></td>
 </tr>
 <tr class="hl">
   <td><strong>Reject Null</strong></td>
-  <td><span style="color:red;">False Positive: 8</span></td>
-  <td><span style="color:forestgreen;">True Positive: 8</span></td>
+  <td><span class="red">False Positive: 8</span></td>
+  <td><span class="green">True Positive: 8</span></td>
 </tr>
 <tr>
   <td></td>

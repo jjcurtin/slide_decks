@@ -1,0 +1,38 @@
+/* Shared utility classes — KEEP IDENTICAL in slide_decks/ and book_git/.
+   Opt-in classes used in .qmd; valid in both reveal.js slides and the HTML book. */
+
+/* Text color (.green renders forestgreen) */
+.uwred { color: #c5050c !important; }
+.red   { color: red !important; }
+.green { color: forestgreen !important; }
+.blue  { color: blue !important; }
+.teal  { color: teal !important; }
+.gray  { color: gray !important; }
+
+/* Vertical spacers (finer than <br>): <div class="gap-sm"></div> */
+.gap-xs { height: 0.25rem; }
+.gap-sm { height: 0.5rem; }
+.gap-md { height: 1rem; }
+.gap-lg { height: 1.5rem; }
+
+/* Table highlight fill:
+   <tr class="hl"> for a row, or class="hl" on each cell for a column */
+table tr.hl td,
+table td.hl,
+table th.hl { background-color: #ffe08a !important; }
+
+/* Callouts render normally by default. Opt in by wrapping the callout:
+   ::: {.callout-corner}  -> small fixed box in the bottom-left
+   ::: {.callout-wide}    -> force full-width normal flow */
+.callout-corner .callout {
+  position: absolute;
+  left: 0%;
+  bottom: 0%;
+  width: 300px;
+  height: auto;
+}
+
+.callout-wide .callout {
+  position: static !important;
+  width: 100% !important;
+}

@@ -3,7 +3,7 @@ format:
   revealjs:
     html-math-method: katex
     scrollable: true 
-    css: presentation.css
+    css: [presentation.css, utilities.css]
     slide-number: false 
     multiplex: false 
     auto-stretch: false

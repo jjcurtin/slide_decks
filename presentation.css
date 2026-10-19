@@ -2,11 +2,12 @@
 NOTES 
 
 * 2025_0110: Added theming for UW-style presentation
+* Shared utility classes now live in utilities.css (loaded alongside this file).
 */
 
-.reveal-viewport {
-
-}
+/* ============================================================
+   THEME (automatic UW-style presentation styling)
+   ============================================================ */
 
 .reveal .slides {
   width: 100% !important;
@@ -34,15 +35,6 @@ time, mark, audio, video {
   font-weight: bold !important;
   font-size: 25px !important;
 }
-
-/* 
-body {
-  background-image: url('https://github.com/jjcurtin/slide_decks/blob/main/images/uwlogo_right.png?raw=true') !important;
-  background-repeat: no-repeat !important;
-  background-position: right top !important;
-  background-size: 5vw !important;
-  } 
-*/
 
 body {
 border-right: 4vw solid #c5050c;
@@ -177,124 +169,20 @@ color:black;
 }
 
 
-.list-gray {
-color:gray !important;
-}
-
-.centered {
-text-align:center;
-}
-
-/* Vertical spacers: finer control than <br>.
-   Use <div class="gap-sm"></div> between blocks. */
-.gap-xs { height: 0.25rem; }
-.gap-sm { height: 0.5rem; }
-.gap-md { height: 1rem; }
-.gap-lg { height: 1.5rem; }
-
-.smaller {
-font-size: 0.7em !important;
-}
-
-.medium {
-font-size: 0.85em !important;
-}
-
-
-.red {
-  color: red !important;
-}
-
-.yellowb {
-  background-color: yellow !important;
-}
-
-.yellow {
-  color: yellow !important;
-}
-
-
-.green {
-  color: green !important;
-}
-
-.blue {
-  color: blue !important;
-}
-
-.uwred {
-  color: #c5050c !important;
-}
-
-.gray {
-  color:gray !important; 
-}
-
 .reveal .cell-output pre code {
   background-color: honeydew !important;
   border-radius: 4px;
-}
-
-/* USE THIS IN QMD FOR MANUAL*/
-/*::::: {.absolute left="0%" bottom="0%" width="300px" height="auto"}*/
-/*::::: {style="font-size: 75%;"}*/
-.callout-title p strong {
-font-size: 75% !important;
-}
-
-.callout-content p {
-font-size: 75% !important;
-}
-
-.callout {
-position: absolute;
-left: 0%;
-bottom: 0%; 
-width: 300px;
-height: auto;
-}
-
-/* Full-width callout: wrap the callout in a ::: {.callout-wide} div.
-   Overrides the fixed 300px absolute box above. */
-.callout-wide .callout {
-position: static !important;
-width: 100% !important;
 }
 
 figcaption {
 display: none !important;
 }
 
-/* --- Table row/column highlighting ---
-   Color fill:  <tr class="hl"> for a row, or class="hl" on each cell for a column
-   Box outline: use "hlbox" the same way                                        */
-.reveal table tr.hl td,
-.reveal table td.hl,
-.reveal table th.hl {
-  background-color: #ffe08a !important;
+/* Callout text sizing (applies to all callouts in these decks) */
+.callout-title p strong {
+font-size: 75% !important;
 }
 
-.reveal table tr.hlbox td,
-.reveal table td.hlbox,
-.reveal table th.hlbox {
-  outline: 4px solid #c5050c !important;
-  outline-offset: -4px;
-}
-
-.rect_outline {
-  border: 5px solid;
-  border-color: red;
-  opacity: .5;
-  width: 100px; 
-  height: 100px; 
-}
-
-.circ_outline {
-  border: 5px solid;
-  border-color: red;
-  opacity: .5;
-  
-  border-radius: 50%;
-  height: 100px;   
-  width: 100px;
+.callout-content p {
+font-size: 75% !important;
 }

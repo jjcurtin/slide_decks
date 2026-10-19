@@ -47,9 +47,9 @@ However, he also noticed many of the people who had relapsed hadn't used the app
 \
 \
 
-> “Could you predict not only [who]{style="color: blue;"} might be at greatest risk for relapse … <br>
- … but precisely [when]{style="color: blue;"} that relapse might occur … <br>
- … and [how best to intervene]{style="color: blue;"} to prevent it?"
+> “Could you predict not only [who]{.blue} might be at greatest risk for relapse … <br>
+ … but precisely [when]{.blue} that relapse might occur … <br>
+ … and [how best to intervene]{.blue} to prevent it?"
  
  \
  \
@@ -69,11 +69,11 @@ Dave knew that we were exploring the factors that motivated alcohol and other dr
 
 ## A Smart Recovery Monitoring and Support System
 
-- Precision mental health requires us to provide the [right interventions]{style="color: blue;"} and supports to the <br>[right people]{style="color: blue;"} at the [right time]{style="color: blue;"}, [every time]{style="color: blue;"}
+- Precision mental health requires us to provide the [right interventions]{.blue} and supports to the <br>[right people]{.blue} at the [right time]{.blue}, [every time]{.blue}
 
 \
 
-- Continuing care for substance use disorders requires [long-term monitoring]{style="color: blue;"} and <br>[ongoing lifestyle adjustments and support]{style="color: blue;"} to prevent relapse
+- Continuing care for substance use disorders requires [long-term monitoring]{.blue} and <br>[ongoing lifestyle adjustments and support]{.blue} to prevent relapse
 
 ::: {.notes}
 These questions that Dave was asking are at the heart of what we now call precision mental health.  How can we provide the **right interventions and supports** to the **right people** at the **right time**, **every time**
@@ -87,11 +87,11 @@ And, critically, the optimal supports for any specific individual can change mon
 
 ## A Smart Recovery Monitoring and Support System
 
-- [Precision mental health requires us to provide the right treatments and supports to the <br>right people at the right time, every time]{style="color:gray;"}
+- [Precision mental health requires us to provide the right treatments and supports to the <br>right people at the right time, every time]{.gray}
 
 \
 
-- [Continuing care for substance use disorders requires long-term monitoring and <br>ongoing lifestyle adjustments and support to prevent relapse]{style="color:gray;"}
+- [Continuing care for substance use disorders requires long-term monitoring and <br>ongoing lifestyle adjustments and support to prevent relapse]{.gray}
 
 \
 
@@ -136,14 +136,14 @@ and we can collect these inputs with very high temporal granularity, at least se
 
 ## Personal Sensing
 
-[Personal sensing collects information from smartphones to identify a person's thoughts, feelings, behaviors, and context.]{style="color:gray;"}
+[Personal sensing collects information from smartphones to identify a person's thoughts, feelings, behaviors, and context.]{.gray}
 
 \
 
-[Sensing allows for "real-world" measurement that]{style="color:gray;"}
+[Sensing allows for "real-world" measurement that]{.gray}
 
-- [Can be sustained for long periods]{style="color:gray;"}
-- [Has very high temporal granularity]{style="color:gray;"} 
+- [Can be sustained for long periods]{.gray}
+- [Has very high temporal granularity]{.gray} 
 
 \
 
@@ -275,7 +275,7 @@ Participants used these EMAs to report on their current experiences including th
 
 ## Model Predictions 
 
-- Predict hour-by-hour probability of [future lapse]{style="color: blue;"}
+- Predict hour-by-hour probability of [future lapse]{.blue}
 
 \
 
@@ -294,7 +294,7 @@ And we developed separate models for three future lapse windows – lapses in th
 
 ## Model Predictions 
 
-- Predict hour-by-hour probability of [future lapse]{style="color: blue;"}
+- Predict hour-by-hour probability of [future lapse]{.blue}
 
 \
 
@@ -319,12 +319,14 @@ The Area under the Receiver Operating Characteristic Curve (auROC) indicates the
 - Perfect performance: auROC = 1.0 
 
 
+:::::: {.callout-corner}
 :::::{.callout-tip icon=false}
 ## Rules of thumb for auROC 
 .70 - .80 is considered fair  
 .80 - .90 is considered good  
 \>= .90 is considered excellent  
 :::::
+::::::
 
 ::: {.notes}
 We can evaluate the performance accuracy of these models using a metric called the auROC for short.  
@@ -340,7 +342,7 @@ And models with auROCs of .90 or higher are considered to have excellent perform
 ## Model Performance
 
 ::: {.columns}
-:::: {.column width="40%"}
+:::: {.column width="40%" .callout-corner}
 
 :::::{.callout-tip icon=false}
 ## Rules of thumb for auROC 
@@ -374,7 +376,7 @@ So given this, we were very encouraged to see that our one week prediction model
 ## Model Performance
 
 ::: {.columns}
-:::: {.column width="40%"}
+:::: {.column width="40%" .callout-corner}
 :::::{.callout-tip icon=false}
 ## Rules of thumb for auROC 
 .70 - .80 is considered fair  
@@ -405,7 +407,7 @@ And our model that made predictions about the lapse probability in the next day 
 ## Model Performance: Excellent auROCs
 
 ::: {.columns}
-:::: {.column width="40%"}
+:::: {.column width="40%" .callout-corner}
 :::::{.callout-tip icon=false}
 ## Rules of thumb for auROC 
 .70 - .80 is considered fair  
@@ -657,7 +659,7 @@ This is obviously unacceptable and we are working now to correct this.
 ## NIDA Project: A Larger, More Diverse Sample 
 
 - Recruited ~ 300 patients in recovery from Opioid Use Disorder 
-- [National sample (size; diversity: demographics, location)]{style="color: blue;"}
+- [National sample (size; diversity: demographics, location)]{.blue}
 - More variation in stage of recovery (1 – 6 months at start)
 - Sensing for 12 months
 
