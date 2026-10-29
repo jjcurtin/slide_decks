@@ -1,0 +1,50 @@
+---
+pagetitle: "Rudra Health AI Insights"
+format:
+  revealjs:
+    slide-number: true
+    embed-resources: true
+tbl-colwidths: [35, 65]
+---
+
+## The OUD Recovery Challenge
+
+**OUD recovery is a moving target.**
+
+- Every patient brings a unique mix of strengths and risks
+- Those strengths and risks shift from day to day
+
+**To stay in recovery, patients must:**
+
+- Monitor their recovery every day
+- Spot emerging risks early and recognize their strengths
+- Use the right recovery skill for today's risk
+- Keep at it, day after day
+
+*Clinicians see patients weekly or monthly. Risk changes daily.*
+
+## What Insights Does {.smaller}
+
+**Insights provides a daily recovery loop, personalized by AI**
+
+1. **Reflect.** A 1-minute daily reflection builds the habit of self-monitoring and helps patients see their own strengths and risks.
+
+2. **Assess.** A validated AI model combines the reflection with passive geolocation data to quantify Recovery Health, show how it's changing over time, and pinpoint the one strength or risk that matters most for that patient today.
+
+3. **Act.** Insights recommends one personalized recovery activity to build on that strength or address that risk, so patients learn a new skill every day.
+
+4. **Reward.** Evidence-based rewards (contingency management) for completing the reflection and the activity keep patients coming back daily.
+
+*Insights makes self-monitoring a daily habit, makes it accurate, and makes it actionable.*
+
+
+## How Insights Is Different {.smaller}
+
+| Typical recovery apps | Insights |
+|---|---|
+| Generic toolkit: patients pick from a menu | **One personalized activity**, chosen for that patient, that day |
+| Little or no monitoring | **Daily self-monitoring plus passive sensing** |
+| No AI, or generic AI chatbots that respond only when asked | **Predictive AI that forecasts each patient's risk**, validated in NIH-funded research |
+| Static content | **Adapts daily** as strengths and risks change |
+
+*Other apps hand patients a toolbox. Insights tells them which tool to use today, and why.*
