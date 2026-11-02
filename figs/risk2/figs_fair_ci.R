@@ -30,7 +30,7 @@ plot_ci <- function(d, title, delta, y = .85){
     labs(title = title) +
     xlab("") +
     theme(legend.position = "none") +
-    scale_y_continuous(breaks = seq(0.4, 1, 0.10), limits = c(0.4, 1)) +
+    scale_y_continuous(breaks = seq(0.4, 1, 0.10), limits = c(0.4, 1.05)) +
     scale_color_manual(values = col_groups) +
     theme(title = element_text(size = 16, color = "#C5050C", face = "bold"),
           axis.text.x = element_text(size = 14, color = "black"),
@@ -39,8 +39,10 @@ plot_ci <- function(d, title, delta, y = .85){
           axis.title.y = element_text(size = 16, color = "black")) +
     geom_hline(yintercept = 0.5, linetype = "dashed", color = "gray") +
     geom_hline(yintercept = 1.0, linetype = "dashed", color = "gray") +
-    annotate("text", label = "random", x = 0.75, y = .5, size = 6, color = "gray") +
-    annotate("text", label = "perfect", x = 0.75, y = 1, size = 6, color = "gray") +
+    annotate("text", label = "random", x = 0.5, y = .49, size = 6, color = "gray",
+             hjust = 0, vjust = 1) +
+    annotate("text", label = "perfect", x = 0.5, y = 1.01, size = 6, color = "gray",
+             hjust = 0, vjust = 0) +
     annotate("text", label = the_label,  x = 2, y = y, size = 6, color = "#C5050C") 
 }
 

@@ -30,15 +30,15 @@ fig_lag_ci <- ci |>
     geom_hline(yintercept = 1.0, linetype = "dashed", color = "gray") +
     annotate("text", label = "random", x = 0.5, y = .49, size = 6, color = "gray",
              hjust = 0, vjust = 1) +
-    annotate("text", label = "perfect", x = 0.5, y = .99, size = 6, color = "gray",
-             hjust = 0, vjust = 1) +
+    annotate("text", label = "perfect", x = 0.5, y = 1.01, size = 6, color = "gray",
+             hjust = 0, vjust = 0) +
   # coord_flip() +
   ylab("auROC") +
   xlab("Prediction Lag") +
   theme(legend.position = "none") +
   scale_y_continuous(
     breaks = seq(0.4, 1, 0.10),
-    limits = c(0.4, 1)
+    limits = c(0.4, 1.05)
   ) +
   theme(axis.text.x = element_text(size = 16, face = "bold"),
         axis.text.y = element_text(size = 12),

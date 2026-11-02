@@ -35,7 +35,7 @@ plot_ci <- function(d, title, delta, y = .70){
       xlab("") +
       ylab("auROC") +
       theme(legend.position = "none") +
-      scale_y_continuous(breaks = seq(0.4, 1, 0.10), limits = c(0.4, 1)) +
+      scale_y_continuous(breaks = seq(0.4, 1, 0.10), limits = c(0.4, 1.05)) +
       scale_color_manual(values = col_groups) +
       theme(title = element_text(size = 16, color = "#C5050C", face = "bold"),
             axis.text.x = element_text(size = 12, color = "black", face = "bold"),
@@ -44,8 +44,10 @@ plot_ci <- function(d, title, delta, y = .70){
             axis.title.y = element_text(size = 16, color = "black")) + 
       geom_hline(yintercept = 0.5, linetype = "dashed", color = "gray") +
       geom_hline(yintercept = 1.0, linetype = "dashed", color = "gray") +
-      annotate("text", label = "random", x = 0.75, y = .5, size = 6, color = "gray") +
-      annotate("text", label = "perfect", x = 0.75, y = 1, size = 6, color = "gray") +
+      annotate("text", label = "random", x = 0.5, y = .49, size = 6, color = "gray",
+               hjust = 0, vjust = 1) +
+      annotate("text", label = "perfect", x = 0.5, y = 1.01, size = 6, color = "gray",
+               hjust = 0, vjust = 0) +
       annotate("text", label = the_label,  x = 2, y = y, size = 6, color = "#C5050C") 
 }
 
@@ -71,7 +73,7 @@ delta <- round(ci[6, "median"] - ci[5, "median"], 2)
 fig_fair_income_1  <- ci |>
   filter(model == "above_poverty" | model == "below_poverty") |>
   mutate(model = fct(model, levels = c("above_poverty", "below_poverty")),
-         model = fct_recode(model, "above poverty" = "above_poverty", "below poverty" = "below_poverty")) |> 
+         model = fct_recode(model, "above\npoverty" = "above_poverty", "below\npoverty" = "below_poverty")) |> 
   plot_ci("Income", delta, .65)
   
 delta <- ci[7, "median"] - ci[8, "median"]
@@ -93,7 +95,7 @@ fig_race_only  <- ci |>
       linewidth = 2) +
     labs(x = "Race/Ethnicity", y = "auROC") +
     theme(legend.position = "none") +
-    scale_y_continuous(breaks = seq(0.4, 1, 0.10), limits = c(0.4, 1)) +
+    scale_y_continuous(breaks = seq(0.4, 1, 0.10), limits = c(0.4, 1.05)) +
     scale_color_manual(values = c("orange", "#C5050C")) +
     theme(axis.text.x = element_text(size = 14, color = "black", face = "bold"),
           axis.text.y = element_text(size = 12, color = "black"),
@@ -101,5 +103,7 @@ fig_race_only  <- ci |>
           axis.title.y = element_text(size = 16, color = "black")) +
     geom_hline(yintercept = 0.5, linetype = "dashed", color = "gray") +
     geom_hline(yintercept = 1.0, linetype = "dashed", color = "gray") +
-    annotate("text", label = "random", x = 0.75, y = .5, size = 6, color = "gray") +
-    annotate("text", label = "perfect", x = 0.75, y = 1, size = 6, color = "gray")
+    annotate("text", label = "random", x = 0.5, y = .49, size = 6, color = "gray",
+             hjust = 0, vjust = 1) +
+    annotate("text", label = "perfect", x = 0.5, y = 1.01, size = 6, color = "gray",
+             hjust = 0, vjust = 0)

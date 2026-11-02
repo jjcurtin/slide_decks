@@ -605,7 +605,7 @@ Given that, we were dismayed but not surprised to find that those models perform
 #| fig-width: 10 
 
 cowplot::plot_grid(fig_fair_race_1, fig_fair_income_1, fig_fair_sex_1,
-                   nrow = 1)
+                   nrow = 1, align = "h")
 ```
 
 ::: {.notes}
