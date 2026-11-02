@@ -2,7 +2,7 @@ path_data <- "data/risk"
 if(!file.exists(here::here(path_data, "ema_acc_ci.csv"))){
   
   library(tidyverse)
-  devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true")
+  source("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true")
   path_ema <- format_path(str_c("studydata/risk/models/ema"))
  
   # open preds 

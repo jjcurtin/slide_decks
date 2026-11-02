@@ -3,7 +3,7 @@
 #################################
 library(tidyverse)
 library(tidyposterior)
-devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true")
+source("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true")
 path_fairema <- format_path(str_c("studydata/risk/data_processed/fairema"))
 path_out <- "data/risk"
 

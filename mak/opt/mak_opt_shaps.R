@@ -1,7 +1,7 @@
 path_data <- "data/opt"
 if (!file.exists(here::here(path_data, "opt_shaps_examples.csv"))){
   library(tidyverse)
-  devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true")
+  source("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true")
 
   features <- c("past use", "future efficacy", "craving", "past stressful event", 
                 "future risky situation", "past pleasant event", "past risky situation",

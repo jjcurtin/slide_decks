@@ -2,7 +2,7 @@ path_out <- "data/risk"
 if (!file.exists(here::here(path_out, "ema_demographics.csv"))) {
   
   library(tidyverse)
-  devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true")
+  source("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true")
   path_processed <- format_path("studydata/risk/data_processed/ema")
   path_shared <- format_path("studydata/risk/data_processed/shared")
   

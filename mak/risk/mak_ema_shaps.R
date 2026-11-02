@@ -1,7 +1,7 @@
 path_data <- "data/risk"
 if (!file.exists(here::here(path_data, "ema_shaps_global.csv"))){
   library(tidyverse)
-  devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true")
+  source("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true")
   path_models <- format_path("studydata/risk/models/ema")
   
   shap_local_week <- read_rds(file.path(path_models, "outer_shapsgrp_1week_0_v5_nested_main.rds")) |> 
