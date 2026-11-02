@@ -125,8 +125,6 @@ space_y_fun <- function(data, id, x_data) {
 }
 
 cm_mosaic <- function(x) {
-  `%+%` <- ggplot2::`%+%`
-
   cm_zero <- (as.numeric(x$table == 0) / 2) + x$table
   x_data <- space_fun(colSums(cm_zero), 200)
   full_data_list <- lapply(
@@ -137,7 +135,7 @@ cm_mosaic <- function(x) {
   tick_labels <- colnames(cm_zero)
   axis_labels <- get_axis_labels(x)
   
-  ggplot2::ggplot(full_data) %+%
+  ggplot2::ggplot(full_data) +
     ggplot2::geom_rect(
       ggplot2::aes(
         xmin = xmin,
@@ -146,19 +144,19 @@ cm_mosaic <- function(x) {
         ymax = ymax
       ), 
       fill = c("green", "red", "red", "green")
-    ) %+%
+    ) +
     ggplot2::scale_x_continuous(
       breaks = (x_data$xmin + x_data$xmax) / 2,
       labels = tick_labels
-    ) %+%
+    ) +
     ggplot2::scale_y_continuous(
       breaks = (y1_data$ymin + y1_data$ymax) / 2,
       labels = tick_labels
-    ) %+%
+    ) +
     ggplot2::labs(
       y = axis_labels$y,
       x = axis_labels$x
-    ) %+%
+    ) +
     ggplot2::theme(panel.background = ggplot2::element_blank())
 }
 

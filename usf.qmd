@@ -437,6 +437,265 @@ But we can, and to be clear, we believe all three of these models to have clinic
 
 -----------------------------------------------------------------------------
 
+## Lagged Prediction: Looking Farther into the Future
+
+Rationale and data slides for lagged AUD model
+
+-----------------------------------------------------------------------------
+
+## Model Calibration: Trusting the Probabilities 
+
+Return to AUD EMA model and show calibration plots
+
+```{r}
+#| label: aud_calibration_plot
+#| fig-height: 6
+#| fig-width: 10
+
+source(here::here("figs/risk/figs_ema_demographics.R"))
+cowplot::plot_grid(fig_age, fig_income, fig_sex_bar,
+                   fig_educ_bar, fig_ms_bar, fig_race_bar, nrow = 2, ncol  = 3)
+```
+
+-----------------------------------------------------------------------------
+
+## Passive Sensing Methods: Geolocation 
+
+::: {.notes}
+
+FIX TRANSITION AND FOCUS ON GPS.
+
+[PAUSE]
+
+Next up.... as our monitoring and support system continues to mature, we will want a richer, broader set of lapse risk features so that we can distinguish better between different situations that require different supports. 
+
+We can do this by engineering features from our location and communication signals, which tap into different experiences than what we measure by EMA.
+:::
+
+-----------------------------------------------------------------------------
+
+## {#gps_detection_1 data-menu-title="GPS detection, wide view" background-image="https://dionysus.psych.wisc.edu/present/john_gps_wide.png" background-size="100%" background-position="bottom" background-repeat="none"}
+
+
+::: {.notes}
+To give you taste of the power for these novel signals, here is a wide view of my moment-by-moment location detected by a GPS app over a month when we were first experimenting with this sensing method.  The app recorded the paths that I traveled, with movement by car in green and running in blue.
+
+The red dots indicate places that I stopped to visit for at least a few minutes.
+
+And although not displayed here, the app recorded the days and exact times that I was at each of these locations.
+
+From these data, you can immediately see that I am runner, with long runs leaving from downtown Madison and frequent trail runs on the weekends in the county and state parks to the west and northwest.
+:::
+
+-----------------------------------------------------------------------------
+
+## {#gps_detection_2 data-menu-title="GPS detection, zoomed" background-image="https://dionysus.psych.wisc.edu/present/john_gps_zoom.png" background-size="100%" background-position="bottom" background-repeat="none"}
+
+
+::: {.notes}
+Zooming in to the Madison isthmus, these data show that I drove my children halfway around the lake each morning to their elementary school.  And from these data we might be able to detect those stressful mornings when getting my young kids dressed and fed didn't go as planned and we were late, sometimes **very late**, to school!
+
+The app recorded my daily running commute through downtown Madison to and from my office.  From this, we can observe my longs days at the office and also those days that I skipped out.
+
+Looking at the red dots indicating the places I visit, the system can detect the restaurants, bars, and coffee shops where I eat, drink and socialize.  We can use public map data to identify these places and make inferences about what I do there.
+
+[PAUSE]
+
+Both geolocation and communications data are powerful sensed signals that we have already begun to use to predict lapse risk with success.
+
+And we plan to implement a model with both EMA and geolocation for a new project that we are just launching now.
+:::
+
+-----------------------------------------------------------------------------
+
+## Passive Sensing Methods: Geolocation 
+
+SLIDES ON AUD GPS MODEL.   JUST PERFORMANCE FOR NOW.
+
+Make clear that it doesn't add much to EMA RE prediction but gives more features for personalization
+
+-----------------------------------------------------------------------------
+
+## Algorithmic Fairness
+
+::: {.notes}
+
+FIX THIS TRANSITION
+
+
+So, obviously, we are really excited about the potential capabilities of this system for providing personalized continuing care.  
+
+But not surprisingly, there are still a number of very important issues to address before we can implement this system.
+:::
+
+-----------------------------------------------------------------------------
+
+## Next Steps:  Algorithmic Fairness
+
+::: {.notes}
+To start, our models have some serious but unfortunately not unexpected problems given what I told you earlier about the some of the demographic limitations of our training data.  
+
+I've already shown you that our models perform exceptionally well when evaluated across the full sample.  However, when we evaluate model performance, it is critical that we look at performance in subgroups that experience health disparities.  And too often, these analyses are not done or reported.  
+
+Its only very recently that we have begin to take this seriously and we must.  If we hope to use our system to address existing disparities in SUD outcomes then our models must perform well with all groups, regardless of their privilege or the use of these models may exacerbate rather than reduce existing mental healthcare disparities.
+:::
+
+-----------------------------------------------------------------------------
+
+## Next Steps: Algorithmic Fairness
+
+::: {.columns}
+:::: {.column width="50%"}
+```{r}
+#| label: fig_race_1
+#| fig-height: 6
+#| fig-width: 8
+
+fig_race_bar
+```
+::::
+
+:::: {.column width="50%"}
+<!--BLANK-->
+::::
+:::
+
+::: {.notes}
+As one example of this issue, the data we collected to train these models from this first NIAAA grant did not include much racial or ethnic diversity among the participants.   We collected those data at a time when we weren't yet thinking as carefully about issues of representation as we try to do now.
+:::
+
+-----------------------------------------------------------------------------
+
+## Next Steps: Algorithmic Fairness
+
+::: {.columns}
+:::: {.column width="50%"}
+```{r}
+#| label: fig_race_2
+#| fig-height: 6
+#| fig-width: 8
+
+fig_race_bar
+```
+::::
+
+:::: {.column width="50%"}
+```{r}
+#| label: figs_fair_race
+#| fig-height: 6
+#| fig-width: 8
+
+source(here::here("figs/risk/figs_fairema_ci.R"))
+fig_fair_race_1
+```
+::::
+:::
+
+::: {.notes}
+Given that, we were dismayed but not surprised to find that those models perform substantially worse (with auROCs that are .19 units lower) when predicting lapses for anyone who wasn’t white and non-hispanic.
+:::
+
+-------------------------------------------------------------------------------
+
+## Algorithmic Fairness
+
+```{r}
+#| label: figs_fairema_ci-2
+#| fig-height: 6
+#| fig-width: 10 
+
+cowplot::plot_grid(fig_fair_race_1, fig_fair_income_1, fig_fair_sex_1,
+                   nrow = 1)
+```
+
+::: {.notes}
+And these fairness issues were not limited to just race and ethnicity.  We see worse performance for participants with incomes below the poverty line and to a lessor extent for female participants. 
+
+This is obviously unacceptable and we are working now to correct this.
+:::
+
+-----------------------------------------------------------------------------
+ 
+## Algorithmic Fairness: NIDA Opioid Use Lapses 
+
+- Recruited ~ 300 patients in recovery from Opioid Use Disorder 
+- [National sample (size; diversity: demographics, location)]{.blue}
+- More variation in stage of recovery (1 – 6 months at start)
+- Sensing for 12 months
+
+\
+
+![](https://github.com/jjcurtin/slide_decks/blob/main/images/risk2_pi_wide.png?raw=true){.absolute bottom=0}
+
+::: {.notes}
+For example, we were awarded a grant from NIDA to collect a more racially diverse sample using nationwide recruiting techniques.  
+
+This sample also included much needed geographic diversity because the factors that predict lapse in urban settings may be different from those that predict lapse in rural settings.
+:::
+
+-----------------------------------------------------------------------------
+
+## Algorithmic Fairness: NIDA Opioid Use Lapses 
+
+- Excellent performance: auROC ~ 0.94
+
+::: {.notes}
+
+[PAUSE]
+
+We are in the midst of finalizing model training using these data but I'll give you a peek at performance for models using EMA features similar to the AUD models models I showed you previously.   We are particularly excited by these models because we restricted the EMAs to only 1 per day but we are still seeing the best performance we have seen to date when predicting lapses in the next day.
+
+An auROC of .94
+:::
+
+-----------------------------------------------------------------------------
+
+## Algorithmic Fairness: NIDA Opioid Use Lapses 
+
+
+- [Excellent performance: auROC ~ 0.94]{.gray}
+
+```{r}
+#| label: figs_fair_risk2_ci_1
+#| fig-height: 6
+#| fig-width: 10 
+
+source(here::here("figs/risk2/figs_fair_ci.R"))
+cowplot::plot_grid(fig_fair_race_2, fig_fair_income_2, fig_fair_sex_2,
+                   nrow = 1)
+```
+
+::: {.notes}
+And more importantly, this next day prediction model appears much fairer with respect to its performance in all three of the subgroups where our original models were deficient.
+
+[PAUSE]
+
+But let me explicitly say that issues related to fairness and the potential to exacerbate health disparities through the use of a sensing and AI based monitoring and support system are much more complicated than what I've had time to present here. 
+
+I’d be happy to dive a bit deeper into this during the discussion period if people are interested to engage more with this.
+:::
+
+
+-----------------------------------------------------------------------------
+
+## Feature Importance:  Looking Under the Hood
+
+AUD GLOBAL SHAPS
+
+-----------------------------------------------------------------------------
+
+## Feature Importance:  Looking Under the Hood
+
+OUD GLOBAL SHAPS
+
+-----------------------------------------------------------------------------
+
+## Feature Importance:  Looking Under the Hood
+
+OUD Daily most important features. 
+
+-----------------------------------------------------------------------------
+
 ## Beyond Prediction: Personalized Recommendations 
 
 ::: columns
@@ -466,6 +725,11 @@ fig_shap_ex1
 :::
 
 ::: {.notes}
+
+WORK ON TRANSITION
+
+
+
 But we can get much more than just lapse probabilities from these models. 
 
 Using SHAP values, we can understand which features contributed most strongly to any prediction for a specific person at a specific moment in time.  This allows us to understand not only WHEN a lapse might occur but also WHY and potentially how best to intervene. 
@@ -560,206 +824,9 @@ In this way, we can provide personalized recommendations to patients that are ta
 
 -----------------------------------------------------------------------------
 
-## Next Steps: Algorithmic Fairness
+## Smart Digital Therapeutics
 
-::: {.notes}
-So, obviously, we are really excited about the potential capabilities of this system for providing personalized continuing care.  
-
-But not surprisingly, there are still a number of very important issues to address before we can implement this system.
-:::
-
------------------------------------------------------------------------------
-
-## Next Steps:  Algorithmic Fairness
-
-::: {.notes}
-To start, our models have some serious but unfortunately not unexpected problems given what I told you earlier about the some of the demographic limitations of our training data.  
-
-I've already shown you that our models perform exceptionally well when evaluated across the full sample.  However, when we evaluate model performance, it is critical that we look at performance in subgroups that experience health disparities.  And too often, these analyses are not done or reported.  
-
-Its only very recently that we have begin to take this seriously and we must.  If we hope to use our system to address existing disparities in SUD outcomes then our models must perform well with all groups, regardless of their privilege or the use of these models may exacerbate rather than reduce existing mental healthcare disparities.
-:::
-
------------------------------------------------------------------------------
-
-## Next Steps: Algorithmic Fairness
-
-::: {.columns}
-:::: {.column width="50%"}
-```{r}
-#| label: fig_race_1
-#| fig-height: 6
-#| fig-width: 8
-
-fig_race_bar
-```
-::::
-
-:::: {.column width="50%"}
-<!--BLANK-->
-::::
-:::
-
-::: {.notes}
-As one example of this issue, the data we collected to train these models from this first NIAAA grant did not include much racial or ethnic diversity among the participants.   We collected those data at a time when we weren't yet thinking as carefully about issues of representation as we try to do now.
-:::
-
------------------------------------------------------------------------------
-
-## Next Steps: Algorithmic Fairness
-
-::: {.columns}
-:::: {.column width="50%"}
-```{r}
-#| label: fig_race_2
-#| fig-height: 6
-#| fig-width: 8
-
-fig_race_bar
-```
-::::
-
-:::: {.column width="50%"}
-```{r}
-#| label: figs_fair_race
-#| fig-height: 6
-#| fig-width: 8
-
-source(here::here("figs/risk/figs_fairema_ci.R"))
-fig_fair_race_1
-```
-::::
-:::
-
-::: {.notes}
-Given that, we were dismayed but not surprised to find that those models perform substantially worse (with auROCs that are .19 units lower) when predicting lapses for anyone who wasn’t white and non-hispanic.
-:::
-
--------------------------------------------------------------------------------
-
-## Algorithmic Fairness
-
-```{r}
-#| label: figs_fairema_ci-2
-#| fig-height: 6
-#| fig-width: 10 
-
-cowplot::plot_grid(fig_fair_race_1, fig_fair_income_1, fig_fair_sex_1,
-                   nrow = 1)
-```
-
-::: {.notes}
-And these fairness issues were not limited to just race and ethnicity.  We see worse performance for participants with incomes below the poverty line and to a lessor extent for female participants. 
-
-This is obviously unacceptable and we are working now to correct this.
-:::
-
------------------------------------------------------------------------------
- 
-## NIDA Project: A Larger, More Diverse Sample 
-
-- Recruited ~ 300 patients in recovery from Opioid Use Disorder 
-- [National sample (size; diversity: demographics, location)]{.blue}
-- More variation in stage of recovery (1 – 6 months at start)
-- Sensing for 12 months
-
-\
-
-![](https://github.com/jjcurtin/slide_decks/blob/main/images/risk2_pi_wide.png?raw=true){.absolute bottom=0}
-
-::: {.notes}
-For example, we were awarded a grant from NIDA to collect a more racially diverse sample using nationwide recruiting techniques.  
-
-This sample also included much needed geographic diversity because the factors that predict lapse in urban settings may be different from those that predict lapse in rural settings.
-:::
-
------------------------------------------------------------------------------
-
-## Next Steps: Algorithmic Fairness
-
-- Excellent performance: auROC ~ 0.94
-
-::: {.notes}
-
-[PAUSE]
-
-We are in the midst of finalizing model training using these data but I'll give you a peek at performance for models using EMA features similar to the AUD models models I showed you previously.   We are particularly excited by these models because we restricted the EMAs to only 1 per day but we are still seeing the best performance we have seen to date when predicting lapses in the next day.
-
-An auROC of .94
-:::
-
------------------------------------------------------------------------------
-
-## Next Steps: Algorithmic Fairness
-
-- [Excellent performance: auROC ~ 0.94]{.gray}
-
-```{r}
-#| label: figs_fair_risk2_ci_1
-#| fig-height: 6
-#| fig-width: 10 
-
-source(here::here("figs/risk2/figs_fair_ci.R"))
-cowplot::plot_grid(fig_fair_race_2, fig_fair_income_2, fig_fair_sex_2,
-                   nrow = 1)
-```
-
-::: {.notes}
-And more importantly, this next day prediction model appears much fairer with respect to its performance in all three of the subgroups where our original models were deficient.
-
-[PAUSE]
-
-But let me explicitly say that issues related to fairness and the potential to exacerbate health disparities through the use of a sensing and AI based monitoring and support system are much more complicated than what I've had time to present here. 
-
-I’d be happy to dive a bit deeper into this during the discussion period if people are interested to engage more with this.
-:::
-
------------------------------------------------------------------------------
-
-## Next Steps: Sensing Geolocation and Communcations
-
-::: {.notes}
-
-[PAUSE]
-
-Next up.... as our monitoring and support system continues to mature, we will want a richer, broader set of lapse risk features so that we can distinguish better between different situations that require different supports. 
-
-We can do this by engineering features from our location and communication signals, which tap into different experiences than what we measure by EMA.
-:::
-
------------------------------------------------------------------------------
-
-## {#gps_detection_1 data-menu-title="GPS detection, wide view" background-image="https://dionysus.psych.wisc.edu/present/john_gps_wide.png" background-size="100%" background-position="bottom" background-repeat="none"}
-
-
-::: {.notes}
-To give you taste of the power for these novel signals, here is a wide view of my moment-by-moment location detected by a GPS app over a month when we were first experimenting with this sensing method.  The app recorded the paths that I traveled, with movement by car in green and running in blue.
-
-The red dots indicate places that I stopped to visit for at least a few minutes.
-
-And although not displayed here, the app recorded the days and exact times that I was at each of these locations.
-
-From these data, you can immediately see that I am runner, with long runs leaving from downtown Madison and frequent trail runs on the weekends in the county and state parks to the west and northwest.
-:::
-
------------------------------------------------------------------------------
-
-## {#gps_detection_2 data-menu-title="GPS detection, zoomed" background-image="https://dionysus.psych.wisc.edu/present/john_gps_zoom.png" background-size="100%" background-position="bottom" background-repeat="none"}
-
-
-::: {.notes}
-Zooming in to the Madison isthmus, these data show that I drove my children halfway around the lake each morning to their elementary school.  And from these data we might be able to detect those stressful mornings when getting my young kids dressed and fed didn't go as planned and we were late, sometimes **very late**, to school!
-
-The app recorded my daily running commute through downtown Madison to and from my office.  From this, we can observe my longs days at the office and also those days that I skipped out.
-
-Looking at the red dots indicating the places I visit, the system can detect the restaurants, bars, and coffee shops where I eat, drink and socialize.  We can use public map data to identify these places and make inferences about what I do there.
-
-[PAUSE]
-
-Both geolocation and communications data are powerful sensed signals that we have already begun to use to predict lapse risk with success.
-
-And we plan to implement a model with both EMA and geolocation for a new project that we are just launching now.
-:::
+introduce the idea of a DTx (Insights app) that has native prediction
 
 -----------------------------------------------------------------------------
 

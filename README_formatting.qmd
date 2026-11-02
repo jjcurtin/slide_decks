@@ -1,0 +1,380 @@
+---
+title: "Formatting Guide for Slide Decks"
+subtitle: "Quarto + reveal.js conventions used in this repo"
+date: last-modified
+engine: markdown
+format:
+  typst:
+    toc: true
+    toc-depth: 2
+---
+
+This guide records the formatting conventions used in the research-talk decks in this repo (e.g., `usf.qmd`). Examples are shown as literal markdown so you can copy them into a deck.
+
+# Workflow and files
+
+| File | Role |
+|---|---|
+| `_quarto_uw.yml` | Shared reveal.js settings (CSS files, title-slide background, `auto-stretch: false`, `scrollable: true`). Copied to `_quarto.yml` only while publishing. |
+| `presentation.css` | **Theme**: the automatic look of every slide (fonts, header colors, red right border, list bullets, title slide). |
+| `utilities.css` | **Utilities**: opt-in classes you use in the `.qmd` (colors, spacers, table highlight, callout placement). Intended to stay identical to the copy in `~/github/book_git` (see `HANDOFF.md`). |
+| `publish.sh` | Publishes one deck to Posit Connect Cloud. |
+| `_publish.yml` | Written by `quarto publish`; maps each deck to its Connect Cloud item. Do not hand-edit. |
+| `figs/`, `mak/`, `data/` | Figure scripts, data-prep scripts, and locally cached data (see [Figures from R](#figures-from-r)). |
+| `images/` | Static images (photos, logos, screenshots). |
+
+There is **no committed `_quarto.yml`**. Publish with:
+
+```bash
+./publish.sh usf.qmd
+```
+
+which copies `_quarto_uw.yml` to `_quarto.yml`, publishes, then deletes `_quarto.yml`, `*_files/`, and `*.html`. The first publish of a new deck creates a new Connect Cloud item and adds it to `_publish.yml`; later publishes update that item.
+
+To preview locally without publishing:
+
+```bash
+cp _quarto_uw.yml _quarto.yml
+quarto preview usf.qmd
+rm _quarto.yml
+```
+
+# Deck YAML header
+
+Each deck sets only its own metadata; formatting comes from `_quarto_uw.yml`.
+
+```yaml
+---
+title: 'A "Smart" Recovery Monitoring and Support System for SUD Continuing Care'
+author: "John J. Curtin, Ph.D."
+institute: "University of Wisconsin-Madison"
+date: "November 6, 2026"
+editor_options: 
+  chunk_output_type: console
+---
+```
+
+R code is hidden by default in reveal.js. Teaching decks that show code add `execute: echo: true` to the header.
+
+# Slides and headings
+
+## Slide breaks
+
+Separate slides with a long horizontal rule. It makes slide boundaries easy to see in the source.
+
+```markdown
+-----------------------------------------------------------------------------
+
+## Slide Title
+```
+
+## Heading levels
+
+| Markdown | Renders as | Use |
+|---|---|---|
+| `#` | 60px black, left aligned, red underline bar | Section title slides (rare in research talks) |
+| `##` | 40px UW red with a short red bar underneath | **Every slide title** |
+| `###` | 40px black | Rare |
+| `#### Text {.uwred style="margin-top: 3rem;"}` | Red sub-heading with space above | A second heading lower on a slide (e.g., below a table) |
+
+Repeating the same `##` title over several slides is fine and is how progressive builds work (see [Progressive builds](#progressive-builds)).
+
+## Intentionally blank slides
+
+A slide with no heading and no content gives a blank screen so the audience focuses on the speaker. Put what you plan to say in the notes.
+
+```markdown
+-----------------------------------------------------------------------------
+
+::: {.notes}
+What I will say while the screen is blank.
+:::
+
+-----------------------------------------------------------------------------
+```
+
+A slide that has a title but no body (e.g., `## Next Steps: Algorithmic Fairness` followed only by notes) works the same way while keeping the section label on screen.
+
+## Full-slide background images
+
+For an image that fills the slide with no title, put the attributes on an empty `##` heading. Give it an `id` and a `data-menu-title` so it is identifiable in the slide menu.
+
+```markdown
+## {#gps_detection_1 data-menu-title="GPS detection, wide view" background-image="https://dionysus.psych.wisc.edu/present/john_gps_wide.png" background-size="100%" background-position="bottom" background-repeat="none"}
+```
+
+## Title slide
+
+The title slide is built from the YAML header. Its background image (`images/title_slide.png`) and white, left-aligned text come from `_quarto_uw.yml` and `presentation.css`; nothing is needed in the deck.
+
+# Speaker notes
+
+Every slide should have notes. Press `s` during the presentation to open speaker view.
+
+```markdown
+::: {.notes}
+Notes text. Can include lists, **bold**, and [PAUSE] cues.
+:::
+```
+
+# Text and emphasis
+
+The theme makes all body text bold at 25px; `**strong**` is even heavier (weight 900).
+
+## Color classes (`utilities.css`)
+
+| Class | Color | Typical use |
+|---|---|---|
+| `.uwred` | UW red `#c5050c` | Key terms in teaching decks |
+| `.blue` | blue | Key terms in research talks |
+| `.gray` | gray | Points already covered, in progressive builds |
+| `.red`, `.green`, `.teal` | red, forestgreen, teal | Contrasts (e.g., correct vs. error) |
+
+Apply them to inline text with Pandoc spans, or with raw HTML inside HTML blocks:
+
+```markdown
+Provide the [right interventions]{.blue} to the [right people]{.blue}
+
+<span class="green">Correct (True Positive, TP)</span>
+```
+
+Use classes, not inline `style="color: ..."`.
+
+## Progressive builds
+
+We build up content by **duplicating the slide** and changing the emphasis, not with reveal fragments. Typically, text already discussed turns gray and new text is added below.
+
+```markdown
+## Personal Sensing
+
+Personal sensing collects information from smartphones ...
+
+-----------------------------------------------------------------------------
+
+## Personal Sensing
+
+[Personal sensing collects information from smartphones ...]{.gray}
+
+\
+
+We focus on 
+
+- Ecological Momentary Assessment (EMA)
+- Geolocation
+```
+
+Graying a list item: wrap the item text, e.g., `- [Can be sustained for long periods]{.gray}`.
+
+## Block quotes
+
+```markdown
+> "Could you predict not only [who]{.blue} might be at greatest risk ... <br>
+ ... but precisely [when]{.blue} that relapse might occur ..."
+```
+
+# Spacing
+
+From coarsest to finest:
+
+| Method | Markdown | Effect |
+|---|---|---|
+| Blank paragraph | a line containing only `\` | One line of vertical space; stack two for more |
+| Spacer div | `<div class="gap-xs"></div>` (also `gap-sm`, `gap-md`, `gap-lg`) | 0.25, 0.5, 1, or 1.5 rem of vertical space |
+| Line break in text | `<br>` | Breaks a line within a paragraph or bullet, controlling where long lines wrap |
+
+```markdown
+- First point
+
+\
+
+- Second point, separated by one blank line
+
+<div class="gap-sm"></div>
+
+- Third point, separated by a smaller gap
+```
+
+Use `\` lines in research talks and gap divs when you need finer control. Put a blank line before and after each.
+
+# Columns
+
+```markdown
+::: {.columns}
+:::: {.column width="40%"}
+Left content
+::::
+
+:::: {.column width="60%"}
+Right content (often a figure)
+::::
+:::
+```
+
+Use more colons on the inner fences so the nesting is easy to read. An empty column can hold a placeholder comment, `<!-- blank -->`, to reserve space for content that appears on a later slide of a build.
+
+# Callouts
+
+Callouts render normally (in the page flow) by default. Wrap them to change placement.
+
+## Corner callout
+
+`.callout-corner` pins a small (300px) box to the bottom-left of the slide. We use it for reference information that stays put across a build (e.g., auROC rules of thumb).
+
+```markdown
+:::::: {.callout-corner}
+:::::{.callout-tip icon=false}
+## Rules of thumb for auROC 
+.70 - .80 is considered fair  
+.80 - .90 is considered good  
+\>= .90 is considered excellent  
+:::::
+::::::
+```
+
+Inside columns, add the class to the column instead of adding another wrapper:
+
+```markdown
+:::: {.column width="40%" .callout-corner}
+:::::{.callout-tip icon=false}
+## Rules of thumb for auROC 
+...
+:::::
+::::
+```
+
+## Full-width callout
+
+`.callout-wide` forces a full-width box in the normal flow. We use it for questions and interactive moments.
+
+```markdown
+::: {.callout-wide}
+::: {.callout-important}
+# Question
+Should you trust a significant effect less if power was low?
+:::
+:::
+```
+
+## Callout details
+
+- The first heading inside the callout becomes its title.
+- Callout titles and text are shrunk to 75% by `presentation.css`.
+- `icon=false` removes the icon.
+- End lines with two spaces for line breaks inside a callout without bullets (as in the rules of thumb above).
+- Types: `.callout-note`, `.callout-tip`, `.callout-important`, `.callout-warning`, `.callout-caution`.
+
+# Figures from R {#figures-from-r}
+
+Figures are made in separate scripts and only *displayed* in the deck, which keeps the `.qmd` readable and lets several decks reuse a figure.
+
+## Three-layer structure
+
+| Folder | Script | Job |
+|---|---|---|
+| `mak/<project>/` | `mak_*.R` | Pull results from the research drive (via `format_path()`) and cache them in `data/<project>/`. Each script checks `if (!file.exists(...))` first, so it only runs once per clone. |
+| `data/<project>/` | (cached `.csv` / `.rds`) | Local copies of the results. Git-ignored; recreated by the `mak_*` scripts in each clone. |
+| `figs/<project>/` | `figs_*.R` | Source the needed `mak_*` script, read from `data/`, and create named ggplot objects (e.g., `fig_auroc_ci_1`). They do not print anything. |
+
+Projects so far: `risk` (AUD/EMA study), `risk2` (NIDA OUD study), `opt` (optimization trial), `gen`.
+
+`format_path()` comes from the lab_support repo and turns a study-drive path into the right mount point for Windows, Mac, or Linux. Load it with base R:
+
+```r
+source("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true")
+path_models <- format_path("risk2/models/combined")
+```
+
+Rendering therefore needs a network connection and, the first time in each clone, access to the research drive.
+
+## Displaying a figure
+
+Source the script in the first chunk that needs it; the objects remain available to later chunks in the same deck. Use `here::here()` for paths.
+
+````markdown
+```{r}
+#| label: figs_auroc_ci_1
+#| fig-height: 6
+#| fig-width: 6
+
+source(here::here("figs/risk/figs_ema_probability.R"))
+fig_auroc_ci_1
+```
+````
+
+- Give every chunk a unique `label` (labels must not repeat within a deck).
+- Size with `fig-height` and `fig-width` (inches). These set the figure's size and aspect ratio, and how large plot text looks relative to it. `auto-stretch: false` is set, so reveal.js does not stretch figures to fill leftover space.
+- Common sizes: full slide `10 x 6`; figure in a half or 60% column `6 x 6`; small figure in a 2 x 2 grid `5 x 3`.
+- Combine several plots in one figure with `cowplot::plot_grid()`:
+
+````markdown
+```{r}
+#| label: figs_fairema_ci-2
+#| fig-height: 6
+#| fig-width: 10
+
+cowplot::plot_grid(fig_fair_race_1, fig_fair_income_1, fig_fair_sex_1, nrow = 1)
+```
+````
+
+- Figure captions are hidden by the theme, so do not rely on `fig-cap`.
+- Style plots in the figure script (e.g., titles in `#C5050C`, larger axis text) so they match the deck.
+
+# Images
+
+## Inline images
+
+Point at the image on GitHub with `?raw=true`, so the deck works wherever it is rendered:
+
+```markdown
+![](https://github.com/jjcurtin/slide_decks/blob/main/images/ema_hand.png?raw=true){.absolute bottom=0 right=50 width=45%}
+```
+
+A relative local path also works (e.g., `![](images/ema_hand.png)`); `quarto publish` uploads it with the deck. The image must be committed and pushed before a GitHub URL will work.
+
+## Positioning with `.absolute`
+
+`.absolute` takes the image out of the text flow and places it relative to the slide. Combine it with any of `top`, `bottom`, `left`, `right` (pixels unless units are given) and `width` / `height`.
+
+| Goal | Attributes |
+|---|---|
+| Photo in the bottom-right corner | `{.absolute bottom=0 right=50 width=30%}` |
+| Full-width banner along the bottom (e.g., PI/team strip) | `{.absolute bottom=0}` |
+
+Absolutely positioned images can overlap text, so check each slide after rendering.
+
+# Footers
+
+A per-slide footer (right-aligned, bottom) for links, citations, or asides:
+
+```markdown
+::: {.footer}
+https://jjcurtin-power.share.connect.posit.cloud/
+:::
+```
+
+# Tables
+
+Hand-written HTML tables let you highlight rows or cells, which is useful for builds:
+
+```markdown
+<table>
+<tr><th>Model</th><th>auROC</th></tr>
+<tr class="hl"><td>Full</td><td>0.94</td></tr>
+<tr><td>No geolocation</td><td>0.94</td></tr>
+</table>
+```
+
+`class="hl"` on a `<tr>` fills the row with yellow (`#ffe08a`); on individual `<td>`/`<th>` cells it highlights a column.
+
+# Code output
+
+When decks show code (`echo: true`), printed output is shown on a honeydew background by the theme. No markup is needed.
+
+# Gotchas
+
+- **Close every HTML comment.** `<!--` without `-->` silently hides everything up to the next `-->`, including `:::` fences, which breaks the layout of the following slides.
+- **Balance the colons.** Each opening fence needs a matching closing fence with the same number of colons.
+- **Untitled slides are blank by design.** Do not "fix" them.
+- **`scrollable: true`** is set, so overfull slides scroll instead of being cut off. If a slide scrolls during practice, trim it.
+- **A leftover `_quarto.yml`** (e.g., from an interrupted publish) changes how every file in the folder renders. Delete it if a publish fails partway.
+- **`publish.sh` deletes all `*.html` and `*_files/`** in the folder, including other rendered decks.

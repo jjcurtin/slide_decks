@@ -14,3 +14,7 @@
   posit-connect-cloud:
     - id: 01a107bd-ed3d-55ff-045f-86012a483dab
       url: https://connect.posit.cloud/jjcurtin/content/01a107bd-ed3d-55ff-045f-86012a483dab
+- source: usf.qmd
+  posit-connect-cloud:
+    - id: 01a19dfd-0622-2035-a06c-e7f7e4b9b915
+      url: https://connect.posit.cloud/jjcurtin/content/01a19dfd-0622-2035-a06c-e7f7e4b9b915
