@@ -7,6 +7,9 @@ theme_set(theme_classic())
 path_data <- "data/risk" 
 path_mak <- "mak/risk"
 
+# Okabe-Ito colors (colorblind safe); keep in sync with figs_ema_shaps.R
+model_colors <- c(week = "#D55E00", day = "#0072B2", hour = "#009E73")
+
 # Load prediction data
 source(here::here(path_mak, "mak_probability.R"))  # create data if needed
 preds_week <- read_rds(here::here(path_data, "ema_preds_1week.rds"))
@@ -49,13 +52,14 @@ roc_all <- roc_week |>
 plot_ci <- function(d) {
   d |>
     ggplot(aes(x = model)) +
-      geom_point(aes(y = median), 
-                 size = 4, color = c("red", "green", "blue")) +
       geom_errorbar(aes(ymin = lower, ymax = upper),
-                    color = c("red", "green", "blue"),
+                    color = unname(model_colors),
                     width = .2,
-                    linewidth = 2,
+                    linewidth = 1.25,
                     position = position_dodge(.9)) +
+      # hollow point drawn on top so the median stands out from the CI
+      geom_point(aes(y = median), size = 3.5, shape = 21, fill = "white",
+                 stroke = 1.5, color = unname(model_colors)) +
       geom_hline(yintercept = 0.5, linetype = "dashed", color = "gray") +
       geom_hline(yintercept = 1.0, linetype = "dashed", color = "gray") +
       annotate("text", label = "random", x = 0.5, y = .49, size = 6, color = "gray",
@@ -76,12 +80,7 @@ plot_ci <- function(d) {
 
 # probability histogram function
 plot_probs <- function(df_preds, model) {
-  bar_color <- 
-    case_when(
-      tolower(model) == "week" ~ "red",
-      tolower(model) == "day" ~ "green",
-      tolower(model) == "hour" ~ "blue",
-    )
+  bar_color <- model_colors[[tolower(model)]]
   df_preds |> 
     ggplot(data = _, aes(x = prob_beta)) + 
      geom_histogram(bins = 15, fill = bar_color, col = "black", alpha = .4) +
@@ -201,12 +200,13 @@ fig_cal <- preds_day |>
   ggplot(data = _, aes(x = midpoints, y = mean_lapse)) +
     geom_abline(slope = 1, intercept = 0, linetype = "dashed",
                 color = "gray") +
-    geom_line(color = "green") +
-    geom_point(color = "green") +
+    geom_line(color = model_colors[["day"]], linewidth = 1.5) +
+    geom_point(color = model_colors[["day"]], size = 3.5, shape = 21,
+               fill = "white", stroke = 1.5) +
     labs(x = "Predicted Lapse Probability (bin mid-point)",
          y = "Observed Lapse Probability") +
     annotate("text", label = "Next day model", x = 0.2, y = 1,
-             color = "green", size = 6) +
+             color = model_colors[["day"]], size = 6) +
     scale_x_continuous(breaks = seq(0, 1, bin_width),
                        limits = c(0, 1)) +
     scale_y_continuous(breaks = seq(0, 1, bin_width),
@@ -217,7 +217,7 @@ fig_cal <- preds_day |>
           axis.title.y = element_text(size = 16))
 
 # ROC curve plots
-line_colors  <- c("orange", "green", "blue")
+line_colors  <- model_colors
 fig_roc_week <- roc_all |>
   filter(model == "week") |>
   plot_roc(line_colors) # +

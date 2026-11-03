@@ -27,7 +27,8 @@ fig_global_all <- global |>
   ylab("Mean |SHAP| value (in Log-Odds)") +
   xlab("") +
   coord_flip() +
-  scale_fill_manual(values = c("orange","green","blue"))
+  # Okabe-Ito model colors; keep in sync with figs_ema_probability.R
+  scale_fill_manual(values = c(week = "#D55E00", day = "#0072B2", hour = "#009E73"))
 
 
 fig_global_day <- global |>
@@ -36,7 +37,7 @@ fig_global_day <- global |>
   mutate(variable_grp = str_split_i(variable_grp, " \\(", 1)) |>
   mutate(group = reorder(variable_grp, mean_value, sum)) |>
   ggplot() +
-  geom_bar(aes(x = group, y = mean_value), stat = "identity", fill  = "green") +
+  geom_bar(aes(x = group, y = mean_value), stat = "identity", fill  = "#0072B2") +
   ylab("Mean |SHAP| value (in Log-Odds)") +
   xlab("") +
   coord_flip() +

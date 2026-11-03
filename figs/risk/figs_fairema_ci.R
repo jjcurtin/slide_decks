@@ -15,22 +15,21 @@ ci <- read_csv(here::here(path_data, "fairema_ci_1day.csv"),
 ################################
 # Function to plot CIs
 ################################
-gg_color_hue <- function(n) {
-  hues = seq(15, 375, length = n + 1)
-  hcl(h = hues, l = 65, c = 100)[1:n]
-}
-
-col_groups <- gg_color_hue(2)
+# Reference (advantaged) group = gray; comparison group = purple.
+# Keep in sync with figs/risk2/figs_fair_ci.R and fig_race_bar in figs_ema_demographics.R
+col_groups <- c("#A6A6A6", "#7B3294")
 
 plot_ci <- function(d, title, delta, y = .70){
   the_label <- str_c("Delta = ", sprintf("%.2f", delta))
   d |> 
     ggplot(aes(x = model, color = model)) +
-      geom_point(aes(y = median), size = 4) +
       geom_errorbar(aes(ymin = lower, ymax = upper),
         width = .2, 
         position = position_dodge(.9), 
-        linewidth = 2) +
+        linewidth = 1.25) +
+      # hollow point on top; matches auROC/lag figures
+      geom_point(aes(y = median), size = 3.5, shape = 21, fill = "white",
+                 stroke = 1.5) +
       labs(title = title) +
       xlab("") +
       ylab("auROC") +

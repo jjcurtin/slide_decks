@@ -47,9 +47,9 @@ However, he also noticed many of the people who had relapsed hadn't used the app
 \
 \
 
-> “Could you predict not only [who]{.blue} might be at greatest risk for relapse … <br>
- … but precisely [when]{.blue} that relapse might occur … <br>
- … and [how best to intervene]{.blue} to prevent it?"
+> “Could you predict not only [who]{.uwred} might be at greatest risk for relapse … <br>
+ … but precisely [when]{.uwred} that relapse might occur … <br>
+ … and [how best to intervene]{.uwred} to prevent it?"
  
  \
  \
@@ -69,11 +69,11 @@ Dave knew that we were exploring the factors that motivated alcohol and other dr
 
 ## A Smart Recovery Monitoring and Support System
 
-- Precision mental health requires us to provide the [right interventions]{.blue} and supports to the <br>[right people]{.blue} at the [right time]{.blue}, [every time]{.blue}
+- Precision mental health requires us to provide the [right interventions]{.uwred} and supports to the <br>[right people]{.uwred} at the [right time]{.uwred}, [every time]{.uwred}
 
 \
 
-- Continuing care for substance use disorders requires [long-term monitoring]{.blue} and <br>[ongoing lifestyle adjustments and support]{.blue} to prevent relapse
+- Continuing care for substance use disorders requires [long-term monitoring]{.uwred} and <br>[ongoing lifestyle adjustments and support]{.uwred} to prevent relapse
 
 ::: {.notes}
 These questions that Dave was asking are at the heart of what we now call precision mental health.  How can we provide the **right interventions and supports** to the **right people** at the **right time**, **every time**
@@ -275,7 +275,7 @@ Participants used these EMAs to report on their current experiences including th
 
 ## Model Predictions 
 
-- Predict hour-by-hour probability of [future lapse]{.blue}
+- Predict hour-by-hour probability of [future lapse]{.uwred}
 
 \
 
@@ -294,7 +294,7 @@ And we developed separate models for three future lapse windows – lapses in th
 
 ## Model Predictions 
 
-- Predict hour-by-hour probability of [future lapse]{.blue}
+- Predict hour-by-hour probability of [future lapse]{.uwred}
 
 \
 
@@ -437,27 +437,108 @@ But we can, and to be clear, we believe all three of these models to have clinic
 
 -----------------------------------------------------------------------------
 
-## Lagged Prediction: Looking Farther into the Future
-
-Rationale and data slides for lagged AUD model
-
------------------------------------------------------------------------------
-
 ## Model Calibration: Trusting the Probabilities 
 
-Return to AUD EMA model and show calibration plots
+::: {.columns}
+:::: {.column width="45%"}
 
+\
+
+- Probabilities are well calibrated where most predictions fall
+- Ordinal across the full range
+- Provides fine gradations of relative risk for clinical decision-making
+::::
+
+:::: {.column width="55%"}
 ```{r}
 #| label: aud_calibration_plot
 #| fig-height: 6
-#| fig-width: 10
+#| fig-width: 6
 
-source(here::here("figs/risk/figs_ema_demographics.R"))
-cowplot::plot_grid(fig_age, fig_income, fig_sex_bar,
-                   fig_educ_bar, fig_ms_bar, fig_race_bar, nrow = 2, ncol  = 3)
+fig_cal
 ```
+::::
+:::
+
+::: {.notes}
+[COMMENT - REVIEW WHEN FINE-TUNING NOTES: This may be the place to discuss our plans to provide feedback to patients in the form of their level of risk or recovery health, rather than formally predicting lapse vs. no lapse.]
+
+Beyond discriminating well between lapses and non-lapses, we also want to be able to trust the lapse probabilities themselves.
+
+On the right, I am showing you a simple calibration plot for our next day model. On the x-axis, I've binned predicted lapse probabilities into bins that are 10 percent wide, and for each bin, I display the actual observed probability of lapses for observations in that bin.
+
+If the probabilities were perfectly calibrated, the bin means would all fall on the dotted line, with the bin from 0 - .1 having an observed probability of about .05, the bin from .1 - .2 having a probability of about .15, and so on.
+
+Calibration is excellent at the low end, where the large majority of predictions fall. In the middle of the range, the model somewhat overestimates risk. But across the full range, higher predicted probabilities always mean higher observed lapse rates.
+
+Given this, we believe that the lapse probabilities can provide fine gradations of relative risk for clinical decision-making.
+:::
 
 -----------------------------------------------------------------------------
+
+## Lagged Prediction: Advanced Warning
+
+::: {.columns}
+:::: {.column width="50%"}
+- Previous models only predict immediate future 
+- Advanced warning needed for some types of supports 
+::::
+
+:::: {.column width="50%"}
+
+<!--Blank-->
+
+::::
+:::
+
+::: {.notes}
+
+[PAUSE]
+
+Now, you might have noticed that up until this point, I've only talked about predictions for the immediate future - the next week, the next day, or the next hour.  And in these past few examples, I've been talking about using one of those immediate models - the next day model - to provide personalized support recommendations that the patient can implement that next day.
+
+However, for some types of support, people may need some advanced warning to put those supports into place.   For example, if you need to meet with your AA sponsor or get in to see your therapist, you will need some lead time to schedule those meetings or appointments.   
+:::
+
+-----------------------------------------------------------------------------
+
+## Lagged Prediction: Advanced Warning
+
+::: {.columns}
+:::: {.column width="50%"}
+- [Previous models only predict immediate future]{.gray}
+- [Advanced warning needed for some types of supports]{.gray} 
+
+\
+
+- Can lag model up to two weeks into the future
+- Performance drops but still remains good
+::::
+
+:::: {.column width="50%"}
+```{r}
+#| label: figs_lag_ci
+#| fig-height: 6
+#| fig-width: 6
+
+source(here::here("figs/risk/figs_lag_ci.R"))
+fig_lag_ci
+```
+::::
+:::
+
+::: {.notes}
+Given this, we have begun to explore various methods for predicting lapse probabilities further into the future.  
+
+As a first step, we took the model which predicted lapses in the next week and lagged it by different periods from one day up to two weeks into the future.   For example, the two week lagged model predicts the probability of a lapse that will occur during a one week period but that period begins two weeks from now.  
+
+And as you can see from the plot on the right, this approach does result in a drop in performance as we move further into the future.  But even with a two week lag, we still have an auROC of .85 which is still potentially clinically useful.
+
+And we are currently exploring other methods for predicting lapse probabilities further into the future that may perform better than this simple lagging approach and I'd be happy to talk more about those during the discussion period if anyone is interested.
+:::
+
+-----------------------------------------------------------------------------
+
 
 ## Passive Sensing Methods: Geolocation 
 
@@ -530,7 +611,7 @@ But not surprisingly, there are still a number of very important issues to addre
 
 -----------------------------------------------------------------------------
 
-## Next Steps:  Algorithmic Fairness
+## Algorithmic Fairness
 
 ::: {.notes}
 To start, our models have some serious but unfortunately not unexpected problems given what I told you earlier about the some of the demographic limitations of our training data.  
@@ -542,7 +623,7 @@ Its only very recently that we have begin to take this seriously and we must.  I
 
 -----------------------------------------------------------------------------
 
-## Next Steps: Algorithmic Fairness
+## Algorithmic Fairness
 
 ::: {.columns}
 :::: {.column width="50%"}
@@ -566,7 +647,7 @@ As one example of this issue, the data we collected to train these models from t
 
 -----------------------------------------------------------------------------
 
-## Next Steps: Algorithmic Fairness
+## Algorithmic Fairness
 
 ::: {.columns}
 :::: {.column width="50%"}
@@ -618,34 +699,62 @@ This is obviously unacceptable and we are working now to correct this.
  
 ## Algorithmic Fairness: NIDA Opioid Use Lapses 
 
-- Recruited ~ 300 patients in recovery from Opioid Use Disorder 
-- [National sample (size; diversity: demographics, location)]{.blue}
-- More variation in stage of recovery (1 – 6 months at start)
-- Sensing for 12 months
+- 296 patients in recovery from Opioid Use Disorder, all on MOUD 
+- [National sample: 47 states; diverse demographics and locations]{.uwred}
+- 1 – 12 months on MOUD at start
+- 1 daily survey plus geolocation sensing for up to 12 months
 
 \
 
 ![](https://github.com/jjcurtin/slide_decks/blob/main/images/risk2_pi_wide.png?raw=true){.absolute bottom=0}
 
 ::: {.notes}
-For example, we were awarded a grant from NIDA to collect a more racially diverse sample using nationwide recruiting techniques.  
+For example, with a grant from NIDA, we set out to collect a more diverse sample using nationwide recruiting.
 
-This sample also included much needed geographic diversity because the factors that predict lapse in urban settings may be different from those that predict lapse in rural settings.
+We followed 296 people in recovery from opioid use disorder who were all receiving medications for opioid use disorder, or MOUD, like buprenorphine or methadone.  They came from 47 states, which gave us much needed geographic diversity as well, because the factors that predict lapse in urban settings may be different from those that predict lapse in rural settings.
+
+We also enrolled people across a wider range of time in recovery - anywhere from 1 to 12 months on MOUD when they started.
+
+And we made the monitoring much lighter.  Participants completed just one brief survey each day, and we added geolocation sensing that ran passively on their phones.  And we followed them for up to a full year - on average, people stayed on study for more than 9 months.
 :::
 
 -----------------------------------------------------------------------------
 
 ## Algorithmic Fairness: NIDA Opioid Use Lapses 
 
+::: {.columns}
+:::: {.column width="40%"}
+
+\
+
 - Excellent performance: auROC ~ 0.94
+::::
+
+:::: {.column width="60%"}
+```{r}
+#| label: figs_auroc_ci_oud
+#| fig-height: 6
+#| fig-width: 6
+
+source(here::here("figs/risk2/figs_perf_ci.R"))
+fig_auroc_ci_oud
+```
+::::
+:::
 
 ::: {.notes}
 
 [PAUSE]
 
-We are in the midst of finalizing model training using these data but I'll give you a peek at performance for models using EMA features similar to the AUD models models I showed you previously.   We are particularly excited by these models because we restricted the EMAs to only 1 per day but we are still seeing the best performance we have seen to date when predicting lapses in the next day.
+So how well did we do in this new sample?
 
-An auROC of .94
+Here is the same performance figure I showed you earlier for our three alcohol models, and I've added our next day model for opioid lapses on the far right.
+
+This model has an auROC of .94.  That is better than our next day alcohol model, and as good as or better than even our next hour alcohol model.
+
+And we got this level of performance with much less burden on participants.  In this study, people completed only one brief survey per day, rather than four.  We did add geolocation sensing, but that runs passively in the background on their phone and asks nothing of them.
+
+Of course, this is a different study, with a different substance and a different sample, so this isn't a head-to-head comparison.  But it tells us that we can get excellent lapse prediction with a much lighter touch - which matters a lot if we want people to stick with a system like this for months or years.
 :::
 
 -----------------------------------------------------------------------------
@@ -658,15 +767,19 @@ An auROC of .94
 ```{r}
 #| label: figs_fair_risk2_ci_1
 #| fig-height: 6
-#| fig-width: 10 
+#| fig-width: 12 
 
 source(here::here("figs/risk2/figs_fair_ci.R"))
 cowplot::plot_grid(fig_fair_race_2, fig_fair_income_2, fig_fair_sex_2,
-                   nrow = 1)
+                   fig_fair_geo_2, nrow = 1, align = "h")
 ```
 
 ::: {.notes}
-And more importantly, this next day prediction model appears much fairer with respect to its performance in all three of the subgroups where our original models were deficient.
+And more importantly, this next day prediction model is much fairer.  The large performance gaps we saw in our original models for race and ethnicity, income, and sex have mostly closed.  And we can now also look at people living in rural vs. urban areas.
+
+To be clear, the gaps are not zero.  The model still performs slightly worse for most of the less advantaged groups - by about one to two hundredths of a point in auROC - and with this much data, those small differences are reliable.  Interestingly, for income, the model actually performs slightly better for people with lower incomes.
+
+But what matters most clinically is that performance is excellent for everyone.  Every group has an auROC between .92 and .95, which is better than our original AUD models achieved even for the groups they served best.
 
 [PAUSE]
 
@@ -824,9 +937,12 @@ In this way, we can provide personalized recommendations to patients that are ta
 
 -----------------------------------------------------------------------------
 
-## Smart Digital Therapeutics
+## Next Steps: A Smart Digital Health (Therapeutic) App
 
 introduce the idea of a DTx (Insights app) that has native prediction
+
+
+Introduce the core engagement loop from Insights app?
 
 -----------------------------------------------------------------------------
 

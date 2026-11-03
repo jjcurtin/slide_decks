@@ -1,10 +1,12 @@
-# NOTE: THE DATA FOR THIS FIG NEED TO BE CHECKED!
-
+# Data verified 2026-11-03 against study_lag (pp_perf_tibble.csv); all lags are 24-hour windows
 
 library(tidyverse)
 theme_set(theme_classic()) 
 path_data <- "data/risk" 
 path_mak <- "mak/risk"
+
+# Lagged models are all day (24-hour window) models; Okabe-Ito blue matches figs_ema_probability.R
+day_color <- "#0072B2"
 
 source(here::here(path_mak, "mak_lag_ci.R"))
 ci <- read_csv(here::here(path_data, "lag_ci.csv"),
@@ -21,11 +23,14 @@ ci <- read_csv(here::here(path_data, "lag_ci.csv"),
 
 fig_lag_ci <- ci |>
   ggplot(aes(x = model)) +
-  geom_point(aes(y = pp_median), size = 3) +
   geom_errorbar(aes(ymin = pp_lower, ymax = pp_upper),
+    color = day_color,
     width = .2,
     position = position_dodge(.9),
-    linewidth = 1.5) +
+    linewidth = 1.25) +
+  # hollow point drawn on top so the median stands out from the CI
+  geom_point(aes(y = pp_median), size = 3.5, shape = 21, fill = "white",
+             stroke = 1.5, color = day_color) +
     geom_hline(yintercept = 0.5, linetype = "dashed", color = "gray") +
     geom_hline(yintercept = 1.0, linetype = "dashed", color = "gray") +
     annotate("text", label = "random", x = 0.5, y = .49, size = 6, color = "gray",

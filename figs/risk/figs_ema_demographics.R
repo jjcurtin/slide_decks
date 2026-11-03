@@ -42,6 +42,8 @@ fig_race_bar <- d |>
   count(white) |>
   ggplot(aes(x = white, y = n, fill = white)) +
     geom_bar(stat = "identity", width = 1) +
+    # matches fairness figures (figs_fairema_ci.R): reference = gray, comparison = purple
+    scale_fill_manual(values = c("#A6A6A6", "#7B3294")) +
     labs(title = "Race/Ethnicity", x = NULL, y = "count") +
     theme(legend.title = element_blank(), legend.position = "none") +
     theme(axis.text = element_text(size = 12, face = "bold")) + 

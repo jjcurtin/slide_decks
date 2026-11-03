@@ -4,7 +4,7 @@
 library(tidyverse)
 library(tidyposterior)
 source("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true")
-path_fairema <- format_path(str_c("studydata/risk/data_processed/fairema"))
+path_fairema <- format_path("risk/data_processed/fairema")
 path_out <- "data/risk"
 
 # All of this code is temp to get CIs for CHM.  Not run because csv file already existed so need to be checked 

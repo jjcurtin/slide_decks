@@ -3,8 +3,8 @@ if (!file.exists(here::here(path_out, "ema_demographics.csv"))) {
   
   library(tidyverse)
   source("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true")
-  path_processed <- format_path("studydata/risk/data_processed/ema")
-  path_shared <- format_path("studydata/risk/data_processed/shared")
+  path_processed <- format_path("risk/data_processed/ema")
+  path_shared <- format_path("risk/data_processed/shared")
   
   # open disposition df on server  
   disposition <- read_csv(here::here(path_processed, "disposition.csv"), 
