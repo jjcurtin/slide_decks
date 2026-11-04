@@ -988,7 +988,7 @@ And right below those, we see a second tier made up mostly of location features 
 \
 
 - Urges and abstinence confidence most often the top risk factor
-- A location feature is the top risk factor on about 30% of days
+- Which factor is on top depends on level of risk
 ::::
 
 :::: {.column width="60%"}
@@ -1009,7 +1009,7 @@ When we are giving someone support recommendations, what we really want to know 
 
 From this view, urges and abstinence confidence are each the top risk factor on about 15 percent of days, slightly more often than recent opioid use.  That tells us that recommendations focused on managing urges and building confidence will be relevant most often.
 
-And location features matter a lot here.  Taken together, a location feature was the top risk factor on about 30 percent of days.  So on nearly a third of days, the most useful thing we could tell someone may be about where they are spending their time - for example, that they've been spending less time at places they find helpful for their recovery.
+Location features show up here too.  Taken together, a location feature was the top factor on about 30 percent of days.  But I want to be careful with this view.  Most days are low-risk days, and on those days the top factor is only nudging risk up a little.  On the relatively few high-risk days, the picture is simpler: recent opioid use is almost always the main driver.  We are still working through what this means for implementation, but it already tells us something important.  The right recommendation depends not only on which risk factor is elevated, but on how much risk the person is at.
 :::
 
 -----------------------------------------------------------------------------
@@ -1138,16 +1138,110 @@ And at a later point in time, that same person may have improved their abstinenc
 Now they could be provided with guided stress reduction or relaxation techniques that they could use each day.  
 
 In this way, we can provide personalized recommendations to patients that are tailored to their unique risk profile at that moment in time.
+
+These examples are all high-risk days.  But as we saw, most days are not.  On those days, I don't think the most helpful thing is another relapse-prevention skill.  Instead, we might recommend activities that build broader well-being: connecting with supportive people, physical activity, sleep, things that are meaningful or enjoyable.  Those are what make recovery sustainable.  So recommendations would be tailored on two dimensions: what is driving risk, and how much risk the person is at right now.
 :::
 
 -----------------------------------------------------------------------------
 
-## Next Steps: A Smart Digital Health (Therapeutic) App
+## Next Steps: A Smart Digital Health App
 
-introduce the idea of a DTx (Insights app) that has native prediction
+::: {.columns}
+:::: {.column width="40%"}
 
+\
 
-Introduce the core engagement loop from Insights app?
+- Most recovery apps offer a toolbox
+  - Patients choose when to use it
+  - Patients choose which tools
+::::
+
+:::: {.column width="60%"}
+
+<!--Blank-->
+
+::::
+:::
+
+::: {.notes}
+[DRAFT]
+
+So far, I have focused mostly on the algorithm.  But an algorithm by itself is not an intervention.  It needs a home, and for us that home is a digital health app.
+
+Remember where this started.  Dave Gustafson's app worked, but many people who relapsed hadn't used the app in the days before, and others hadn't used the tools that would have helped them most.  That is the problem with most recovery apps.  They offer a toolbox, and patients have to decide on their own when to open it and which tool fits what they are facing that day.
+:::
+
+-----------------------------------------------------------------------------
+
+## Next Steps: A Smart Digital Health App
+
+::: {.columns}
+:::: {.column width="40%"}
+
+\
+
+- [Most recovery apps offer a toolbox]{.gray}
+  - [Patients choose when to use it]{.gray}
+  - [Patients choose which tools]{.gray}
+
+- A smart app embeds the algorithm
+  - Monitors recovery every day
+  - Matches the tool to today's risk
+::::
+
+:::: {.column width="60%"}
+
+<!--Blank-->
+
+::::
+:::
+
+::: {.notes}
+[DRAFT]
+
+A smart app instead embeds the algorithm.  It monitors recovery every day, and it points the person to the tool that matches today's risk.
+:::
+
+-----------------------------------------------------------------------------
+
+## Next Steps: A Smart Digital Health App
+
+::: {.columns}
+:::: {.column width="40%"}
+
+\
+
+- [Most recovery apps offer a toolbox]{.gray}
+  - [Patients choose when to use it]{.gray}
+  - [Patients choose which tools]{.gray}
+
+- [A smart app embeds the algorithm]{.gray}
+  - [Monitors recovery every day]{.gray}
+  - [Matches the tool to today's risk]{.gray}
+::::
+
+:::: {.column width="60%"}
+![](images/engagement_loop.png){height="580px"}
+::::
+:::
+
+::: {.notes}
+[DRAFT]
+
+We have built our OUD model into an app organized around a simple daily loop.  And you have already seen most of the pieces.
+
+Each day, people reflect.  They complete a one-minute daily reflection, which is the daily survey that drives our model.  Remember, without it, performance dropped from .94 to .63.
+
+Then they discover.  The model combines the reflection with geolocation, and the app shows them a recovery health score, how it has changed over the past two weeks, and the factor shaping it most today.  That top factor comes from the same SHAP values I showed you earlier.
+
+Then they learn.  The app recommends one brief recovery activity matched to that factor, like the personalized recommendations I just described.  And on lower-risk days, that might be an activity that supports broader well-being.
+
+And finally, reward.  The model only works if people keep reflecting, so we use contingency management, small financial incentives, for completing the reflection and the activity.
+
+One more piece is this dashed arrow.  The feedback is not only for the algorithm.  When people see how their reflections connect to changes in their recovery, it should sharpen their own self-monitoring, so the app is also teaching a recovery skill.
+
+[COMMENT - REVIEW WHEN FINE-TUNING ORDER: decide where to transition from lapse risk/probability to recovery health score. This slide uses "recovery health score" without introducing it.]
+:::
 
 -----------------------------------------------------------------------------
 
@@ -1188,4 +1282,32 @@ We can then manipulate what information we include in daily messages from the sy
 Obviously, we are very excited to get started on this project because it will bring us one step closer to providing meaningful support to individuals in recovery.   
 
 Thanks for your time, and I'd be happy to answer any questions you might have now or later at the end of this session.
+:::
+
+-----------------------------------------------------------------------------
+
+## Next Steps: Insights App Pilot Trial
+
+- Funded by the Wisconsin Alumni Research Foundation (WARF)
+- Aims
+  - Characterize patient experiences with the app to guide its refinement
+  - Preliminary effects on opioid use and MOUD adherence
+  - Preliminary effects of incentive level on daily engagement
+- 210 patients early in MOUD treatment (1 week to 3 months), referred by treatment providers
+- 8-week, three-arm randomized trial
+  - Treatment as usual (TAU)
+  - TAU + Insights app with low or high contingency management
+- Key outcomes
+  - User experience: acceptability, usability, exit interviews
+  - Opioid use and MOUD adherence
+  - Daily engagement with app
+
+::: {.notes}
+[DRAFT]
+
+We are also about to take this model out of the research setting and into care.  The Wisconsin Alumni Research Foundation, or WARF, is a non-profit that works with UW scientists to turn their discoveries into products that reach people.  WARF is funding a pilot field trial of the Insights app, the app built around the daily loop I showed you, with patients receiving MOUD.
+
+The trial has three aims.  First, and most important for a pilot, we want to learn from patients' experiences so we can improve the app before a larger efficacy trial.  Second, we will get preliminary estimates of its effects on opioid use and on taking MOUD as prescribed.  Third, the model depends on patients completing the daily reflection, so we are testing how much incentive is needed to sustain that daily engagement.
+
+We will recruit 210 patients through their treatment providers, earlier in recovery than in our prediction study, and randomize them to treatment as usual or treatment as usual plus the app, with either low or high contingency management for completing the daily reflection and the recommended activity.  The trial lasts 8 weeks.
 :::
