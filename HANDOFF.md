@@ -1,16 +1,24 @@
 # USF Keynote Deck — Handoff
 
-Last updated: 2026-11-03 (end of day; second Linux machine)
+Last updated: 2026-11-03 (late evening session; second Linux machine)
 
-## Where we left off (2026-11-03)
+## Where we left off (2026-11-03, evening)
 
-- John is **rendering and reviewing the whole deck** after today's changes. Start the next chat by
-  asking what he found (layout, figure sizes, wording). Nothing today has been rendered by the
-  assistant inside the deck; figures were previewed individually.
-- Slides touched today: calibration, lag (2-slide build), OUD design, OUD performance (new figure),
-  OUD fairness (v13, 4 panels), plus color/style changes in many figures and `.blue` → `.uwred`.
-- Top open items: lag slide notes (still verbatim from neurotech and partly wrong — see Lag section),
-  GPS results slide, feature importance, housekeeping, timing.
+- **GPS section done** (5 slides, notes drafted; John reviewed and approved). See GPS section.
+- **Feature importance section drafted** (AUD x2, OUD x2). Rendered as revealjs and checked.
+- **OPEN ISSUE, decide first next session:** the risk-split check (late in session) shows the
+  "share of days as top feature" view is dominated by **low-risk days** where the winning SHAP is
+  tiny. On higher-risk days, past use is almost always the top feature (AUD 66–77%, OUD 87–100%)
+  and location features essentially never are. So the current **second OUD feature-importance
+  slide is misleading** (bullet/notes: "a location feature is the top risk factor on about 30% of
+  days … most useful thing we could tell someone"). John will decide how to integrate this into a
+  coherent story. Assistant's suggested next analysis: top feature on higher-risk days
+  **excluding past use** (the modifiable factor a recommendation engine would act on), AUD + OUD.
+- Still open from before: lag slide notes (verbatim neurotech; see Lag section), personalized
+  recommendations transition (now should refer back to SHAP), Smart DTx, Optimize wording, timing.
+- **Uncommitted work:** new scripts (`figs/risk/figs_gps_ci.R`, `mak/risk/mak_gps_ci.R`,
+  `figs/risk2/figs_shaps.R`, `mak/risk2/mak_shaps.R`) are untracked, and new caches in `data/` are
+  gitignored — commit them with `git add -f data/...` (see Feature importance section for the list).
 
 ## Publishing — FIXED 2026-11-03 (this machine)
 
@@ -54,10 +62,10 @@ Last updated: 2026-11-03 (end of day; second Linux machine)
 | 1 | Motivation, sensing, AUD sample, EMA, week/day/hour auROC | "A Smart Recovery...", "Personal Sensing", "Lapse Prediction for AUD", "Participant Characteristics", "EMA", "Model Predictions", "Model Performance" | Done (existing) |
 | 2 | AUD calibration | "Model Calibration: Trusting the Probabilities" | **Drafted 2026-11-03** (`fig_cal`, bullets, notes); John to review bullets/notes |
 | 3 | Lagged AUD models (now **after** calibration; John reordered) | "Lagged Prediction: Advanced Warning" (x2 build) | Slides + figure in; **notes still need revision** |
-| 4 | GPS as passive sensing (+ John's GPS demo slides) + AUD GPS results | "Passive Sensing Methods: Geolocation" (x2) + 2 background-image slides | Concept/demo exist; results slide is placeholder; transition notes say "FIX TRANSITION" |
+| 4 | GPS as passive sensing (+ John's GPS demo slides) + AUD GPS results | "Passive Sensing Methods: Geolocation" (title-only) → 2 untitled background-image demo slides → "Geolocation: Lapse Prediction for AUD" (x3: title-only implementation, then 2-slide figure build) | **Done 2026-11-03 evening**; John approved |
 | 5 | Fairness: AUD problems → OUD improvement | "Algorithmic Fairness", "Next Steps: Algorithmic Fairness" (x3), "Algorithmic Fairness: NIDA Opioid Use Lapses" (x3) | AUD done; OUD design, performance, and fairness slides **updated 2026-11-03** (v13) |
-| 6 | Global feature importance AUD + OUD, then OUD "most important by day" | "Feature Importance: Looking Under the Hood" (x3) | Placeholders |
-| 7 | Personalized recommendations | "Beyond Prediction: Personalized Recommendations" (x3) | Done (AUD SHAP examples) |
+| 6 | Global feature importance AUD + OUD, then OUD "most important by day" | "Feature Importance: Looking Under the Hood" (x4: AUD 2-slide build, OUD global, OUD share of days) | **Drafted 2026-11-03 evening**; OUD share-of-days slide needs rethinking (see top) |
+| 7 | Personalized recommendations | "Beyond Prediction: Personalized Recommendations" (x3) | Done (AUD SHAP examples); notes still say "WORK ON TRANSITION" and introduce SHAP as new — SHAP is now introduced in section 6 |
 | 8 | Smart DTx with native prediction (Insights / Rudra app) | "Smart Digital Therapeutics" | Placeholder (see [rudra.qmd](rudra.qmd)) |
 | 9 | Optimize grant | "Next Steps: Optimize System Feedback to Patients" | Exists; wording outdated ("begins in ~1 month") |
 
@@ -71,8 +79,7 @@ resolves correctly on this Linux box; a `"studydata/..."` prefix does **not** (s
 - auROC: week 0.90, day 0.90, hour 0.93.
 - Fairness (day model): race 0.70 vs 0.90 (Δ −0.19), income below vs above poverty
   (Δ −0.13), sex female vs male (Δ −0.04).
-- Global SHAP figures already exist but are unused: `fig_global_all/day/hour` in
-  `figs/risk/figs_ema_shaps.R` (top day-level features: past use, future efficacy, craving).
+- Feature importance: see "Feature importance (2026-11-03 evening)" section below.
 
 ### AUD lagged models — `~/github/study_lag`, drive `risk/models/lag/`
 - **Updated today.** `mak/risk/mak_lag_ci.R` now reads `pp_perf_tibble.csv` (same file the
@@ -121,7 +128,31 @@ resolves correctly on this Linux box; a `"studydata/..."` prefix does **not** (s
 - Fairness differs from EMA model: worse for age 55+ (Δ 0.08), better for lower education;
   race/sex/poverty not credible. Recommend **not** showing GPS fairness (muddies the AUD→OUD story).
 - Probabilities cluster near base rate (narrow range).
-- No combined EMA+GPS model in this paper.
+- No combined EMA+GPS model in this paper, so **never say GPS "doesn't add much to EMA"** — only
+  that GPS alone predicts less well than EMA alone.
+- Same outcome as the EMA day model (24-hour windows advancing hourly); GPS sample is the EMA
+  sample minus 5 with poor GPS data. GPS vs EMA comparison is **descriptive only** (different CV
+  schemes, no formal contrast); GPS vs demographics was tested in the paper (probability = 1).
+- Method details (for notes/Q&A): Moves then FollowMee app, continuous GPS + WiFi, 3 months,
+  participants could pause sharing. Monthly visits asked about frequently visited places (>2x/month):
+  type, drank there before, alcohol available, pleasant/unpleasant, risk to recovery (none–high),
+  trying to avoid. Plus passive features (time home, evening out, location variance, entropy,
+  weather).
+- **Deck (2026-11-03 evening):** `mak/risk/mak_gps_ci.R` caches `pp_all_tibble.csv` →
+  `data/risk/gps_ci.csv`. `figs/risk/figs_gps_ci.R` → `fig_gps_ci_1` (Demographics, Geolocation)
+  and `fig_gps_ci_2` (adds "Daily surveys (4x daily)" = EMA day model 0.90 from
+  `data/risk/ema_auroc_ci.csv`, the original paper value matching the Model Performance slide).
+  All three x-axis levels on both figs (`drop = FALSE`) so the build only adds a point; all day blue.
+- **GPS slide structure:** (1) "Passive Sensing Methods: Geolocation" title-only, general intro,
+  new bridge from lag slides, no communications mention; (2–3) John's GPS demo images (demo slide 2
+  notes now end at the public-map-data line; communications + "launching now" lines cut);
+  (4) "Geolocation: Lapse Prediction for AUD" title-only, coarse implementation details;
+  (5–6) same title, lag-style 50/50 build with `fig_gps_ci_1` / `fig_gps_ci_2`. Notes cover: credible
+  signal above demographics (at chance), .72 = fair, top features were participant-described
+  location features; then surveys predict better, low burden, works on skipped-survey days,
+  captures risk factors hard to report or that would lengthen the survey, callback to feature
+  importance. Deliberately **no** OUD "lighter survey + GPS = 0.94" setup (OUD ablation shows no
+  loss without GPS).
 
 ### OUD (NIDA risk2) — `~/github/study_risk2` (`index.qmd`), drive `risk2/models/combined/` (v13 files)
 - 330 enrolled, **296 analyzed**, 47 states, Apr 2021–Dec 2024, on MOUD 1–12 months;
@@ -132,8 +163,7 @@ resolves correctly on this Linux box; a `"studydata/..."` prefix does **not** (s
 - Ablation: no daily survey 0.63; no geolocation 0.94 (no loss); demographics only 0.55.
 - Fairness: 5 subgroups (gender, race/ethnicity, income at **$25k**, sexual orientation,
   rural/urban), all 0.92–0.95; income gap favors lower-income group.
-- Feature importance: mean |SHAP| → past opioid use (2x next); proportion-of-days-most-important →
-  urge and abstinence confidence first; location features in top 10.
+- Feature importance: see "Feature importance (2026-11-03 evening)" section below.
 - Surprising patterns: recent *decreases* in stimulant use or urges raise risk.
 - Local SHAP example image: `~/github/study_risk2/figures/shapley_local.png`.
 - Figure code: `~/github/study_risk2/notebooks/mak_figures.qmd` (fig-1 fairness, fig-2 calibration,
@@ -157,6 +187,65 @@ resolves correctly on this Linux box; a `"studydata/..."` prefix does **not** (s
   match the gray bullet on the next slide); notes rewritten (no "midst of finalizing").
 - Paper issue to mention to John/Kendra: `notebooks/mak_tables.qmd` builds Table 2 from
   `contrast_ablate_v10.csv` though `v13` exists.
+
+### Feature importance (2026-11-03 evening)
+
+**AUD (day model only; John's decision).**
+- Source verified: paper pipeline `~/github/proj_risk/ema/mak_scripts/archive/2_metrics_outer.qmd`
+  (SHAPforxgboost on 30 outer folds, averaged across 3 repeats per obs, summed into 18 categories).
+  Deck cache `data/risk/ema_shaps_day.rds` = drive `outer_shapsgrp_1day_0_v5_nested_main.rds`
+  (same byte size; content not compared because the R session can't read the drive).
+- `mak/risk/mak_ema_shaps.R` additions (original `ema_shaps_global.csv` block untouched):
+  - `ema_shaps_global_day.csv`: valence + arousal → "emotional state" **summed per observation**
+    (not summing global means; 0.030 vs 0.039), then mean |SHAP|.
+  - `ema_shaps_day_max.csv`: share of observations each category had the largest **signed** SHAP.
+  - `ema_shaps_day_max_risk.csv`: same shares for all / risk ≥ base rate (7.7%) / risk ≥ .2, plus
+    median winning SHAP per category. Risk = `prob_beta` from `ema_preds_1day.rds` averaged over
+    3 repeats.
+- `figs/risk/figs_ema_shaps.R`: `fig_global_day` rebuilt (16 categories, day blue, lapse hour dropped
+  — exactly 0 for day model; "lapse day" → "day of week"; "future efficacy" → "abstinence
+  confidence" to match EMA slide). New `fig_daymax_day` and `fig_daymax_day_risk` (≥ base rate).
+  `fig_global_all/hour` unchanged.
+- Global: past use 0.84, abstinence confidence 0.55, craving 0.20; demographics < 0.006.
+- Share of days (all): past stressful event 26%, abstinence confidence 20%, past use 17%, craving 12%.
+  But past stressful event wins with median SHAP 0.09 (54% < 0.1). Risk ≥ base rate: past use 66%,
+  abstinence confidence 30%, craving 3%. Risk ≥ .2: past use 77%, abstinence confidence 23%.
+- AUD observations are 24-hour windows advancing hourly (274,179), not one per calendar day.
+
+**OUD (v13).**
+- Paper method (`study_risk2/notebooks/mak_figures.qmd` fig-3a; Methods in `index.qmd`): grouped
+  raw SHAPs from single 5-fold CV; global = mean |SHAP|; day-level = proportion of days each
+  category had the highest SHAP. **Paper code uses `slice_max(value)` (signed); fig-3a caption
+  says "highest absolute" — tell Kendra.** Paper also leaves gender/race/orientation/employment/
+  day-of-week as separate dummies (tell Kendra). Raw past opioid use missing (8 categories are
+  change-only, probably near-zero-variance filtering) — confirm with Kendra.
+- `mak/risk2/mak_shaps.R` (John runs it; R session can't read drive `.rds`):
+  - `shaps_global.csv`, `shaps_day_max.csv`: paper-faithful 88 categories.
+  - `shaps_global_combined.csv`, `shaps_day_max_combined.csv`: **talk version** — raw + change
+    combined per construct, dummies grouped, all summed per observation before either metric.
+  - `shaps_day_max_combined_risk.csv`: shares for all / risk ≥ base rate (1.8%) / risk ≥ .2, plus
+    median winning SHAP. Risk = `prob_raw`. **ID gotcha:** preds `id_obs` = `label_num` (has gaps,
+    max 89,693), SHAP `id_obs` = rank of `label_num`; script remaps by rank (verified: winning SHAP
+    vs logit risk Spearman .82 vs .13 naive). This CSV was computed by the assistant from John's
+    in-memory objects with identical code; a rerun would reproduce it.
+- `figs/risk2/figs_shaps.R`: `fig_global_oud`, `fig_daymax_oud` (own order),
+  `fig_daymax_oud_global_order` (paper-style shared order). Top 15, bars colored by source
+  (survey `#0072B2`, geolocation `#E69F00`, other/demographic `#A6A6A6`); labels lowercased,
+  no raw/change suffix (John: no raw vs change point), "religious" → "religious locations".
+- Global: past opioid use 1.03, urge 0.46, abstinence confidence 0.41, stimulant use 0.13, then
+  mostly location features (6 in top 15). Share of days (all): abstinence confidence 15.6%, urge
+  15.2%, past opioid use 12.3%; geolocation categories total 29.6%. **But** location winners have
+  median SHAP 0.03–0.07 (location variance < 0.1 on 98.5% of its wins). Risk ≥ base rate (9,037
+  days): past opioid use 87%, urge 9%, abstinence confidence 4%, location ~0%. Risk ≥ .2 (1,280):
+  past opioid use 100%.
+
+**Slides in usf.qmd** (all titled "Feature Importance: Looking Under the Hood"; 40/60 columns,
+figs 8×6): AUD slide 1 introduces SHAP (first mention in deck) + top 3 + all items contribute + day
+of week; AUD slide 2 (grayed build) demographics contribute little, ties to GPS demographics-only
+model and to fairness (ignoring demographics ≠ fair). OUD slide 1 `fig_global_oud` (same core risk
+factors as alcohol; location features next tier; bracketed IF ASKED note on OUD ablation). OUD
+slide 2 `fig_daymax_oud` — **needs revision** (see top). AUD notes still say "weekends, as you might
+guess" (from archive; global SHAP doesn't show direction) — John to keep or drop.
 
 ### Framing cautions discussed
 - **GPS story:** "lower burden + different, actionable risk factors," not "better prediction."
@@ -228,7 +317,14 @@ resolves correctly on this Linux box; a `"studydata/..."` prefix does **not** (s
 
 ## Next steps (in rough order; John will direct)
 
-- [ ] **Follow up on John's render/review** of today's changes.
+- [ ] **Decide how to handle the risk-split finding** in the OUD share-of-days slide (see top);
+      optional analysis: top feature on higher-risk days excluding past use (AUD + OUD).
+- [ ] Commit new scripts and `git add -f` new caches: `data/risk/{gps_ci,ema_shaps_global_day,
+      ema_shaps_day_max,ema_shaps_day_max_risk}.csv`, `data/risk2/{shaps_global,shaps_day_max,
+      shaps_global_combined,shaps_day_max_combined,shaps_day_max_combined_risk}.csv`.
+- [ ] Personalized recommendations notes: fix "WORK ON TRANSITION"; refer back to SHAP.
+- [x] GPS section (5 slides) and GPS figure.
+- [x] Feature importance slides drafted (AUD x2, OUD x2).
 - [x] Lag slides added (2-slide build with `fig_lag_ci`).
 - [ ] Lag notes: revise for 24-hour window and new position after calibration (see Lag section).
 - [x] Shell Quarto upgraded to 1.11.9 and Connect Cloud authorized (see top of file).
@@ -238,16 +334,14 @@ resolves correctly on this Linux box; a `"studydata/..."` prefix does **not** (s
 - [ ] Mention to Kendra: `mak_tables.qmd` uses `contrast_ablate_v10.csv` (v13 exists).
 - [x] Calibration slide drafted with `fig_cal`. John to review bullets/notes and the
       bracketed comment; possibly brief OUD calibration later.
-- [ ] GPS results slide: new figure from `risk/models/gps/pp_all_tibble.csv` (GPS vs demographics),
-      maybe top features; rewrite GPS transition notes; mention communications as future.
 - [x] OUD fairness figure + notes updated to v13 (4 subgroups).
 - [x] OUD section: design/sample slide (296, 47 states, MOUD, 1–12 months on MOUD, 1 survey/day +
       geolocation, up to 12 months) and performance slide + notes updated 2026-11-03.
-- [ ] Feature importance: AUD global (`figs_ema_shaps.R`), OUD global (two methods), OUD by-day.
+- [ ] Communications: John will strip mentions from earlier slides (keep only as future direction).
 - [ ] Optional: OUD local SHAP example; Smart DTx slide; update Optimize slide wording.
-- [ ] Housekeeping (when John says): YAML date still "March 5th, 2026" → "November 6, 2026";
-      typos ("Communcations", "reasonble", "charactersitics", "martital", "ethinic", "lessor");
-      notes referencing "after this symposium ends... 1 pm".
+- [ ] Housekeeping (when John says): typos ("Communcations", "reasonble", "charactersitics",
+      "martital", "ethinic", "lessor"); notes referencing "after this symposium ends... 1 pm".
+      (Title and date done by John: date is `'2026-11-06'`, renders "November 6, 2026".)
 - [ ] Re-estimate timing once sections are drafted; then decide AUD cuts.
 
 ## Gotchas
@@ -267,6 +361,15 @@ resolves correctly on this Linux box; a `"studydata/..."` prefix does **not** (s
   be saved before `source()` sees them. The read/edit tools also timed out while a render was
   running.
 - `publish.sh` deletes every `*.html` and `*_files/` in the root.
+- **Rendering locally:** `quarto render usf.qmd` alone gives plain HTML. Copy the config first, as
+  `publish.sh` does: `cp _quarto_uw.yml _quarto.yml && quarto render usf.qmd; rm _quarto.yml`.
+- **Headless Chrome screenshots** of revealjs slides (`google-chrome --headless=new --screenshot
+  ... usf.html#/slide-id`) crop the left edge at any window size; it's an artifact (reviewed lag
+  slide crops the same way), not a layout bug.
+- **R session can't read the research drive with `read_rds()`** (agent file sandbox blocks
+  `file()` on `~/mnt/standard`; `read_csv()` happened to work). Mak scripts that read drive `.rds`
+  files must be run by John in his console. Don't work around it.
+- **New caches are gitignored** (`/data/`), so commit with `git add -f`.
 - Render needs network (GitHub `format_path.R`, image URLs, dionysus GPS backgrounds) — accepted.
 
 ## CSS / formatting architecture (from October refactor)

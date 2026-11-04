@@ -1,8 +1,8 @@
 ---
-title: 'A "Smart" Recovery Monitoring and Support System for SUD Continuing Care'
+title: 'Digital therapeutic algorithms for precision mental health with substance use disorders'
 author: "John J. Curtin, Ph.D."
 institute: "University of Wisconsin-Madison"
-date: "March 5th, 2026"
+date: '2026-11-06'
 editor_options: 
   chunk_output_type: console
 ---
@@ -543,14 +543,13 @@ And we are currently exploring other methods for predicting lapse probabilities 
 ## Passive Sensing Methods: Geolocation 
 
 ::: {.notes}
-
-FIX TRANSITION AND FOCUS ON GPS.
-
 [PAUSE]
 
-Next up.... as our monitoring and support system continues to mature, we will want a richer, broader set of lapse risk features so that we can distinguish better between different situations that require different supports. 
+So far, everything I've shown you has been built from a single source of information - what people tell us in their surveys.  And as you've seen, those surveys work very well.  But they do ask something of people every day, and they can only capture what people notice about themselves and are willing to report.
 
-We can do this by engineering features from our location and communication signals, which tap into different experiences than what we measure by EMA.
+As our monitoring and support system continues to mature, we will want a richer, broader set of lapse risk features so that we can distinguish better between different situations that require different supports.
+
+One way to get there is passive sensing - collecting signals from the smartphone that people already carry with them, without asking anything more of them.  And one of the most promising of these signals is geolocation, which taps into different experiences than what we measure with surveys - where people go, when they go there, and how long they stay.
 :::
 
 -----------------------------------------------------------------------------
@@ -579,21 +578,101 @@ Zooming in to the Madison isthmus, these data show that I drove my children half
 The app recorded my daily running commute through downtown Madison to and from my office.  From this, we can observe my longs days at the office and also those days that I skipped out.
 
 Looking at the red dots indicating the places I visit, the system can detect the restaurants, bars, and coffee shops where I eat, drink and socialize.  We can use public map data to identify these places and make inferences about what I do there.
-
-[PAUSE]
-
-Both geolocation and communications data are powerful sensed signals that we have already begun to use to predict lapse risk with success.
-
-And we plan to implement a model with both EMA and geolocation for a new project that we are just launching now.
 :::
 
 -----------------------------------------------------------------------------
 
-## Passive Sensing Methods: Geolocation 
+## Geolocation: Lapse Prediction for AUD
 
-SLIDES ON AUD GPS MODEL.   JUST PERFORMANCE FOR NOW.
+::: {.notes}
+[PAUSE]
 
-Make clear that it doesn't add much to EMA RE prediction but gives more features for personalization
+So let me tell you how we used geolocation in our study of people in recovery from alcohol use disorder.  These were the same participants I described earlier.
+
+Participants ran an app on their phones that recorded their location continuously for the three months they were on study.  And they could pause location sharing any time they wanted.
+
+Public map data can tell us that a place is a bar or a restaurant.  But it can't tell us what a place means to a specific person.  A friend's house might be a safe place for one person, and for another person, the place where they used to drink every weekend.
+
+So each month, we asked participants about the places they went to often.  For each place, we asked what kind of place it was, whether they had drunk alcohol there before, whether alcohol was available there, whether their experiences there were generally pleasant or unpleasant, and how much risk being there posed to their recovery.
+
+From these data, we built features like how much time someone spent at places they considered high risk, or at places where they had drunk before, over the past day and the past week.  We also built features that need no input from participants at all, like how much time they spent at home or out in the evening, and how variable their movement was.
+
+And then we used these features to predict lapses in the next day - the same outcome as our next day survey model.
+:::
+
+-----------------------------------------------------------------------------
+
+## Geolocation: Lapse Prediction for AUD
+
+::: {.columns}
+:::: {.column width="50%"}
+- Geolocation predicts lapse well above demographics
+- Fair performance on its own
+::::
+
+:::: {.column width="50%"}
+```{r}
+#| label: figs_gps_ci_1
+#| fig-height: 6
+#| fig-width: 6
+
+source(here::here("figs/risk/figs_gps_ci.R"))
+fig_gps_ci_1
+```
+::::
+:::
+
+::: {.notes}
+Here is how well geolocation predicted next day lapses.
+
+As a comparison point, we first fit a model that used only demographic characteristics - things like age, sex, race, and income.  That model, on the left, performed at chance, with an auROC of about .52.  Knowing who someone is didn't tell us when they would lapse.
+
+When we added the geolocation features, auROC rose to .72.  So there is credible predictive signal in where people spend their time, well above what demographics alone provide.
+
+By our rules of thumb, .72 is fair performance.  That is not good enough to use clinically on its own, and we wouldn't.  But it tells us that these location signals carry real information about lapse risk.
+
+And notably, the most important features in this model were the ones built from participants' own descriptions of their locations - time spent at places they had rated for risk to their recovery, and at places where they had drunk before.
+:::
+
+-----------------------------------------------------------------------------
+
+## Geolocation: Lapse Prediction for AUD
+
+::: {.columns}
+:::: {.column width="50%"}
+- [Geolocation predicts lapse well above demographics]{.gray}
+- [Fair performance on its own]{.gray}
+
+\
+
+- Daily surveys predict better
+- Geolocation adds low burden and new risk factors
+::::
+
+:::: {.column width="50%"}
+```{r}
+#| label: figs_gps_ci_2
+#| fig-height: 6
+#| fig-width: 6
+
+fig_gps_ci_2
+```
+::::
+:::
+
+::: {.notes}
+Now let's add our next day survey model from earlier.  Same participants, same outcome - a lapse in the next 24 hours.
+
+On its own, geolocation doesn't predict as well as the daily surveys - .72 compared to .90.  And to be clear, in this study we haven't tested whether adding geolocation to the surveys improves prediction.
+
+So why bother with geolocation?
+
+First, it asks very little of people.  Participants completed four surveys every day, but the geolocation app just ran in the background.  And it keeps working on the days that people skip their surveys, which matters when we are asking people to use a system like this for months or years.
+
+Second, and more important for us, it lets us measure risk factors that are hard for people to report on, or that would require the survey to get too long.  People can't easily tell us how much time they spent this week at places where they used to drink, or how much their daily routine has changed.  Location gives us those measures without asking.
+
+That gives us a broader set of risk factors to draw on when we tailor support recommendations to each person.  And you'll see these location features again a bit later when we look under the hood of our models.
+:::
 
 -----------------------------------------------------------------------------
 
@@ -791,21 +870,147 @@ I’d be happy to dive a bit deeper into this during the discussion period if pe
 
 -----------------------------------------------------------------------------
 
-## Feature Importance:  Looking Under the Hood
+## Feature Importance: Looking Under the Hood
 
-AUD GLOBAL SHAPS
+::: {.columns}
+:::: {.column width="40%"}
+
+\
+
+- Past use, abstinence confidence, and craving matter most
+- All survey items contribute
+::::
+
+:::: {.column width="60%"}
+```{r}
+#| label: figs_global_day_1
+#| fig-height: 6
+#| fig-width: 8
+
+source(here::here("figs/risk/figs_ema_shaps.R"))
+fig_global_day
+```
+::::
+:::
+
+::: {.notes}
+[PAUSE]
+
+So far, I've focused on how well our models predict.  But we also want to understand how they make their predictions.  That matters for trust, and as you'll see shortly, it is what lets us move from predicting lapses to recommending supports.
+
+To do this, we use a method called SHAP, which stands for Shapley Additive Explanations.  SHAP comes from cooperative game theory.  For every single prediction the model makes, it assigns each feature a share of the credit for that prediction.
+
+If we average the size of those contributions across all participants and all days, we get a measure of each feature's global importance.  That's what I'm showing you here for our next day survey model.  Longer bars mean more influence on the model's predictions.
+
+Not surprisingly, recent alcohol use matters most.  Past behavior is the best predictor of future behavior.  But people's confidence that they can stay abstinent and their craving are also very important.
+
+And every item on the survey contributes something - recent stressful and pleasant events, upcoming risky situations, emotional state, and so on.  The model also learned that lapses are more likely on some days of the week than others - weekends, as you might guess.
+:::
 
 -----------------------------------------------------------------------------
 
-## Feature Importance:  Looking Under the Hood
+## Feature Importance: Looking Under the Hood
 
-OUD GLOBAL SHAPS
+::: {.columns}
+:::: {.column width="40%"}
+
+\
+
+- [Past use, abstinence confidence, and craving matter most]{.gray}
+- [All survey items contribute]{.gray}
+
+\
+
+- Demographics contribute little
+::::
+
+:::: {.column width="60%"}
+```{r}
+#| label: figs_global_day_2
+#| fig-height: 6
+#| fig-width: 8
+
+fig_global_day
+```
+::::
+:::
+
+::: {.notes}
+In contrast, demographic characteristics - age, sex, marital status, education, and race - contribute very little.  That fits with what we saw for the demographics-only model in the geolocation study, which performed at chance.
+
+This makes sense.  Demographics are stable for a person over time, so they can't tell us much about which days someone is at higher risk.  The signal comes from how people's experiences change from day to day.
+
+And it's worth connecting this back to fairness.  The model barely uses demographics, yet it still performed worse for some groups.  So leaving demographics out of a model, or finding that it ignores them, is not enough to make it fair.  Fairness depends on who the model learns from and whether its features capture everyone's experiences equally well.
+:::
 
 -----------------------------------------------------------------------------
 
-## Feature Importance:  Looking Under the Hood
+## Feature Importance: Looking Under the Hood
 
-OUD Daily most important features. 
+::: {.columns}
+:::: {.column width="40%"}
+
+\
+
+- Same core risk factors as for alcohol
+- Location features form the next tier
+::::
+
+:::: {.column width="60%"}
+```{r}
+#| label: figs_global_oud
+#| fig-height: 6
+#| fig-width: 8
+
+source(here::here("figs/risk2/figs_shaps.R"))
+fig_global_oud
+```
+::::
+:::
+
+::: {.notes}
+Here is the same global importance plot for our opioid model.  I've colored the bars by where the information comes from - the daily survey in blue and geolocation in gold.
+
+The top of this list should look familiar.  Recent opioid use is by far the most important feature, followed by urges and abstinence confidence.  These are the same core risk factors that led our alcohol model - past use, confidence, and craving.  So across two different substances, two different samples, and two different survey designs, the same constructs from relapse prevention theory rise to the top.  We also see that recent use of other drugs, especially stimulants, matters.
+
+And right below those, we see a second tier made up mostly of location features - time spent at places people told us were helpful or harmful to their recovery, pleasant or unpleasant, religious settings, and how much they moved around.  This is the payoff I promised earlier.  These are risk factors that would be hard to get from a survey, and they give us more ways to understand what is going on in someone's life.
+
+[IF ASKED: In this study, removing geolocation did not lower overall performance, so these features largely overlap with what the survey already captures for prediction.  Their value is in the additional, actionable risk factors they identify, not in better prediction.]
+:::
+
+-----------------------------------------------------------------------------
+
+## Feature Importance: Looking Under the Hood
+
+::: {.columns}
+:::: {.column width="40%"}
+
+\
+
+- Urges and abstinence confidence most often the top risk factor
+- A location feature is the top risk factor on about 30% of days
+::::
+
+:::: {.column width="60%"}
+```{r}
+#| label: figs_daymax_oud
+#| fig-height: 6
+#| fig-width: 8
+
+fig_daymax_oud
+```
+::::
+:::
+
+::: {.notes}
+But global importance can be misleading for our purposes.  A feature like recent opioid use has an enormous effect on risk, but only on the relatively few days after someone has used.  Averaged across everyone, that big but rare effect puts it at the top.
+
+When we are giving someone support recommendations, what we really want to know is which factor is driving their risk on a given day.  So here, for every day for every participant, we identified the single feature that raised their predicted risk the most.  And this plot shows the proportion of days on which each feature was that top risk factor.
+
+From this view, urges and abstinence confidence are each the top risk factor on about 15 percent of days, slightly more often than recent opioid use.  That tells us that recommendations focused on managing urges and building confidence will be relevant most often.
+
+And location features matter a lot here.  Taken together, a location feature was the top risk factor on about 30 percent of days.  So on nearly a third of days, the most useful thing we could tell someone may be about where they are spending their time - for example, that they've been spending less time at places they find helpful for their recovery.
+:::
 
 -----------------------------------------------------------------------------
 
