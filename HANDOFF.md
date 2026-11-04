@@ -1,24 +1,55 @@
 # USF Keynote Deck — Handoff
 
-Last updated: 2026-11-03 (late evening session; second Linux machine)
+Last updated: 2026-11-04 (~16:15). Talk is **Friday Nov 6**.
 
-## Where we left off (2026-11-03, evening)
+## Where we left off (2026-11-04, 16:15) — ON HOLD
 
-- **GPS section done** (5 slides, notes drafted; John reviewed and approved). See GPS section.
-- **Feature importance section drafted** (AUD x2, OUD x2). Rendered as revealjs and checked.
-- **OPEN ISSUE, decide first next session:** the risk-split check (late in session) shows the
-  "share of days as top feature" view is dominated by **low-risk days** where the winning SHAP is
-  tiny. On higher-risk days, past use is almost always the top feature (AUD 66–77%, OUD 87–100%)
-  and location features essentially never are. So the current **second OUD feature-importance
-  slide is misleading** (bullet/notes: "a location feature is the top risk factor on about 30% of
-  days … most useful thing we could tell someone"). John will decide how to integrate this into a
-  coherent story. Assistant's suggested next analysis: top feature on higher-risk days
-  **excluding past use** (the modifiable factor a recommendation engine would act on), AUD + OUD.
-- Still open from before: lag slide notes (verbatim neurotech; see Lag section), personalized
-  recommendations transition (now should refer back to SHAP), Smart DTx, Optimize wording, timing.
-- **Uncommitted work:** new scripts (`figs/risk/figs_gps_ci.R`, `mak/risk/mak_gps_ci.R`,
-  `figs/risk2/figs_shaps.R`, `mak/risk2/mak_shaps.R`) are untracked, and new caches in `data/` are
-  gitignored — commit them with `git add -f data/...` (see Feature importance section for the list).
+- **John is doing his own round of edits and an out-loud run-through**, then will come back. When
+  he returns: re-read `usf.qmd` (it will have changed), recount timing, then consider the Under the
+  Hood trim (below).
+- **Session 2026-11-04 afternoon (after 15:10):**
+  - Render fixed: 5 duplicate chunk labels from John's slide splits renamed with suffixes
+    (`aud_calibration_plot_2`, `figs_gps_ci_3`, `figs_fair_risk2_ci_2`, `figs_global_oud_2`,
+    `figs_daymax_oud_2`). Also `source(figs_ema_demographics.R)` had been deleted with the original
+    participant slides → added to the combined "Participant Characteristics" chunk. Full render to
+    scratch succeeded.
+  - OUD performance figure (`figs/risk2/figs_perf_ci.R`, `fig_auroc_ci_oud`): AUD week/day/hour
+    faded (alpha .3, data-driven `alpha` column + `scale_alpha_identity()`), colors mapped by name
+    via `scale_color_manual()`, OUD point labeled ".94" in bold UW red (`#c5050c`) computed from the
+    data. A UW red box was tried and removed (John preferred the fade).
+  - **Geolocation notes rewritten** (all 7 slides, John approved; tagged [DRAFT]): 1,012 → 725
+    words. Sharpening: map-data-can't-give-meaning point now pays off on results slide ("exactly
+    the personal meaning that map data alone can't give us"); "had drank" → "used to drink there"
+    (John dislikes "drunk"); "months or years" line cut (duplicated in OUD performance notes);
+    callback now says "under the hood of our opioid model" (AUD model has no location features).
+    Assistant's optional idea not applied: one-sentence privacy nod on GPS zoom slide.
+- **Timing (16:14 file):** 5,351 spoken notes words ≈ **44.6 min at 120 wpm** (60 notes blocks,
+  brackets and HTML comments excluded). Clicks/pauses add ~2–3 min → ~47 min spoken.
+  **New target (John): ~45 min total**, since the introduction may eat a few minutes → notes
+  ≈ 42.5 min ≈ **5,100 words; cut ~250 more**. Next candidate: Under the Hood (946 words, 7.9 min;
+  share-of-days slides are the weakest given the low-risk-day issue). Section timing table
+  (pre-geolocation edit) was: Disclosures+opening 3.0, Gustafson 3.2, sensing/AUD/participants/EMA
+  3.4, predictions+auROC 2.9, calibration 2.0, lag 1.6, geolocation 8.4 (now ~6.0), AUD fairness
+  2.3, OUD 4.0, under the hood 7.9, smart app 3.0, Optimize 1.2, WARF 2.1, closing 1.9.
+- **Word-count method:** parse `.notes` blocks line by line (a single regex over the file missed
+  one block), drop YAML, HTML comments, and `[...]` text, count `\S+`, divide by 120.
+- **Recovery health score: CHECK WITH JOHN.** The assistant added a 2-slide "From Lapse Risk to
+  Recovery Health" build after the loop; it is **no longer in the file** (John apparently removed
+  it). The Optimize slide now carries the definition ("Recovery health score (inverse of lapse
+  probability)"). Two notes still point to the removed slides: calibration slide 2 ("I'll come back
+  to how we present that signal to patients near the end") and loop Discover ("which I'll say more
+  about in a moment"). Also the well-being/low-risk paragraph lived on the removed slide 2 — confirm
+  whether John wants it somewhere (it is no longer anywhere in the deck).
+- **Uncommitted work:** last commit is John's `1993608` ("first full draft edits"; usf.qmd at the
+  15:07 state). Modified since: `usf.qmd` (labels, demographics source, geolocation notes),
+  `HANDOFF.md`, `figs/opt/figs_opt_shaps.R`, `figs/risk/figs_ema_demographics.R`,
+  `figs/risk2/figs_perf_ci.R`. Untracked: `figs/rudra/figs_loop.R`, `images/engagement_loop.png`.
+  Earlier caches still need `git add -f` (see Next steps).
+- **Post-talk analysis (deferred by John):** "share of days as top feature" is dominated by
+  low-risk days where the winning SHAP is tiny. On higher-risk days past use is almost always top
+  (AUD 66–77%, OUD 87–100%); location features essentially never. Implications for the
+  recommendation engine to be worked out after the talk. Suggested analysis: top feature on
+  higher-risk days **excluding past use**, AUD + OUD.
 
 ## Publishing — FIXED 2026-11-03 (this machine)
 
@@ -37,8 +68,7 @@ Last updated: 2026-11-03 (late evening session; second Linux machine)
 ## The talk
 
 - **Venue:** Psychology department keynote, University of South Florida, **Friday Nov 6, 2026**.
-- **Length:** ~50 min talk + 10 min questions. Current notes are ~2,700 words (~21 min at
-  130 wpm) before the new sections are written, so there is room to add.
+- **Length:** ~50 min talk + 10 min questions. Use **120 wpm** for timing (John's request).
 - **Deck:** [usf.qmd](usf.qmd) (revealjs only; no book output).
 - **Published:** https://connect.posit.cloud/jjcurtin/content/01a19dfd-0622-2035-a06c-e7f7e4b9b915
   (`./publish.sh usf.qmd`; ID now in `_publish.yml`, so republishing updates in place).
@@ -48,17 +78,55 @@ Last updated: 2026-11-03 (late evening session; second Linux machine)
 
 - **John directs every slide edit.** Discuss first; do not change `usf.qmd` unless asked.
   Figure scripts (`figs/`, `mak/`) can be edited when asked.
+- **Re-read before editing or describing.** John edits `usf.qmd` in RStudio at the same time.
+  Use exact-string `edit` calls only; **no whole-file rewrites from R** (`readLines`/`writeLines`)
+  — they read disk and can collide with unsaved editor buffers. Never describe slide text from
+  memory (2026-11-04: assistant wrongly claimed typos remained that John had already fixed).
+- **Slide builds = separate slides, not fragments.** John prefers each new bullet/image to be a new
+  slide that replaces the previous one (earlier bullets grayed with `[...]{.gray}`), so each notes
+  page is short enough to read in presenter view without scrolling. Split long notes the same way.
 - **Untitled / title-only slides with notes are intentional** (blank screen while John talks).
-- **Add first, cut later.** Keep the AUD material for now; trim after the full draft exists.
-- **Communications sensing:** mention only, as a future direction (paper exists; results underwhelming).
-- **Optimize trial:** started, but no data/results to show.
+- **Add first, cut later** — now in the cutting phase (see timing above).
+- **Notes drafted by the assistant are marked [DRAFT];** open questions as [COMMENT - ...].
+- **Communications sensing:** future direction only. John reworked the sensing slides
+  ("Brief daily surveys", "(other sensing methods)").
+- **Optimize trial (NIAAA, AUD):** collecting data now; **4 months** per person; shows a **recovery
+  health score** (not lapse probability). No results to show.
+- **Terminology:** lapse probability/risk throughout the algorithm half; recovery health score only
+  once the app/patient view starts.
 - Formatting conventions are documented in [README_formatting.qmd](README_formatting.qmd)
   (rendered to `README_formatting.pdf` via Typst).
 
-## Agreed talk arc (John has inserted placeholder slides for this)
+## Current slide order (re-read from usf.qmd 2026-11-04 15:07)
+
+Slide numbers include the title slide as 1. Notes word counts exclude bracketed text.
+
+| Slides | Section | Titles / content | Notes |
+|---|---|---|---|
+| 2 | Disclosures | "Disclosures" (Claire + Kendra + John built models; WARF copyright/IP; Rudra Health AI license; John co-founder/CSO) | [DRAFT]; doubles as preview |
+| 3–4 | Opening story | untitled (decade ago; family) | the notes block right after the YAML is its own blank slide |
+| 5–8 | Gustafson + precision MH | "A Smart Recovery Monitoring and Support System" x4 | who/when/how quote |
+| 9–11 | Sensing + AUD study | "Personal Sensing" x2, "Lapse Prediction for AUD" | John reworked (brief surveys, geolocation; other methods in parens) |
+| 12 | Participants | "Participant Characteristics" (7-panel combined; John deleted the two originals) | [DRAFT] tag still on |
+| 13 | EMA | "Brief Daily Surveys" (retitled by John) | |
+| 14–19 | Predictions + auROC | "Model Predictions" x2, "Model Performance" x3, "...Excellent auROCs" | slide 15 notes still "after this symposium ends... 2 pm" |
+| 20–21 | Calibration | "Model Calibration: Trusting the Probabilities" x2 (John split) | slide 21 plants "graded signal... I'll come back near the end" |
+| 22–23 | Lag | "Lagged Prediction: Advanced Warning" x2 | revised; [COMMENT] on "exploring other methods" may be resolved — check |
+| 24–30 | Geolocation | intro, 2 demo images, "Geolocation: Lapse Prediction for AUD" x4 (John split results) | notes rewritten/trimmed 2026-11-04 16:00 [DRAFT], John approved |
+| 31–35 | Fairness (AUD) | "Algorithmic Fairness" x5 | "lessor" typo remains (slide 35) |
+| 36–39 | OUD | "NIDA OUD Recovery Project" (+ ": Model Performance", ": Algorithmic Fairness" x2) — John retitled | performance fig: AUD faded, OUD ".94" in UW red (2026-11-04) |
+| 40–48 | Under the hood | "Feature Importance: Looking Under the Hood" x9: SHAP cartoon x3 → AUD global x2 → OUD global x2 → OUD share of days x2 | SHAP introduced on slide 40; "weekends, as you might guess" still in slide 43 notes |
+| 49–52 | Smart app | "Next Steps: A Smart Digital Health App" x4: toolbox → smart app → loop → loop + dashed arrow (John added bullet "Helps patients improve their own self-monitoring") | Discover notes dangle "say more in a moment" |
+| 53 | Optimize | "Next Steps: Optimize System Feedback to Patients" | defines health score as inverse of lapse probability |
+| 54–56 | WARF pilot | "Next Steps: Insights App Pilot Trial" x3 (John split) | WARF explained on Disclosures; callback here |
+| 57–61 | Closing | "A Smart Recovery Monitoring and Support System" x5 (quote → Who → When → How → what we don't know/thanks) | [COMMENT] on "Who" reframing may be resolved — check |
+
+## Section history and details (2026-11-03/04; superseded rows kept for context)
 
 | # | Section | Slides (titles in usf.qmd) | Status |
 |---|---|---|---|
+| 1b | Participant Characteristics, combined (added 2026-11-04 as 3rd slide after the two originals; John may cut the originals) | "Participant Characteristics" | 7 panels: top row AUD symptom count, age, income; bottom row sex, race/ethnicity, education, marital status. Notes [DRAFT] merge both originals. New `fig_race_bar_demo` (default ggplot fill) used on demographics slides; `fig_race_bar` stays gray/purple for fairness slides |
+| 0 | Disclosures (added 2026-11-04, directly after title slide) | "Disclosures" | 4 bullets: Claire Punturieri + Kendra Wyant built models; WARF holds copyright/manages IP; Rudra Health AI licensed, building app; John co-founder + CSO. Notes [DRAFT] frame it as a preview. Note: the notes block right after the YAML is its own blank slide (not title-slide notes); the "About a decade ago" blank slide now follows Disclosures. WARF is now defined twice (here and WARF pilot slide notes) — trim one later |
 | 1 | Motivation, sensing, AUD sample, EMA, week/day/hour auROC | "A Smart Recovery...", "Personal Sensing", "Lapse Prediction for AUD", "Participant Characteristics", "EMA", "Model Predictions", "Model Performance" | Done (existing) |
 | 2 | AUD calibration | "Model Calibration: Trusting the Probabilities" | **Drafted 2026-11-03** (`fig_cal`, bullets, notes); John to review bullets/notes |
 | 3 | Lagged AUD models (now **after** calibration; John reordered) | "Lagged Prediction: Advanced Warning" (x2 build) | Slides + figure in; **notes still need revision** |
@@ -67,7 +135,12 @@ Last updated: 2026-11-03 (late evening session; second Linux machine)
 | 6 | Global feature importance AUD + OUD, then OUD "most important by day" | "Feature Importance: Looking Under the Hood" (x4: AUD 2-slide build, OUD global, OUD share of days) | **Drafted 2026-11-03 evening**; OUD share-of-days slide needs rethinking (see top) |
 | 7 | Personalized recommendations | "Beyond Prediction: Personalized Recommendations" (x3) | Done (AUD SHAP examples); notes still say "WORK ON TRANSITION" and introduce SHAP as new — SHAP is now introduced in section 6 |
 | 8 | Smart DTx with native prediction (Insights / Rudra app) | "Smart Digital Therapeutics" | Placeholder (see [rudra.qmd](rudra.qmd)) |
-| 9 | Optimize grant | "Next Steps: Optimize System Feedback to Patients" | Exists; wording outdated ("begins in ~1 month") |
+| 6a (moved 2026-11-04) | SHAP cartoon (Patients 1–3) now OPENS the feature importance section, retitled "Feature Importance: Looking Under the Hood" | 3 slides before AUD global | SHAP introduced here (local → global → share of days); option (a): one recommendation sentence per patient. Cartoon data are simulated (`mak/opt/mak_opt_shaps.R` → `data/opt/opt_shaps_examples.csv`); `figs/opt/figs_opt_shaps.R` restyled to match `fig_global_day` (day blue, "abstinence confidence", valence+arousal summed to "emotional state", global item order, shared 0–1.7 x-axis, red labels on top factors via `plot_shap_ex()`). Well-being/low-risk paragraph moved to app Learn step. AUD global notes now start "summarize these explanations across everyone". Agreed reorder plan: next add recovery health score slide after loop (plant "graded signal" at calibration, name/define at Discover) and a closing slide after WARF |
+| 8 (now) | Smart digital health app / engagement loop (2026-11-04) | "Next Steps: A Smart Digital Health App" (replaces Smart DTx placeholder) | Drafted as a 3-slide replace build (no fragments; John prefers separate slides so notes fit presenter view): toolbox bullets → grayed + smart-app bullets → all grayed + loop figure; notes [DRAFT] call back to Gustafson/CHESS app (relapsers didn't use app/best tools), map Reflect→daily survey (ablation .94→.63), Discover→score + SHAP top factor, Learn→recommendations (well-being on low-risk days), Reward→CM. Bracketed comment: still need to decide where risk → recovery health score transition happens. Figure: `figs/rudra/figs_loop.R` (run manually) → static `images/engagement_loop.png` (DiagrammeR/rsvg, Source Sans Pro, day blue circles, UW red dashed self-monitoring arrow). Source Sans Pro copied from Quarto's revealjs fonts to `~/.local/share/fonts/source-sans-pro` so rsvg uses the deck font; on another machine, do the same before regenerating |
+| 8b (added 2026-11-04, after loop) | Recovery health score | "From Lapse Risk to Recovery Health" (2-slide build) | Slide 1: lapse probability = model-evaluation metric; recovery health score = what patients see (inverse of next-day lapse prob, 0–100, higher better, daily + 2-wk trend); notes tie to calibration. Slide 2 adds "Why recovery health?" (information not verdict; strengths/progress; targeted skills on low days, well-being on good days); the well-being paragraph moved here from the loop Learn step. Calibration notes: bracketed comment replaced by a "graded signal, not yes/no alarm; I'll come back to it" plant. Loop Discover notes say "I'll say more about [the score] in a moment"; loop health-score comment removed. Optimize slide updated 2026-11-04: shows a health score (John confirmed), bullets reworded (score, trend, top factors, matched recommendation), status "Data collection underway" merged into first bullet (a standalone line was hidden by the PI banner image); notes rewritten [DRAFT]. |
+| 10 | WARF-funded Insights app pilot trial (added 2026-11-04, after Optimize) | "Next Steps: Insights App Pilot Trial" | Drafted from `~/github/proj_rudra1/irb/protocol.qmd` (aims, 210 pts, 8-wk 3-arm RCT, outcomes); notes marked [DRAFT]; WARF now explained on Disclosures, pilot notes use a callback. John later split it into 3 slides |
+| 11 | Closing (added 2026-11-04, after WARF) | "A Smart Recovery Monitoring and Support System" (reprises opening title + Gustafson quote/photo) | 4-slide replace build (quote only → +Who → +When (Who grayed) → +How (Who/When grayed)); 72% left column so text clears photo; notes [DRAFT] end with "Thanks for your time" (removed from Optimize notes). Bracketed comment: "Who" reframes Dave's "who is at risk" as "who the models work for" — John to decide |
+| 9 | Optimize grant | "Next Steps: Optimize System Feedback to Patients" | Updated 2026-11-04 (underway, 4 months, health score); John further edited bullets/notes |
 
 ## Data sources and key numbers
 
@@ -239,7 +312,8 @@ resolves correctly on this Linux box; a `"studydata/..."` prefix does **not** (s
   days): past opioid use 87%, urge 9%, abstinence confidence 4%, location ~0%. Risk ≥ .2 (1,280):
   past opioid use 100%.
 
-**Slides in usf.qmd** (all titled "Feature Importance: Looking Under the Hood"; 40/60 columns,
+**Slides in usf.qmd** — SUPERSEDED: the section now opens with the SHAP cartoon (see Current slide
+order). Original description: (all titled "Feature Importance: Looking Under the Hood"; 40/60 columns,
 figs 8×6): AUD slide 1 introduces SHAP (first mention in deck) + top 3 + all items contribute + day
 of week; AUD slide 2 (grayed build) demographics contribute little, ties to GPS demographics-only
 model and to fairness (ignoring demographics ≠ fair). OUD slide 1 `fig_global_oud` (same core risk
@@ -317,16 +391,32 @@ guess" (from archive; global SHAP doesn't show direction) — John to keep or dr
 
 ## Next steps (in rough order; John will direct)
 
-- [ ] **Decide how to handle the risk-split finding** in the OUD share-of-days slide (see top);
-      optional analysis: top feature on higher-risk days excluding past use (AUD + OUD).
-- [ ] Commit new scripts and `git add -f` new caches: `data/risk/{gps_ci,ema_shaps_global_day,
-      ema_shaps_day_max,ema_shaps_day_max_risk}.csv`, `data/risk2/{shaps_global,shaps_day_max,
-      shaps_global_combined,shaps_day_max_combined,shaps_day_max_combined_risk}.csv`.
-- [ ] Personalized recommendations notes: fix "WORK ON TRANSITION"; refer back to SHAP.
+- [ ] **Recovery health score placement** — confirm with John (see top): removed slides, dangling
+      references in calibration slide 21 and loop Discover notes, orphaned well-being paragraph.
+- [ ] **After John's own edits + out-loud run:** re-read usf.qmd, recount timing.
+- [ ] **Trim notes to ≈ 5,100 words** (16:14: 5,351 ≈ 44.6 min; target ~45 min total incl. clicks).
+      Geolocation done; next propose a sharpen-and-trim of Under the Hood (~250 words) in chat
+      first (John liked the "propose in chat, then apply" workflow).
+- [ ] Resolve open [COMMENT]s and remove [DRAFT] tags as John approves sections.
+- [ ] Housekeeping: "lessor" (slide 35), "after this symposium ends... 2 pm" (slide 15), "weekends,
+      as you might guess" (slide 43; global SHAP shows no direction).
+- [ ] **Commit** (checkpoint): `usf.qmd`, `HANDOFF.md`, `figs/opt/figs_opt_shaps.R`,
+      `figs/risk/figs_ema_demographics.R`, `figs/risk2/figs_perf_ci.R`, `figs/rudra/figs_loop.R`,
+      `images/engagement_loop.png`;
+      and `git add -f` caches: `data/risk/{gps_ci,ema_shaps_global_day,ema_shaps_day_max,
+      ema_shaps_day_max_risk}.csv`, `data/risk2/{shaps_global,shaps_day_max,shaps_global_combined,
+      shaps_day_max_combined,shaps_day_max_combined_risk}.csv` (check `git status --ignored`).
+- [ ] Render check and publish (`./publish.sh usf.qmd`) after John's review.
+- [ ] Post-talk: risk-split analysis (see top).
+- [x] 2026-11-04: SHAP cartoon moved to open Under the Hood (option a: one recommendation sentence
+      per patient); cartoon fig restyled; smart app/loop slides + figure; WARF pilot slide;
+      closing slides; disclosures; combined participant slide + `fig_race_bar_demo`; Optimize
+      wording (health score, 4 months, underway); lag notes revised; calibration "graded signal" plant.
 - [x] GPS section (5 slides) and GPS figure.
 - [x] Feature importance slides drafted (AUD x2, OUD x2).
 - [x] Lag slides added (2-slide build with `fig_lag_ci`).
-- [ ] Lag notes: revise for 24-hour window and new position after calibration (see Lag section).
+- [x] Lag notes revised 2026-11-04: stand alone (no recommendations reference), next day model lagged, 24-hour window starting two weeks out, .91 → .85. Bracketed comment asks John whether "currently exploring other methods" (Apr 2025) is still true.
+- [x] Optimize: 4 months per person (was six), slide + notes.
 - [x] Shell Quarto upgraded to 1.11.9 and Connect Cloud authorized (see top of file).
 - [ ] Publish after John's review (missing R package was being installed); optionally test whether
       the assistant's bash tool can now publish.
@@ -337,18 +427,20 @@ guess" (from archive; global SHAP doesn't show direction) — John to keep or dr
 - [x] OUD fairness figure + notes updated to v13 (4 subgroups).
 - [x] OUD section: design/sample slide (296, 47 states, MOUD, 1–12 months on MOUD, 1 survey/day +
       geolocation, up to 12 months) and performance slide + notes updated 2026-11-03.
-- [ ] Communications: John will strip mentions from earlier slides (keep only as future direction).
-- [ ] Optional: OUD local SHAP example; Smart DTx slide; update Optimize slide wording.
-- [ ] Housekeeping (when John says): typos ("Communcations", "reasonble", "charactersitics",
-      "martital", "ethinic", "lessor"); notes referencing "after this symposium ends... 1 pm".
-      (Title and date done by John: date is `'2026-11-06'`, renders "November 6, 2026".)
-- [ ] Re-estimate timing once sections are drafted; then decide AUD cuts.
+- [x] Communications stripped from early slides by John (now "(other sensing methods)").
+- [x] Smart DTx slide (now smart app/loop) and Optimize wording done. Optional still: OUD local SHAP example.
+- [x] Most typos fixed by John; remaining ones listed in housekeeping item above.
+- [x] Timing re-estimated (see top).
 
 ## Gotchas
 
 - **Figure-script dependencies:** each `figs_*.R` is sourced in the first chunk that uses it;
   later chunks reuse the objects (e.g., `fig_race_bar` from `figs_ema_demographics.R`,
-  `fig_shap_ex*` from `figs/opt/figs_opt_shaps.R`). Reordering slides can break this.
+  `fig_shap_ex*` from `figs/opt/figs_opt_shaps.R`). Reordering or deleting slides can break this
+  (2026-11-04: deleting the original participant slides removed the demographics `source()`).
+- **Splitting slides by copy-paste duplicates chunk labels** → knitr "Duplicate chunk label" error.
+  Check with `grep -oE '^#\| *label: *.*' usf.qmd | sort | uniq -d`. Duplicated slides are often
+  byte-identical, so `edit` anchors must include the end of the preceding slide's notes.
 - Figure scripts share the render's global env and reuse names (`plot_ci`, `ci`, `delta`,
   `path_data`, `model_colors`). Fine because each script builds its figures at source time, but
   don't call a helper like `plot_ci()` from a later chunk expecting an earlier script's version.
@@ -370,6 +462,16 @@ guess" (from archive; global SHAP doesn't show direction) — John to keep or dr
   `file()` on `~/mnt/standard`; `read_csv()` happened to work). Mak scripts that read drive `.rds`
   files must be run by John in his console. Don't work around it.
 - **New caches are gitignored** (`/data/`), so commit with `git add -f`.
+- **Render to scratch** to avoid touching the repo: `cp _quarto_uw.yml _quarto.yml && quarto render
+  usf.qmd --output-dir <scratch>/render; rm _quarto.yml` (harmless warnings about output dir).
+  Duplicate slide titles get ids `title`, `title-1`, `title-2`, ... for screenshot URLs.
+- **Engagement loop figure** is static: rerun `figs/rudra/figs_loop.R` manually. Needs Source Sans
+  Pro as a system font (copied from `/opt/quarto/share/formats/revealjs/reveal/dist/theme/fonts/
+  source-sans-pro` to `~/.local/share/fonts/`, then `fc-cache`); otherwise rsvg silently substitutes.
+- **Figure scripts leak globals** (`format_path`, `path_data`) when sourced in the console; clean
+  up after previewing.
+- Absolute-positioned banner images (e.g., `opt_pi_wide.png`) hide text placed near the slide
+  bottom; check screenshots after adding lines.
 - Render needs network (GitHub `format_path.R`, image URLs, dionysus GPS backgrounds) — accepted.
 
 ## CSS / formatting architecture (from October refactor)

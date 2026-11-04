@@ -1,5 +1,5 @@
 ---
-title: 'Digital therapeutic algorithms for precision mental health with substance use disorders'
+title: 'Smart Digital Health Apps for precision mental health for SUD'
 author: "John J. Curtin, Ph.D."
 institute: "University of Wisconsin-Madison"
 date: '2026-11-06'
@@ -181,7 +181,7 @@ We focus on
 
 - Brief daily surveys 
 - Geolocation
-- (smartphone communications (calls and texts), audio/video check-ins, sleep)
+- [smartphone communications (calls and texts), audio/video check-ins, sleep]
 
 ::: {.notes}
 At this point, we have worked extensively with ecological momentary assessments and other brief survey methods and geolocation sensing as our two primary buckets of inputs.  We do sense other inputs as well but in the service of time I will leave those to the question period if people are interested. 
@@ -201,7 +201,7 @@ At this point, we have worked extensively with ecological momentary assessments 
 - Followed with sensing for up to 3 months
   - Brief surveys (4x daily) 
   - Geolocation
-  - (other sensing methods)
+  - [other sensing methods]
 
 \
 
@@ -223,7 +223,7 @@ We followed these individuals for up to three months, using our focal sensing me
 #| fig-height: 6
 #| fig-width: 12
 
-# plots made in figs_ema_demographics.R
+source(here::here("figs/risk/figs_ema_demographics.R"))
 cowplot::plot_grid(
   cowplot::plot_grid(fig_sx, fig_age, fig_income, nrow = 1),
   cowplot::plot_grid(fig_sex_bar, fig_race_bar_demo, fig_educ_bar, fig_ms_bar,
@@ -485,7 +485,7 @@ If the probabilities were perfectly calibrated, the bin means would all fall on 
 
 :::: {.column width="55%"}
 ```{r}
-#| label: aud_calibration_plot
+#| label: aud_calibration_plot_2
 #| fig-height: 6
 #| fig-width: 6
 
@@ -569,13 +569,13 @@ As you can see from the plot on the right, performance does drop as we look furt
 ## Passive Sensing Methods: Geolocation 
 
 ::: {.notes}
+[DRAFT]
+
 [PAUSE]
 
-OK, so far, everything I've shown you has been built from a single source of information - what people tell us in their surveys.  And as you've seen, those surveys work very well.  But they do ask something of people every day, and they can only capture what people notice about themselves and are willing to report.
+So far, everything I've shown you comes from one source - what people tell us in their surveys.  Those surveys work very well.  But they ask something of people every day, and they can only capture what people notice about themselves and are willing to report.
 
-As our monitoring and support system continues to mature, we wanted a richer, broader set of lapse risk features so that we can distinguish better between different situations that require different supports.
-
-One way to get there is passive sensing - collecting signals from the smartphone that people already carry with them, without asking anything more of them.  And one of the most promising of these signals is geolocation, which taps into different experiences than what we measure with surveys - where people go, when they go there, how long they stay, and what they typical do there.
+To match support to different situations, we want a broader set of risk factors.  One way to get them is passive sensing - signals collected from the phone people already carry, without asking anything more of them.  And one of the most promising is geolocation: where people go, when, for how long, and what they do there.
 :::
 
 -----------------------------------------------------------------------------
@@ -584,13 +584,11 @@ One way to get there is passive sensing - collecting signals from the smartphone
 
 
 ::: {.notes}
-To give you taste of the power for these novel signals, here is a wide view of my moment-by-moment location detected by a GPS app over a month when we were first experimenting with this sensing method almost a decade ago.  The app recorded the paths that I traveled, with movement by car in green and running in blue.
+[DRAFT]
 
-The red dots indicate places that I stopped to visit for at least a few minutes.
+To give you a taste of what these signals reveal, here is a month of my own location data, from when we first started experimenting with GPS almost a decade ago.  The paths show where I traveled - green by car, blue running.  The red dots are places I stopped for at least a few minutes, and the app also recorded exactly when I was at each one.
 
-And although not displayed here, the app recorded the days and exact times that I was at each of these locations.
-
-From these data, you can immediately see that I am runner, with long runs leaving from downtown Madison and frequent trail runs on the weekends in the county and state parks to the west and northwest.
+Even from this wide view, you can see that I'm a runner, with long runs from downtown Madison and weekend trail runs in the parks to the west.
 :::
 
 -----------------------------------------------------------------------------
@@ -599,13 +597,13 @@ From these data, you can immediately see that I am runner, with long runs leavin
 
 
 ::: {.notes}
-Zooming in to the Madison isthmus, these data show that I drove my children halfway around the lake each morning to their elementary school.  And from these data we might be able to detect those stressful mornings when getting my young kids dressed and fed didn't go as planned and we were late, sometimes **very late**, to school!
+[DRAFT]
 
-The app recorded my daily running commute through downtown Madison to and from my office.  From this, we can observe my longs days at the office and also those days that I skipped out.
+Zooming in on the Madison isthmus, you can see me driving my kids halfway around the lake to elementary school each morning.  We might even detect those stressful mornings when we were late - sometimes **very late** - to school!
 
-Looking at the red dots indicating the places I visit, the system can detect the restaurants, bars, and coffee shops where I eat, drink and socialize.  We can use public map data or information from our participants themselves to identify these places and make inferences about what I do there.
+You can see my running commute to and from my office, which shows my long days at work and the days I skipped out.  And the red dots show the restaurants, bars, and coffee shops where I eat, drink, and socialize.
 
-I hope its pretty intuitive what a powerful window into someones life location sensing can provide.
+I hope it's intuitive what a powerful window into someone's life location provides.
 :::
 
 -----------------------------------------------------------------------------
@@ -613,17 +611,17 @@ I hope its pretty intuitive what a powerful window into someones life location s
 ## Geolocation: Lapse Prediction for AUD
 
 ::: {.notes}
+[DRAFT]
+
 [PAUSE]
 
-So let me tell you how we used geolocation in our AUD study.  Participants ran an app on their phones that recorded their location continuously for the three months they were on study.  
+In our AUD study, participants ran an app that recorded their location continuously for their three months on study.
 
-Public map data can tell us that a place is a bar or a restaurant.  But it can't tell us what a place means to a specific person.  A friend's house might be a safe place for one person, and for another person, the place where they used to drink every weekend.
+Public map data can tell us that a place is a bar or a restaurant.  But it can't tell us what that place means to a specific person.  A friend's house might be a safe place for one person, and for another, the place where they used to drink every weekend.
 
-So each month, we asked participants about the places they went to often.  For each place, we asked what kind of place it was, whether they had drank alcohol there before, whether alcohol was available there, whether their experiences there were generally pleasant or unpleasant, and how much risk being there posed to their recovery.
+So each month, we asked participants about the places they went often - for example, whether they used to drink there, whether alcohol was available, whether it was pleasant or unpleasant, and how risky it was for their recovery.
 
-From these data, we built features like how much time someone spent at places they considered high risk, or at places where they had drank before, over the past day and the past week.  We also built features that need no input from participants at all, like how much time they spent at home or out in the evening, and how variable their movement was.
-
-And then we used these features to predict lapses in the next day - the same outcome as our next day survey model.
+From their answers, we built features like how much time someone spent at high-risk places, or places where they used to drink, over the past day and week.  We added features that need no input at all, like time at home, evenings out, and how variable their movement was.  And we used these features to predict lapses in the next day - the same outcome as our survey model.
 :::
 
 -----------------------------------------------------------------------------
@@ -649,13 +647,13 @@ fig_gps_ci_1
 :::
 
 ::: {.notes}
-As a comparison point, we first fit a model that used only demographic characteristics - things like age, sex, race, and income.  That model, on the left, performed at chance, with an auROC of about .52.  Knowing who someone is didn't tell us when they would lapse.
+[DRAFT]
 
-When we added the geolocation features, auROC rose to .72.  So there is credible predictive signal in where people spend their time, well above what demographics alone provide.
+As a comparison, we first fit a model using only demographics - age, sex, race, and income.  It performed at chance, with an auROC of .52.  Knowing who someone is didn't tell us when they would lapse.
 
-By our rules of thumb, .72 is fair performance.  That is not good enough to use clinically on its own, and we wouldn't.  But it tells us that these location signals carry real information about lapse risk.
+The geolocation model reached .72 - credible signal, well above demographics.  By our rules of thumb, that's fair performance.  Not good enough to use clinically on its own, and we wouldn't.
 
-And notably, the most important features in this model were the ones built from participants' own descriptions of their locations - for example, time spent at places they had rated for risk to their recovery, and at places where they had drank before.
+And the most important features were the ones built from participants' own descriptions of their places - time at places they rated as risky, and at places where they used to drink.  In other words, exactly the personal meaning that map data alone can't give us.
 :::
 
 -----------------------------------------------------------------------------
@@ -685,12 +683,14 @@ fig_gps_ci_2
 :::
 
 ::: {.notes}
-[PAUSE]
-
-However, its important to acknowledge that geolocation on its own doesn't predict as well as the daily surveys - .72 compared to .90.  
+[DRAFT]
 
 [PAUSE]
-So why do we bother with geolocation?
+
+Of course, geolocation on its own doesn't predict as well as the daily surveys - .72 compared to .90.
+
+[PAUSE]
+So why bother with geolocation?
 [PAUSE]
 :::
 
@@ -711,7 +711,7 @@ So why do we bother with geolocation?
 
 :::: {.column width="50%"}
 ```{r}
-#| label: figs_gps_ci_2
+#| label: figs_gps_ci_3
 #| fig-height: 6
 #| fig-width: 6
 
@@ -721,11 +721,13 @@ fig_gps_ci_2
 :::
 
 ::: {.notes}
-First, it asks very little of people.  Participants completed four surveys every day, but the geolocation app just ran in the background.  And it keeps working on the days that people skip their surveys, which matters when we are asking people to use a system like this for months or years.
+[DRAFT]
 
-Second, and more important for us, it lets us measure risk factors that are hard for people to report on, or that would require the survey to get too long.  People can't easily tell us how much time they spent this week at places where they used to drink, or how much their daily routine has changed.  Location gives us those measures without asking.
+First, it asks very little.  Participants completed four surveys a day, but the geolocation app just ran in the background - and it kept working on the days people skipped their surveys.
 
-That gives us a broader set of risk factors to draw on when we tailor support recommendations to each person.  And you'll see these location features again a bit later when we look under the hood of our models.
+Second, and more important for us, it measures risk factors that are hard to report or would make the survey too long.  People can't easily tell us how much time they spent this week at places where they used to drink, or how much their routine has changed.  Location gives us those measures without asking.
+
+That broader set of risk factors helps us tailor support to each person.  And you'll see location features again when we look under the hood of our opioid model.
 :::
 
 -----------------------------------------------------------------------------
@@ -914,7 +916,7 @@ But what matters most clinically is that performance is excellent for everyone. 
 
 
 ```{r}
-#| label: figs_fair_risk2_ci_1
+#| label: figs_fair_risk2_ci_2
 #| fig-height: 6
 #| fig-width: 12 
 
@@ -1171,7 +1173,7 @@ The top of this list should look familiar.  Recent opioid use is by far the most
 
 :::: {.column width="60%"}
 ```{r}
-#| label: figs_global_oud
+#| label: figs_global_oud_2
 #| fig-height: 6
 #| fig-width: 8
 
@@ -1230,7 +1232,7 @@ When we are giving someone support recommendations, what we really want to know 
 
 :::: {.column width="60%"}
 ```{r}
-#| label: figs_daymax_oud
+#| label: figs_daymax_oud_2
 #| fig-height: 6
 #| fig-width: 8
 

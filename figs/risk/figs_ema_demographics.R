@@ -35,7 +35,21 @@ fig_educ_bar <- d |>
     theme(axis.text.x = element_text(size = 10, color = "black", angle = 20, hjust = 1)) + 
     theme(plot.title = element_text(size = 15, face = "bold", color = "#C5050C"))
 
-# Race
+# Race: default ggplot fill to match the other demographic bars (Participant
+# Characteristics slides)
+fig_race_bar_demo <- d |>
+  mutate(white = fct(white, levels = c(
+    "White/Non-hispanic", "Other"))) |>
+  count(white) |>
+  ggplot(aes(x = white, y = n, fill = white)) +
+    geom_bar(stat = "identity", width = 1) +
+    labs(title = "Race/Ethnicity", x = NULL, y = "count") +
+    theme(legend.title = element_blank(), legend.position = "none") +
+    theme(axis.text = element_text(size = 12, face = "bold")) + 
+    theme(axis.text.x = element_text(size = 10, color = "black", angle = 20, hjust = 1)) + 
+    theme(plot.title = element_text(size = 15, face = "bold", color = "#C5050C"))
+
+# Race: gray/purple version for the Algorithmic Fairness slides
 fig_race_bar <- d |>
   mutate(white = fct(white, levels = c(
     "White/Non-hispanic", "Other"))) |>
