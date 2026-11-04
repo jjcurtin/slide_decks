@@ -7,6 +7,36 @@ editor_options:
   chunk_output_type: console
 ---
 
+## Disclosures
+
+- [Claire Punturieri]{.uwred}, [Kendra Wyant]{.uwred} (graduate students) and I developed machine learning models that predict substance use lapses and identify risk factors in real time
+
+\
+
+- The [Wisconsin Alumni Research Foundation (WARF)]{.uwred} holds the copyright and manages this IP to help UW inventions reach the public
+
+\
+
+- [Rudra Health AI]{.uwred} has licensed these models and is developing a digital health app to support recovery
+
+\
+
+- I am a co-founder and Chief Science Officer of Rudra Health AI
+
+::: {.notes}
+[DRAFT]
+
+Before I start, I need to make a disclosure, and it also gives you a preview of where this talk is going.
+
+Two of my graduate students, Claire Punturieri and Kendra Wyant, have developed machine learning models that predict substance use lapses and identify the risk factors driving them, in real time.  You'll see a lot of their work today.
+
+The Wisconsin Alumni Research Foundation, or WARF, holds the copyright on these models.  WARF is a non-profit that helps UW scientists turn their inventions into products, so that the work can have a broader impact on public health.
+
+WARF has licensed these models to Rudra Health AI, which is developing a digital health app to support people in recovery.  I am a co-founder and the Chief Science Officer of Rudra Health AI, so I have a financial interest in this work.  I'll come back to the app near the end of the talk.
+:::
+
+-----------------------------------------------------------------------------
+
 ::: {.notes}
 About a decade ago I was approaching the middle of my career.  I had developed a successful basic clinical science research program as a psychophysiologist running experiments to understand the effects of drugs and drug withdrawal on stress.  The work was intellectually stimulating, we were publishing it in good outlets, and we were getting grants, but my heart was increasingly not in it.  
 :::
@@ -35,7 +65,7 @@ And it was those conversations that really got me thinking about how I could re-
 
 
 ::: {.notes}
-It was around that time that Dave Gustafson reached out to me.  Dave directs a center on campus that develops digital therapeutics for substance use disorders.  These are essentially smartphone apps that provide ongoing continuing care for patients during their recovery.  He had just completed a large randomized controlled trial demonstrating that his app meaningfully decreased heavy drinking days and increased abstinence rates over the first year of recovery. 
+It was around that time that Dave Gustafson reached out to me.  Dave directs a center on campus that develops digital health apps for substance use disorders.  These are essentially smartphone apps that provide ongoing continuing care for patients during their recovery.  He had just completed a large randomized controlled trial demonstrating that his app meaningfully decreased heavy drinking days and increased abstinence rates over the first year of recovery. 
 
 However, he also noticed many of the people who had relapsed hadn't used the app in the days leading up to that relapse.  And others who had relapsed hadn't used the specific supports in the app that he would have thought would be most effective for them.
 :::
@@ -149,19 +179,18 @@ and we can collect these inputs with very high temporal granularity, at least se
 
 We focus on 
 
-- Ecological Momentary Assessment (EMA)
+- Brief daily surveys 
 - Geolocation
-- Smartphone communications (calls and texts)
+- (smartphone communications (calls and texts), audio/video check-ins, sleep)
 
 ::: {.notes}
-At this point, we have worked extensively with a sensing method called ecological momentary assessment, or EMA for short, 
-
-but I will also tell you about how we are expanding our sensing methods to include geolocation and smartphone communications data.
+At this point, we have worked extensively with ecological momentary assessments and other brief survey methods and geolocation sensing as our two primary buckets of inputs.  We do sense other inputs as well but in the service of time I will leave those to the question period if people are interested. 
 :::
 
 -----------------------------------------------------------------------------
 
 ## Lapse Prediction for AUD
+
 
 - 151 individuals with moderate to severe alcohol use disorder (AUD)
 
@@ -170,9 +199,9 @@ but I will also tell you about how we are expanding our sensing methods to inclu
 - Committed to abstinence throughout study
 
 - Followed with sensing for up to 3 months
-  - Ecological Momentary Assessment (EMA)
+  - Brief surveys (4x daily) 
   - Geolocation
-  - Smartphone Communications
+  - (other sensing methods)
 
 \
 
@@ -181,7 +210,7 @@ but I will also tell you about how we are expanding our sensing methods to inclu
 ::: {.notes}
 As the first step toward developing this system, in 2016 we were awarded a large grant from the NIAAA to recruit a sample of individuals in early recovery from moderate to severe AUD.
 
-We followed these individuals for up to three months, using our three sensing methods and also recording any lapses back to alcohol use.
+We followed these individuals for up to three months, using our focal sensing methods and also recording any lapses back to alcohol use.
 :::
 
 -----------------------------------------------------------------------------
@@ -195,13 +224,13 @@ We followed these individuals for up to three months, using our three sensing me
 
 source(here::here("figs/risk/figs_ema_demographics.R"))
 cowplot::plot_grid(fig_age, fig_income, fig_sex_bar,
-                   fig_educ_bar, fig_ms_bar, fig_race_bar, nrow = 2, ncol  = 3)
+                   fig_educ_bar, fig_ms_bar, fig_race_bar_demo, nrow = 2, ncol  = 3)
 ```
 
 ::: {.notes}
 Let me start highlighting the characteristics of the sample we are using to develop and evaluate the AUD lapse models.
 
-We had reasonble diversity across many participant charactersitics including age, sex at birth, martital status, education, and income
+We had reasonable diversity across many participant characteristics including age, sex at birth, marital status, education, and income
 
 However, given the methods we used for recruiting, we have very little racial and ethinic diversity in the sample.  The sample is predominately white and non-hispanic
 
@@ -240,6 +269,35 @@ fig_sx
 I also want to highlight that this is a sample with clinically meaningful problems with their AUD use, consistent with their pursuit of abstinence goals
 
 On the right, I am showing you a histogram of the DSM-5 AUD symptom counts to confirm that everyone reported 4 or more symptoms of alcohol use disorder consistent with a moderate to severe presentation
+:::
+
+-----------------------------------------------------------------------------
+
+## Participant Characteristics
+
+```{r}
+#| label: figs_ema_demographics_combined
+#| fig-height: 6
+#| fig-width: 12
+
+# plots made in figs_ema_demographics.R
+cowplot::plot_grid(
+  cowplot::plot_grid(fig_sx, fig_age, fig_income, nrow = 1),
+  cowplot::plot_grid(fig_sex_bar, fig_race_bar_demo, fig_educ_bar, fig_ms_bar,
+                     nrow = 1, align = "h"),
+  nrow = 2)
+```
+
+::: {.notes}
+[DRAFT - combined version of the two previous slides]
+
+Let me start by highlighting the characteristics of the sample we used to develop and evaluate the AUD lapse models.
+
+First, this is a sample with clinically meaningful alcohol problems.  In the top left, you can see that everyone reported 4 or more DSM-5 symptoms of alcohol use disorder, consistent with a moderate to severe presentation, and all were pursuing abstinence.
+
+We had reasonable diversity across many other characteristics, including age, income, sex at birth, education, and marital status.
+
+However, given the methods we used for recruiting, we have very little racial and ethnic diversity.  The sample is predominantly White and non-Hispanic.  I'll return to this later, both when we evaluate algorithmic fairness and when I talk about a larger NIDA-funded project where we corrected this problem of representation in our models.
 :::
 
 -----------------------------------------------------------------------------
@@ -461,8 +519,6 @@ fig_cal
 :::
 
 ::: {.notes}
-[COMMENT - REVIEW WHEN FINE-TUNING NOTES: This may be the place to discuss our plans to provide feedback to patients in the form of their level of risk or recovery health, rather than formally predicting lapse vs. no lapse.]
-
 Beyond discriminating well between lapses and non-lapses, we also want to be able to trust the lapse probabilities themselves.
 
 On the right, I am showing you a simple calibration plot for our next day model. On the x-axis, I've binned predicted lapse probabilities into bins that are 10 percent wide, and for each bin, I display the actual observed probability of lapses for observations in that bin.
@@ -472,6 +528,8 @@ If the probabilities were perfectly calibrated, the bin means would all fall on 
 Calibration is excellent at the low end, where the large majority of predictions fall. In the middle of the range, the model somewhat overestimates risk. But across the full range, higher predicted probabilities always mean higher observed lapse rates.
 
 Given this, we believe that the lapse probabilities can provide fine gradations of relative risk for clinical decision-making.
+
+And that matters for how we will eventually use these predictions.  Because we can trust the probabilities, we don't have to collapse them into a yes or no alarm about whether someone will lapse.  We can treat them as a graded signal of where someone stands in their recovery each day.  I'll come back to how we present that signal to patients near the end of the talk.
 :::
 
 -----------------------------------------------------------------------------
@@ -495,9 +553,9 @@ Given this, we believe that the lapse probabilities can provide fine gradations 
 
 [PAUSE]
 
-Now, you might have noticed that up until this point, I've only talked about predictions for the immediate future - the next week, the next day, or the next hour.  And in these past few examples, I've been talking about using one of those immediate models - the next day model - to provide personalized support recommendations that the patient can implement that next day.
+Now, you might have noticed that up until this point, I've only talked about predictions for the immediate future - the next week, the next day, or the next hour.
 
-However, for some types of support, people may need some advanced warning to put those supports into place.   For example, if you need to meet with your AA sponsor or get in to see your therapist, you will need some lead time to schedule those meetings or appointments.   
+Predictions like these are useful for supports that people can put into place right away.  But for some types of support, people need advance warning.  For example, if you need to meet with your AA sponsor or get in to see your therapist, you will need some lead time to schedule those meetings or appointments.
 :::
 
 -----------------------------------------------------------------------------
@@ -528,11 +586,13 @@ fig_lag_ci
 :::
 
 ::: {.notes}
-Given this, we have begun to explore various methods for predicting lapse probabilities further into the future.  
+So we asked whether we could predict lapses further into the future.
 
-As a first step, we took the model which predicted lapses in the next week and lagged it by different periods from one day up to two weeks into the future.   For example, the two week lagged model predicts the probability of a lapse that will occur during a one week period but that period begins two weeks from now.  
+We took our next day model and lagged it by different amounts, from one day up to two weeks.  For example, the two week lagged model uses only the data we have today to predict the probability of a lapse during a 24-hour window that begins two weeks from now.
 
-And as you can see from the plot on the right, this approach does result in a drop in performance as we move further into the future.  But even with a two week lag, we still have an auROC of .85 which is still potentially clinically useful.
+As you can see from the plot on the right, performance does drop as we look further into the future, from .91 with no lag to .85 with a two week lag.  But .85 is still good performance by our rules of thumb, and potentially clinically useful.
+
+[COMMENT - This last paragraph is from April 2025.  Still true, or cut?]
 
 And we are currently exploring other methods for predicting lapse probabilities further into the future that may perform better than this simple lagging approach and I'd be happy to talk more about those during the discussion period if anyone is interested.
 :::
@@ -872,6 +932,131 @@ I’d be happy to dive a bit deeper into this during the discussion period if pe
 
 ## Feature Importance: Looking Under the Hood
 
+::: columns
+::: {.column width="50%"}
+```{r}
+#| fig-height: 3
+#| fig-width: 5
+
+source(here::here("figs/opt/figs_opt_shaps.R"))
+fig_shap_ex1
+```
+:::
+
+::: {.column width="50%"}
+<!--Blank-->
+:::
+:::
+
+::: columns
+::: {.column width="50%"}
+<!-- Blank-->
+:::
+
+::: {.column width="50%"}
+<!-- Blank-->
+:::
+:::
+
+::: {.notes}
+[PAUSE]
+
+So far, I've focused on how well our models predict.  But we also want to understand how they make their predictions.  That matters for trust, and it is what lets us move from predicting WHEN a lapse might occur to understanding WHY, and how best to intervene.
+
+To do this, we use a method called SHAP, which stands for Shapley Additive Explanations.  SHAP comes from cooperative game theory.  For every single prediction the model makes, for a specific person at a specific moment in time, it assigns each feature a share of the credit for that prediction.
+
+Here is an illustrative example.  This person would be predicted to have a high lapse probability on day 30 of their recovery.  Longer bars mean that feature contributed more to today's prediction, and for this person, it is high craving that is driving their risk.  For that person, we could recommend urge surfing techniques or remind them that distracting activities can help get them through short periods of craving.
+:::
+
+-----------------------------------------------------------------------------
+
+## Feature Importance: Looking Under the Hood
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| fig-height: 3
+#| fig-width: 5
+
+fig_shap_ex1
+```
+:::
+
+::: {.column width="50%"}
+<!--blank-->
+:::
+:::
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| fig-height: 3
+#| fig-width: 5
+
+fig_shap_ex2
+```
+:::
+
+::: {.column width="50%"}
+<!--Blank-->
+:::
+:::
+
+::: {.notes}
+In contrast, a second person might have similarly high lapse probability on day 30 of their recovery, but instead because they have lapsed a few times in recent weeks. They could be encouraged and assisted to complete activities designed to increase their motivation for abstinence. 
+:::
+
+-----------------------------------------------------------------------------
+
+## Feature Importance: Looking Under the Hood
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| fig-height: 3
+#| fig-width: 5
+
+fig_shap_ex1
+```
+:::
+
+::: {.column width="50%"}
+<!--Blank-->
+:::
+:::
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| fig-height: 3
+#| fig-width: 5
+
+fig_shap_ex2
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| fig-height: 3
+#| fig-width: 5
+
+fig_shap_ex3
+```
+:::
+:::
+
+::: {.notes}
+And at a later point in time, that same person may have improved their abstinence motivation but now be at increased risk for a lapse because of a string of recent past and anticipated stressors.   
+
+Now they could be provided with guided stress reduction or relaxation techniques that they could use each day.  
+
+So the reasons for high risk differ across people, and they change over time within the same person.  That is what lets us tailor recommendations to each person's unique risk profile at that moment in time.
+:::
+
+-----------------------------------------------------------------------------
+
+## Feature Importance: Looking Under the Hood
+
 ::: {.columns}
 :::: {.column width="40%"}
 
@@ -894,13 +1079,7 @@ fig_global_day
 :::
 
 ::: {.notes}
-[PAUSE]
-
-So far, I've focused on how well our models predict.  But we also want to understand how they make their predictions.  That matters for trust, and as you'll see shortly, it is what lets us move from predicting lapses to recommending supports.
-
-To do this, we use a method called SHAP, which stands for Shapley Additive Explanations.  SHAP comes from cooperative game theory.  For every single prediction the model makes, it assigns each feature a share of the credit for that prediction.
-
-If we average the size of those contributions across all participants and all days, we get a measure of each feature's global importance.  That's what I'm showing you here for our next day survey model.  Longer bars mean more influence on the model's predictions.
+We can also step back and summarize these explanations across everyone.  If we average the size of each feature's contribution across all participants and all days, we get a measure of each feature's global importance.  That's what I'm showing you here for our next day survey model.  Longer bars mean more influence on the model's predictions.
 
 Not surprisingly, recent alcohol use matters most.  Past behavior is the best predictor of future behavior.  But people's confidence that they can stay abstinent and their craving are also very important.
 
@@ -1005,141 +1184,11 @@ fig_daymax_oud
 ::: {.notes}
 But global importance can be misleading for our purposes.  A feature like recent opioid use has an enormous effect on risk, but only on the relatively few days after someone has used.  Averaged across everyone, that big but rare effect puts it at the top.
 
-When we are giving someone support recommendations, what we really want to know is which factor is driving their risk on a given day.  So here, for every day for every participant, we identified the single feature that raised their predicted risk the most.  And this plot shows the proportion of days on which each feature was that top risk factor.
+When we are giving someone support recommendations, what we really want to know is which factor is driving their risk on a given day.  So here, for every day for every participant, we identified the single feature that raised their predicted risk the most - like the top bar for each of the example patients I showed you a few minutes ago.  And this plot shows the proportion of days on which each feature was that top risk factor.
 
 From this view, urges and abstinence confidence are each the top risk factor on about 15 percent of days, slightly more often than recent opioid use.  That tells us that recommendations focused on managing urges and building confidence will be relevant most often.
 
 Location features show up here too.  Taken together, a location feature was the top factor on about 30 percent of days.  But I want to be careful with this view.  Most days are low-risk days, and on those days the top factor is only nudging risk up a little.  On the relatively few high-risk days, the picture is simpler: recent opioid use is almost always the main driver.  We are still working through what this means for implementation, but it already tells us something important.  The right recommendation depends not only on which risk factor is elevated, but on how much risk the person is at.
-:::
-
------------------------------------------------------------------------------
-
-## Beyond Prediction: Personalized Recommendations 
-
-::: columns
-::: {.column width="50%"}
-```{r}
-#| fig-height: 3
-#| fig-width: 5
-
-source(here::here("figs/opt/figs_opt_shaps.R"))
-fig_shap_ex1
-```
-:::
-
-::: {.column width="50%"}
-<!--Blank-->
-:::
-:::
-
-::: columns
-::: {.column width="50%"}
-<!-- Blank-->
-:::
-
-::: {.column width="50%"}
-<!-- Blank-->
-:::
-:::
-
-::: {.notes}
-
-WORK ON TRANSITION
-
-
-
-But we can get much more than just lapse probabilities from these models. 
-
-Using SHAP values, we can understand which features contributed most strongly to any prediction for a specific person at a specific moment in time.  This allows us to understand not only WHEN a lapse might occur but also WHY and potentially how best to intervene. 
-
-For example, in this first plot,  I am showing you someone who would be predicted to have a high lapse probability on day 30 of their recovery because they have been reporting high craving.  For that person, we could recommend urge surfing techniques or remind them that distracting activities can help get them through short periods of craving.
-:::
-
------------------------------------------------------------------------------
-
-## Beyond Prediction: Personalized Recommendations 
-
-::: columns
-::: {.column width="50%"}
-```{r}
-#| fig-height: 3
-#| fig-width: 5
-
-fig_shap_ex1
-```
-:::
-
-::: {.column width="50%"}
-<!--blank-->
-:::
-:::
-
-::: columns
-::: {.column width="50%"}
-```{r}
-#| fig-height: 3
-#| fig-width: 5
-
-fig_shap_ex2
-```
-:::
-
-::: {.column width="50%"}
-<!--Blank-->
-:::
-:::
-
-::: {.notes}
-In contrast, a second person might have similarly high lapse probability on day 30 of their recovery, but instead because they have lapsed a few times in recent weeks. They could be encouraged and assisted to complete activities designed to increase their motivation for abstinence. 
-:::
-
------------------------------------------------------------------------------
-
-## Beyond Prediction: Personalized Recommendations 
-
-::: columns
-::: {.column width="50%"}
-```{r}
-#| fig-height: 3
-#| fig-width: 5
-
-fig_shap_ex1
-```
-:::
-
-::: {.column width="50%"}
-<!--Blank-->
-:::
-:::
-
-::: columns
-::: {.column width="50%"}
-```{r}
-#| fig-height: 3
-#| fig-width: 5
-
-fig_shap_ex2
-```
-:::
-
-::: {.column width="50%"}
-```{r}
-#| fig-height: 3
-#| fig-width: 5
-
-fig_shap_ex3
-```
-:::
-:::
-
-::: {.notes}
-And at a later point in time, that same person may have improved their abstinence motivation but now be at increased risk for a lapse because of a string of recent past and anticipated stressors.   
-
-Now they could be provided with guided stress reduction or relaxation techniques that they could use each day.  
-
-In this way, we can provide personalized recommendations to patients that are tailored to their unique risk profile at that moment in time.
-
-These examples are all high-risk days.  But as we saw, most days are not.  On those days, I don't think the most helpful thing is another relapse-prevention skill.  Instead, we might recommend activities that build broader well-being: connecting with supportive people, physical activity, sleep, things that are meaningful or enjoyable.  Those are what make recovery sustainable.  So recommendations would be tailored on two dimensions: what is driving risk, and how much risk the person is at right now.
 :::
 
 -----------------------------------------------------------------------------
@@ -1232,56 +1281,97 @@ We have built our OUD model into an app organized around a simple daily loop.  A
 
 Each day, people reflect.  They complete a one-minute daily reflection, which is the daily survey that drives our model.  Remember, without it, performance dropped from .94 to .63.
 
-Then they discover.  The model combines the reflection with geolocation, and the app shows them a recovery health score, how it has changed over the past two weeks, and the factor shaping it most today.  That top factor comes from the same SHAP values I showed you earlier.
+Then they discover.  The model combines the reflection with geolocation, and the app shows them a recovery health score, which I'll say more about in a moment, how it has changed over the past two weeks, and the factor shaping it most today.  That top factor comes from the same SHAP values I showed you earlier.
 
-Then they learn.  The app recommends one brief recovery activity matched to that factor, like the personalized recommendations I just described.  And on lower-risk days, that might be an activity that supports broader well-being.
+Then they learn.  The app recommends one brief recovery activity matched to that factor, like the urge surfing or stress reduction examples I showed you earlier.
 
 And finally, reward.  The model only works if people keep reflecting, so we use contingency management, small financial incentives, for completing the reflection and the activity.
 
 One more piece is this dashed arrow.  The feedback is not only for the algorithm.  When people see how their reflections connect to changes in their recovery, it should sharpen their own self-monitoring, so the app is also teaching a recovery skill.
+:::
 
-[COMMENT - REVIEW WHEN FINE-TUNING ORDER: decide where to transition from lapse risk/probability to recovery health score. This slide uses "recovery health score" without introducing it.]
+-----------------------------------------------------------------------------
+
+## From Lapse Risk to Recovery Health
+
+- Lapse probability: the right metric for evaluating models
+
+\
+
+- Recovery health score: what patients see
+  - Inverse of next-day lapse probability
+  - 0 – 100; higher is better
+  - Updated daily, with two-week trend
+
+::: {.notes}
+[DRAFT]
+
+Let me say a bit more about that recovery health score, because it reflects an important shift in how we talk about these predictions.
+
+Throughout this talk, I've described our models' output as the probability of a lapse.  That's the right language for evaluating a model.  But it isn't what we want a person in recovery to see every morning.
+
+So in the app, we flip it.  The recovery health score is the inverse of the next-day lapse probability, on a 0 to 100 scale where higher is better.  It's the same information, from the same model, framed around recovery rather than relapse.
+
+And this is where calibration pays off.  Because higher predicted probabilities reliably mean higher risk, a change in someone's score reflects a real change in where they stand, and the two-week trend shows them which direction they're heading.
+:::
+
+-----------------------------------------------------------------------------
+
+## From Lapse Risk to Recovery Health
+
+- [Lapse probability: the right metric for evaluating models]{.gray}
+
+\
+
+- [Recovery health score: what patients see]{.gray}
+  - [Inverse of next-day lapse probability]{.gray}
+  - [0 – 100; higher is better]{.gray}
+  - [Updated daily, with two-week trend]{.gray}
+
+\
+
+- Why recovery health?
+  - A low score is information, not a verdict
+  - Recognizes strengths and progress
+  - Guides support: targeted skills on low days, broader well-being on good days
+
+::: {.notes}
+[DRAFT]
+
+Why frame it this way?  People in recovery hear a lot about risk and relapse.  A health score treats a low day as information to act on, not a verdict.  And it can go up, so it recognizes people's strengths and progress, not just their risks.
+
+It also shapes what we recommend.  When recovery health is low, the activity targets the factor driving risk that day.  But on most days, recovery health is good, and on those days I don't think the most helpful thing is another relapse prevention skill.  Instead, the app might recommend activities that build broader well-being: connecting with supportive people, physical activity, sleep, things that are meaningful or enjoyable.  Those are what make recovery sustainable.
+
+So recommendations are tailored on two dimensions: what is driving risk, and how healthy someone's recovery is right now.
 :::
 
 -----------------------------------------------------------------------------
 
 ## Next Steps: Optimize System Feedback to Patients 
 
-- Sensing EMA and geolocation for six months
+- [Data collection underway:]{.uwred} EMA and geolocation sensing for four months
 - Model updated each night (4 am) for next day
-  - Lapse probability prediction
-  - Recent trend in lapse probability
-  - Important risk features
-  - Risk relevant support recommendation
+  - Recovery health score
+  - Recent trend in recovery health
+  - Top factors affecting recovery health
+  - Support recommendation matched to those factors
   
 - Participants receive daily messages varying combinations of these components
 
 - Measure trust, utility, engagement, and clinical outcomes
 
-Data collection begins in ~ 1 month
-
 ![](https://github.com/jjcurtin/slide_decks/blob/main/images/opt_pi_wide.png?raw=true){.absolute bottom=0}
 
 ::: {.notes}
-And that brings us to perhaps the most important next step.
+[DRAFT]
 
-Just because our prediction models perform well, doesn't guarantee that they will provide meaningful clinical benefits.
+We are already testing pieces of this system with patients.
 
-We need to be able to provide feedback from these models to patients such that they trust the system, find it useful, and engage with it over time in a way that improves their recovery.
+Just because our prediction models perform well doesn't guarantee that they will provide meaningful clinical benefits.  We need to provide feedback from these models in a way that patients trust, find useful, and engage with over time, so that it actually improves their recovery.
 
-And we were just awarded another grant from the NIAAA to do exactly this.  
+That is the focus of our current NIAAA-funded project, which is collecting data now.  Participants complete EMAs and share their geolocation for four months.  Each night, the model updates and generates their recovery health score for the next day, its recent trend, the factors most affecting it, and a support recommendation matched to those factors.
 
-In this project, we will be using a model with inputs from both EMA and geolocation.  We will use the model to make 
-
-- daily lapse probability predictions, 
-- identify current personalized lapse risks, 
-- and map those risks to behavioral and support recommendations that are specific to each person each day.   
-
-We can then manipulate what information we include in daily messages from the system to participants to increase their trust and engagement with the system as well as formally evaluating its clinical benefits.
-
-Obviously, we are very excited to get started on this project because it will bring us one step closer to providing meaningful support to individuals in recovery.   
-
-Thanks for your time, and I'd be happy to answer any questions you might have now or later at the end of this session.
+We then vary which of these components each participant receives in their daily messages.  That lets us learn which pieces of feedback build trust and engagement, and we will also evaluate the clinical benefits.
 :::
 
 -----------------------------------------------------------------------------
@@ -1305,9 +1395,123 @@ Thanks for your time, and I'd be happy to answer any questions you might have no
 ::: {.notes}
 [DRAFT]
 
-We are also about to take this model out of the research setting and into care.  The Wisconsin Alumni Research Foundation, or WARF, is a non-profit that works with UW scientists to turn their discoveries into products that reach people.  WARF is funding a pilot field trial of the Insights app, the app built around the daily loop I showed you, with patients receiving MOUD.
+We are also about to take this model out of the research setting and into care.  WARF, which I mentioned at the start, is funding a pilot field trial of the Insights app, the app built around the daily loop I showed you, with patients receiving MOUD.
 
 The trial has three aims.  First, and most important for a pilot, we want to learn from patients' experiences so we can improve the app before a larger efficacy trial.  Second, we will get preliminary estimates of its effects on opioid use and on taking MOUD as prescribed.  Third, the model depends on patients completing the daily reflection, so we are testing how much incentive is needed to sustain that daily engagement.
 
 We will recruit 210 patients through their treatment providers, earlier in recovery than in our prediction study, and randomize them to treatment as usual or treatment as usual plus the app, with either low or high contingency management for completing the daily reflection and the recommended activity.  The trial lasts 8 weeks.
+:::
+
+-----------------------------------------------------------------------------
+
+## A Smart Recovery Monitoring and Support System
+
+::: {.columns}
+:::: {.column width="72%"}
+> “Could you predict not only [who]{.uwred} might be at greatest risk for relapse … <br>
+ … but precisely [when]{.uwred} that relapse might occur … <br>
+ … and [how best to intervene]{.uwred} to prevent it?"
+
+\
+
+::::
+
+:::: {.column width="28%"}
+<!--Blank-->
+::::
+:::
+
+![](https://github.com/jjcurtin/slide_decks/blob/main/images/gustafson.jpeg?raw=true){.absolute bottom=0 right=50 width=20%}
+
+::: {.notes}
+[DRAFT]
+
+So let me bring us back to where we started, with Dave Gustafson's question.  Could we predict who might be at greatest risk for relapse, precisely when that relapse might occur, and how best to intervene to prevent it?
+:::
+
+-----------------------------------------------------------------------------
+
+## A Smart Recovery Monitoring and Support System
+
+::: {.columns}
+:::: {.column width="72%"}
+> “Could you predict not only [who]{.uwred} might be at greatest risk for relapse … <br>
+ … but precisely [when]{.uwred} that relapse might occur … <br>
+ … and [how best to intervene]{.uwred} to prevent it?"
+
+\
+
+- [Who:]{.uwred} Excellent performance for everyone when models learn from diverse samples
+::::
+
+:::: {.column width="28%"}
+<!--Blank-->
+::::
+:::
+
+![](https://github.com/jjcurtin/slide_decks/blob/main/images/gustafson.jpeg?raw=true){.absolute bottom=0 right=50 width=20%}
+
+::: {.notes}
+[COMMENT - "Who" reframes Dave's question from who is at risk to who the models work for.  Keep, or answer it as "who is at risk on any given day" instead?]
+
+On who, we've learned that our models can work well for everyone, but only if we build them that way.  When we trained them on a more diverse national sample, performance was excellent across every group we could examine.
+:::
+
+-----------------------------------------------------------------------------
+
+## A Smart Recovery Monitoring and Support System
+
+::: {.columns}
+:::: {.column width="72%"}
+> “Could you predict not only [who]{.uwred} might be at greatest risk for relapse … <br>
+ … but precisely [when]{.uwred} that relapse might occur … <br>
+ … and [how best to intervene]{.uwred} to prevent it?"
+
+\
+
+- [Who: Excellent performance for everyone when models learn from diverse samples]{.gray}
+- [When:]{.uwred} Next week, day, and hour (auROCs .90 – .94), with up to two weeks of advance warning
+::::
+
+:::: {.column width="28%"}
+<!--Blank-->
+::::
+:::
+
+![](https://github.com/jjcurtin/slide_decks/blob/main/images/gustafson.jpeg?raw=true){.absolute bottom=0 right=50 width=20%}
+
+::: {.notes}
+On when, we can predict lapses in the next week, the next day, and even the next hour with excellent accuracy, and we can see up to two weeks into the future when people need time to put supports in place.
+:::
+
+-----------------------------------------------------------------------------
+
+## A Smart Recovery Monitoring and Support System
+
+::: {.columns}
+:::: {.column width="72%"}
+> “Could you predict not only [who]{.uwred} might be at greatest risk for relapse … <br>
+ … but precisely [when]{.uwred} that relapse might occur … <br>
+ … and [how best to intervene]{.uwred} to prevent it?"
+
+\
+
+- [Who: Excellent performance for everyone when models learn from diverse samples]{.gray}
+- [When: Next week, day, and hour (auROCs .90 – .94), with up to two weeks of advance warning]{.gray}
+- [How:]{.uwred} Explanations of what is driving each person's risk each day, delivered through a smart digital health app
+::::
+
+:::: {.column width="28%"}
+<!--Blank-->
+::::
+:::
+
+![](https://github.com/jjcurtin/slide_decks/blob/main/images/gustafson.jpeg?raw=true){.absolute bottom=0 right=50 width=20%}
+
+::: {.notes}
+And on how, the same models can tell us what is driving each person's risk on each day, which lets us match support to that person and that moment.  And by building the algorithm into a digital health app, we can deliver that support every day, in a way that should also help people get better at monitoring their own recovery.
+
+What we don't know yet is whether people will trust this system, engage with it over time, and benefit from it.  That's what our Optimize and Insights trials are designed to find out.
+
+Thanks for your time, and I'd be happy to answer any questions.
 :::
