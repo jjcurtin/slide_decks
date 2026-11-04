@@ -833,7 +833,7 @@ This is obviously unacceptable and we immediately turned to correcting this in o
 - 296 patients in recovery from Opioid Use Disorder, all on MOUD 
 - [National sample: 47 states; diverse demographics and locations]{.uwred}
 - 1 – 12 months on MOUD at start
-- 1 daily survey plus geolocation sensing for up to 12 months
+- 1x daily surveys plus geolocation sensing for up to 12 months
 
 \
 
