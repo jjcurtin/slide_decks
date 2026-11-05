@@ -36,9 +36,9 @@ plot_ci <- function(d, title, delta, y = .85, x = 2){
     theme(legend.position = "none") +
     scale_y_continuous(breaks = seq(0.4, 1, 0.10), limits = c(0.4, 1.05)) +
     scale_color_manual(values = col_groups) +
-    theme(title = element_text(size = 16, color = "#C5050C", face = "bold"),
-          axis.text.x = element_text(size = 12, color = "black", face = "bold"),
-          axis.text.y = element_text(size = 12, color = "black"),
+    theme(title = element_text(size = 18, color = "#C5050C", face = "bold"),
+          axis.text.x = element_text(size = 16, color = "black", face = "bold"),
+          axis.text.y = element_text(size = 14, color = "black"),
           axis.title.x = element_text(size = 16, color = "black"),
           axis.title.y = element_text(size = 16, color = "black")) +
     geom_hline(yintercept = 0.5, linetype = "dashed", color = "gray") +

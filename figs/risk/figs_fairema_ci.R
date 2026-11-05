@@ -36,9 +36,9 @@ plot_ci <- function(d, title, delta, y = .70){
       theme(legend.position = "none") +
       scale_y_continuous(breaks = seq(0.4, 1, 0.10), limits = c(0.4, 1.05)) +
       scale_color_manual(values = col_groups) +
-      theme(title = element_text(size = 16, color = "#C5050C", face = "bold"),
-            axis.text.x = element_text(size = 12, color = "black", face = "bold"),
-            axis.text.y = element_text(size = 12, color = "black"),
+      theme(title = element_text(size = 18, color = "#C5050C", face = "bold"),
+            axis.text.x = element_text(size = 16, color = "black", face = "bold"),
+            axis.text.y = element_text(size = 14, color = "black"),
             axis.title.x = element_text(size = 16, color = "black"),
             axis.title.y = element_text(size = 16, color = "black")) + 
       geom_hline(yintercept = 0.5, linetype = "dashed", color = "gray") +
@@ -58,14 +58,14 @@ delta <- round(ci[1, "median"] - ci[2, "median"], 2)
 fig_fair_sex_1  <- ci |>
   filter(model == "Male" | model == "Female") |>
   mutate(model = fct(model, levels = c("Male", "Female")),
-         model = fct_recode(model, "        male" = "Male", "      female" = "Female")) |> 
+         model = fct_recode(model, "male" = "Male", "female" = "Female")) |> 
   plot_ci("Sex", delta, .78) 
 
 delta <- round(ci[3, "median"] - ci[4, "median"], 2)
 fig_fair_race_1  <- ci |>
   filter(model == "white" | model == "non_white") |>
   mutate(model = fct(model, levels = c("white", "non_white")),
-         model = fct_recode(model, "white/non-hispanic" = "white", "other" = "non_white")) |> 
+         model = fct_recode(model, "white/\nnon-hispanic" = "white", "other" = "non_white")) |> 
   plot_ci("Race/Ethnicity", delta, .59) 
 
 delta <- round(ci[6, "median"] - ci[5, "median"], 2)

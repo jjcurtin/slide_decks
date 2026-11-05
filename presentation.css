@@ -40,6 +40,24 @@ body {
 border-right: 4vw solid #c5050c;
 }  
 
+/* UW crest at the top of the red bar (bar is 4vw wide; crest aspect ~0.64) */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0.8vw;
+  right: 0.4vw;
+  width: 3.2vw;
+  height: 5vw;
+  background: url("https://raw.githubusercontent.com/jjcurtin/slide_decks/refs/heads/main/images/uwlogo.png") no-repeat center / contain;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Superscripts (e.g., RudraHealth^AI^): override the global 25px size above */
+.reveal sup {
+  font-size: 0.8em !important;
+}
+
 .reveal strong, .reveal b {
     font-weight: 900 !important;
 }
@@ -120,6 +138,12 @@ h1.title  {
   width: .8em;
   display: block;
   background-color: #c5050c;
+}
+
+/* Untitled slides (bare "##", e.g., background-image slides): hide the empty
+   heading so its red separator doesn't show */
+.reveal h2:empty {
+  display: none;
 }
   
 .reveal h3 {

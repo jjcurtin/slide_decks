@@ -29,10 +29,13 @@ fig_educ_bar <- d |>
   count(educ) |>
   ggplot(aes(x = educ, y = n, fill = educ)) +
     geom_bar(stat = "identity", width = 1) +
+    scale_x_discrete(labels = c(
+      "<= High school" = "<= High\nschool", "Some college" = "Some\ncollege",
+      "4 year college degree" = "4 year\ndegree", "Advanced degree" = "Advanced\ndegree")) +
     labs(title = "Education", x = NULL, y = "count") +
     theme(legend.title = element_blank(), legend.position = "none") +
     theme(axis.text = element_text(size = 12, face = "bold")) + 
-    theme(axis.text.x = element_text(size = 10, color = "black", angle = 20, hjust = 1)) + 
+    theme(axis.text.x = element_text(size = 10, color = "black")) + 
     theme(plot.title = element_text(size = 15, face = "bold", color = "#C5050C"))
 
 # Race: default ggplot fill to match the other demographic bars (Participant
@@ -43,10 +46,11 @@ fig_race_bar_demo <- d |>
   count(white) |>
   ggplot(aes(x = white, y = n, fill = white)) +
     geom_bar(stat = "identity", width = 1) +
+    scale_x_discrete(labels = c("White/Non-hispanic" = "White/\nNon-hispanic")) +
     labs(title = "Race/Ethnicity", x = NULL, y = "count") +
     theme(legend.title = element_blank(), legend.position = "none") +
     theme(axis.text = element_text(size = 12, face = "bold")) + 
-    theme(axis.text.x = element_text(size = 10, color = "black", angle = 20, hjust = 1)) + 
+    theme(axis.text.x = element_text(size = 10, color = "black")) + 
     theme(plot.title = element_text(size = 15, face = "bold", color = "#C5050C"))
 
 # Race: gray/purple version for the Algorithmic Fairness slides
@@ -58,11 +62,14 @@ fig_race_bar <- d |>
     geom_bar(stat = "identity", width = 1) +
     # matches fairness figures (figs_fairema_ci.R): reference = gray, comparison = purple
     scale_fill_manual(values = c("#A6A6A6", "#7B3294")) +
+    scale_x_discrete(labels = c("White/Non-hispanic" = "White/\nNon-hispanic")) +
     labs(title = "Race/Ethnicity", x = NULL, y = "count") +
     theme(legend.title = element_blank(), legend.position = "none") +
-    theme(axis.text = element_text(size = 12, face = "bold")) + 
-    theme(axis.text.x = element_text(size = 10, color = "black", angle = 20, hjust = 1)) + 
-    theme(plot.title = element_text(size = 15, face = "bold", color = "#C5050C"))
+    # larger text: shown alone at slide scale; keep in sync with plot_ci() in fairness figs
+    theme(axis.text.x = element_text(size = 16, color = "black", face = "bold"),
+          axis.text.y = element_text(size = 14, color = "black"),
+          axis.title.y = element_text(size = 16, color = "black", face = "bold")) + 
+    theme(plot.title = element_text(size = 21.6, face = "bold", color = "#C5050C"))
 
 # Sex
 fig_sex_bar <- d |>
@@ -74,7 +81,7 @@ fig_sex_bar <- d |>
     labs(title = "Sex at Birth", x = NULL, y = "count") +
     theme(legend.title = element_blank(), legend.position = "none") +
     theme(axis.text = element_text(size = 12, face = "bold")) + 
-    theme(axis.text.x = element_text(size = 10, color = "black", angle = 20, hjust = 1)) + 
+    theme(axis.text.x = element_text(size = 10, color = "black")) + 
     theme(plot.title = element_text(size = 15, face = "bold", color = "#C5050C"))
 
 # Marital status
@@ -82,10 +89,11 @@ fig_ms_bar <- d |>
   count(ms) |>
   ggplot(aes(x = ms, y = n, fill = ms)) +
     geom_bar(stat = "identity", width = 1) +
+    scale_x_discrete(labels = c("Never married" = "Never\nmarried")) +
     labs(title = "Marital Status", x = NULL, y = "count") +
     theme(legend.title = element_blank(), legend.position = "none") +
     theme(axis.text = element_text(size = 12, face = "bold")) + 
-    theme(axis.text.x = element_text(size = 10, color = "black", angle = 20, hjust = 1)) + 
+    theme(axis.text.x = element_text(size = 10, color = "black")) + 
     theme(plot.title = element_text(size = 15, face = "bold", color = "#C5050C"))
 
 # Age

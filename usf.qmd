@@ -17,11 +17,11 @@ editor_options:
 
 \
 
-- [Rudra Health AI]{.uwred} has licensed these models and is developing a digital health app to support recovery
+- [RudraHealth^AI^]{.uwred} has licensed these models and is developing a digital health app to support recovery
 
 \
 
-- I am a [co-founder]{.uwred} and [Chief Science Officer]{.uwred} of Rudra Health AI
+- I am a [co-founder]{.uwred} and [Chief Science Officer]{.uwred} of RudraHealth^AI^
 
 ::: {.notes}
 Before I start, I need to make disclosures, and conveniently, these disclosures will also gives you a preview of where this talk and my research program is going.
@@ -30,9 +30,9 @@ Two of my graduate students, Claire Punturieri and Kendra Wyant and I have devel
 
 The Wisconsin Alumni Research Foundation, or WARF, holds the copyright on these models.  WARF is a non-profit that helps UW scientists turn their inventions into products, so that the work can have a broader impact on public health.
 
-WARF has licensed these models to Rudra Health AI, which is developing a digital health app to support people in SUD recovery.  
+WARF has licensed these models to RudraHealth^AI^, which is developing a digital health app to support people in SUD recovery.  
 
-I am a co-founder and the Chief Science Officer of Rudra Health AI, so I have a financial interest in this work.  I'll come back to the app near the end of the talk.
+I am a co-founder and the Chief Science Officer of RudraHealth^AI^, so I have a financial interest in this work.  I'll come back to the app near the end of the talk.
 
 And with those out of the way, let me start by giving you a sense of who I am and how I got here.
 :::
@@ -233,7 +233,7 @@ source(here::here("figs/risk/figs_ema_demographics.R"))
 cowplot::plot_grid(
   cowplot::plot_grid(fig_sx, fig_age, fig_income, nrow = 1),
   cowplot::plot_grid(fig_sex_bar, fig_race_bar_demo, fig_educ_bar, fig_ms_bar,
-                     nrow = 1, align = "h"),
+                     nrow = 1, align = "h", rel_widths = c(0.85, 0.85, 1.15, 1.15)),
   nrow = 2)
 ```
 
@@ -1375,6 +1375,8 @@ That is the problem with most recovery apps.  They offer a toolbox, and patients
   - [Patients choose when to use it]{.gray}
   - [Patients choose which tools]{.gray}
 
+<div class="gap-md"></div>
+
 - A smart app embeds the algorithm
   - Monitors recovery every day
   - Matches the tool to today's risk
@@ -1406,6 +1408,8 @@ It monitors recovery every day, and it points the person to the tool that matche
 - [Most recovery apps offer a toolbox]{.gray}
   - [Patients choose when to use it]{.gray}
   - [Patients choose which tools]{.gray}
+
+<div class="gap-md"></div>
 
 - [A smart app embeds the algorithm]{.gray}
   - [Monitors recovery every day]{.gray}
@@ -1441,6 +1445,8 @@ We also show them how that score has changed over the past two weeks, and the fa
   - [Patients choose when to use it]{.gray}
   - [Patients choose which tools]{.gray}
 
+<div class="gap-md"></div>
+
 - [A smart app embeds the algorithm]{.gray}
   - [Monitors recovery every day]{.gray}
   - [Matches the tool to today's risk]{.gray}
@@ -1470,6 +1476,8 @@ And finally, REWARD.  The model only works if people keep reflecting and learnin
 - [Most recovery apps offer a toolbox]{.gray}
   - [Patients choose when to use it]{.gray}
   - [Patients choose which tools]{.gray}
+
+<div class="gap-md"></div>
 
 - [A smart app embeds the algorithm]{.gray}
   - [Monitors recovery every day]{.gray}
@@ -1523,7 +1531,6 @@ We then vary which of these components each participant receives as part of thei
 
 ## Next Steps: Insights App Pilot Trial
 
-- Funded by the Wisconsin Alumni Research Foundation (WARF)
 - Aims
   - Characterize patient experiences with the app to guide its refinement
   - Preliminary effects on opioid use and medication adherence
@@ -1537,8 +1544,12 @@ We then vary which of these components each participant receives as part of thei
   - Opioid use and medication adherence
   - Daily engagement with app
 
+::: footer
+Funded by the Wisconsin Alumni Research Foundation (WARF)
+:::
+
 ::: {.notes}
-We are also about to take this model out of the research setting and into care.  In my role as Chief Science Officer at RudraHealth AI, we have developed an alpha version of what we call the Insights app to support patients in recovery from OUD.   
+We are also about to take this model out of the research setting and into care.  In my role as Chief Science Officer at RudraHealth^AI^, we have developed an alpha version of what we call the Insights app to support patients in recovery from OUD.   
 
 WARF, which I mentioned at the start, is funding a pilot field trial of the Insights app, which is built around our OUD algorithm and the daily engagement loop that I showed you.  
 :::
@@ -1547,7 +1558,6 @@ WARF, which I mentioned at the start, is funding a pilot field trial of the Insi
 
 ## Next Steps: Insights App Pilot Trial
 
-- Funded by the Wisconsin Alumni Research Foundation (WARF)
 - Aims
   - Characterize patient experiences with the app to guide its refinement
   - Preliminary effects on opioid use and medication adherence
@@ -1560,6 +1570,10 @@ WARF, which I mentioned at the start, is funding a pilot field trial of the Insi
   - User experience: acceptability, usability, exit interviews
   - Opioid use and medication adherence
   - Daily engagement with app
+
+::: footer
+Funded by the Wisconsin Alumni Research Foundation (WARF)
+:::
 
 ::: {.notes}
 The trial has three aims.  
@@ -1575,7 +1589,6 @@ Third, the model depends on patients completing the daily reflection, so we are 
 
 ## Next Steps: Insights App Pilot Trial
 
-- Funded by the Wisconsin Alumni Research Foundation (WARF)
 - Aims
   - Characterize patient experiences with the app to guide its refinement
   - Preliminary effects on opioid use and medication adherence
@@ -1588,6 +1601,10 @@ Third, the model depends on patients completing the daily reflection, so we are 
   - User experience: acceptability, usability, exit interviews
   - Opioid use and medication adherence
   - Daily engagement with app
+
+::: footer
+Funded by the Wisconsin Alumni Research Foundation (WARF)
+:::
 
 ::: {.notes}
 We will recruit 210 patients receiving OUD medications through their treatment providers and randomize them to treatment as usual or treatment as usual plus the app, with either low or high contingency management for completing the daily reflection and the recommended activity.  
