@@ -1,8 +1,38 @@
 # USF Keynote Deck — Handoff
 
-Last updated: 2026-11-04 (~16:15). Talk is **Friday Nov 6**.
+Last updated: 2026-11-05 (~15:30). Talk is **Friday Nov 6**.
 
-## Where we left off (2026-11-04, 16:15) — ON HOLD
+## Session 2026-11-05 (afternoon) — signed out
+
+John had already done his own edits/run-through (commits `de23e5e`, `38684e7`, `f7d70f5`,
+`b62fd02` "tune slides on plane"), so the 11-04 slide order, timing, and dangling-reference notes
+below are **stale** — re-read `usf.qmd` before relying on them. This session was formatting fixes
+John directed (all uncommitted; see Next steps):
+
+- **Participant Characteristics bottom row:** labels horizontal with line wraps (`scale_x_discrete(labels = ...)`;
+  data unchanged): "White/\nNon-hispanic", "Never\nmarried", education 2-line labels with
+  "4 year college degree" → "4 year\ndegree". Chunk now uses `rel_widths = c(0.85, 0.85, 1.15, 1.15)`
+  so the education/marital panels have room.
+- **Fairness text sizes (consistency across all fairness slides):** `fig_race_bar` (gray/purple) and
+  `plot_ci()` in both `figs/risk/figs_fairema_ci.R` and `figs/risk2/figs_fair_ci.R` now x-axis 16 bold,
+  y-axis 14, axis title 16 bold, plot title ~21.6 (bar sets 21.6 explicitly; `plot_ci()` sets
+  `title` 18 and theme_classic scales plot.title ×1.2). AUD race label wrapped
+  ("white/\nnon-hispanic"); AUD sex labels lost their leading-space padding (looked off-center).
+- **UW crest restored** on the red bar: `body::after` rule in `presentation.css` (fixed position,
+  3.2vw wide, top 0.8vw), image from GitHub raw `images/uwlogo.png` (crest interior is opaque white,
+  so it reads on red). The old Jan-2025 rule used `uwlogo_right.png`, which no longer exists.
+- **WARF pilot slides (3):** "Funded by WARF" bullet moved to a per-slide `::: footer` (right-aligned,
+  black, bold, 25px via theme). Optional: gray/smaller if John wants it quieter.
+- **"Rudra Health AI" → `RudraHealth^AI^`** everywhere (2 slide bullets + 3 notes). Added
+  `.reveal sup { font-size: 0.8em !important; }` (the global 25px rule otherwise makes superscripts
+  full size; John reviewed 0.6, full, and chose 0.8).
+- **Untitled slides:** `.reveal h2:empty { display: none; }` hides the empty heading (and its red
+  separator) on bare-`##` slides — currently only the two GPS map slides. Verified on a test page;
+  John to confirm in browser. Heading attributes `{...}` must stay on the `##` line (Pandoc rule).
+- Spacer classes reminder: `.gap-xs/sm/md/lg` (0.25/0.5/1/1.5rem) in `utilities.css`; same in
+  `~/github/book_git/utilities.css` (book_git **was** migrated after all — see CSS section).
+
+## Where we left off (2026-11-04, 16:15) — superseded by John's edits; items may be resolved
 
 - **John is doing his own round of edits and an out-loud run-through**, then will come back. When
   he returns: re-read `usf.qmd` (it will have changed), recount timing, then consider the Under the
@@ -400,10 +430,9 @@ guess" (from archive; global SHAP doesn't show direction) — John to keep or dr
 - [ ] Resolve open [COMMENT]s and remove [DRAFT] tags as John approves sections.
 - [ ] Housekeeping: "lessor" (slide 35), "after this symposium ends... 2 pm" (slide 15), "weekends,
       as you might guess" (slide 43; global SHAP shows no direction).
-- [ ] **Commit** (checkpoint): `usf.qmd`, `HANDOFF.md`, `figs/opt/figs_opt_shaps.R`,
-      `figs/risk/figs_ema_demographics.R`, `figs/risk2/figs_perf_ci.R`, `figs/rudra/figs_loop.R`,
-      `images/engagement_loop.png`;
-      and `git add -f` caches: `data/risk/{gps_ci,ema_shaps_global_day,ema_shaps_day_max,
+- [ ] **Commit** (checkpoint, 2026-11-05): uncommitted = `usf.qmd`, `presentation.css`, `HANDOFF.md`,
+      `figs/risk/figs_ema_demographics.R`, `figs/risk/figs_fairema_ci.R`, `figs/risk2/figs_fair_ci.R`.
+      Still **not tracked** (checked 11-05) — `git add -f` caches: `data/risk/{gps_ci,ema_shaps_global_day,ema_shaps_day_max,
       ema_shaps_day_max_risk}.csv`, `data/risk2/{shaps_global,shaps_day_max,shaps_global_combined,
       shaps_day_max_combined,shaps_day_max_combined_risk}.csv` (check `git status --ignored`).
 - [ ] Render check and publish (`./publish.sh usf.qmd`) after John's review.
@@ -472,16 +501,26 @@ guess" (from archive; global SHAP doesn't show direction) — John to keep or dr
   up after previewing.
 - Absolute-positioned banner images (e.g., `opt_pi_wide.png`) hide text placed near the slide
   bottom; check screenshots after adding lines.
-- Render needs network (GitHub `format_path.R`, image URLs, dionysus GPS backgrounds) — accepted.
+- Render needs network (GitHub `format_path.R`, image URLs, dionysus GPS backgrounds, UW crest) — accepted.
+- **Theme forces 25px bold on nearly every element** (`presentation.css` global rule incl. `sup`,
+  `div`, `span`), so per-slide footers and superscripts need explicit overrides to look smaller.
+- **CSS-only changes can be previewed without re-rendering:** copy `presentation.css` into the
+  scratch render dir (the HTML links it by relative path) and re-screenshot.
+- `--print-to-pdf` of `usf.html?print-pdf` produced an empty PDF (timing); for left-edge checks use a
+  minimal test HTML that links the CSS.
+- Per-slide footer syntax: `::: footer` ... `:::` placed inside the slide (before `::: {.notes}`).
 
 ## CSS / formatting architecture (from October refactor)
 
 - `_quarto_uw.yml` loads `[presentation.css, utilities.css]`. `presentation.css` = theme;
   `utilities.css` = opt-in classes (`.uwred/.blue/.gray/...`, `.gap-*`, `.hl`,
   `.callout-corner`, `.callout-wide`). Details in README_formatting.qmd.
-- **book_git was never migrated:** the October handoff claimed `~/github/book_git` also got
-  `utilities.css` and stripped theme files, but it did not (no `utilities.css`; configs load a
-  single CSS; old utility classes remain). No book_git .qmd uses the removed classes, so the
-  migration is safe to redo later. Deferred until after the talk.
+- **book_git:** CORRECTED 2026-11-05 — a fresh clone of `~/github/book_git` (latest `266a4ff`) does
+  have `utilities.css` with the same `.gap-*` classes and its qmds use them (commit `a45b86d`
+  synced it with slide_decks). The earlier "never migrated" note was from a stale local copy.
+  Not yet checked whether book_git also needs today's `presentation.css` additions (crest,
+  `sup`, `h2:empty`); its theme files are `slides_teaching.css` / `slides_wide_teaching.css`.
+- **Theme additions 2026-11-05** (`presentation.css`, shared by every deck using it): UW crest
+  `body::after`, `.reveal sup` 0.8em, `.reveal h2:empty { display: none; }`.
 - Archived 2024 decks reference `presentation.css` directly and would lose utility classes if
   republished.
