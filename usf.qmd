@@ -24,21 +24,25 @@ editor_options:
 - I am a co-founder and Chief Science Officer of Rudra Health AI
 
 ::: {.notes}
-[DRAFT]
-
 Before I start, I need to make a disclosure, and it also gives you a preview of where this talk is going.
 
 Two of my graduate students, Claire Punturieri and Kendra Wyant, have developed machine learning models that predict substance use lapses and identify the risk factors driving them, in real time.  You'll see a lot of their work today.
 
 The Wisconsin Alumni Research Foundation, or WARF, holds the copyright on these models.  WARF is a non-profit that helps UW scientists turn their inventions into products, so that the work can have a broader impact on public health.
 
-WARF has licensed these models to Rudra Health AI, which is developing a digital health app to support people in recovery.  I am a co-founder and the Chief Science Officer of Rudra Health AI, so I have a financial interest in this work.  I'll come back to the app near the end of the talk.
+WARF has licensed these models to Rudra Health AI, which is developing a digital health app to support people in recovery.  
+
+I am a co-founder and the Chief Science Officer of Rudra Health AI, so I have a financial interest in this work.  I'll come back to the app near the end of the talk.
 :::
 
 -----------------------------------------------------------------------------
 
 ::: {.notes}
-About a decade ago I was approaching the middle of my career.  I had developed a successful basic clinical science research program as a psychophysiologist running experiments to understand the effects of drugs and drug withdrawal on stress.  The work was intellectually stimulating, we were publishing it in good outlets, and we were getting grants, but my heart was increasingly not in it.  
+About a decade ago I was approaching the middle of my career.  
+
+I had developed a successful basic clinical science research program as a psychophysiologist running experiments to understand the effects of drugs and drug withdrawal on stress.  
+
+The work was intellectually stimulating, we were publishing it in good outlets, and we were getting grants, but my heart was increasingly not in it.  
 :::
 
 -----------------------------------------------------------------------------
@@ -65,7 +69,7 @@ And it was those conversations that really got me thinking about how I could re-
 
 
 ::: {.notes}
-It was around that time that Dave Gustafson reached out to me.  Dave directs a center on campus that develops digital health apps for substance use disorders.  These are essentially smartphone apps that provide ongoing continuing care for patients during their recovery.  He had just completed a large randomized controlled trial demonstrating that his app meaningfully decreased heavy drinking days and increased abstinence rates over the first year of recovery. 
+It was around that time that Dave Gustafson reached out to me.  Dave directs a center on campus that develops digital health apps for substance use disorders.  These are smartphone apps that provide ongoing continuing care for patients during their recovery.  He had just completed a large randomized controlled trial demonstrating that his app meaningfully decreased heavy drinking days and increased abstinence rates over the first year of recovery. 
 
 However, he also noticed many of the people who had relapsed hadn't used the app in the days leading up to that relapse.  And others who had relapsed hadn't used the specific supports in the app that he would have thought would be most effective for them.
 :::
@@ -232,15 +236,15 @@ cowplot::plot_grid(
 ```
 
 ::: {.notes}
-[DRAFT - combined version of the two previous slides]
-
 Let me start by highlighting the characteristics of the sample we used to develop and evaluate the AUD lapse models.
 
 First, this is a sample with clinically meaningful alcohol problems.  In the top left, you can see that everyone reported 4 or more DSM-5 symptoms of alcohol use disorder, consistent with a moderate to severe presentation, and all were pursuing abstinence.
 
 We had reasonable diversity across many other characteristics, including age, income, sex at birth, education, and marital status.
 
-However, given the methods we used for recruiting, we have very little racial and ethnic diversity.  The sample is predominantly White and non-Hispanic.  I'll return to this later, both when we evaluate algorithmic fairness and when I talk about a larger NIDA-funded project where we corrected this problem of representation in our models.
+However, given the methods we used for recruiting, we have very little racial and ethnic diversity.  The sample is predominantly White and non-Hispanic.  
+
+I'll return to this later, both when we evaluate algorithmic fairness and when I talk about a larger NIDA-funded project where we corrected this problem of representation in our models.
 :::
 
 -----------------------------------------------------------------------------
@@ -499,7 +503,9 @@ As you can see, calibration is excellent at the low end, where the large majorit
 
 Given this, we believe that the lapse probabilities can provide fine gradations of relative risk for clinical decision-making.
 
-And that matters for how we will eventually use these predictions.  Because we can trust the probabilities, we don't have to collapse them into a yes or no alarm about whether someone will lapse.  We can treat them as a graded signal of where someone stands in their recovery each day.  I'll come back to how we present that signal to patients near the end of the talk.
+And that matters for how we will eventually use these predictions.  Because we can trust the probabilities, we don't have to collapse them into a yes or no alarm about whether someone will lapse.  We can treat them as a graded signal of where someone stands in their recovery each day.  
+
+I'll come back to how we present that signal to patients near the end of the talk.
 :::
 
 -----------------------------------------------------------------------------
@@ -525,7 +531,9 @@ And that matters for how we will eventually use these predictions.  Because we c
 
 Now, you might have noticed that up until this point, I've only talked about predictions for the immediate future - the next week, the next day, or the next hour.
 
-Predictions like these are useful for supports that people can put into place right away.  But for some types of support, people need advance warning.  For example, if you need to meet with your AA sponsor or get in to see your therapist, you will need some lead time to schedule those meetings or appointments.
+Predictions like these are useful for supports that people can put into place right away.  But for some types of support, people need advance warning.  
+
+For example, if you need to meet with your AA sponsor or get in to see your therapist, you will need some lead time to schedule those meetings or appointments.
 :::
 
 -----------------------------------------------------------------------------
@@ -569,13 +577,13 @@ As you can see from the plot on the right, performance does drop as we look furt
 ## Passive Sensing Methods: Geolocation 
 
 ::: {.notes}
-[DRAFT]
-
 [PAUSE]
 
 So far, everything I've shown you comes from one source - what people tell us in their surveys.  Those surveys work very well.  But they ask something of people every day, and they can only capture what people notice about themselves and are willing to report.
 
-To match support to different situations, we want a broader set of risk factors.  One way to get them is passive sensing - signals collected from the phone people already carry, without asking anything more of them.  And one of the most promising is geolocation: where people go, when, for how long, and what they do there.
+To match support to different situations, we want a broader set of risk factors.  One way to get them is passive sensing of signals collected from the phone people already carry.  
+
+And one of the most promising is geolocation: where people go, when, for how long, and what they do there.
 :::
 
 -----------------------------------------------------------------------------
@@ -584,9 +592,9 @@ To match support to different situations, we want a broader set of risk factors.
 
 
 ::: {.notes}
-[DRAFT]
+To give you a taste of what these signals reveal, here is a month of my own location data, from when we first started experimenting with GPS almost a decade ago.  The paths show where I traveled - green by car, blue running.  
 
-To give you a taste of what these signals reveal, here is a month of my own location data, from when we first started experimenting with GPS almost a decade ago.  The paths show where I traveled - green by car, blue running.  The red dots are places I stopped for at least a few minutes, and the app also recorded exactly when I was at each one.
+The red dots are places I stopped for at least a few minutes, and the app also recorded exactly when I was at each one.
 
 Even from this wide view, you can see that I'm a runner, with long runs from downtown Madison and weekend trail runs in the parks to the west.
 :::
@@ -597,8 +605,6 @@ Even from this wide view, you can see that I'm a runner, with long runs from dow
 
 
 ::: {.notes}
-[DRAFT]
-
 Zooming in on the Madison isthmus, you can see me driving my kids halfway around the lake to elementary school each morning.  We might even detect those stressful mornings when we were late - sometimes **very late** - to school!
 
 You can see my running commute to and from my office, which shows my long days at work and the days I skipped out.  And the red dots show the restaurants, bars, and coffee shops where I eat, drink, and socialize.
@@ -611,8 +617,6 @@ I hope it's intuitive what a powerful window into someone's life location provid
 ## Geolocation: Lapse Prediction for AUD
 
 ::: {.notes}
-[DRAFT]
-
 [PAUSE]
 
 In our AUD study, participants ran an app that recorded their location continuously for their three months on study.
@@ -647,8 +651,6 @@ fig_gps_ci_1
 :::
 
 ::: {.notes}
-[DRAFT]
-
 As a comparison, we first fit a model using only demographics - age, sex, race, and income.  It performed at chance, with an auROC of .52.  Knowing who someone is didn't tell us when they would lapse.
 
 The geolocation model reached .72 - credible signal, well above demographics.  By our rules of thumb, that's fair performance.  Not good enough to use clinically on its own, and we wouldn't.
@@ -683,8 +685,6 @@ fig_gps_ci_2
 :::
 
 ::: {.notes}
-[DRAFT]
-
 [PAUSE]
 
 Of course, geolocation on its own doesn't predict as well as the daily surveys - .72 compared to .90.
@@ -721,13 +721,11 @@ fig_gps_ci_2
 :::
 
 ::: {.notes}
-[DRAFT]
-
 First, it asks very little.  Participants completed four surveys a day, but the geolocation app just ran in the background - and it kept working on the days people skipped their surveys.
 
 Second, and more important for us, it measures risk factors that are hard to report or would make the survey too long.  People can't easily tell us how much time they spent this week at places where they used to drink, or how much their routine has changed.  Location gives us those measures without asking.
 
-That broader set of risk factors helps us tailor support to each person.  And you'll see location features again when we look under the hood of our opioid model.
+This broader set of risk factors also helps us tailor support to each person.  And you'll see location features again when we look under the hood of our opioid model.
 :::
 
 -----------------------------------------------------------------------------
@@ -773,7 +771,9 @@ fig_race_bar
 :::
 
 ::: {.notes}
-As one example of this issue, the data we collected to train these models from this first NIAAA grant did not include much racial or ethnic diversity among the participants.   We collected those data at a time when we weren't yet thinking as carefully about issues of representation as we try to do now.
+As one example of this issue, the data we collected to train these models from this first NIAAA grant did not include much racial or ethnic diversity among the participants.   
+
+We collected those data at a time when we weren't yet thinking as carefully about issues of representation as we try to do now.
 :::
 
 -----------------------------------------------------------------------------
