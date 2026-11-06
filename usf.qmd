@@ -1461,7 +1461,7 @@ Recently, we have begun to develop a SMART digital health app like this built on
 
 Each day, people REFLECT.  They complete a one-minute daily reflection, which is the daily survey that drives our model.  
 
-Then they DISCOVER.  The model combines the reflection with geolocation, and the app shows them a recovery health score, which for us is the inverse of their probability of returning to use.  
+Then they DISCOVER.  The model combines the reflection with geolocation, and the app shows them a recovery health score.
 
 We also show them how that score has changed over the past two weeks, and the factor shaping it most today.  That top factor comes from the same SHAP values I showed you earlier.
 :::
@@ -1536,6 +1536,65 @@ So the app is also teaching this important self-monitoring recovery skill by gui
 
 -----------------------------------------------------------------------------
 
+## From Lapse Risk to Recovery Health
+
+- Lapse probability: the right metric for evaluating models
+
+\
+
+- Recovery health score: what patients see
+  - Inverse of next-day lapse probability
+  - 0 – 100; higher is better
+  - Updated daily, with two-week trend
+
+::: {.notes}
+[PAUSE]
+
+Let me also say a bit more about our current thinking on the recovery health score, because it reflects an important shift in how we talk about these predictions.
+
+Throughout this talk, I've described our models' output as the probability of a lapse.  That's the right language for evaluating a model.  But it isn't what we want a person in recovery to see every morning.
+
+So in the app, we flip it.  The recovery health score is the inverse of the next-day lapse probability, on a 0 to 100 scale where higher is better.  It's the same information, from the same model, framed around recovery rather than relapse.
+
+And this is where calibration pays off.  Because higher predicted probabilities reliably mean higher risk, a change in someone's score reflects a real change in where they stand, and the two-week trend shows them which direction they're heading.
+:::
+
+-----------------------------------------------------------------------------
+
+## From Lapse Risk to Recovery Health
+
+- [Lapse probability: the right metric for evaluating models]{.gray}
+
+\
+
+- [Recovery health score: what patients see]{.gray}
+  - [Inverse of next-day lapse probability]{.gray}
+  - [0 – 100; higher is better]{.gray}
+  - [Updated daily, with two-week trend]{.gray}
+
+\
+
+- Why recovery health?
+  - A low score is information, not a verdict
+  - Recognizes strengths and progress
+  - Guides support: targeted skills on low days, broader well-being on good days
+
+::: {.notes}
+[PAUSE]
+
+So why do we think we should frame it as recovery health?  
+
+We know that people in recovery hear a lot about risk and relapse.  A health score treats a low day as information to act on, not a verdict.  And it can go up, so it recognizes people's strengths and progress, not just their risks.
+
+It also shapes what we recommend.  When recovery health is low, the activity targets the factor driving risk that day.  But on most days, recovery health is good, and on those days I don't think the most helpful thing is another relapse prevention skill.  
+
+Instead, the app might recommend activities that build broader well-being: connecting with supportive people, physical activity, sleep, things that are meaningful or enjoyable.  Those are what make recovery sustainable.
+
+So recommendations are tailored on two dimensions: what is driving risk, and how healthy someone's recovery is right now.
+:::
+
+-----------------------------------------------------------------------------
+
 ## Next Steps: Optimize System Feedback to Patients 
 
 - Data collection underway: EMA and geolocation sensing for four months
@@ -1552,7 +1611,9 @@ So the app is also teaching this important self-monitoring recovery skill by gui
 ![](https://github.com/jjcurtin/slide_decks/blob/main/images/opt_pi_wide.png?raw=true){.absolute bottom=0}
 
 ::: {.notes}
-We are already testing pieces of this system with patients in a newly funded NIAAA project that just started data collection.
+[PAUSE]
+
+We have now started to test pieces of this system with patients in a newly funded NIAAA project that just started data collection.
 
 Obviously, just because our prediction models perform well doesn't guarantee that they will provide meaningful clinical benefits.  We need to provide feedback from these models in a way that patients trust, find useful, and engage with over time, so that it actually improves their recovery.
 
