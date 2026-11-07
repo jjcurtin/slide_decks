@@ -21,22 +21,22 @@ editor_options:
 
 \
 
-- I am a [co-founder]{.uwred} and [Chief Science Officer]{.uwred} of RudraHealth^AI^
+- I am a [co-founder]{.uwred} and [Chief Science Officer]{.uwred} at RudraHealth^AI^
 
 ::: {.notes}
 Before I start, I need to make some disclosures, and conveniently, these disclosures will also gives you a preview of where this talk and my research program are going.
 
-Two of my graduate students, Claire Punturieri and Kendra Wyant, and I have developed machine learning models that predict substance use lapses and identify the risk factors driving them, in real time.  You'll see a lot of this work today.
+Two of my graduate students and I have developed machine learning models that predict substance use lapses and identify the risk factors driving those lapses in real time.  You'll see a lot of this work today.
 
-The Wisconsin Alumni Research Foundation, or WARF, holds the copyright on these models.  WARF is a non-profit that helps UW scientists turn their inventions and other IP into products so that the work can have a broader impact on public health.
+The Wisconsin Alumni Research Foundation, or WARF, holds the copyright on these models.  WARF is a non-profit that helps UW scientists turn their inventions and other IP into commercial products so that the work can have a broader impact on public health.
 
 WARF has licensed these models to RudraHealth^AI^, a healthcare technology company that is developing a digital health app to support people in recovery from substance use disorders.  
 
-And I am a co-founder and the Chief Science Officer of RudraHealth^AI^, so I have a financial interest in this work.  And I'll come back to talk more about this app near the end of this presentation.
+And in addition to my day job, I am a co-founder and the Chief Science Officer at RudraHealth^AI^, so I have a financial interest in this work.  And I'll come back to talk more about this app near the end of this presentation.
 
 [PAUSE]
 
-And I should probably also disclose that I am a Milwaukee Brewers fan!
+And I should probably also disclose that like most Wisconsinites, I am a big Milwaukee Brewers fan!
 
 [Pause]
 
@@ -77,11 +77,13 @@ And it was those conversations with my aunt that really got me thinking about ho
 
 
 ::: {.notes}
-It was around that time that Dave Gustafson reached out to me.  Dave directed a center on campus that developed digital health apps for substance use disorders.  These are smartphone apps that provide ongoing continuing care for patients during their recovery.  He had just completed a large randomized controlled trial demonstrating that his app meaningfully decreased heavy drinking days and increased abstinence rates over the first year of recovery. 
+It was around that time that Dave Gustafson reached out to me.  Dave directed a center on campus that developed digital health apps for substance use disorders.  These are smartphone apps that provide ongoing continuing care for patients during their recovery.  
 
-However, he also noticed many of the people who had relapsed hadn't used the app in the days leading up to that relapse.  
+He had just completed a large randomized controlled trial demonstrating that his app meaningfully decreased heavy drinking days and increased abstinence rates over the first year of recovery when given to patients on discharge from residential care.
 
-And others who had relapsed hadn't used the specific supports in the app that he would have thought would be most effective for them.
+However, he also noticed many of the people in the trial who had relapsed hadn't used the app in the days leading up to that relapse.  
+
+And others who had relapsed hadn't used the specific supports in the app that he thought would have been most effective for them.
 :::
 
 -----------------------------------------------------------------------------
@@ -125,6 +127,8 @@ These questions that Dave was asking us are at the heart of what we now call pre
 And this focus on the **right time** is particularly important for recovery from substance use disorders.  Substance use disorders are chronic relapsing conditions and therefore successful recovery requires lifelong monitoring and support to prevent relapse.  
 
 And, critically, the optimal supports for any specific individual can change month to month, day to day, and even from moment to moment.
+
+And as you can imagine this is incredibly difficult for patients to do well at the beginning of their recovery and to sustain over long periods of their life.
 :::
 
 -----------------------------------------------------------------------------
@@ -144,7 +148,7 @@ And, critically, the optimal supports for any specific individual can change mon
   - Artificial Intelligence/Machine learning
 
 ::: {.notes}
-We believed that we could harness and combine two technologies that were emerging at that time, 
+We believed that we could help patients with this by  harnessing and combining two technologies that were emerging at that time, 
 
 personal sensing and artificial intelligence algorithms, 
 
@@ -724,10 +728,12 @@ fig_gps_ci_2
 ::: {.notes}
 [PAUSE]
 
-Of course, geolocation on its own doesn't predict as well as the daily surveys - .72 compared to .90.
+Of course, geolocation on its own doesn't predict as well as the daily surveys - .72 compared to .91.
 
 [PAUSE]
+
 So you might ask why we bother with geolocation?  And I have several answers....
+
 [PAUSE]
 :::
 
@@ -757,7 +763,7 @@ fig_gps_ci_2
 ::::
 :::
 
-::: {.notesj}
+::: {.notes}
 First, it asks very little of participants other than that the provide a one-time report of their typical subjective experiences at important locations.   The surveys model required that participants complete four surveys a day, but the geolocation app just ran in the background - and it kept working on the days people skipped their surveys.
 
 Second, and more important for us, it measures risk factors that are hard to report or would make the survey too long.  People can't easily tell us how much time they spent this week at places where they used to drink, or how much their routine has changed.  Timestamped location gives us those measures without asking.
@@ -967,7 +973,7 @@ To be clear, the gaps are not zero.
 
 The model still performs slightly worse for most of the less advantaged groups - by about one to two hundredths of a point in auROC - and with this much data, those small differences are reliable.  
 
-Thought interestingly, for income, the model actually performs slightly better for people with lower incomes.
+Though interestingly, for income, the model actually performs slightly better for people with lower incomes.
 
 But what matters most clinically is that performance is excellent for everyone.  Every group has an auROC between .92 and .95, which is better than our original AUD models achieved even for the groups they served best.
 :::
